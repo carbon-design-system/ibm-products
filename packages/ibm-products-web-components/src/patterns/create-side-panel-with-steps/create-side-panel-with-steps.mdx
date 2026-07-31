@@ -1,0 +1,175 @@
+import { ArgTypes, Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as createSidePanelWithStepsStories from './create-side-panel-with-steps.stories';
+
+<Meta of={createSidePanelWithStepsStories} />
+
+# Create side panel with steps
+
+[Create side panel usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#side-panel)
+|
+[Carbon side panel documentation](https://ibm-products-web-components.netlify.app/?path=/docs/components-sidepanel--overview)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [What is a Pattern?](#what-is-a-pattern)
+- [Getting Started](#getting-started)
+- [Ingredients](#ingredients)
+- [Example Usage](#example-usage)
+- [Architecture](#architecture)
+
+## Overview
+
+The `create-side-panel-with-steps` is a **pattern** (not a component) that
+provides a recipe for building multi-step creation flows inside a side panel.
+It combines `c4p-side-panel` with a step utility (`create-side-panel-step`) and
+a progress indicator (`create-side-panel-influencer`) to guide users through a
+sequential form workflow while keeping on-page content visible.
+
+Use this pattern for **medium-complexity creations** where the user needs page
+context. The side panel appears on top of existing page content, which remains
+accessible.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-side-panel-with-steps)
+> example implementation.
+
+[![Edit in Stackblitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-side-panel-with-steps)
+
+## What is a Pattern?
+
+Unlike components that are exported from the package, **patterns are recipes**
+that you copy into your codebase and customize to fit your specific needs. This
+approach offers:
+
+- **Full Control**: Modify the code to match your exact requirements
+- **No Breaking Changes**: Updates to the pattern don't affect your
+  implementation
+- **Seamless Customization**: Adapt the pattern without workarounds or prop
+  drilling
+- **Scalability**: Build upon the foundation with your own features
+
+The `create-side-panel-with-steps` pattern consists of:
+
+- `create-side-panel-step.ts` — Individual step web component
+- `create-side-panel-influencer.ts` — Progress indicator web component
+- `create-side-panel-with-steps.ts` — Wrapper example wiring everything together
+
+## Getting Started
+
+1. **Copy the pattern code** from the
+   [example directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-side-panel-with-steps/src/components)
+   into your project.
+2. **Install dependencies**: `@carbon/ibm-products-web-components`, `@carbon/web-components`, `lit`.
+3. **Import and use** the pattern components in your application.
+4. **Customize** as needed for your use case.
+
+## Ingredients
+
+To build this pattern, the following components are used:
+
+- [c4p-side-panel](https://ibm-products-web-components.netlify.app/?path=/docs/components-sidepanel--overview)
+- [cds-progress-indicator](https://web-components.carbondesignsystem.com/?path=/docs/components-progress-indicator--overview)
+- [cds-progress-step](https://web-components.carbondesignsystem.com/?path=/docs/components-progress-indicator--overview)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-form](https://web-components.carbondesignsystem.com/?path=/docs/components-form--overview)
+- [cds-form-item](https://web-components.carbondesignsystem.com/?path=/docs/components-form--overview)
+- [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
+- [cds-number-input](https://web-components.carbondesignsystem.com/?path=/docs/components-number-input--overview)
+- [cds-select](https://web-components.carbondesignsystem.com/?path=/docs/components-select--overview)
+
+## Example Usage
+
+<Canvas of={createSidePanelWithStepsStories.Default} />
+
+## Architecture
+
+The pattern is built on top of:
+
+- **LitElement**: Base class for creating reactive web components with Shadow DOM
+- **Lit Reactive Properties**: Using `@state()` and `@property()` decorators for
+  reactive state management
+- **Carbon Web Components**: For form inputs, layout, and progress indicator
+- **`c4p-side-panel`**: The IBM Products side panel component that hosts the
+  step content and action buttons
+
+### Step Management
+
+Steps are managed by your wrapper component. The pattern provides two helper
+elements:
+
+| Element | Purpose |
+|---|---|
+| `create-side-panel-step` | Renders a single step with title, subtitle, description, and slotted form content |
+| `create-side-panel-influencer` | Renders a vertical `cds-progress-indicator` above the step content |
+
+Your wrapper component tracks `currentStep` and conditionally renders each step
+using `lit/nothing` so only the active step's markup is present in the DOM.
+
+### Key Implementation Steps
+
+1. **Import components** — Import the step utilities and Carbon components.
+2. **Declare step data** — Define a `stepData` array with titles that drives
+   the progress indicator.
+3. **Track `currentStep`** — Use a `@state()` property (1-based index).
+4. **Render steps conditionally** — Render only the active
+   `create-side-panel-step` using `this.currentStep === n ? this.renderStepN() : nothing`.
+5. **Pass `stepData` to the influencer** — Bind `.stepData` and
+   `current-step` attributes on `create-side-panel-influencer`.
+6. **Wire action buttons** — Use `slot="actions"` buttons on `c4p-side-panel`
+   for Back / Next / Create navigation.
+
+### Minimal Example
+
+#### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/form/form-item.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+// Copy pattern helpers into your project:
+import './components/create-side-panel-step.js';
+import './components/create-side-panel-influencer.js';
+```
+
+#### HTML
+
+```html
+<c4p-side-panel
+  include-overlay
+  open
+  size="md"
+  title="Create topic"
+>
+  <div slot="subtitle">Step 1 of 2</div>
+
+  <!-- Progress indicator -->
+  <create-side-panel-influencer
+    current-step="1"
+    .stepData="${[
+      { title: 'Topic name' },
+      { title: 'Configuration' },
+    ]}"
+  ></create-side-panel-influencer>
+
+  <!-- Step content -->
+  <create-side-panel-step title="Topic name">
+    <cds-form>
+      <cds-form-item>
+        <cds-text-input label="Topic name" placeholder="Enter topic name">
+        </cds-text-input>
+      </cds-form-item>
+    </cds-form>
+  </create-side-panel-step>
+
+  <cds-button slot="actions" kind="secondary">Cancel</cds-button>
+  <cds-button slot="actions" kind="primary">Next</cds-button>
+</c4p-side-panel>
+```
+
+## Feedback
+
+Help us improve this pattern by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/ibm-products/issues/new/choose).

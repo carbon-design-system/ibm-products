@@ -1,0 +1,79 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+//
+// Create side panel with steps – shared component styles
+//
+
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+$block-class: create-side-panel-with-steps;
+
+// ProgressIndicator overrides inside the panel
+:host {
+  display: contents;
+}
+
+.#{$block-class}__step {
+  padding-block-start: $spacing-05;
+}
+
+.#{$block-class}__step-title {
+  @include type.type-style('heading-03');
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class}__step-subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class}__step-description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__step-fieldset {
+  margin-block-start: $spacing-05;
+  border: none;
+  padding: 0;
+
+  legend {
+    @include type.type-style('heading-03');
+
+    margin-block-end: $spacing-05;
+  }
+}
+
+.#{$block-class}__step-content {
+  margin-block-start: $spacing-05;
+}
+
+// Influencer / progress indicator panel
+.#{$block-class}__influencer {
+  padding-block-end: $spacing-06;
+  padding-block-start: $spacing-03;
+  border-block-end: 1px solid $layer-accent-01;
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__influencer-title {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-05;
+}

@@ -1,6 +1,32 @@
-import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Markdown, Meta,Canvas } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 import * as TearsheetStories from './tearsheet.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './tearsheet-helpers.ts?raw';
+
+export const customFunctionArr = [
+  `const el = document?.body.querySelector('my-app');\n\n` +
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .replace(/document\.querySelector\(/g, 'el?.shadowRoot?.querySelector(')
+    .trim()
+];
+
+export const customImportArr = [`import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import Bee from '@carbon/icons/es/bee/32';
+import Add16 from '@carbon/icons/es/add/32';
+import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';
+import { breakpoints } from '@carbon/layout';
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/progress-indicator/index.js';
+import '@carbon/web-components/es/components/tabs/index.js';
+import '@carbon/web-components/es/components/progress-bar/index.js';
+import '@carbon/ibm-products-web-components/es/components/truncated-text/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
+`];
 
 <Meta of={TearsheetStories} />
 
@@ -282,7 +308,194 @@ The `c4p-tearsheet-footer` component supports two approaches for rendering actio
 
 The `.actions` property automatically handles button sizing based on the tearsheet variant and screen size, while custom buttons give you full control over the footer layout.
 
+## Example Usage
 
+### Default
+
+<Canvas
+  of={TearsheetStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.Default,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          status: { preview: ['preview-tearsheet'] },
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Influencer
+
+<Canvas
+  of={TearsheetStories.WithInfluencer}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.WithInfluencer,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          status: { preview: ['preview-tearsheet'] },
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Tabs
+
+<Canvas
+  of={TearsheetStories.WithTabs}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.WithTabs,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          status: { preview: ['preview-tearsheet'] },
+        }),
+    },
+  ]}
+></Canvas>
+
+### Narrow Tearsheet
+
+<Canvas
+  of={TearsheetStories.narrowTearsheet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.narrowTearsheet,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          status: { preview: ['preview-tearsheet'] },
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Custom Footer Actions
+
+<Canvas
+  of={TearsheetStories.WithCustomFooterActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.WithCustomFooterActions,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'tearsheet-preview',
+          status: { preview: ['preview-tearsheet'] },
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Steps
+
+<Canvas
+  of={TearsheetStories.withSteps}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.withSteps,
+          customFunctionDefs: [],
+          customImports: [`import './story-assets/step-tearsheet-preview.ts';`],
+          componentName: 'tearsheet-preview',
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Steps and Horizontal Progress Indicator
+
+<Canvas
+  of={TearsheetStories.withStepsAndHorizontalProgressIndicator}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.withStepsAndHorizontalProgressIndicator,
+          customFunctionDefs: [],
+          customImports: [`import './story-assets/step-tearsheet-preview.ts';`],
+          componentName: 'tearsheet-preview',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Stacking Tearsheets
+
+<Canvas
+  of={TearsheetStories.StackingTearsheets}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.StackingTearsheets,
+          customFunctionDefs: [],
+          customImports: [`import './story-assets/stacking-tearsheet.ts';`],
+          componentName: 'tearsheet-preview',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Stacking Narrow Tearsheets
+
+<Canvas
+  of={TearsheetStories.StackingNarrowTearsheets}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.StackingNarrowTearsheets,
+          customFunctionDefs: [],
+          customImports: [`import './story-assets/stacking-tearsheet.ts';`],
+          componentName: 'tearsheet-preview',
+          status: { preview: ['preview-tearsheet'] },
+        }),
+    },
+  ]}
+></Canvas>
+
+### Stacking With Different Sizes
+
+<Canvas
+  of={TearsheetStories.StackingWithDifferentSizes}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: TearsheetStories.StackingWithDifferentSizes,
+          customFunctionDefs: [],
+          customImports: [`import './story-assets/stacking-tearsheet.ts';`],
+          componentName: 'tearsheet-preview',
+          status: { preview: ['preview-tearsheet'] },
+        }),
+    },
+  ]}
+></Canvas>
 
 ## Component API
 

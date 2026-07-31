@@ -17,7 +17,6 @@ const prefix = 'c4p';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/button/index.js';
-import '@carbon/ibm-products-web-components/es/utilities/step-flow/index.js';
 import styles from './_storybook-styles.scss?lit';
 import { StepInstance } from '@carbon/ibm-products-web-components/es/utilities/step-flow/step-flow-signal.js';
 import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';

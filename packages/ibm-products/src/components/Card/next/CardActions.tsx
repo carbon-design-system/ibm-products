@@ -5,13 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactNode, useEffect, useRef, useState, Children } from 'react';
+import React, {
+  forwardRef,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  Children,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { OverflowMenu, OverflowMenuItem, FeatureFlags } from '@carbon/react';
 import { createOverflowHandler } from '@carbon/utilities';
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+import { CardActionProps } from './CardAction';
 
 const blockClass = `${pkg.prefix}--card-next`;
 const componentName = 'CardActions';
@@ -44,100 +53,111 @@ interface ActionItem {
  * Positioned in the top-right corner with 8px gap between actions.
  * When actions exceed 50% of available header space, overflow menu is shown.
  */
-export const CardActions = ({
-  children,
-  className,
-  overflowMenuLabel = 'More actions',
-  ...rest
-}: CardActionsProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [hiddenItems, setHiddenItems] = useState<ActionItem[]>([]);
-  const classes = cx(`${blockClass}__actions`, className);
+export let CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
+  (
+    { children, className, overflowMenuLabel = 'More actions', ...rest },
+    ref
+  ) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [hiddenItems, setHiddenItems] = useState<ActionItem[]>([]);
+    const classes = cx(`${blockClass}__actions`, className);
 
-  // Convert children to array of action items with IDs
-  const actionItems: ActionItem[] = [];
-  Children.forEach(children, (child, index) => {
-    if (React.isValidElement(child)) {
-      const id = `action-${index}`;
-      // Try to extract label from IconButton props
-      let label = overflowMenuLabel;
+    // Build action items only when children change.
+    // Label resolution is one level deep only:
+    //   1. CardAction.label explicit override
+    //   2. Direct child button props: label (IconButton) → iconDescription → text children
+    //   3. Fallback ordinal string
+    // ID is derived from the resolved label for stability.
+    const actionItems = useMemo(() => {
+      const items: ActionItem[] = [];
+      Children.forEach(children, (child, index) => {
+        if (React.isValidElement(child)) {
+          const actionProps = child.props as CardActionProps;
+          const button = actionProps.children;
+          const buttonProps = React.isValidElement(button)
+            ? (button.props as any)
+            : null;
 
-      const childProps = child.props as any;
-      if (childProps.children && React.isValidElement(childProps.children)) {
-        const iconButton = childProps.children as any;
-        label =
-          iconButton.props?.label ||
-          iconButton.props?.iconDescription ||
-          `Action ${index + 1}`;
+          const label =
+            actionProps.label ??
+            buttonProps?.label ??
+            buttonProps?.iconDescription ??
+            (typeof buttonProps?.children === 'string'
+              ? buttonProps.children
+              : `Action ${index + 1}`);
+
+          const id = `${label}-${index}`;
+          items.push({ id, element: child, label });
+        }
+      });
+      return items;
+    }, [children]);
+
+    useEffect(() => {
+      if (!containerRef.current || actionItems.length === 0) {
+        return;
       }
-      actionItems.push({ id, element: child, label });
-    }
-  });
 
-  useEffect(() => {
-    if (!containerRef.current || actionItems.length === 0) {
-      return;
-    }
+      const handler = createOverflowHandler({
+        container: containerRef.current,
+        onChange: (_visible, hidden) => {
+          const hiddenIds = hidden.map((el) => el.dataset.id);
+          setHiddenItems(
+            actionItems.filter((item) => hiddenIds.includes(item.id))
+          );
+        },
+      });
 
-    const handler = createOverflowHandler({
-      container: containerRef.current,
-      onChange: (_visible, hidden) => {
-        const hiddenIds = hidden.map((el) => el.dataset.id);
-        setHiddenItems(
-          actionItems.filter((item) => hiddenIds.includes(item.id))
-        );
-      },
-    });
+      return () => handler.disconnect();
+    }, [children]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return () => handler.disconnect();
-  }, [children]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  return (
-    <div
-      ref={containerRef}
-      className={classes}
-      {...rest}
-      {...getDevtoolsProps(componentName)}
-    >
-      {actionItems.map((item) => (
-        <div key={item.id} data-id={item.id}>
-          {item.element}
-        </div>
-      ))}
+    return (
       <div
-        data-offset
-        data-hidden
-        data-floating-menu-container
-        style={{
-          position: 'relative',
+        ref={(node) => {
+          containerRef.current = node;
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref) {
+            (ref as React.RefObject<HTMLDivElement | null>).current = node;
+          }
         }}
+        className={classes}
+        {...rest}
+        {...getDevtoolsProps(componentName)}
       >
-        <FeatureFlags enableV12Overflowmenu>
-          <OverflowMenu size="sm" aria-label={overflowMenuLabel}>
-            {hiddenItems.map((item) => (
-              <OverflowMenuItem
-                key={item.id}
-                itemText={item.label || 'Action'}
-                onClick={() => {
-                  // Try to trigger the click on the original button
+        {actionItems.map((item) => (
+          <div key={item.id} data-id={item.id}>
+            {item.element}
+          </div>
+        ))}
+        <div data-offset data-hidden data-floating-menu-container>
+          <FeatureFlags enableV12Overflowmenu>
+            <OverflowMenu size="sm" aria-label={overflowMenuLabel}>
+              {hiddenItems.map((item) => (
+                <OverflowMenuItem
+                  key={item.id}
+                  itemText={item.label || 'Action'}
+                  onClick={() => {
+                    // Try to trigger the click on the original button
 
-                  const elementProps = item.element.props as any;
-                  const button = elementProps.children;
-                  if (button && React.isValidElement(button)) {
-                    const buttonProps = button.props as any;
-                    if (buttonProps.onClick) {
-                      buttonProps.onClick();
+                    const elementProps = item.element.props as any;
+                    const button = elementProps.children;
+                    if (button && React.isValidElement(button)) {
+                      const buttonProps = button.props as any;
+                      if (buttonProps.onClick) {
+                        buttonProps.onClick();
+                      }
                     }
-                  }
-                }}
-              />
-            ))}
-          </OverflowMenu>
-        </FeatureFlags>
+                  }}
+                />
+              ))}
+            </OverflowMenu>
+          </FeatureFlags>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 CardActions.propTypes = {
   /**
@@ -156,4 +176,5 @@ CardActions.propTypes = {
   overflowMenuLabel: PropTypes.string,
 };
 
+CardActions = pkg.checkComponentEnabled(CardActions, componentName);
 CardActions.displayName = componentName;

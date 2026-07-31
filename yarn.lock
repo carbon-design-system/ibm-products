@@ -2048,14 +2048,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon-labs/wc-resizer@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@carbon-labs/wc-resizer@npm:0.3.0"
+"@carbon-labs/wc-resizer@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@carbon-labs/wc-resizer@npm:0.5.0"
   dependencies:
     "@babel/runtime": "npm:^7.23.2"
     "@carbon-labs/utilities": "npm:0.21.0"
     lit: "npm:^3.2.1"
-  checksum: 10/80a59506fc8a1c665c1ddd66617d8af0f3a832e1f6937368bc69653caed972bbf24c819b0599cba9006d0ccebc9371f96044cf3440b0e81311bcc6d2cc7dbb47
+  checksum: 10/6d6ca12afaef49ca1823731b99222481fea4779f5fefa41d88d9d802fd4c677bcdc308513612f10da3b590b370729218c76ffd9e6c9503abbe5ac5b52c24cea3
   languageName: node
   linkType: hard
 
@@ -2222,7 +2222,7 @@ __metadata:
     "@aarsteinmedia/dotlottie-player": "npm:^6.0.5"
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.22.0"
-    "@carbon-labs/wc-resizer": "npm:^0.3.0"
+    "@carbon-labs/wc-resizer": "npm:^0.5.0"
     "@carbon/ibm-products-styles": "npm:^2.91.0"
     "@carbon/ibm-products-utilities": "workspace:*"
     "@carbon/icon-helpers": "npm:^10.77.0"

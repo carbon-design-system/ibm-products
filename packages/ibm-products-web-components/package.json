@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "@carbon-labs/wc-empty-state": "^0.22.0",
-    "@carbon-labs/wc-resizer": "^0.3.0",
+    "@carbon-labs/wc-resizer": "^0.5.0",
     "@carbon/ibm-products-styles": "^2.91.0",
     "@carbon/layout": "^11.54.0",
     "@carbon/styles": "^1.110.1",

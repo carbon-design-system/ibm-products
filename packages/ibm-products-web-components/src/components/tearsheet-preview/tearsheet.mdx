@@ -10,7 +10,7 @@ export const customFunctionArr = [
     .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
     .replace(/export\s+/g, '')
     .replace(/\/\*\*[\s\S]*?\*\//g, '')
-    .replace(/document\n\s*\.querySelector\(/g, 'el?.shadowRoot?.querySelector(')
+    .replace(/document\n?\s*\.querySelector\(/g, 'el?.shadowRoot?.querySelector(')
     .trim()
 ];
 

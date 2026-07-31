@@ -16,11 +16,11 @@ import styles from './story-styles.scss?lit';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
-  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
-  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`top-start`]: POPOVER_ALIGNMENT.TOP_START,
+  [`top-end`]: POPOVER_ALIGNMENT.TOP_END,
   [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
-  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
-  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`bottom-start`]: POPOVER_ALIGNMENT.BOTTOM_START,
+  [`bottom-end`]: POPOVER_ALIGNMENT.BOTTOM_END,
   [`left`]: POPOVER_ALIGNMENT.LEFT,
   [`right`]: POPOVER_ALIGNMENT.RIGHT,
 };

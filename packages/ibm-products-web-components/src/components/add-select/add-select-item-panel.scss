@@ -23,6 +23,7 @@ $prefix: 'c4p';
   .#{$block-class__next}__item-summary-panel {
     display: flex;
     flex-direction: column;
+    padding: 0;
     block-size: 100%;
     transform: translateX(100%);
     transition: transform $duration-moderate-01 motion(standard, productive);

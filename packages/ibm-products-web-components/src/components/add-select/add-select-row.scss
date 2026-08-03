@@ -94,6 +94,8 @@ $prefix: 'c4p';
 
   .#{$block-class__next}-row__cell-wrapper {
     display: flex;
+    /* Shadow DOM doesn't inherit Carbon's global border-box reset */
+    box-sizing: border-box;
     align-items: center;
     justify-content: space-between;
     border-block-end: 1px solid $layer-accent-01;

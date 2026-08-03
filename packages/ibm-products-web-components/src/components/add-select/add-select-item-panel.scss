@@ -37,8 +37,9 @@ $prefix: 'c4p';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $spacing-04 $spacing-03 $spacing-04 $spacing-05;
+    padding: $spacing-07 $spacing-05 $spacing-03;
     border-block-end: 1px solid $border-subtle-01;
+    margin-block-end: 0;
   }
 
   .#{$block-class__next}__item-summary-panel-title {

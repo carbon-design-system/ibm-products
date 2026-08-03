@@ -61,23 +61,25 @@ $web-terminal-width: 40rem;
   inset-block-end: 0;
   inset-block-start: $spacing-09;
   inset-inline-end: 0;
-  max-inline-size: $web-terminal-width;@media screen and (prefers-reduced-motion: reduce) {
-&--open {
-    // stylelint-disable-next-line carbon/motion-easing-use
-    animation: none;
-}
-}
+  max-inline-size: $web-terminal-width;
+  @media screen and (prefers-reduced-motion: reduce) {
+    &--open {
+      // stylelint-disable-next-line carbon/motion-easing-use
+      animation: none;
+    }
+  }
 
   &--open {
     // stylelint-disable-next-line carbon/motion-easing-use
     animation: web-terminal-entrance $duration-moderate-02
       motion(standard, expressive);
-  }@media screen and (prefers-reduced-motion: reduce) {
-&--closed {
-    // stylelint-disable-next-line carbon/motion-easing-use
-    animation: none;
-}
-}
+  }
+  @media screen and (prefers-reduced-motion: reduce) {
+    &--closed {
+      // stylelint-disable-next-line carbon/motion-easing-use
+      animation: none;
+    }
+  }
 
   &--closed {
     // stylelint-disable-next-line carbon/motion-easing-use
@@ -190,16 +192,16 @@ $web-terminal-width: 40rem;
 // ─── Content wrapper ───────────────────────────────────────────────────────────
 
 @media screen and (prefers-reduced-motion: reduce) {
-.web-terminal-content-wrapper {
-  block-size: 100%;
-  inline-size: 100vw;
-  // stylelint-disable-next-line carbon/motion-duration-use
-  transition: none;
+  .web-terminal-content-wrapper {
+    block-size: 100%;
+    inline-size: 100vw;
+    // stylelint-disable-next-line carbon/motion-duration-use
+    transition: none;
 
-  &--open {
-    inline-size: calc(100vw - #{$web-terminal-width});
+    &--open {
+      inline-size: calc(100vw - #{$web-terminal-width});
+    }
   }
-}
 }
 
 .web-terminal-content-wrapper {

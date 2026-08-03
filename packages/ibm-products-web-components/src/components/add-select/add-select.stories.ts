@@ -129,7 +129,8 @@ const AddSelectBodyTemplate = (args) => {
               ? html`
                   <cds-icon-button
                     slot="actions"
-                    label="Sort"
+                    tooltip-text="Sort"
+                    autoalign
                     kind="ghost"
                     size="lg"
                   >
@@ -137,7 +138,8 @@ const AddSelectBodyTemplate = (args) => {
                   </cds-icon-button>
                   <cds-icon-button
                     slot="actions"
-                    label="Filter"
+                    tooltip-text="Filter"
+                    autoalign
                     kind="ghost"
                     size="lg"
                   >
@@ -321,19 +323,19 @@ const AddSelectColumnTemplate = (args) => {
               ? html`
                   <cds-icon-button
                     slot="actions"
-                    label="Sort"
+                    tooltip-text="Sort"
+                    autoalign
                     kind="ghost"
                     size="sm"
-                    align="bottom"
                   >
                     ${iconLoader(ArrowsVertical16, { slot: 'icon' })}
                   </cds-icon-button>
                   <cds-icon-button
                     slot="actions"
-                    label="Filter"
+                    tooltip-text="Filter"
+                    autoalign
                     kind="ghost"
                     size="sm"
-                    align="bottom"
                   >
                     ${iconLoader(Filter16, { slot: 'icon' })}
                   </cds-icon-button>
@@ -616,7 +618,12 @@ const AddSelectSelectionSummaryTemplate = (args) => {
           ? html`
               <div slot="header" class="${storyClass}__summary-header-content">
                 <h3>Custom Header</h3>
-                <cds-icon-button label="Popup" kind="ghost" size="sm">
+                <cds-icon-button
+                  tooltip-text="Popup"
+                  autoalign
+                  kind="ghost"
+                  size="sm"
+                >
                   ${iconLoader(Launch16, { slot: 'icon' })}
                 </cds-icon-button>
               </div>
@@ -626,7 +633,8 @@ const AddSelectSelectionSummaryTemplate = (args) => {
           ? html`
               <cds-icon-button
                 slot="header-actions"
-                label="Filter"
+                tooltip-text="Filter"
+                autoalign
                 kind="ghost"
                 size="sm"
               >
@@ -634,7 +642,8 @@ const AddSelectSelectionSummaryTemplate = (args) => {
               </cds-icon-button>
               <cds-icon-button
                 slot="header-actions"
-                label="Popup"
+                tooltip-text="Popup"
+                autoalign
                 kind="ghost"
                 size="sm"
               >
@@ -914,8 +923,14 @@ export const AddSelectSelectionSummaryItem = {
 // ─── AddSelectItemPanel ───────────────────────────────────────────────────────
 
 const AddSelectItemPanelTemplate = (args) => {
-  const { title, open, closeIconDescription, useChildren, useRenderItem } =
-    args;
+  const {
+    title,
+    open,
+    closeIconDescription,
+    showCloseButton,
+    useChildren,
+    useRenderItem,
+  } = args;
 
   const panelItem = sampleItems[0];
 
@@ -929,6 +944,7 @@ const AddSelectItemPanelTemplate = (args) => {
         .item=${panelItem}
         ?open=${open}
         close-icon-description=${closeIconDescription}
+        ?show-close-button=${showCloseButton}
         @c4p-add-select-item-panel-close=${action(
           'c4p-add-select-item-panel-close'
         )}
@@ -969,6 +985,7 @@ export const AddSelectItemPanel = {
     title: 'Item details',
     open: true,
     closeIconDescription: 'Close item details',
+    showCloseButton: true,
     useChildren: false,
     useRenderItem: false,
   },
@@ -986,6 +1003,12 @@ export const AddSelectItemPanel = {
       control: 'text',
       description: 'Close button aria-label',
     },
+    'close-icon-description': { table: { disable: true } },
+    showCloseButton: {
+      control: 'boolean',
+      description: 'Whether to show the close button',
+    },
+    'show-close-button': { table: { disable: true } },
     useChildren: {
       control: 'boolean',
       description: 'Demonstrate custom children content (highest priority)',

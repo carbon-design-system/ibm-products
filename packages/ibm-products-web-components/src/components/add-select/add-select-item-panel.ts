@@ -55,6 +55,12 @@ class CDSAddSelectItemPanel extends LitElement {
   @property({ type: String, attribute: 'close-icon-description' })
   closeIconDescription = 'Close';
 
+  /**
+   * Whether to show the close button
+   */
+  @property({ type: Boolean, attribute: 'show-close-button', reflect: true })
+  showCloseButton = true;
+
   private _handleClose() {
     this.dispatchEvent(
       new CustomEvent(
@@ -113,7 +119,7 @@ class CDSAddSelectItemPanel extends LitElement {
   }
 
   render() {
-    const { title, open, closeIconDescription } = this;
+    const { title, open, closeIconDescription, showCloseButton } = this;
 
     const panelClasses = classMap({
       [`${blockClass}__item-summary-panel`]: true,
@@ -130,15 +136,20 @@ class CDSAddSelectItemPanel extends LitElement {
         <!-- Header -->
         <div class="${blockClass}__item-summary-panel-header">
           <p class="${blockClass}__item-summary-panel-title">${title}</p>
-          <cds-icon-button
-            label=${closeIconDescription}
-            kind="ghost"
-            size="sm"
-            class="${blockClass}__item-summary-panel-close"
-            @click=${this._handleClose}
-          >
-            ${iconLoader(Close16, { slot: 'icon' })}
-          </cds-icon-button>
+          ${showCloseButton
+            ? html`
+                <cds-icon-button
+                  tooltip-text=${closeIconDescription}
+                  autoalign
+                  kind="ghost"
+                  size="sm"
+                  class="${blockClass}__item-summary-panel-close"
+                  @click=${this._handleClose}
+                >
+                  ${iconLoader(Close16, { slot: 'icon' })}
+                </cds-icon-button>
+              `
+            : nothing}
         </div>
 
         <!-- Body: each slot exists once; wrappers hide/show via display:none -->

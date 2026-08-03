@@ -355,7 +355,8 @@ class CDSAddSelectRow extends LitElement {
                     class="${blockClass}__view-item-panel"
                     kind="ghost"
                     size="sm"
-                    label=${itemPanelIconDescription}
+                    tooltip-text=${itemPanelIconDescription}
+                    autoalign
                     ?aria-pressed=${itemPanelOpen}
                     @click=${this._handleItemPanelClick}
                   >

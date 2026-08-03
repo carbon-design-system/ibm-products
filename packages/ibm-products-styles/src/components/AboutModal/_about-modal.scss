@@ -75,7 +75,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   padding-inline-start: $spacing-04;
 }
 .#{$block-class} .#{$block-class}__links-container a {
-  padding-block-end: $spacing-03;
+  margin-block-end: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__content,
@@ -92,6 +92,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 .#{$block-class}__links-container + .#{$block-class}__copyright-text {
   margin-block-start: $spacing-03;
+}
+.#{$block-class}__links-container + .#{$block-class}__content {
+  margin-block-start: $spacing-05;
 }
 
 p.c4p--about-modal__content:first-child,

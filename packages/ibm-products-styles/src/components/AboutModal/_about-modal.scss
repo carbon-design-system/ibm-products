@@ -84,11 +84,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
   color: $text-secondary;
 
-  margin-block: $spacing-03 0;
+  margin-block: $spacing-06 0;
 }
 
 .#{$block-class} .#{$block-class}__copyright-text {
-  margin-block-start: $spacing-05;
+  margin-block-start: $spacing-03;
 }
 
 p.c4p--about-modal__content:first-child,

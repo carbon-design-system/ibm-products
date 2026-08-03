@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { AILabel, Button, IconButton, Tab, TabList } from '@carbon/react'; // Or your design system components
 import { RightPanelClose } from '@carbon/icons-react';
@@ -377,6 +377,203 @@ describe('Tearsheet component V2', () => {
     );
     expect(menuButton).toBeDefined();
   });
+  // ---------------------------
+  //  Portal & rendering behavior
+  // ---------------------------
+
+  describe('portal behavior', () => {
+    it('renders into document.body by default (portal active)', () => {
+      // With the portal active the tearsheet is NOT a descendant of the
+      // render container — it lives in document.body instead.
+      const { container } = render(<Tearsheet open={true} />);
+      // The tearsheet node must NOT be inside the local render container.
+      expect(container.querySelector(`.${blockClass}`)).not.toBeInTheDocument();
+      // But it must exist somewhere in the document.
+      expect(document.querySelector(`.${blockClass}`)).toBeInTheDocument();
+    });
+
+    it('renders inline when disablePortal is true', () => {
+      const { container } = render(
+        <Tearsheet open={true} disablePortal={true} />
+      );
+      // With the portal disabled the tearsheet IS inside the render container.
+      expect(container.querySelector(`.${blockClass}`)).toBeInTheDocument();
+    });
+
+    it('renders into a custom portalTarget', () => {
+      const customTarget = document.createElement('div');
+      document.body.appendChild(customTarget);
+
+      render(<Tearsheet open={true} portalTarget={customTarget} />);
+
+      expect(customTarget.querySelector(`.${blockClass}`)).toBeInTheDocument();
+
+      document.body.removeChild(customTarget);
+    });
+
+    it('renders exactly once on first open (no double-mount / double-animation)', () => {
+      // Guards the regression: inline → portal remount caused two entrance
+      // animations.  Before the fix, mountNode started as null so the tearsheet
+      // first rendered inline, then remounted inside the portal — leaving two
+      // ComposedModal instances briefly in the DOM.
+      //
+      // After the fix, mountNode is set eagerly in the lazy useState initializer
+      // so only a single instance ever exists.  We verify this by asserting
+      // there is exactly one modal container in the document after render.
+      render(<Tearsheet open={true} />);
+
+      const containers = document.querySelectorAll('.cds--modal-container');
+      expect(containers).toHaveLength(1);
+    });
+  });
+
+  // ---------------------------
+  //  keepMounted
+  // ---------------------------
+
+  describe('keepMounted', () => {
+    it('keeps the tearsheet in the DOM when closed', () => {
+      const { rerender } = render(
+        <Tearsheet open={true} keepMounted={true} disablePortal={true} />
+      );
+      expect(document.querySelector(`.${blockClass}`)).toBeInTheDocument();
+
+      rerender(
+        <Tearsheet open={false} keepMounted={true} disablePortal={true} />
+      );
+
+      // Still mounted — just hidden via CSS class
+      expect(document.querySelector(`.${blockClass}`)).toBeInTheDocument();
+      expect(document.querySelector(`.${blockClass}`)).not.toHaveClass(
+        'is-visible'
+      );
+    });
+
+    it('removes the tearsheet from the DOM when closed without keepMounted', async () => {
+      const { rerender } = render(
+        <Tearsheet open={true} disablePortal={true} />
+      );
+      expect(document.querySelector(`.${blockClass}`)).toBeInTheDocument();
+
+      rerender(<Tearsheet open={false} disablePortal={true} />);
+
+      // After the (instant JSDOM) exit animation, isPresent becomes false → null
+      await waitFor(() =>
+        expect(document.querySelector(`.${blockClass}`)).not.toBeInTheDocument()
+      );
+    });
+  });
+
+  // ---------------------------
+  //  Accessibility / aria props
+  // ---------------------------
+
+  describe('accessibility', () => {
+    it('applies aria-label when provided', () => {
+      render(
+        <Tearsheet open={true} ariaLabel="My tearsheet" disablePortal={true} />
+      );
+      expect(
+        document.querySelector(`[aria-label="My tearsheet"]`)
+      ).toBeInTheDocument();
+    });
+
+    it('falls back to aria-labelledby when ariaLabel is not provided', () => {
+      render(<Tearsheet open={true} disablePortal={true} />);
+      // Carbon's ComposedModal places aria-labelledby on the inner
+      // cds--modal-container div, not on the outer wrapper element.
+      const container = document.querySelector('.cds--modal-container');
+      expect(container).toHaveAttribute('aria-labelledby');
+      expect(container).not.toHaveAttribute('aria-label');
+    });
+  });
+
+  // ---------------------------
+  //  Variant
+  // ---------------------------
+
+  describe('variant', () => {
+    it('applies narrow modifier class when variant is narrow', () => {
+      render(<Tearsheet open={true} variant="narrow" disablePortal={true} />);
+      expect(document.querySelector(`.${blockClass}`)).toHaveClass(
+        `${blockClass}--narrow`
+      );
+    });
+
+    it('applies wide modifier class by default', () => {
+      render(<Tearsheet open={true} disablePortal={true} />);
+      expect(document.querySelector(`.${blockClass}`)).toHaveClass(
+        `${blockClass}--wide`
+      );
+    });
+  });
+
+  // ---------------------------
+  //  containerClassName
+  // ---------------------------
+
+  it('applies containerClassName to the modal container', () => {
+    render(
+      <Tearsheet
+        open={true}
+        containerClassName="my-container"
+        disablePortal={true}
+      />
+    );
+    expect(document.querySelector(`.${blockClass}__container`)).toHaveClass(
+      'my-container'
+    );
+  });
+
+  // ---------------------------
+  //  launcherButtonRef focus return
+  // ---------------------------
+
+  describe('launcherButtonRef focus return', () => {
+    it('returns focus to the launcher button after close', () => {
+      jest.useFakeTimers();
+      const buttonRef = createRef();
+
+      // keepMounted keeps the component mounted after close so the setTimeout
+      // inside the effect can still fire and focus the button.
+      const { rerender } = render(
+        <div>
+          <button ref={buttonRef} data-testid="launcher">
+            Open
+          </button>
+          <Tearsheet
+            open={true}
+            disablePortal={true}
+            keepMounted={true}
+            launcherButtonRef={buttonRef}
+          />
+        </div>
+      );
+
+      rerender(
+        <div>
+          <button ref={buttonRef} data-testid="launcher">
+            Open
+          </button>
+          <Tearsheet
+            open={false}
+            disablePortal={true}
+            keepMounted={true}
+            launcherButtonRef={buttonRef}
+          />
+        </div>
+      );
+
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      expect(document.activeElement).toBe(screen.getByTestId('launcher'));
+
+      jest.useRealTimers();
+    });
+  });
+
   it('check menu button is not rendered when all items are not wrapped with HeaderActionItem', () => {
     render(
       <Tearsheet open={true}>

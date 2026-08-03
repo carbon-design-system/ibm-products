@@ -54,11 +54,23 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 }
 
 // Header styles
+// Uses a two-column grid so __title-media (left) and __title (right) can sit
+// side-by-side without JS injecting wrapper divs. Each child declares its own
+// grid-column; absent children simply leave their cell empty and it collapses.
+//
+//  col 1 (auto)  │  col 2 (1fr)
+//  ──────────────────────────────────────────
+//  __header-media  spans 1 / -1  (full width)
+//  __title-media   col 1         │  __title col 2
+//  __actions       absolute, not in flow
+//
+// When __title-media is absent, __title gets grid-column: 1 / -1 via :not(:has(...))
 .#{$block-class-next}__header {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-01; // 2px gap between label, title, and caption
+  display: grid;
+  column-gap: $spacing-05; // 16px gap between __title-media (col 1) and __title (col 2)
+  grid-template-columns: auto 1fr;
+  row-gap: 0; // vertical rhythm is handled by margin-block on each child
 }
 
 // Body styles
@@ -135,42 +147,17 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 
 // Header primitive components
 
-// Header Media styles (icon slot)
+// CardHeaderMedia — icon/pictogram slot above the title row.
+// $spacing-05 padding on all four sides, max-height 64px per design spec.
+// Spans both grid columns so it is always full-width.
 .#{$block-class-next}__header-media {
   display: flex;
-  flex-shrink: 0; // Don't shrink
-  align-items: flex-start; // Top-align content
-  justify-content: flex-start; // Left-align content
-  block-size: auto; // Auto height based on content
-  inline-size: auto; // Auto width based on content
-  margin-block-end: $spacing-05; // 16px bottom
-  margin-block-start: $spacing-05; // 16px top
-  margin-inline-end: $spacing-05; // 16px right
-  margin-inline-start: $spacing-05; // 16px left
-  max-block-size: $spacing-10; // 64px max height for content
-}
-
-// Inline header media margin (when NOT the first child, i.e., not header media slot)
-// This ensures inline icons align with label/title/caption text
-.#{$block-class-next}__header
-  > .#{$block-class-next}__header-media:not(:first-child) {
-  margin-inline-start: $spacing-05; // 16px left to align with text content
-}
-
-// When header media slot is followed by actions, create row layout
-.#{$block-class-next}__header:has(
-    > .#{$block-class-next}__header-media:first-child
-      + .#{$block-class-next}__actions
-  ) {
-  > .#{$block-class-next}__header-media:first-child {
-    // Header media on the left, remove right margin
-    margin-inline-end: 0;
-  }
-
-  > .#{$block-class-next}__actions {
-    // Actions on the right
-    margin-inline-start: auto;
-  }
+  align-items: flex-start;
+  justify-content: flex-start;
+  grid-column: 1 / -1; // span full width
+  margin-block: $spacing-05;
+  margin-inline: $spacing-05;
+  max-block-size: $spacing-10; // 64px max height
 }
 
 // Media styles (uses Carbon AspectRatio)
@@ -224,104 +211,124 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   margin-block-start: auto;
 }
 
-// Label styles
-.#{$block-class-next}__label {
+// __label nested inside __title (via label prop on CardTitle).
+// __title owns the horizontal margins; __label carries only typography + color.
+// Truncation modifiers are standalone rules — &--modifier inside a descendant
+// combinator block compiles to `.parent > .element--modifier` which only
+// matches the sole modifier class, not the element with base + modifier.
+// Standalone rules match both classes correctly.
+.#{$block-class-next}__title > .#{$block-class-next}__label {
   @include type-style('label-01');
 
   color: $text-secondary;
-
-  margin-block-start: $spacing-05; // 16px top
-  margin-inline: $spacing-05; // 16px left and right
-
-  &--truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 }
 
-// Remove all inline margins from label when inside title-content (with TitleMedia)
-.#{$block-class-next}__title-content > .#{$block-class-next}__label {
-  margin-inline: 0;
+.#{$block-class-next}__label--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-// Title styles
+.#{$block-class-next}__label--truncate-multi {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(
+    --#{c4p-settings.$pkg-prefix}--card-next--label-line-clamp
+  );
+  text-overflow: ellipsis;
+}
+
+// Title container — always a flex column so label / text-row / description stack.
+// Never set display on this element: truncation lives on __title-text-row below.
+// min-inline-size: 0 is required because __title is a grid item: grid items
+// default to min-inline-size: auto (i.e. their content width), which means
+// they won't shrink to fit the cell and overflow: hidden on __title-text-row
+// has no effect. Setting 0 allows the grid cell to constrain the item width.
+// overflow: hidden clips any content that still escapes (e.g. unbreakable words).
 .#{$block-class-next}__title {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
   color: $text-primary;
+  gap: $spacing-01; // 2px between label / text-row / description
   margin-inline: $spacing-05; // 16px left and right
-
-  &--truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &--truncate-multi {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-  }
+  min-inline-size: 0;
 }
 
-// Remove all inline margins from title when inside title-content (with TitleMedia)
-.#{$block-class-next}__title-content > .#{$block-class-next}__title {
-  margin-inline: 0;
+// Title text row — wraps the leading icon, title text, and trailing icon.
+// Truncation modifiers live here so they only clip the text row and never
+// affect the flex column that keeps description visible below.
+.#{$block-class-next}__title-text-row {
+  // Default: inline so bare text nodes wrap naturally.
+  display: block;
 }
 
-// Title Media styles (icon alongside label+title+caption block)
+.#{$block-class-next}__title-text-row--truncate {
+  overflow: hidden;
+  max-inline-size: var(
+    --#{c4p-settings.$pkg-prefix}--card-next--title-max-width,
+    100%
+  );
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class-next}__title-text-row--truncate-multi {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(
+    --#{c4p-settings.$pkg-prefix}--card-next--title-line-clamp
+  );
+  max-inline-size: var(
+    --#{c4p-settings.$pkg-prefix}--card-next--title-max-width,
+    100%
+  );
+  text-overflow: ellipsis;
+}
+
+// CardTitleMedia — inline icon, left column of the title row.
+// Sits in grid column 1; __title takes column 2 alongside it.
 .#{$block-class-next}__title-media {
   display: flex;
-  flex-shrink: 0; // Don't shrink
-  align-items: center; // Center content within the media container
-  justify-content: center; // Center content
-  margin-block-start: $spacing-05; // 16px top margin to align with label
-  margin-inline-start: $spacing-05; // 16px left padding
+  flex-shrink: 0;
+  align-items: flex-start; // top-align so it tracks the first line on long titles
+  justify-content: center;
+  grid-column: 1; // left column
+  margin-block-start: $spacing-05; // aligns top edge with title text top margin
+  margin-inline-start: $spacing-05; // 16px from card edge
   max-block-size: $spacing-10; // 64px max height
 }
 
-// When header contains title-media, make it a flex row container
-// Outer wrapper for TitleMedia + title content (horizontal layout)
-.#{$block-class-next}__header-content {
-  display: flex;
-  flex: 1; // Take remaining space
-  flex-direction: row; // Horizontal: TitleMedia on left, title-content on right
-  align-items: flex-start; // Top-align
-  gap: $spacing-05; // 16px gap between TitleMedia and title-content
-  min-inline-size: 0; // Allow content to shrink and wrap
+// When __title-media is present, __title sits in the right column.
+// When absent, __title spans both columns (full width).
+.#{$block-class-next}__header:has(> .#{$block-class-next}__title-media)
+  > .#{$block-class-next}__title {
+  grid-column: 2;
+  margin-inline-start: 0; // left margin is provided by the gap from __title-media
 }
 
-// Inner wrapper for label, title, caption (vertical stack)
-.#{$block-class-next}__title-content {
-  display: flex;
-  flex: 1; // Take remaining space
-  flex-direction: column; // Stack label, title, caption vertically
-  gap: $spacing-01; // 2px gap between label, title, and caption
-  min-inline-size: 0; // Allow content to shrink and wrap
-  padding-inline-end: $spacing-05; // 16px right padding only
-}
-
-// Expressive density uses larger heading
-.#{$block-class-next}--expressive .#{$block-class-next}__title {
+// Expressive density uses larger heading — applied to the text row so only the
+// title text itself inherits the type style, not the label or description.
+.#{$block-class-next}--expressive .#{$block-class-next}__title-text-row {
   @include type-style('heading-03');
 }
 
 // Productive density uses compact heading (must come after expressive to override)
-.#{$block-class-next}--productive .#{$block-class-next}__title {
+.#{$block-class-next}--productive .#{$block-class-next}__title-text-row {
   @include type-style('heading-compact-02');
 }
 
-// Title with leading icon layout
-.#{$block-class-next}__title--with-start-icon {
+// Leading icon: flex row so icon and text sit side-by-side on the same line.
+.#{$block-class-next}__title-text-row--with-start-icon {
   display: flex;
   align-items: flex-start;
   gap: $spacing-03; // 8px between icon and text per design
 }
 
-// Title with trailing icon - no flex, icon flows inline with text
-.#{$block-class-next}__title--with-end-icon {
-  // No display: flex - let content flow naturally inline
-  // Ensure inline content can flow
+// Trailing icon - no override needed; icon span is inline-flex inside block text.
+.#{$block-class-next}__title-text-row--with-end-icon {
   display: block;
 }
 
@@ -329,7 +336,7 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
 .#{$block-class-next}__title-start-icon {
   display: flex;
   flex-shrink: 0; // Prevent icon from shrinking
-  margin-block: $spacing-01; // 2px top/bottom padding to center with first line of text
+  margin-block-start: $spacing-01; // 2px top/bottom padding to center with first line of text
 }
 
 // Title trailing icon wrapper - inline element that flows with text
@@ -340,47 +347,37 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   vertical-align: middle; // Align with text baseline
 }
 
-// Conditional margin for title based on siblings
-// When title is standalone (no label before it), add top margin
-.#{$block-class-next}__header > .#{$block-class-next}__title:first-child,
-.#{$block-class-next}__header
-  > .#{$block-class-next}__header-media:first-child
-  + .#{$block-class-next}__title,
-.#{$block-class-next}__header
-  > .#{$block-class-next}__media:first-child
-  + .#{$block-class-next}__title,
-.#{$block-class-next}__title-content
-  > .#{$block-class-next}__title:first-child {
-  margin-block-start: $spacing-05; // 16px top
+// __title vertical rhythm.
+// Grid layout makes all sibling-combinator rules unnecessary — every __title
+// that is a direct child of __header always needs 16px top and bottom.
+.#{$block-class-next}__header > .#{$block-class-next}__title {
+  margin-block: $spacing-05;
 }
 
-// When title is standalone (no caption after it), add bottom margin
-// This applies when title is last child OR when followed by actions (but not caption)
-.#{$block-class-next}__header > .#{$block-class-next}__title:last-child,
-.#{$block-class-next}__title-content > .#{$block-class-next}__title:last-child,
-.#{$block-class-next}__title:not(:has(+ .#{$block-class-next}__caption)) {
-  margin-block-end: $spacing-05; // 16px bottom
-}
-
-// Caption styles
-.#{$block-class-next}__caption {
+// __description nested inside __title (via description prop on CardTitle).
+// __title owns the horizontal margins; __description carries only typography + color.
+// No block margins — the parent flex gap provides the 2px separation from the title text.
+// Truncation modifiers are standalone — see note above __label for why.
+.#{$block-class-next}__title > .#{$block-class-next}__description {
   @include type-style('label-01');
 
   color: $text-secondary;
-
-  margin-block-end: $spacing-05; // 16px bottom
-  margin-inline: $spacing-05; // 16px left and right
-
-  &--truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 }
 
-// Remove all inline margins from caption when inside title-content (with TitleMedia)
-.#{$block-class-next}__title-content > .#{$block-class-next}__caption {
-  margin-inline: 0;
+.#{$block-class-next}__description--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class-next}__description--truncate-multi {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(
+    --#{c4p-settings.$pkg-prefix}--card-next--description-line-clamp
+  );
+  text-overflow: ellipsis;
 }
 
 // Actions container styles
@@ -392,17 +389,9 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   block-size: $spacing-07; // 32px default height
   gap: $spacing-02;
   inline-size: 50%; // Limit actions to 50% of available header space per design
-  inset-block-start: $spacing-03; // 16px from top
-  inset-inline-end: $spacing-03; // 16px from right
+  inset-block-start: $spacing-03; // 8px from top
+  inset-inline-end: $spacing-03; // 8px from right edge
   max-inline-size: 50%; // Enforce 50% maximum width
-}
-
-// When actions are in header with header media slot, add bottom margin
-.#{$block-class-next}__header:has(
-    > .#{$block-class-next}__header-media:first-child
-  )
-  .#{$block-class-next}__actions {
-  margin-block-end: $spacing-07; // 32px gap below actions to title
 }
 
 // Action wrapper styles
@@ -462,14 +451,14 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   padding-inline-end: $spacing-13;
 }
 
-// Adjust caption padding when AI label is present
-.#{$block-class-next}--has-ai-label .#{$block-class-next}__caption {
+// Adjust description padding when AI label is present
+.#{$block-class-next}--has-ai-label .#{$block-class-next}__description {
   padding-inline-end: calc($spacing-07 + $spacing-05);
 }
 
-// When both actions and AI label are present, increase caption padding
+// When both actions and AI label are present, increase description padding
 .#{$block-class-next}--has-ai-label:has(.#{$block-class-next}__actions)
-  .#{$block-class-next}__caption {
+  .#{$block-class-next}__description {
   padding-inline-end: $spacing-13;
 }
 
@@ -479,14 +468,6 @@ $block-class-next: #{c4p-settings.$pkg-prefix}--card-next;
   // AI label right edge spacing (12px) + AI label width (24px) + gap (12px) = 48px
   // Using spacing tokens: $spacing-03 + $spacing-06 + $spacing-03 = 48px
   inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
-}
-
-// When AI label is present and title has no caption after it, add bottom margin
-// This prevents title from overlapping with actions
-.#{$block-class-next}--has-ai-label
-  .#{$block-class-next}__header
-  > .#{$block-class-next}__title:not(:has(+ .#{$block-class-next}__caption)) {
-  margin-block-end: $spacing-05; // 16px bottom to prevent overlap with actions
 }
 
 // Hover state for clickable cards with AI label

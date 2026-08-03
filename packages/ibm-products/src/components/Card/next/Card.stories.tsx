@@ -61,10 +61,8 @@ export default {
     CardFooter: Card.Footer,
     CardHeaderMedia: Card.HeaderMedia,
     CardMedia: Card.Media,
-    CardLabel: Card.Label,
     CardTitle: Card.Title,
     CardTitleMedia: Card.TitleMedia,
-    CardCaption: Card.Caption,
     CardActions: Card.Actions,
     CardAction: Card.Action,
   },
@@ -172,9 +170,9 @@ export const ProductiveAndExpressive = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Label>Category</Card.Label>
-          <Card.Title>Productive Card</Card.Title>
-          <Card.Caption>Uses heading-compact-02</Card.Caption>
+          <Card.Title label="Category" description="Uses heading-compact-02">
+            Productive Card
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -194,9 +192,9 @@ export const ProductiveAndExpressive = () => (
     <Column lg={4} md={4} sm={4}>
       <Card density="expressive">
         <Card.Header>
-          <Card.Label>Category</Card.Label>
-          <Card.Title>Expressive Card</Card.Title>
-          <Card.Caption>Uses heading-03</Card.Caption>
+          <Card.Title label="Category" description="Uses heading-03">
+            Expressive Card
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -220,8 +218,9 @@ export const WithIcon = () => (
           <Card.HeaderMedia>
             <Analytics />
           </Card.HeaderMedia>
-          <Card.Title>Analytics Dashboard</Card.Title>
-          <Card.Caption>Real-time metrics</Card.Caption>
+          <Card.Title description="Real-time metrics">
+            Analytics Dashboard
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>This card includes a small icon (16px) alongside the title.</p>
@@ -276,8 +275,9 @@ export const WithIcon = () => (
           <Card.HeaderMedia>
             <Favorite size="32" />
           </Card.HeaderMedia>
-          <Card.Title>Favorite Items</Card.Title>
-          <Card.Caption>Your saved content</Card.Caption>
+          <Card.Title description="Your saved content">
+            Favorite Items
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>This card includes a larger icon (32px) for more prominence.</p>
@@ -296,17 +296,17 @@ export const WithMedia = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
       <Card>
+        <Card.Media ratio="16x9">
+          <img
+            src={placeholder16x9}
+            alt="Placeholder 16:9 ratio"
+            width="100%"
+          />
+        </Card.Media>
         <Card.Header>
-          <Card.Media ratio="16x9">
-            <img
-              src={placeholder16x9}
-              alt="Placeholder 16:9 ratio"
-              width="100%"
-            />
-          </Card.Media>
-          <Card.Label>Featured</Card.Label>
-          <Card.Title>Product Launch Event</Card.Title>
-          <Card.Caption>Join us for the big reveal</Card.Caption>
+          <Card.Title label="Featured" description="Join us for the big reveal">
+            Product Launch Event
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>This card features a 16:9 aspect ratio media slot at the top.</p>
@@ -334,16 +334,13 @@ export const WithMedia = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
+        <Card.Media ratio="1x1">
+          <img src={placeholder1x1} alt="Placeholder 1:1 ratio" width="100%" />
+        </Card.Media>
         <Card.Header>
-          <Card.Media ratio="1x1">
-            <img
-              src={placeholder1x1}
-              alt="Placeholder 1:1 ratio"
-              width="100%"
-            />
-          </Card.Media>
-          <Card.Title>Square Format</Card.Title>
-          <Card.Caption>Perfect for profile images</Card.Caption>
+          <Card.Title description="Perfect for profile images">
+            Square Format
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>This card uses a 1:1 (square) aspect ratio for the media.</p>
@@ -370,9 +367,9 @@ export const WithHeaderActions = () => (
     <Column lg={4} md={4} sm={4}>
       <Card onClick={() => console.log('Card clicked')}>
         <Card.Header>
-          <Card.Label>Project</Card.Label>
-          <Card.Title>Website Redesign</Card.Title>
-          <Card.Caption>Due in 3 days</Card.Caption>
+          <Card.Title label="Project" description="Due in 3 days">
+            Website Redesign
+          </Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton
@@ -430,9 +427,9 @@ export const WithHeaderActions = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Label>Category</Card.Label>
-          <Card.Title>Project dashboard</Card.Title>
-          <Card.Caption>Last updated 2 hours ago</Card.Caption>
+          <Card.Title label="Category" description="Last updated 2 hours ago">
+            Project dashboard
+          </Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton kind="ghost" label="Edit" size="sm">
@@ -524,17 +521,17 @@ export const WithHeaderActions = () => (
           <Card.Actions>
             <Card.Action>
               <Button kind="tertiary" size="sm">
-                Action
+                Export
               </Button>
             </Card.Action>
             <Card.Action>
               <Button kind="tertiary" size="sm">
-                Action
+                Share
               </Button>
             </Card.Action>
             <Card.Action>
               <Button kind="tertiary" size="sm">
-                Action
+                View report
               </Button>
             </Card.Action>
           </Card.Actions>
@@ -545,6 +542,45 @@ export const WithHeaderActions = () => (
             require text labels instead of icons. This is useful when the action
             needs to be more explicit or when an appropriate icon isn&apos;t
             available.
+          </p>
+        </Card.Body>
+      </Card>
+    </Column>
+    <Column lg={4} md={4} sm={4}>
+      <Card>
+        <Card.Header>
+          <Card.Title
+            label="Category"
+            labelTruncate
+            description="This is a lengthy description that will be clamped to exactly two lines using multi-line truncation so you can see how it interacts with the action buttons above"
+            descriptionTruncate
+            titleTruncate={2}
+          >
+            This is a very long card title that wraps across multiple lines in a
+            narrow container
+          </Card.Title>
+          <Card.Actions>
+            <Card.Action>
+              <IconButton kind="ghost" label="Edit" size="sm">
+                <Edit />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Favorite" size="sm">
+                <Favorite />
+              </IconButton>
+            </Card.Action>
+            <Card.Action>
+              <IconButton kind="ghost" label="Share" size="sm">
+                <Share />
+              </IconButton>
+            </Card.Action>
+          </Card.Actions>
+        </Card.Header>
+        <Card.Body>
+          <p>
+            Truncated label (single line ellipsis), long wrapping title, and
+            description clamped to 2 lines — all alongside header actions.
           </p>
         </Card.Body>
       </Card>
@@ -588,8 +624,9 @@ export const WithHeaderMedia = () => (
               </IconButton>
             </Card.Action>
           </Card.Actions>
-          <Card.Title>Analytics Dashboard</Card.Title>
-          <Card.Caption>Real-time metrics</Card.Caption>
+          <Card.Title description="Real-time metrics">
+            Analytics Dashboard
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -680,11 +717,13 @@ export const WithTruncatedTitle = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Title truncate>
+          <Card.Title
+            titleTruncate
+            description="Single-line truncation example"
+          >
             This is a very long title that will be truncated with an ellipsis
             when it exceeds the maximum width
           </Card.Title>
-          <Card.Caption>Single-line truncation example</Card.Caption>
         </Card.Header>
         <Card.Body>
           <p>The title is truncated to a single line with an ellipsis.</p>
@@ -706,13 +745,15 @@ export const WithTruncatedTitle = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Title truncate={3}>
+          <Card.Title
+            titleTruncate={3}
+            description="Multi-line truncation example"
+          >
             This is a very long title that will be truncated after three lines.
             It demonstrates the multi-line truncation feature using WebKit line
             clamp. Any content beyond three lines will be hidden with an
             ellipsis.
           </Card.Title>
-          <Card.Caption>Multi-line truncation example</Card.Caption>
         </Card.Header>
         <Card.Body>
           <p>The title is truncated to three lines with an ellipsis.</p>
@@ -760,9 +801,9 @@ export const WithAILabel = () => (
         }
       >
         <Card.Header>
-          <Card.Label>AI-powered</Card.Label>
-          <Card.Title>Usage Analytics</Card.Title>
-          <Card.Caption>Generated by AI</Card.Caption>
+          <Card.Title label="AI-powered" description="Generated by AI">
+            Usage Analytics
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -797,8 +838,9 @@ export const WithAILabel = () => (
           <Card.HeaderMedia>
             <Analytics />
           </Card.HeaderMedia>
-          <Card.Title>Performance Insights</Card.Title>
-          <Card.Caption>AI-generated summary</Card.Caption>
+          <Card.Title description="AI-generated summary">
+            Performance Insights
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>Card with AI label and header media slot (icon).</p>
@@ -890,11 +932,12 @@ export const WithTitleMedia = () => (
               height={48}
             />
           </Card.TitleMedia>
-          <Card.Label>Label</Card.Label>
-          <Card.Title>Card with title icon</Card.Title>
-          <Card.Caption>
-            The title media slot positions an icon to the left of the title text
-          </Card.Caption>
+          <Card.Title
+            label="Label"
+            description="The title media slot positions an icon to the left of the title text"
+          >
+            Card with title icon
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -916,11 +959,12 @@ export const WithTitleMedia = () => (
               height={64}
             />
           </Card.TitleMedia>
-          <Card.Label>Label</Card.Label>
-          <Card.Title>Card with title icon</Card.Title>
-          <Card.Caption>
-            The title media slot positions an icon to the left of the title text
-          </Card.Caption>
+          <Card.Title
+            label="Label"
+            description="The title media slot positions an icon to the left of the title text"
+          >
+            Card with title icon
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -942,11 +986,12 @@ export const WithTitleMedia = () => (
               height={48}
             />
           </Card.TitleMedia>
-          <Card.Label>Label</Card.Label>
-          <Card.Title>Card with title icon</Card.Title>
-          <Card.Caption>
-            The title media slot positions an icon to the left of the title text
-          </Card.Caption>
+          <Card.Title
+            label="Label"
+            description="The title media slot positions an icon to the left of the title text"
+          >
+            Card with title icon
+          </Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton
@@ -987,14 +1032,17 @@ export const WithTitleMedia = () => (
     </Column>
     <Column lg={4} md={4} sm={4}>
       <Card>
+        <Card.Media ratio="16x9">
+          <img
+            src={placeholder16x9}
+            alt="Placeholder 16:9 ratio"
+            width="100%"
+          />
+        </Card.Media>
         <Card.Header>
-          <Card.Media ratio="16x9">
-            <img
-              src={placeholder16x9}
-              alt="Placeholder 16:9 ratio"
-              width="100%"
-            />
-          </Card.Media>
+          <Card.HeaderMedia>
+            <IconIndicator kind="succeeded" size={16} label="Succeeded" />
+          </Card.HeaderMedia>
           <Card.TitleMedia>
             <img
               src={rebusClassic}
@@ -1003,11 +1051,12 @@ export const WithTitleMedia = () => (
               height={48}
             />
           </Card.TitleMedia>
-          <Card.Label>Label</Card.Label>
-          <Card.Title>Card with title icon</Card.Title>
-          <Card.Caption>
-            The title media slot positions an icon to the left of the title text
-          </Card.Caption>
+          <Card.Title
+            label="Label"
+            description="The title media slot positions an icon to the left of the title text"
+          >
+            Card with title icon
+          </Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton
@@ -1090,11 +1139,7 @@ export const WithTitleLeadingIcon = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Title
-            titleStart={<BeeIcon size={16} />}
-            truncate={2}
-            maxWidth="200px"
-          >
+          <Card.Title titleStart={<BeeIcon size={16} />} titleTruncate={2}>
             Example of long title text that wraps onto two lines
           </Card.Title>
         </Card.Header>
@@ -1150,11 +1195,7 @@ export const WithTitleTrailingIcon = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Title
-            titleEnd={<BeeIcon size={16} />}
-            truncate={2}
-            maxWidth="200px"
-          >
+          <Card.Title titleEnd={<BeeIcon size={16} />} titleTruncate={2}>
             Example of long title text that wraps into three lines with icon
           </Card.Title>
         </Card.Header>
@@ -1178,8 +1219,9 @@ export const WithVideo = () => (
     <Column lg={4} md={4} sm={4}>
       <Card>
         <Card.Header>
-          <Card.Title>Product demo video</Card.Title>
-          <Card.Caption>Watch our latest feature walkthrough</Card.Caption>
+          <Card.Title description="Watch our latest feature walkthrough">
+            Product demo video
+          </Card.Title>
         </Card.Header>
         <Card.Media ratio="16x9">
           <video
@@ -1222,8 +1264,9 @@ export const WithVideo = () => (
           ></iframe>
         </Card.Media>
         <Card.Header>
-          <Card.Title>Tutorial series</Card.Title>
-          <Card.Caption>Getting started guide</Card.Caption>
+          <Card.Title description="Getting started guide">
+            Tutorial series
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -1276,8 +1319,9 @@ export const WithHorizontalMedia = () => (
           />
         </Card.Media>
         <Card.Header>
-          <Card.Label>Get started</Card.Label>
-          <Card.Title>Generate synthetic tabular data</Card.Title>
+          <Card.Title label="Get started">
+            Generate synthetic tabular data
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
@@ -1362,8 +1406,9 @@ export const WithHorizontalMedia = () => (
           <Card.HeaderMedia>
             <DirectionFork size="32" />
           </Card.HeaderMedia>
-          <Card.Label>Prepare your data</Card.Label>
-          <Card.Title>Generate synthetic tabular data</Card.Title>
+          <Card.Title label="Prepare your data">
+            Generate synthetic tabular data
+          </Card.Title>
         </Card.Header>
         <Card.Footer>
           <div className="story-time">
@@ -1422,8 +1467,9 @@ export const GetStartedCard = () => {
             <Card.HeaderMedia>
               <Crossroads size={32} />
             </Card.HeaderMedia>
-            <Card.Label>Prepare your data</Card.Label>
-            <Card.Title>Generate synthetic tabular data</Card.Title>
+            <Card.Title label="Prepare your data">
+              Generate synthetic tabular data
+            </Card.Title>
           </Card.Header>
           <Card.Footer>
             {metadata}
@@ -1443,8 +1489,9 @@ export const GetStartedCard = () => {
                 3
               </span>
             </Card.HeaderMedia>
-            <Card.Label>Prepare your data</Card.Label>
-            <Card.Title>Generate synthetic tabular data</Card.Title>
+            <Card.Title label="Prepare your data">
+              Generate synthetic tabular data
+            </Card.Title>
           </Card.Header>
           <Card.Footer>
             {metadata}
@@ -1465,8 +1512,9 @@ export const GetStartedCard = () => {
             <Card.HeaderMedia>
               <Crossroads size={32} />
             </Card.HeaderMedia>
-            <Card.Label>Prepare your data</Card.Label>
-            <Card.Title>Generate synthetic tabular data</Card.Title>
+            <Card.Title label="Prepare your data">
+              Generate synthetic tabular data
+            </Card.Title>
           </Card.Header>
           <Card.Footer>
             {metadata}
@@ -1511,8 +1559,7 @@ export const WithChart = () => (
         }
       >
         <Card.Header>
-          <Card.Label>Label</Card.Label>
-          <Card.Title>Title</Card.Title>
+          <Card.Title label="Label">Title</Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton
@@ -1575,8 +1622,7 @@ export const WithChart = () => (
         }
       >
         <Card.Header>
-          <Card.Title>Title</Card.Title>
-          <Card.Caption>Caption</Card.Caption>
+          <Card.Title description="Caption">Title</Card.Title>
           <Card.Actions>
             <Card.Action>
               <IconButton

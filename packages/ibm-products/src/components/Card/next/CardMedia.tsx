@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { AspectRatio, AspectRatioProps } from '@carbon/react';
@@ -42,43 +42,41 @@ export interface CardMediaProps extends Omit<AspectRatioProps, 'className'> {
  * In horizontal mode it renders a plain div sized to `mediaWidth` (default
  * 33.33%) that stretches to the full card height — no aspect-ratio math needed.
  */
-export const CardMedia = ({
-  children,
-  className,
-  ratio,
-  mediaWidth = '33.33%',
-  ...rest
-}: CardMediaProps) => {
-  const { horizontal } = useCardContext();
-  const classes = cx(`${blockClass}__media`, className);
+export let CardMedia = forwardRef<HTMLDivElement, CardMediaProps>(
+  ({ children, className, ratio, mediaWidth = '33.33%', ...rest }, ref) => {
+    const { horizontal } = useCardContext();
+    const classes = cx(`${blockClass}__media`, className);
 
-  if (horizontal) {
+    if (horizontal) {
+      return (
+        <div
+          ref={ref}
+          className={`${blockClass}__media ${blockClass}__media--horizontal`}
+          style={
+            {
+              [`--${blockClass}--media-width`]: mediaWidth,
+            } as React.CSSProperties
+          }
+          {...getDevtoolsProps(componentName)}
+        >
+          {children}
+        </div>
+      );
+    }
+
     return (
-      <div
-        className={`${blockClass}__media ${blockClass}__media--horizontal`}
-        style={
-          {
-            [`--${blockClass}--media-width`]: mediaWidth,
-          } as React.CSSProperties
-        }
+      <AspectRatio
+        ratio={ratio}
+        {...rest}
+        ref={ref as React.Ref<HTMLDivElement>}
+        className={classes}
         {...getDevtoolsProps(componentName)}
       >
         {children}
-      </div>
+      </AspectRatio>
     );
   }
-
-  return (
-    <AspectRatio
-      ratio={ratio}
-      {...rest}
-      className={classes}
-      {...getDevtoolsProps(componentName)}
-    >
-      {children}
-    </AspectRatio>
-  );
-};
+);
 
 CardMedia.propTypes = {
   children: PropTypes.node,
@@ -87,4 +85,5 @@ CardMedia.propTypes = {
   mediaWidth: PropTypes.string,
 };
 
+CardMedia = pkg.checkComponentEnabled(CardMedia, componentName);
 CardMedia.displayName = componentName;

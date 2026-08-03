@@ -30,7 +30,7 @@ export interface CardTitleMediaProps {
  * The media slot adapts to the heading area height (min 48px, max 64px) and stays
  * top-aligned when the title wraps to multiple lines.
  */
-export const CardTitleMedia = forwardRef<HTMLDivElement, CardTitleMediaProps>(
+export let CardTitleMedia = forwardRef<HTMLDivElement, CardTitleMediaProps>(
   ({ className, children, ...rest }, ref) => {
     const titleMediaClasses = cx(blockClass, className);
 
@@ -41,8 +41,6 @@ export const CardTitleMedia = forwardRef<HTMLDivElement, CardTitleMediaProps>(
     );
   }
 );
-
-CardTitleMedia.displayName = componentName;
 
 CardTitleMedia.propTypes = {
   /**
@@ -55,3 +53,6 @@ CardTitleMedia.propTypes = {
    */
   className: PropTypes.string,
 };
+
+CardTitleMedia = pkg.checkComponentEnabled(CardTitleMedia, componentName);
+CardTitleMedia.displayName = componentName;

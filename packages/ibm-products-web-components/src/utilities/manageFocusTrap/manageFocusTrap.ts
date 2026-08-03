@@ -153,16 +153,18 @@ export const clearFocusableContainers = (uniqueId?: string) => {
  *
  * @param wrapper - Optional wrapper element to attach the keydown listener to.
  *                  If not provided, defaults to document for backward compatibility.
- *                  Using a specific wrapper can improve performance and scope the listener.
  * @param uniqueId - Optional unique identifier to scope the focus trap to specific containers.
  *                   If provided, only containers registered with this uniqueId are included.
- *                   If not provided, uses the default key for backward compatibility.
+ * @param getFirstFocusable - Optional resolver called lazily on each keydown (and for initial
+ *                            focus) to determine the first element. Using a function rather than
+ *                            a value avoids a stale reference if header-action buttons are added
+ *                            or removed while the tearsheet is open.
+ *                            Falls back to the first element across registered containers.
  *
  * @returns An object with a `cleanup` method that removes event listeners.
- *          Call this method when the component is closing or unmounting.
  *
  * @example
- * // In a parent component when opening
+ *  * // In a parent component when opening
  * protected updated(changedProps) {
  *   if (changedProps.has('open') && this.open) {
  *     // Update signal so children can register
@@ -185,8 +187,17 @@ export const clearFocusableContainers = (uniqueId?: string) => {
  *   this._trapFocusAPI?.cleanup();
  *   clearFocusableContainers(this.uniqueId);
  * }
+ * this._trapFocusAPI = trapFocus(
+ *   this as HTMLElement,
+ *   this.uniqueId,
+ *   () => this._getFirstFocusable()
+ * );
  */
-export const trapFocus = (wrapper?: HTMLElement, uniqueId?: string) => {
+export const trapFocus = (
+  wrapper?: HTMLElement,
+  uniqueId?: string,
+  getFirstFocusable?: (() => HTMLElement | null) | null
+) => {
   const selectorTabbable = selectorTabbableCarbon.replace(
     `${carbonPrefix}-button`,
     `${carbonPrefix}-button:not([disabled]), ${carbonPrefix}-selectable-tag`
@@ -217,6 +228,18 @@ export const trapFocus = (wrapper?: HTMLElement, uniqueId?: string) => {
       return null;
     }
     if (el.tagName === 'BUTTON' || el.tabIndex >= 0) {
+      // Custom elements (e.g. cds-ai-label, cds-icon-button) are tabbable but their
+      // actual focusable control is a <button> inside their shadow root. Without
+      // `delegatesFocus` on the shadow root, calling .focus() on the host does nothing.
+      // Drill into the shadow root to find the real focusable target.
+      if (el.shadowRoot) {
+        const shadowBtn = el.shadowRoot.querySelector(
+          'button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ) as HTMLElement | null;
+        if (shadowBtn) {
+          return shadowBtn;
+        }
+      }
       return el;
     }
     const inner = el.querySelector('button, [tabindex]:not([tabindex="-1"])');
@@ -283,10 +306,11 @@ export const trapFocus = (wrapper?: HTMLElement, uniqueId?: string) => {
     return activeElement;
   };
 
-  //Optionally focus first element immediately
+  // Resolve and focus the first element immediately on open.
   requestAnimationFrame(() => {
-    const elements = getAllFocusableElements(containerArray);
-    getFocusTarget(elements[0])?.focus({ preventScroll: true });
+    const target =
+      getFirstFocusable?.() ?? getAllFocusableElements(containerArray)[0];
+    getFocusTarget(target)?.focus({ preventScroll: true });
   });
 
   /**
@@ -301,22 +325,22 @@ export const trapFocus = (wrapper?: HTMLElement, uniqueId?: string) => {
       return;
     }
 
-    // Flatten all focusable elements from all containers
     const elements = getAllFocusableElements(containerArray);
-
-    const first = elements[0];
+    // Resolve first lazily on every keydown — always reflects current DOM state,
+    // no stale reference if header-actions content changes while tearsheet is open.
+    const first = getFirstFocusable?.() ?? elements[0];
     const last = elements[elements.length - 1];
     const active = getRealActiveElement();
 
     if (e.shiftKey) {
-      // Shift+Tab wrap
-      if (active === first || first.contains(active)) {
+      // Shift+Tab: wrap from first → last
+      if (active === first || first?.contains(active)) {
         e.preventDefault();
         getFocusTarget(last)?.focus();
       }
     } else {
-      // Tab wrap
-      if (active === last || last.contains(active)) {
+      // Tab: wrap from last → first
+      if (active === last || last?.contains(active)) {
         e.preventDefault();
         getFocusTarget(first)?.focus();
       }

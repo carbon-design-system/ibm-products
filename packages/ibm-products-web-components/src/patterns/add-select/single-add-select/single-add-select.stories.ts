@@ -9,13 +9,30 @@
 
 import { html } from 'lit';
 import '../../../../examples/add-select/src/single-add-select/single-add-select';
+import '../../../../examples/add-select/src/single-add-select/single-add-select-with-hierarchy';
+import '../../../../examples/add-select/src/single-add-select/single-add-select-with-hierarchy-side-panel';
 
 export default {
   title: 'Patterns/Add and select/Single add select',
 };
 
-export const singleAddSelect = {
+export const Default = {
+  name: 'Default',
   render: () => {
     return html`<single-add-select-example></single-add-select-example>`;
+  },
+};
+
+export const WithHierarchy = {
+  name: 'With Hierarchy',
+  render: () => {
+    return html`<single-add-select-with-hierarchy-example></single-add-select-with-hierarchy-example>`;
+  },
+};
+
+export const WithHierarchyAndSidePanel = {
+  name: 'With Hierarchy and Side Panel',
+  render: () => {
+    return html`<single-add-select-with-hierarchy-side-panel-example></single-add-select-with-hierarchy-side-panel-example>`;
   },
 };

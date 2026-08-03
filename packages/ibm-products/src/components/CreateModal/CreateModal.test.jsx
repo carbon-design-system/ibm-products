@@ -52,6 +52,10 @@ const RenderComponent = forwardRef(({ children, ...rest }, ref) => {
 });
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders a component CreateModal', async () => {
     render(<RenderComponent />);
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);

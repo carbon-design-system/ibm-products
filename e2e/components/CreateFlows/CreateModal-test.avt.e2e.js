@@ -14,7 +14,7 @@ test.describe('CreateModal @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateModal',
-      id: 'patterns-prebuilt-patterns-create-flows-createmodal--default',
+      id: 'Deprecated-prebuilt-patterns-create-flows-createmodal--default',
       globals: {
         carbonTheme: 'white',
       },

@@ -12,6 +12,8 @@ import * as stories from './CreateModal.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
+      deprecationNotice="This component is deprecated and will be removed in the next major version."
+      altDescription="The `CreateModal` component provides a way for a user to quickly generate a new resource. It is triggered by a user's action, appears on top of the main page content, and is persistent until dismissed. The purpose of this modal should be immediately apparent to the user, with a clear and obvious path to completion."
       altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage#modal"
       blocks={[
         {

@@ -25,9 +25,10 @@ import { CreateModal } from '.';
 
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CreateModal.docs-page';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Create flows/CreateModal',
+  title: 'Deprecated/Prebuilt patterns/Create flows/CreateModal',
   component: CreateModal,
   tags: ['autodocs'],
   parameters: {
@@ -35,6 +36,27 @@ export default {
     docs: { page: DocsPage },
     controls: { sort: 'requiredFirst' },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/patterns-create-flows-create-modal">
+                Create Modal true pattern
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
   argTypes: {
     portalTarget: { control: { disable: true } },
     open: {

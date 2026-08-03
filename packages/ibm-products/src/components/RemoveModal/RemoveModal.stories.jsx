@@ -10,9 +10,10 @@ import { Button, Link } from '@carbon/react';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { RemoveModal } from '.';
 import mdx from './RemoveModal.mdx';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/RemoveModal',
+  title: 'Deprecated/Prebuilt patterns/RemoveModal',
   component: RemoveModal,
   tags: ['autodocs'],
   parameters: {
@@ -21,6 +22,27 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/patterns-delete-and-remove">
+                Delete and remove true pattern
+              </a>
+              .
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
   argTypes: {
     portalTarget: {
       control: false,

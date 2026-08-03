@@ -88,6 +88,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 
 .#{$block-class} .#{$block-class}__copyright-text {
+  margin-block-start: $spacing-05;
+}
+.#{$block-class}__links-container + .#{$block-class}__copyright-text {
   margin-block-start: $spacing-03;
 }
 

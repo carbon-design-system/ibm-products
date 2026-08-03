@@ -36,7 +36,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card-next;
 
   .#{$block-class}__title,
   .#{$block-class}__label,
-  .#{$block-class}__caption,
+  .#{$block-class}__description,
   .#{$block-class}__body {
     color: #ffffff;
   }

@@ -17,7 +17,7 @@ const blockClass = `${pkg.prefix}--card-next__footer`;
 /**
  * CardFooter component - Footer section of the card
  */
-export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
+export let CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className, children, ...rest }, ref) => {
     const footerClasses = cx(blockClass, className);
 
@@ -29,8 +29,6 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   }
 );
 
-CardFooter.displayName = componentName;
-
 CardFooter.propTypes = {
   /**
    * Footer content
@@ -41,3 +39,6 @@ CardFooter.propTypes = {
    */
   className: PropTypes.string,
 };
+
+CardFooter = pkg.checkComponentEnabled(CardFooter, componentName);
+CardFooter.displayName = componentName;

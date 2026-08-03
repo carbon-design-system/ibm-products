@@ -654,7 +654,7 @@ const AddSelectSelectionSummaryTemplate = (args) => {
         ${showEmptyState
           ? html`
               <div slot="empty-state" class="${storyClass}__empty-state">
-                <p>No selected items. Select items to see them here.</p>
+                <p>No selected items.<br />Select items to see them here.</p>
               </div>
             `
           : nothing}
@@ -722,6 +722,11 @@ export const AddSelectSelectionSummary = {
     editIconDescription: {
       control: 'text',
       description: 'Edit icon aria-label',
+    },
+    selectedItemCount: {
+      control: false,
+      description:
+        'Number of selected items — drives the count badge and empty-state visibility',
     },
     useCustomChildren: {
       control: 'boolean',

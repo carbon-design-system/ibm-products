@@ -208,6 +208,7 @@ collect:
         - container-class-name
         - onc4p-preview-tearsheet-beingclosed
         - onc4p-preview-tearsheet-closed
+        - onc4p-preview-tearsheet-collapse-change
         - selectors-floating-menus
         - summary-content-width
         - variant
@@ -235,7 +236,7 @@ collect:
         - width
         # c4p-tearsheet-header
         - disable-header-collapse
-        - onc4p-tearsheet-header-close-button-clicked
+        - onc4p-tearsheet-header-collapse-change
         # c4p-tearsheet-influencer
         - influencer-panel-aria-label
         - influencer-panel-open

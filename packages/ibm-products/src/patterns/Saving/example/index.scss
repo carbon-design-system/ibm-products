@@ -68,7 +68,10 @@ body {
 
 .saving-pattern__buttons {
   display: flex;
-  gap: $spacing-03;
+
+  .#{$carbon-prefix}--btn .#{$carbon-prefix}--inline-loading {
+    min-block-size: auto;
+  }
 }
 
 .saving-pattern__message {

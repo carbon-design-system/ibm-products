@@ -61,11 +61,26 @@ $prefix: 'c4p';
       background: $layer-hover-01;
 
       .#{$block-class__next}-row__title {
-        color: $interactive;
+        color: $link-primary;
       }
 
+      .#{$block-class__next}-row__view-item-panel svg,
       .#{$block-class__next}-row__nav-indicator svg {
-        color: $interactive;
+        fill: $icon-disabled;
+      }
+    }
+
+    // Must come after &:hover to win the specificity tie
+    &--selected:hover:not(&--disabled) {
+      background: $layer-selected-hover-01;
+
+      .#{$block-class__next}-row__title {
+        color: $text-primary;
+      }
+
+      .#{$block-class__next}-row__view-item-panel svg,
+      .#{$block-class__next}-row__nav-indicator svg {
+        fill: $icon-primary;
       }
     }
   }
@@ -81,9 +96,10 @@ $prefix: 'c4p';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $spacing-05;
-    block-size: 3rem;
     border-block-end: 1px solid $layer-accent-01;
+    min-block-size: $spacing-09;
+    padding-block: $spacing-03;
+    padding-inline: $spacing-05;
   }
 
   .#{$block-class__next}-row__content {
@@ -124,27 +140,67 @@ $prefix: 'c4p';
     margin-inline-start: $spacing-03;
   }
 
+  .#{$block-class__next}-row__view-item-panel {
+    margin-inline-start: auto;
+  }
+
   .#{$block-class__next}-row__nav-indicator {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: $spacing-02;
-    border-radius: 4px;
     cursor: pointer;
     margin-inline-start: $spacing-03;
+    padding-block: $spacing-02;
+    padding-inline: $spacing-02;
     transition: background-color $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $layer-hover-01;
+      background-color: $background-hover;
     }
 
     &:focus {
-      outline: 2px solid $focus;
-      outline-offset: -2px;
+      outline: $spacing-01 solid $focus;
+      outline-offset: calc(-1 * $spacing-01);
     }
 
     svg {
       fill: $icon-primary;
+    }
+  }
+
+  // Skeleton state
+  .#{$block-class__next}-row--skeleton {
+    cursor: default;
+    pointer-events: none;
+
+    &:hover {
+      background: none;
+    }
+
+    .#{$block-class__next}-row__skeleton-control {
+      flex: none;
+      border-radius: $spacing-01;
+      background-color: $skeleton-element;
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+      margin-inline-end: $spacing-05;
+    }
+
+    // Override cds-skeleton-icon host size to match the circular icon placeholder
+    .#{$block-class__next}-row__icon cds-skeleton-icon {
+      border-radius: 50%;
+      block-size: $spacing-07;
+      inline-size: $spacing-07;
+
+      &::before {
+        border-radius: 50%;
+        animation: none;
+      }
+    }
+
+    .#{$block-class__next}-row__skeleton-title {
+      margin-block-end: 0;
+      margin-block-start: $spacing-03;
     }
   }
 

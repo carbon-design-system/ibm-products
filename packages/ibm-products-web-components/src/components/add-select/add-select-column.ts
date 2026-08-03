@@ -211,20 +211,21 @@ class CDSAddSelectColumn extends LitElement {
               <div class="${blockClass}-column__header">
                 ${showSelectAll && multi
                   ? html`
-                      <div class="${blockClass}-column__title-wrapper">
-                        <cds-checkbox
-                          class="${blockClass}-column__select-all"
-                          ?checked=${allSelected}
-                          ?indeterminate=${allIndeterminate}
-                          @cds-checkbox-changed=${this._handleSelectAll}
-                          label-text="${title}"
-                        ></cds-checkbox>
+                      <cds-checkbox
+                        class="${blockClass}-column__select-all"
+                        ?checked=${allSelected}
+                        ?indeterminate=${allIndeterminate}
+                        @cds-checkbox-changed=${this._handleSelectAll}
+                      >
+                        <span class="${blockClass}-column__title"
+                          >${title}</span
+                        >
                         ${itemCount > 0
                           ? html`<cds-tag type="gray" size="sm"
                               >${itemCount}</cds-tag
                             >`
                           : nothing}
-                      </div>
+                      </cds-checkbox>
                     `
                   : html`
                       <div class="${blockClass}-column__title-wrapper">

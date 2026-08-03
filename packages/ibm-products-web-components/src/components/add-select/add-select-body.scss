@@ -72,10 +72,10 @@ $prefix: 'c4p';
   }
 
   .#{$block-class__next}__tags-label {
-    @include type.type-style('body-compact-01');
+    @include type.type-style('heading-compact-02');
 
     margin: 0;
-    color: $text-secondary;
+    color: $text-primary;
   }
 
   .#{$block-class__next}__sub-header-actions {

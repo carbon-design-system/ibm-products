@@ -268,6 +268,12 @@ class CDSAddSelectRow extends LitElement {
             <div class="${blockClass}__cell-wrapper">
               <div class="${blockClass}__skeleton-control"></div>
               <div class="${blockClass}__content">
+                <!-- Hidden slot kept so slotchange fires and _hasIconSlot is accurate -->
+                <slot
+                  name="icon"
+                  style="display:none"
+                  @slotchange=${this._handleIconSlotChange}
+                ></slot>
                 ${this._hasIconSlot
                   ? html`
                       <div class="${blockClass}__icon">

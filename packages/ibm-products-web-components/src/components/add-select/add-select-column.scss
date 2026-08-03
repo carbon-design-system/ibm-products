@@ -57,19 +57,17 @@ $prefix: 'c4p';
   }
 
   .#{$block-class__next}-column__title {
-    @include type.type-style('body-compact-01');
+    @include type.type-style('heading-compact-01');
 
-    color: $text-secondary;
-    font-weight: 600;
+    margin-inline-end: $spacing-03;
   }
 
-  // Select all: checkbox label-text area holds title + tag inline
+  // Select all: align slotted title + tag inside the checkbox label
   .#{$block-class__next}-column__select-all {
-    .cds--checkbox-label-text {
+    &::part(label) {
       display: flex;
       align-items: center;
       gap: $spacing-03;
-      margin-inline-start: $spacing-03;
     }
   }
 

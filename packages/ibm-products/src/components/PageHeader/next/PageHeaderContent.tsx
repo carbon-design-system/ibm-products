@@ -8,7 +8,6 @@ import React, {
   type ComponentType,
   type FunctionComponent,
   useEffect,
-  useState,
   useRef,
   RefObject,
 } from 'react';
@@ -70,7 +69,7 @@ export const PageHeaderContent = React.forwardRef<
     className,
     children,
     title,
-    titleAs = 'h1',
+    titleAs: TitleTag = 'h1',
     truncate,
     renderIcon: IconElement,
     contextualActions,
@@ -89,6 +88,7 @@ export const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleLines = truncate ?? (contextualActions ? 1 : 2);
 
   useEffect(() => {
     if (componentRef?.current) {
@@ -119,14 +119,19 @@ export const PageHeaderContent = React.forwardRef<
                   </div>
                 )}
 
-                <TruncatedText
-                  align="bottom"
-                  id={title}
-                  lines={truncate}
-                  type="tooltip"
+                <TitleTag
+                  ref={titleRef}
                   className={`${blockClass}__content__title`}
-                  value={title}
-                />
+                >
+                  <TruncatedText
+                    id={`${blockClass}__content__title__truncatedText`}
+                    className={`${blockClass}__content__title-text`}
+                    align="bottom"
+                    value={title}
+                    lines={titleLines}
+                    type="tooltip"
+                  />
+                </TitleTag>
               </div>
               {contextualActions && (
                 <div className={`${blockClass}__content__contextual-actions`}>

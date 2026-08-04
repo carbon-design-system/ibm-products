@@ -45,9 +45,9 @@ export interface PageHeaderContentProps {
    */
   titleAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | typeof Heading;
   /**
-   * Specify lines to truncate in title
+   * Specify the maximum number of lines the title can span before truncating.
    */
-  truncate?: number;
+  titleTruncate?: number;
   /**
    * The PageHeaderContent's contextual actions
    */
@@ -70,7 +70,7 @@ export const PageHeaderContent = React.forwardRef<
     children,
     title,
     titleAs: TitleTag = 'h1',
-    truncate,
+    titleTruncate,
     renderIcon: IconElement,
     contextualActions,
     pageActions,
@@ -88,7 +88,7 @@ export const PageHeaderContent = React.forwardRef<
     className
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const titleLines = truncate ?? (contextualActions ? 1 : 2);
+  const titleLines = titleTruncate ?? (contextualActions ? 1 : 2);
 
   useEffect(() => {
     if (componentRef?.current) {
@@ -193,7 +193,7 @@ PageHeaderContent.propTypes = {
     PropTypes.elementType,
   ]),
   /**
-   * Specify lines to truncate in title
+   * Specify the maximum number of lines the title can span before truncating.
    */
-  truncate: PropTypes.number,
+  titleTruncate: PropTypes.number,
 };

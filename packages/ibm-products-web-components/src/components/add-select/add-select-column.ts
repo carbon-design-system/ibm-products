@@ -173,7 +173,7 @@ class CDSAddSelectColumn extends LitElement {
     const showHeader = showSelectAll || !!title;
 
     return html`
-      <div class=${columnClasses}>
+      <div class=${columnClasses} part="column">
         <!-- Column search with optional actions slot -->
         ${!hideSearch
           ? html`

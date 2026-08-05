@@ -192,88 +192,89 @@ export class SingleAddSelectWithHierarchyExample extends LitElement {
         <h3>Single Add Select – With Hierarchy</h3>
         <p>Click the button below to open the single add select dialog with hierarchical navigation.</p>
 
-        <cds-button kind="primary" @click="${this._openAddSelect}">
+        <cds-button kind="primary" class="launch-button" @click="${this._openAddSelect}">
           Select a category
         </cds-button>
+      </div>
 
-        ${this._showNotification
-          ? html`
+      <div class="single-add-select-with-hierarchy-pattern">
+      <c4p-add-select ?multi=${false}>
+        <c4p-preview-tearsheet
+          ?open=${this._open}
+          variant="narrow"
+          @c4p-preview-tearsheet-closed="${this._handleClose}"
+        >
+          <c4p-tearsheet-header hide-close-button slot="header">
+            <c4p-tearsheet-header-content title="Select category">
+              <div slot="description">Choose one category from the list below</div>
+            </c4p-tearsheet-header-content>
+          </c4p-tearsheet-header>
+
+          <c4p-tearsheet-body is-flush>
+            <c4p-add-select-body
+              slot="main-content"
+              global-search-label="Search categories"
+              global-search-placeholder="Search..."
+              items-label="Categories"
+              search-results-title="Search results"
+              .itemCount="${this._filteredItems.length}"
+              .path="${breadcrumbPath}"
+              @c4p-add-select-body-search="${this._handleSearch}"
+              @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
+            >
+              <c4p-add-select-column hide-search>
+                ${this._filteredItems.length > 0
+                  ? this._filteredItems.map(
+                      (item) => html`
+                        <c4p-add-select-row
+                          item-id="${item.id}"
+                          title="${item.title}"
+                          value="${item.value}"
+                          ?has-children="${this.dataManager.hasChildren(item.id)}"
+                          ?selected="${this._selectedItemId === item.id}"
+                          @c4p-add-select-row-select="${this._handleItemSelect}"
+                          @c4p-add-select-row-navigate="${this._handleNavigate}"
+                        ></c4p-add-select-row>
+                      `
+                    )
+                  : html`
+                      <div class="no-results">
+                        <h4 class="no-results__title">No results found</h4>
+                        <p class="no-results__description">Try adjusting your search or browse categories</p>
+                      </div>
+                    `}
+              </c4p-add-select-column>
+            </c4p-add-select-body>
+          </c4p-tearsheet-body>
+
+          <c4p-tearsheet-footer slot="footer">
+            <div class="action-buttons">
+              <cds-button kind="secondary" @click="${this._handleClose}">Cancel</cds-button>
+              <cds-button
+                kind="primary"
+                @click="${this._handleSubmit}"
+                ?disabled="${!this._selectedItemId}"
+              >Select</cds-button>
+            </div>
+          </c4p-tearsheet-footer>
+        </c4p-preview-tearsheet>
+      </c4p-add-select>
+      </div>
+
+      ${this._showNotification
+        ? html`
+            <div class="notification">
               <cds-toast-notification
                 kind="success"
+                low-contrast
                 title="Item selected"
                 subtitle="Selected: ${this._selectedValue}"
                 timeout="3000"
                 @cds-notification-closed="${() => { this._showNotification = false; }}"
               ></cds-toast-notification>
-            `
-          : ''}
-
-        ${this._open
-          ? html`
-              <c4p-add-select ?multi=${false}>
-                <c4p-preview-tearsheet
-                  ?open=${this._open}
-                  variant="narrow"
-                  @c4p-preview-tearsheet-closed="${this._handleClose}"
-                >
-                  <c4p-tearsheet-header hide-close-button slot="header">
-                    <c4p-tearsheet-header-content title="Select category">
-                      <div slot="description">Choose one category from the list below</div>
-                    </c4p-tearsheet-header-content>
-                  </c4p-tearsheet-header>
-
-                  <c4p-tearsheet-body>
-                    <c4p-add-select-body
-                      slot="main-content"
-                      global-search-label="Search categories"
-                      global-search-placeholder="Search..."
-                      items-label="Categories"
-                      search-results-title="Search results"
-                      .itemCount="${this._filteredItems.length}"
-                      .path="${breadcrumbPath}"
-                      @c4p-add-select-body-search="${this._handleSearch}"
-                      @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
-                    >
-                      <c4p-add-select-column hide-search>
-                        ${this._filteredItems.length > 0
-                          ? this._filteredItems.map(
-                              (item) => html`
-                                <c4p-add-select-row
-                                  item-id="${item.id}"
-                                  title="${item.title}"
-                                  value="${item.value}"
-                                  ?has-children="${this.dataManager.hasChildren(item.id)}"
-                                  ?selected="${this._selectedItemId === item.id}"
-                                  @c4p-add-select-row-select="${this._handleItemSelect}"
-                                  @c4p-add-select-row-navigate="${this._handleNavigate}"
-                                ></c4p-add-select-row>
-                              `
-                            )
-                          : html`
-                              <div class="no-results">
-                                <h4 class="no-results__title">No results found</h4>
-                                <p class="no-results__description">Try adjusting your search or browse categories</p>
-                              </div>
-                            `}
-                      </c4p-add-select-column>
-                    </c4p-add-select-body>
-                  </c4p-tearsheet-body>
-
-                  <c4p-tearsheet-footer slot="footer">
-                    <div class="action-buttons">
-                      <cds-button kind="secondary" @click="${this._handleClose}">Cancel</cds-button>
-                      <cds-button
-                        kind="primary"
-                        @click="${this._handleSubmit}"
-                        ?disabled="${!this._selectedItemId}"
-                      >Select</cds-button>
-                    </div>
-                  </c4p-tearsheet-footer>
-                </c4p-preview-tearsheet>
-              </c4p-add-select>
-            `
-          : ''}
-      </div>
+            </div>
+          `
+        : ''}
     `;
   }
 }

@@ -390,95 +390,96 @@ export class SingleAddSelectWithHierarchySidePanelExample extends LitElement {
         <h3>Single Add Select – With Hierarchy and Side Panel</h3>
         <p>Click the button below to open the add single item dialog with hierarchical navigation and side panel for item details.</p>
 
-        <cds-button kind="primary" @click="${this._openAddSelect}">
+        <cds-button kind="primary" class="launch-button" @click="${this._openAddSelect}">
           Add asset
         </cds-button>
+      </div>
 
-        ${this._showNotification
-          ? html`
+      <div class="add-single-item-from-hierarchy-pattern">
+      <c4p-add-select ?multi=${false}>
+        <c4p-preview-tearsheet
+          ?open=${this._open}
+          variant="wide"
+          summary-content-width="22.5rem"
+          @c4p-preview-tearsheet-closed="${this._handleClose}"
+        >
+          <c4p-tearsheet-header hide-close-button slot="header">
+            <c4p-tearsheet-header-content title="Add asset">
+              <div slot="description">Select asset from the list lorem ipsum dolor infotext.</div>
+            </c4p-tearsheet-header-content>
+          </c4p-tearsheet-header>
+
+          <c4p-tearsheet-body is-flush>
+            <c4p-add-select-body
+              slot="main-content"
+              global-search-label="Find assets"
+              global-search-placeholder="Find assets"
+              items-label="Assets"
+              search-results-title="Search results"
+              .itemCount="${this._currentItems.length}"
+              .path="${breadcrumbPath}"
+              @c4p-add-select-body-search="${this._handleSearch}"
+              @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
+            >
+              ${this._currentItems.length > 0
+                ? html`
+                    ${this._renderColumn(this._currentItems, 'Assets')}
+                    ${this._navigationLevels.map((level) =>
+                      this._renderColumn(level.items, level.parentTitle)
+                    )}
+                  `
+                : html`
+                    <div class="no-results">
+                      <h4 class="no-results__title">No results found</h4>
+                      <p class="no-results__description">Try adjusting your search or browse categories</p>
+                    </div>
+                  `}
+            </c4p-add-select-body>
+
+            <!-- Side panel summary content -->
+            <c4p-tearsheet-summary-content is-flush slot="summary-content">
+              <c4p-add-select-selection-summary
+                title="Selected asset"
+                .selectedItemCount="${this._selectedItem ? 1 : 0}"
+              >
+                <div slot="empty-state" class="empty-state">
+                  <p class="empty-state-text">Select an item to view details</p>
+                </div>
+                ${this._selectedItem
+                  ? this._renderSidePanelContent(this._selectedItem)
+                  : ''}
+              </c4p-add-select-selection-summary>
+            </c4p-tearsheet-summary-content>
+          </c4p-tearsheet-body>
+
+          <c4p-tearsheet-footer slot="footer">
+            <div class="action-buttons">
+              <cds-button kind="secondary" @click="${this._handleClose}">Cancel</cds-button>
+              <cds-button
+                kind="primary"
+                @click="${this._handleSubmit}"
+                ?disabled="${!this._selectedItemId}"
+              >Add</cds-button>
+            </div>
+          </c4p-tearsheet-footer>
+        </c4p-preview-tearsheet>
+      </c4p-add-select>
+      </div>
+
+      ${this._showNotification
+        ? html`
+            <div class="notification">
               <cds-toast-notification
                 kind="success"
+                low-contrast
                 title="Asset Added"
                 subtitle="Successfully added: ${this._selectedItem?.value ?? ''}"
                 timeout="3000"
                 @cds-notification-closed="${() => { this._showNotification = false; }}"
               ></cds-toast-notification>
-            `
-          : ''}
-
-        ${this._open
-          ? html`
-              <c4p-add-select ?multi=${false}>
-                <c4p-preview-tearsheet
-                  ?open=${this._open}
-                  variant="wide"
-                  summary-content-width="22.5rem"
-                  @c4p-preview-tearsheet-closed="${this._handleClose}"
-                >
-                  <c4p-tearsheet-header hide-close-button slot="header">
-                    <c4p-tearsheet-header-content title="Add asset">
-                      <div slot="description">Select asset from the list lorem ipsum dolor infotext.</div>
-                    </c4p-tearsheet-header-content>
-                  </c4p-tearsheet-header>
-
-                  <c4p-tearsheet-body>
-                    <c4p-add-select-body
-                      slot="main-content"
-                      global-search-label="Find assets"
-                      global-search-placeholder="Find assets"
-                      items-label="Assets"
-                      search-results-title="Search results"
-                      .itemCount="${this._currentItems.length}"
-                      .path="${breadcrumbPath}"
-                      @c4p-add-select-body-search="${this._handleSearch}"
-                      @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
-                    >
-                      ${this._currentItems.length > 0
-                        ? html`
-                            ${this._renderColumn(this._currentItems, 'Assets')}
-                            ${this._navigationLevels.map((level) =>
-                              this._renderColumn(level.items, level.parentTitle)
-                            )}
-                          `
-                        : html`
-                            <div class="no-results">
-                              <h4 class="no-results__title">No results found</h4>
-                              <p class="no-results__description">Try adjusting your search or browse categories</p>
-                            </div>
-                          `}
-                    </c4p-add-select-body>
-
-                    <!-- Side panel summary content -->
-                    <c4p-tearsheet-summary-content is-flush slot="summary-content">
-                      <c4p-add-select-selection-summary
-                        title="Selected asset"
-                        .selectedItemCount="${this._selectedItem ? 1 : 0}"
-                      >
-                        <div slot="empty-state" class="empty-state">
-                          <p class="empty-state-text">Select an item to view details</p>
-                        </div>
-                        ${this._selectedItem
-                          ? this._renderSidePanelContent(this._selectedItem)
-                          : ''}
-                      </c4p-add-select-selection-summary>
-                    </c4p-tearsheet-summary-content>
-                  </c4p-tearsheet-body>
-
-                  <c4p-tearsheet-footer slot="footer">
-                    <div class="action-buttons">
-                      <cds-button kind="secondary" @click="${this._handleClose}">Cancel</cds-button>
-                      <cds-button
-                        kind="primary"
-                        @click="${this._handleSubmit}"
-                        ?disabled="${!this._selectedItemId}"
-                      >Add</cds-button>
-                    </div>
-                  </c4p-tearsheet-footer>
-                </c4p-preview-tearsheet>
-              </c4p-add-select>
-            `
-          : ''}
-      </div>
+            </div>
+          `
+        : ''}
     `;
   }
 }

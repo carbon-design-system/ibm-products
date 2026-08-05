@@ -39,31 +39,42 @@ const getButtonSize = (variant: string = 'wide') => {
   return isSmallScreen || variant === 'narrow' ? 'xl' : '2xl';
 };
 
+// When decorator=true, render an AI label; false/undefined renders nothing.
 const getDecorator = (decorator) => {
-  switch (decorator) {
-    case 'WITH_AI_LABEL':
-      return html`
-        <cds-ai-label alignment="bottom-right" slot="decorator">
-          <div slot="body-text">
-            <p class="secondary">AI Explained</p>
-            <h2 class="ai-label-heading">84%</h2>
-            <p class="secondary bold">Confidence score</p>
-            <p class="secondary">Any description goes here</p>
-            <hr />
-            <p class="secondary">Model type</p>
-            <p class="bold">Foundation model</p>
-          </div>
-        </cds-ai-label>
-      `;
-
-    default:
-      return;
+  if (!decorator) {
+    return '';
   }
+  return html`
+    <cds-ai-label alignment="bottom-right" slot="decorator">
+      <div slot="body-text">
+        <p class="secondary">AI Explained</p>
+        <h2 class="ai-label-heading">84%</h2>
+        <p class="secondary bold">Confidence score</p>
+        <p class="secondary">Any description goes here</p>
+        <hr />
+        <p class="secondary">Model type</p>
+        <p class="bold">Foundation model</p>
+      </div>
+    </cds-ai-label>
+  `;
 };
 const toggleButton = () => {
   document
     .querySelector(`${prefix}-preview-tearsheet`)
     ?.toggleAttribute('open');
+};
+
+/**
+ * Handles `c4p-preview-tearsheet-collapse-change` events in stories.
+ * Resizes header-action buttons to `xs` when collapsed, `sm` when expanded,
+ * matching the React TearsheetHeaderActions behavior.
+ */
+const handleCollapseChange = (e: Event) => {
+  const { collapsed } = (e as CustomEvent).detail as { collapsed: boolean };
+  const tearsheet = e.currentTarget as Element;
+  tearsheet
+    .querySelectorAll('[slot="header-actions"] cds-button')
+    .forEach((btn) => btn.setAttribute('size', collapsed ? 'xs' : 'sm'));
 };
 
 const toggleInfluencerPanel = () => {
@@ -285,7 +296,8 @@ export const Default = {
   args: {
     variant: 'wide',
     open: false,
-    decorator: 'NONE',
+    decorator: false,
+    isFlush: false,
     hideCloseButton: false,
     disableHeaderCollapse: false,
     title: 'Title of the tearsheet',
@@ -295,58 +307,6 @@ export const Default = {
     showHeaderActions: true,
     showSummaryContent: true,
     preventCloseOnClickOutside: false,
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['wide', 'narrow'],
-      description: 'Tearsheet variant',
-    },
-    open: {
-      control: 'boolean',
-      description: 'Controls whether the tearsheet is open',
-    },
-    decorator: {
-      control: 'select',
-      options: ['NONE', 'WITH_AI_LABEL'],
-      description: 'Decorator type for the tearsheet header',
-    },
-    hideCloseButton: {
-      control: 'boolean',
-      description: 'Hide the close button in the header',
-    },
-    disableHeaderCollapse: {
-      control: 'boolean',
-      description: 'Disable header collapse/expand on scroll',
-    },
-    title: {
-      control: 'text',
-      description: 'Title of the tearsheet',
-    },
-    label: {
-      control: 'text',
-      description: 'Label above the title',
-    },
-    showDescription: {
-      control: 'boolean',
-      description: 'Show description text',
-    },
-    showTitleIcon: {
-      control: 'boolean',
-      description: 'Show icon before title',
-    },
-    showHeaderActions: {
-      control: 'boolean',
-      description: 'Show action buttons in header',
-    },
-    showSummaryContent: {
-      control: 'boolean',
-      description: 'Show summary content panel',
-    },
-    preventCloseOnClickOutside: {
-      control: 'boolean',
-      description: 'Prevent closing when clicking outside',
-    },
   },
   render: (args) => {
     return html`
@@ -366,15 +326,14 @@ export const Default = {
         variant="${args.variant}"
         ?open="${args.open}"
         ?prevent-close-on-click-outside="${args.preventCloseOnClickOutside}"
+        @c4p-preview-tearsheet-collapse-change="${handleCollapseChange}"
       >
         <c4p-tearsheet-header
           ?hide-close-button="${args.hideCloseButton}"
           ?disable-header-collapse="${args.disableHeaderCollapse}"
         >
-          <!-- slotted Decorator -->
-          ${args.decorator !== 'NONE' ? getDecorator(args.decorator) : ''}
-
           <c4p-tearsheet-header-content title="${args.title}">
+            ${getDecorator(args.decorator)}
             <label slot="label">${args.label}</label>
             ${args.showDescription ? description : ''}
             ${args.showTitleIcon
@@ -393,10 +352,11 @@ export const Default = {
         </c4p-tearsheet-header>
 
         <c4p-tearsheet-body>
-          <div slot="main-content">
+          <div slot="main-content" ?is-flush="${args.isFlush}">
             ${args.showSummaryContent
               ? html`<div class="summaryPanelTrigger">
                   <cds-button
+                    size="md"
                     kind="ghost"
                     label="Open right panel"
                     @click="${toggleSummaryPanel}"
@@ -442,7 +402,14 @@ export const Default = {
 };
 
 export const WithInfluencer = {
-  render: () => {
+  args: {
+    variant: 'wide',
+    decorator: false,
+    isFlush: false,
+    hideCloseButton: false,
+    disableHeaderCollapse: false,
+  },
+  render: (args) => {
     return html`
       <style>
         ${styles}
@@ -454,12 +421,16 @@ export const WithInfluencer = {
         </div>
       </div>
 
-      <c4p-preview-tearsheet variant="wide">
-        <c4p-tearsheet-header ?hide-close-button="${false}">
-          <!-- Decorator -->
-          ${getDecorator('WITH_AI_LABEL')}
-
+      <c4p-preview-tearsheet
+        variant="${args.variant ?? 'wide'}"
+        @c4p-preview-tearsheet-collapse-change="${handleCollapseChange}"
+      >
+        <c4p-tearsheet-header
+          ?hide-close-button="${args.hideCloseButton}"
+          ?disable-header-collapse="${args.disableHeaderCollapse}"
+        >
           <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
             <label slot="label">Label</label>
             ${description}
             ${iconLoader(Bee, {
@@ -478,10 +449,11 @@ export const WithInfluencer = {
         </c4p-tearsheet-influencer>
 
         <c4p-tearsheet-body>
-          <div slot="main-content">
+          <div slot="main-content" ?is-flush="${args.isFlush}">
             <!-- Button to open influencer panel on small screens -->
             <div class="influencerPanelTrigger">
               <cds-button
+                size="md"
                 kind="ghost"
                 tooltip-text="Open Influencer"
                 tooltip-position="right"
@@ -497,7 +469,7 @@ export const WithInfluencer = {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer
-          variant="wide"
+          variant="${args.variant ?? 'wide'}"
           .actions="${[
             {
               kind: 'ghost',
@@ -521,7 +493,14 @@ export const WithInfluencer = {
 };
 
 export const WithTabs = {
-  render: () => {
+  args: {
+    variant: 'wide',
+    decorator: false,
+    isFlush: false,
+    hideCloseButton: false,
+    disableHeaderCollapse: false,
+  },
+  render: (args) => {
     return html`
       <style>
         ${styles}
@@ -533,12 +512,16 @@ export const WithTabs = {
         </div>
       </div>
 
-      <c4p-preview-tearsheet variant="wide">
-        <c4p-tearsheet-header ?hide-close-button="${false}">
-          <!-- Decorator -->
-          ${getDecorator('WITH_AI_LABEL')}
-
+      <c4p-preview-tearsheet
+        variant="${args.variant ?? 'wide'}"
+        @c4p-preview-tearsheet-collapse-change="${handleCollapseChange}"
+      >
+        <c4p-tearsheet-header
+          ?hide-close-button="${args.hideCloseButton}"
+          ?disable-header-collapse="${args.disableHeaderCollapse}"
+        >
           <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
             <label slot="label">Label</label>
             ${description}
             ${iconLoader(Bee, {
@@ -556,10 +539,7 @@ export const WithTabs = {
         </c4p-tearsheet-header>
 
         <c4p-tearsheet-body>
-          <div slot="main-content">
-            <!-- Button to open influencer panel on small screens -->
-
-            <!-- Main Content -->
+          <div slot="main-content" ?is-flush="${args.isFlush}">
             <div
               id="tab-cloudFoundry"
               role="tabpanel"
@@ -573,7 +553,7 @@ export const WithTabs = {
         </c4p-tearsheet-body>
 
         <c4p-tearsheet-footer
-          variant="wide"
+          variant="${args.variant ?? 'wide'}"
           .actions="${[
             {
               kind: 'ghost',
@@ -597,86 +577,97 @@ export const WithTabs = {
 };
 
 export const narrowTearsheet = {
+  args: {
+    decorator: false,
+    isFlush: false,
+    hideCloseButton: false,
+    disableHeaderCollapse: false,
+  },
   render: (args) => {
     return html`
       <style>
         ${styles}
       </style>
-       <div class="${storyPrefix}story-container">
+      <div class="${storyPrefix}story-container">
         <div class="${storyPrefix}story-header"></div>
         <div id="page-content-selector" class="${storyPrefix}story-content">
           <cds-button @click="${toggleButton}">Toggle tearsheet</cds-button>
         </div>
       </div>
 
+      <c4p-preview-tearsheet
+        variant="narrow"
+        @c4p-preview-tearsheet-collapse-change="${handleCollapseChange}"
+      >
+        <c4p-tearsheet-header
+          ?hide-close-button="${args.hideCloseButton}"
+          ?disable-header-collapse="${args.disableHeaderCollapse}"
+        >
+          <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
+            <label slot="label">Label</label>
+            ${description}
+            <div slot="header-actions">
+              <cds-button size="sm" kind="tertiary">
+                Primary action ${iconLoader(Add16, { slot: 'icon' })}
+              </cds-button>
+            </div>
+          </c4p-tearsheet-header-content>
+        </c4p-tearsheet-header>
 
-     <c4p-preview-tearsheet variant="narrow">
-     <c4p-tearsheet-header  ?hide-close-button="${false}" >
-           <!-- slotted Decorator -->
-             ${getDecorator('WITH_AI_LABEL')}
-      <c4p-tearsheet-header-content title="Tile to the tearsheet">
-      <label slot="label"> label </label>
-    ${description}
-     
-      
-      <div slot="header-actions">
-            <cds-button size="sm" kind="tertiary" 
-              >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
-            >
-          </div>
-     </c4p-tearsheet-header-content>
-   
-      
-   
-     </c4p-tearsheet-header>
-      <c4p-tearsheet-influencer  >${progressIndicator(true)}</c4p-tearsheet-influencer>
-       <c4p-tearsheet-body >
-       <div  slot="main-content"> 
-        <div class="influencerPanelTrigger">
+        <c4p-tearsheet-influencer
+          >${progressIndicator(true)}</c4p-tearsheet-influencer
+        >
+
+        <c4p-tearsheet-body>
+          <div slot="main-content" ?is-flush="${args.isFlush}">
+            <div class="influencerPanelTrigger">
               <cds-button
+                size="md"
                 kind="ghost"
                 label="Open influencer"
                 @click="${toggleInfluencerPanel}"
               >
-                 ${iconLoader(RightPanelClose32, {
-                   slot: 'icon',
-                 })}
-                </cds-button>
+                ${iconLoader(RightPanelClose32, { slot: 'icon' })}
+              </cds-button>
             </div>
             <div class="summaryPanelTrigger">
               <cds-button
+                size="md"
                 kind="ghost"
                 label="Open right panel"
-               @click="${toggleSummaryPanel}"
-               
-              > ${iconLoader(RightPanelClose32, {
-                slot: 'icon',
-              })}</cds-button>
+                @click="${toggleSummaryPanel}"
+              >
+                ${iconLoader(RightPanelClose32, { slot: 'icon' })}
+              </cds-button>
             </div>
-        ${dummyContent}</div>
-       <c4p-tearsheet-summary-content   slot="summary-content">${summaryContent}</c4p-tearsheet-summary-content>
+            ${dummyContent}
+          </div>
+          <c4p-tearsheet-summary-content slot="summary-content">
+            ${summaryContent}
+          </c4p-tearsheet-summary-content>
         </c4p-tearsheet-body>
+
         <c4p-tearsheet-footer
-         variant="narrow"
-         .actions="${[
-           {
-             kind: 'ghost',
-             label: 'Cancel',
-             onClick: toggleButton,
-           },
-           {
-             kind: 'secondary',
-             label: 'Back',
-           },
-           {
-             kind: 'primary',
-             label: 'Submit',
-           },
-         ]}"
-       >
-       </c4p-tearsheet-footer>
-     </<c4p-preview-tearsheet>
-      
+          variant="narrow"
+          .actions="${[
+            {
+              kind: 'ghost',
+              label: 'Cancel',
+              onClick: toggleButton,
+            },
+            {
+              kind: 'secondary',
+              label: 'Back',
+            },
+            {
+              kind: 'primary',
+              label: 'Submit',
+            },
+          ]}"
+        >
+        </c4p-tearsheet-footer>
+      </c4p-preview-tearsheet>
     `;
   },
 };
@@ -728,22 +719,11 @@ export const WithCustomFooterActions = {
   args: {
     variant: 'wide',
     open: false,
+    decorator: false,
+    isFlush: false,
+    hideCloseButton: false,
+    disableHeaderCollapse: false,
     showSummaryContent: true,
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['wide', 'narrow'],
-      description: 'Tearsheet variant',
-    },
-    open: {
-      control: 'boolean',
-      description: 'Controls whether the tearsheet is open',
-    },
-    showSummaryContent: {
-      control: 'boolean',
-      description: 'Show summary content panel',
-    },
   },
   render: (args) => {
     return html`
@@ -761,15 +741,19 @@ export const WithCustomFooterActions = {
         variant="${args.variant}"
         ?open="${args.open}"
         prevent-close-on-click-outside
+        @c4p-preview-tearsheet-collapse-change="${handleCollapseChange}"
       >
-        <c4p-tearsheet-header ?hide-close-button="${false}">
+        <c4p-tearsheet-header
+          ?hide-close-button="${args.hideCloseButton}"
+          ?disable-header-collapse="${args.disableHeaderCollapse}"
+        >
           <c4p-tearsheet-header-content title="Title of the tearsheet">
+            ${getDecorator(args.decorator)}
             <label slot="label">Customer data</label>
             ${description}
             ${iconLoader(Bee, {
               slot: 'title-start',
             })}
-
             <div slot="header-actions">
               <cds-button size="sm" kind="tertiary">
                 Action 1 ${iconLoader(Add16, { slot: 'icon' })}
@@ -779,10 +763,11 @@ export const WithCustomFooterActions = {
         </c4p-tearsheet-header>
 
         <c4p-tearsheet-body>
-          <div slot="main-content">
+          <div slot="main-content" ?is-flush="${args.isFlush}">
             ${args.showSummaryContent
               ? html`<div class="summaryPanelTrigger">
                   <cds-button
+                    size="md"
                     kind="ghost"
                     label="Open right panel"
                     @click="${toggleSummaryPanel}"
@@ -838,15 +823,72 @@ const meta = {
       page: mdx,
     },
   },
+  // Shared argTypes inherited by every story
+  argTypes: {
+    decorator: {
+      control: { type: 'boolean' },
+      description: 'When true, an AI Label decorator is shown in the header.',
+    },
+    isFlush: {
+      control: { type: 'boolean' },
+      description:
+        'When true, the main content area takes full width without padding.',
+    },
+    variant: {
+      control: { type: 'radio' },
+      options: ['wide', 'narrow'],
+      description: 'Tearsheet variant',
+    },
+    hideCloseButton: {
+      control: { type: 'boolean' },
+      description: 'Hide the close button in the header.',
+    },
+    disableHeaderCollapse: {
+      control: { type: 'boolean' },
+      description: 'Disable header collapse/expand on scroll.',
+    },
+    closeIconDescription: {
+      control: { type: 'text' },
+      description: 'Accessible label for the close icon button.',
+    },
+    open: {
+      control: { type: 'boolean' },
+      description: 'Controls whether the tearsheet is open',
+    },
+    title: {
+      control: { type: 'text' },
+      description: 'Title of the tearsheet',
+    },
+    label: {
+      control: { type: 'text' },
+      description: 'Label above the title',
+    },
+    showDescription: {
+      control: { type: 'boolean' },
+      description: 'Show description text',
+    },
+    showTitleIcon: {
+      control: { type: 'boolean' },
+      description: 'Show icon before title',
+    },
+    showHeaderActions: {
+      control: { type: 'boolean' },
+      description: 'Show action buttons in header',
+    },
+    showSummaryContent: {
+      control: { type: 'boolean' },
+      description: 'Show summary content panel',
+    },
+    preventCloseOnClickOutside: {
+      control: { type: 'boolean' },
+      description: 'Prevent closing when clicking outside',
+    },
+  },
   decorators: [
     (story) =>
       html` <style>
           #main-content {
             padding: 0;
-          }
-
-          .tabs-demo {
-            padding: 1rem;
           }
         </style>
         ${story()}`,

@@ -30,19 +30,6 @@ $carbon-prefix: 'cds';
   }
 }
 
-.add-single-item-from-hierarchy-pattern {
-  // Remove extra padding from AddSelectColumn to match React implementation.
-  // The padding lives inside the Shadow DOM of c4p-add-select-column, so the
-  // internal class is not reachable from outside. We target the exposed ::part
-  // instead.
-  c4p-add-select-column::part(column) {
-    padding-block: 0;
-    padding-inline: 0;
-  }
-}
-
-
-
 .no-results {
   padding: $spacing-09 $spacing-05;
   text-align: center;

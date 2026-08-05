@@ -93,5 +93,9 @@ $prefix: 'c4p';
   .#{$block-class__next}-list-body {
     display: flex;
     flex-direction: column;
+
+    &--horizontal {
+      flex-direction: row;
+    }
   }
 }

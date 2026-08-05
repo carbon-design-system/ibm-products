@@ -22,7 +22,11 @@ $prefix: 'c4p';
   .#{$block-class__next}-column {
     display: flex;
     flex-direction: column;
-    padding: $spacing-05;
+    block-size: 100%;
+    border-inline-end: 1px solid $border-subtle-01;
+    min-inline-size: 300px;
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
   }
 
   .#{$block-class__next}-column__search {

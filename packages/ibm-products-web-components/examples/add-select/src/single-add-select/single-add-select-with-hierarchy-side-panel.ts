@@ -412,6 +412,7 @@ export class SingleAddSelectWithHierarchySidePanelExample extends LitElement {
           <c4p-tearsheet-body is-flush>
             <c4p-add-select-body
               slot="main-content"
+              layout="horizontal"
               global-search-label="Find assets"
               global-search-placeholder="Find assets"
               items-label="Assets"

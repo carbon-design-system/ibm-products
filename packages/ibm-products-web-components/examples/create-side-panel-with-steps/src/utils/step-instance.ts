@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,9 +10,13 @@
 /**
  * StepInstance — a small reactive step-flow helper backed by @lit-labs/signals.
  *
- * This file is copied from `@carbon/ibm-products-web-components` source and is
- * intentionally kept as a standalone utility so you can paste it into your own
- * project without pulling in the full library source.
+ * This file lives here because the `examples/` directory is a self-contained
+ * Stackblitz project with no access to the monorepo source. It is a verbatim
+ * copy of `packages/ibm-products-web-components/src/utilities/step-flow/step-flow-signal.ts`.
+ *
+ * If you copy this pattern into your own project, import `StepInstance` from
+ * this file or inline the same class — it is not exported from the published
+ * `@carbon/ibm-products-web-components` package.
  *
  * Usage:
  *

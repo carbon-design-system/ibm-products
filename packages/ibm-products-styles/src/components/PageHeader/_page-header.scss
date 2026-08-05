@@ -1057,9 +1057,13 @@ $duration: 1000ms;
   &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
     .#{$block-class}__tab-bar {
     position: static;
+    // On smaller screens, use flex to keep scroller button in flow
+    // position: relative;
     display: flex;
     align-items: center;
+    // background-color: $layer;
 
+    // // On max breakpoint and above, use block to maintain Carbon alignment (scroller uses absolute positioning)
     @include breakpoint(sm) {
       display: block;
     }

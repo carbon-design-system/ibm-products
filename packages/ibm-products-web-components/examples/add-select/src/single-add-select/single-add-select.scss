@@ -53,8 +53,8 @@ $carbon-prefix: 'cds';
 
 .notification {
   position: fixed;
-  top: $spacing-05;
-  right: $spacing-05;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
   z-index: 9999;
 }
 
@@ -123,12 +123,6 @@ $carbon-prefix: 'cds';
   }
 }
 
-cds-toast-notification {
-  position: absolute;
-  top: $spacing-05;
-  right: $spacing-05;
-  z-index: 9999;
-}
 
 // Footer action buttons styles - equal width buttons
 .action-buttons {

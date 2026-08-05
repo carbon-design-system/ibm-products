@@ -33,3 +33,7 @@ $css--plex: true !default;
   justify-content: center;
   block-size: 100vh;
 }
+
+.c4p--create-side-panel__progress-indicator {
+  margin-block-end: $spacing-05;
+}

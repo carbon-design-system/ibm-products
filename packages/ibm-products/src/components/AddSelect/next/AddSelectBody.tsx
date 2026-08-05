@@ -14,7 +14,6 @@ import React, {
   useRef,
   useEffect,
   KeyboardEvent,
-  useContext,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -30,7 +29,7 @@ import {
   type BreadcrumbItemProps,
   type LinkProps,
 } from '@carbon/react';
-import { blockClass, AddSelectContext } from './context';
+import { blockClass } from './context';
 
 /**
  * ----------------
@@ -73,7 +72,9 @@ export interface AddSelectBodyProps {
    */
   path?: Array<{ id: string; title: string }>;
   /**
-   * Callback when search term changes
+   * Called when the global search input value changes.
+   * Intended to filter across ALL columns/rows in the Body.
+   * Independent of any per-column search in AddSelectColumn.
    */
   onSearch?: (searchTerm: string) => void;
   /**
@@ -154,19 +155,23 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
     },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const { multi } = useContext(AddSelectContext);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [globalSearchTerm, setGlobalSearchTerm] = useState('');
     const listRef = useRef<HTMLDivElement>(null);
     const focusedIndexRef = useRef(0);
+    // Cache of querySelectorAll('[role="row"]') — invalidated when children change
+    const rowsCacheRef = useRef<HTMLElement[] | null>(null);
 
-    // Get all item elements
+    // Get all item elements — uses cache; refreshes after children change
     const getItems = (): HTMLElement[] => {
       if (!listRef.current) {
         return [];
       }
-      return Array.from(
-        listRef.current.querySelectorAll('[role="row"]')
-      ) as HTMLElement[];
+      if (rowsCacheRef.current === null) {
+        rowsCacheRef.current = Array.from(
+          listRef.current.querySelectorAll('[role="row"]')
+        ) as HTMLElement[];
+      }
+      return rowsCacheRef.current;
     };
 
     // Update focus on items - only one item should have tabindex="0"
@@ -265,15 +270,16 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
       }
     };
 
-    // Initialize focus management after mount
+    // Invalidate cache and re-initialize focus whenever children change
     useEffect(() => {
+      rowsCacheRef.current = null;
       updateItemFocus(0, false);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [children]);
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
-      setSearchTerm(value);
+      setGlobalSearchTerm(value);
       onSearch?.(value);
     };
 
@@ -303,7 +309,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
                         placeholder={globalSearchPlaceholder}
                         size="lg"
                         onChange={handleSearch}
-                        value={searchTerm}
+                        value={globalSearchTerm}
                         {...searchProps}
                       />
                     </div>
@@ -319,7 +325,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
               {/* Sub-header with breadcrumbs or item label */}
               <div className={`${blockClass}__sub-header`}>
                 <div className={`${blockClass}__tags`}>
-                  {searchTerm ? (
+                  {globalSearchTerm ? (
                     <p className={`${blockClass}__tags-label`}>
                       {searchResultsTitle}
                     </p>
@@ -379,7 +385,6 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
           className={`${blockClass}__content`}
           ref={listRef}
           role="grid"
-          aria-multiselectable={multi}
           tabIndex={0}
           onKeyDown={handleKeyDown}
         >
@@ -387,6 +392,7 @@ const AddSelectBody = forwardRef<HTMLDivElement, AddSelectBodyProps>(
             className={cx(`${blockClass}-list-body`, {
               [`${blockClass}-list-body--horizontal`]: layout === 'horizontal',
             })}
+            role="rowgroup"
           >
             {children}
           </div>

@@ -9,16 +9,13 @@
 
 import { html } from 'lit';
 import '../../../examples/create-side-panel-with-steps/src/index';
+import DocsPage from './create-side-panel-with-steps.mdx';
 import './story-styles.scss';
 
 export default {
   title: 'Patterns/Create flows/Create side panel with steps',
   parameters: {
-    docs: {
-      description: {
-        component: '',
-      },
-    },
+    docs: { page: DocsPage },
   },
 };
 

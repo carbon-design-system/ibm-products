@@ -23,9 +23,10 @@ import * as createSidePanelWithStepsStories from './create-side-panel-with-steps
 
 The `create-side-panel-with-steps` is a **pattern** (not a component) that
 provides a recipe for building multi-step creation flows inside a side panel.
-It combines `c4p-side-panel` with a step utility (`create-side-panel-step`) and
-a progress indicator (`create-side-panel-influencer`) to guide users through a
-sequential form workflow while keeping on-page content visible.
+It combines `c4p-side-panel` with the `StepInstance` step utility and a
+**horizontal** `cds-progress-indicator` placed in the panel's `slot="below-title"`
+to guide users through a sequential form workflow while keeping on-page content
+visible.
 
 Use this pattern for **medium-complexity creations** where the user needs page
 context. The side panel appears on top of existing page content, which remains
@@ -52,16 +53,16 @@ approach offers:
 
 The `create-side-panel-with-steps` pattern consists of:
 
-- `create-side-panel-step.ts` — Individual step web component
-- `create-side-panel-influencer.ts` — Progress indicator web component
+- `utils/step-instance.ts` — Copy of the `StepInstance` step utility (backed by `@lit-labs/signals`)
+- `components/create-side-panel-step.ts` — Individual step web component
 - `create-side-panel-with-steps.ts` — Wrapper example wiring everything together
 
 ## Getting Started
 
 1. **Copy the pattern code** from the
-   [example directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-side-panel-with-steps/src/components)
+   [example directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-side-panel-with-steps/src)
    into your project.
-2. **Install dependencies**: `@carbon/ibm-products-web-components`, `@carbon/web-components`, `lit`.
+2. **Install dependencies**: `@carbon/ibm-products-web-components`, `@carbon/web-components`, `@lit-labs/signals`, `lit`.
 3. **Import and use** the pattern components in your application.
 4. **Customize** as needed for your use case.
 
@@ -87,38 +88,50 @@ To build this pattern, the following components are used:
 
 The pattern is built on top of:
 
-- **LitElement**: Base class for creating reactive web components with Shadow DOM
-- **Lit Reactive Properties**: Using `@state()` and `@property()` decorators for
-  reactive state management
-- **Carbon Web Components**: For form inputs, layout, and progress indicator
-- **`c4p-side-panel`**: The IBM Products side panel component that hosts the
-  step content and action buttons
+- **`StepInstance`**: A reactive step utility (copied into `utils/step-instance.ts`) backed by `@lit-labs/signals`. Provides `currentStep`, `totalSteps`, `formState`, `handleNext()`, `handlePrevious()`, and `reset()`.
+- **`SignalWatcher`** (`@lit-labs/signals`): Applied to the host component so that changes to the `StepInstance` signal automatically trigger re-renders.
+- **`c4p-side-panel`**: The IBM Products side panel that hosts the step content and action buttons.
+- **Horizontal `cds-progress-indicator`**: Placed in `slot="below-title"` of the side panel — this renders the steps directly below the panel title as a horizontal progress bar, matching the Carbon side panel step-flow pattern.
 
 ### Step Management
 
-Steps are managed by your wrapper component. The pattern provides two helper
-elements:
+Steps are managed entirely through `StepInstance`. The pattern gives you:
 
-| Element | Purpose |
+| API | Purpose |
 |---|---|
-| `create-side-panel-step` | Renders a single step with title, subtitle, description, and slotted form content |
-| `create-side-panel-influencer` | Renders a vertical `cds-progress-indicator` above the step content |
+| `_stepInfo.data.currentStep` | 0-based index of the active step |
+| `_stepInfo.data.totalSteps` | Total number of steps |
+| `_stepInfo.data.formState` | Shared form state object across all steps |
+| `_stepInfo.handleNext()` | Advance to the next step |
+| `_stepInfo.handlePrevious()` | Go back to the previous step |
+| `_stepInfo.reset()` | Reset to step 0 and clear form state |
+| `_stepInfo.updateFormState =` | Replace shared form state (use `structuredClone` before mutating) |
+| `_stepInfo.updateTotalStepCount =` | Set the total step count (call in `connectedCallback`) |
 
-Your wrapper component tracks `currentStep` and conditionally renders each step
-using `lit/nothing` so only the active step's markup is present in the DOM.
+Your wrapper component tracks step state via `StepInstance` and conditionally renders each step using `lit/nothing` — only the active step's markup is in the DOM.
+
+### Horizontal progress indicator placement
+
+The `cds-progress-indicator` is rendered in `slot="below-title"` on `c4p-side-panel`. This places it
+directly below the panel title as a horizontal strip, matching the pattern shown in the [Step flows utility story](https://ibm-products-web-components.netlify.app/?path=/story/utilities-step-flows--side-panel-with-steps).
+
+Step states are driven from `currentStep`:
+
+```ts
+state=${index < currentStep ? 'complete'
+      : index === currentStep ? 'current'
+      : 'incomplete'}
+```
 
 ### Key Implementation Steps
 
-1. **Import components** — Import the step utilities and Carbon components.
-2. **Declare step data** — Define a `stepData` array with titles that drives
-   the progress indicator.
-3. **Track `currentStep`** — Use a `@state()` property (1-based index).
-4. **Render steps conditionally** — Render only the active
-   `create-side-panel-step` using `this.currentStep === n ? this.renderStepN() : nothing`.
-5. **Pass `stepData` to the influencer** — Bind `.stepData` and
-   `current-step` attributes on `create-side-panel-influencer`.
-6. **Wire action buttons** — Use `slot="actions"` buttons on `c4p-side-panel`
-   for Back / Next / Create navigation.
+1. **Copy utilities** — Copy `utils/step-instance.ts` and `components/create-side-panel-step.ts` into your project.
+2. **Extend `SignalWatcher`** — Wrap your component class with `SignalWatcher(LitElement)` so signal changes trigger re-renders.
+3. **Initialize `StepInstance`** — Create a private `_stepInfo = new StepInstance()` and call `_stepInfo.updateTotalStepCount = n` in `connectedCallback`.
+4. **Render horizontal progress indicator** — Place `<cds-progress-indicator>` inside `slot="below-title"` on the side panel; map `_stepLabels` to `<cds-progress-step>` elements.
+5. **Render steps conditionally** — Use `currentStep === n ? this._renderStepN(fs) : nothing` to show only the active step.
+6. **Save form state** — Use `structuredClone(this._stepInfo.data.formState)`, mutate the clone, then assign back with `this._stepInfo.updateFormState = clone`.
+7. **Wire action buttons** — Use `slot="actions"` buttons on `c4p-side-panel` for Cancel / Back / Next / Create navigation.
 
 ### Minimal Example
 
@@ -127,46 +140,87 @@ using `lit/nothing` so only the active step's markup is present in the DOM.
 ```javascript
 import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
 import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/form/form-item.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 // Copy pattern helpers into your project:
+import './utils/step-instance.js';
 import './components/create-side-panel-step.js';
-import './components/create-side-panel-influencer.js';
 ```
 
-#### HTML
+#### TypeScript
 
-```html
-<c4p-side-panel
-  include-overlay
-  open
-  size="md"
-  title="Create topic"
->
-  <div slot="subtitle">Step 1 of 2</div>
+```typescript
+import { LitElement, html, nothing } from 'lit';
+import { state } from 'lit/decorators.js';
+import { SignalWatcher } from '@lit-labs/signals';
+import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
+import { StepInstance } from './utils/step-instance';
 
-  <!-- Progress indicator -->
-  <create-side-panel-influencer
-    current-step="1"
-    .stepData="${[
-      { title: 'Topic name' },
-      { title: 'Configuration' },
-    ]}"
-  ></create-side-panel-influencer>
+@customElement('my-create-side-panel')
+class MyCreateSidePanel extends SignalWatcher(LitElement) {
+  @state() private _open = false;
 
-  <!-- Step content -->
-  <create-side-panel-step title="Topic name">
-    <cds-form>
-      <cds-form-item>
-        <cds-text-input label="Topic name" placeholder="Enter topic name">
-        </cds-text-input>
-      </cds-form-item>
-    </cds-form>
-  </create-side-panel-step>
+  private _stepInfo = new StepInstance();
+  private readonly _stepLabels = ['Step 1', 'Step 2', 'Step 3'];
 
-  <cds-button slot="actions" kind="secondary">Cancel</cds-button>
-  <cds-button slot="actions" kind="primary">Next</cds-button>
-</c4p-side-panel>
+  connectedCallback() {
+    super.connectedCallback();
+    this._stepInfo.updateTotalStepCount = this._stepLabels.length;
+  }
+
+  render() {
+    const { currentStep, totalSteps } = this._stepInfo.data;
+    const isLastStep = currentStep + 1 === totalSteps;
+
+    return html`
+      <cds-button @click=${() => (this._open = true)}>Create</cds-button>
+
+      <c4p-side-panel
+        ?open=${this._open}
+        title="Create resource"
+        include-overlay
+        ?animate-title=${false}
+        @c4p-side-panel-closed=${() => { this._open = false; this._stepInfo.reset(); }}
+      >
+        <div slot="subtitle">Specify the resource details</div>
+
+        <div slot="below-title">
+          <cds-progress-indicator>
+            ${this._stepLabels.map((label, index) => html`
+              <cds-progress-step
+                label=${label}
+                state=${index < currentStep ? 'complete'
+                      : index === currentStep ? 'current'
+                      : 'incomplete'}
+              ></cds-progress-step>
+            `)}
+          </cds-progress-indicator>
+        </div>
+
+        ${currentStep === 0 ? html`<p>Step 1 content</p>` : nothing}
+        ${currentStep === 1 ? html`<p>Step 2 content</p>` : nothing}
+        ${currentStep === 2 ? html`<p>Step 3 content</p>` : nothing}
+
+        <cds-button slot="actions" kind="ghost"
+          @click=${() => { this._open = false; this._stepInfo.reset(); }}>
+          Cancel
+        </cds-button>
+        <cds-button slot="actions" kind="secondary"
+          ?disabled=${currentStep === 0}
+          @click=${() => this._stepInfo.handlePrevious()}>
+          Back
+        </cds-button>
+        <cds-button slot="actions"
+          @click=${() => isLastStep
+            ? (this._open = false, this._stepInfo.reset())
+            : this._stepInfo.handleNext()}>
+          ${isLastStep ? 'Create' : 'Next'}
+        </cds-button>
+      </c4p-side-panel>
+    `;
+  }
+}
 ```
 
 ## Feedback

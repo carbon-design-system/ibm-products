@@ -8,9 +8,6 @@
  */
 
 export { CreateSidePanelStep } from './create-side-panel-step';
-export { CreateSidePanelInfluencer } from './create-side-panel-influencer';
-export type { StepData } from './create-side-panel-influencer';
 
-// Register the custom elements
+// Register the custom element
 import './create-side-panel-step';
-import './create-side-panel-influencer';

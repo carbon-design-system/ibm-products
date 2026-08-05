@@ -9,6 +9,7 @@
 
 import { LitElement, html, nothing } from 'lit';
 import { state } from 'lit/decorators.js';
+import { SignalWatcher } from '@lit-labs/signals';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element';
 import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
@@ -18,130 +19,154 @@ import '@carbon/web-components/es/components/form/form.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/number-input/index.js';
 import '@carbon/web-components/es/components/select/index.js';
-import './components/index.js';
-import type { StepData } from './components/index.js';
+import '@carbon/web-components/es/components/progress-indicator/index.js';
+import './components/create-side-panel-step';
+import { StepInstance } from './utils/step-instance';
 import styles from './styles.scss?lit';
 
 const blockClass = 'c4p--create-side-panel';
 const storyClass = 'create-side-panel-with-steps-stories';
 
+interface CreateSidePanelFormState {
+  [key: string]: unknown;
+  topicName?: string;
+  partitions?: number;
+  replicas?: number;
+  replicationFactor?: string;
+  retentionSize?: string;
+}
+
 /**
  * Create side panel with steps — main Storybook example component.
  *
- * Demonstrates how to wire `c4p-side-panel` with the step utilities
- * (`create-side-panel-step` and `create-side-panel-influencer`) to
+ * Demonstrates how to wire `c4p-side-panel` with the `StepInstance` utility
+ * and a horizontal `cds-progress-indicator` placed in `slot="below-title"` to
  * produce a multi-step "Create partitions" flow.
  *
  * @element create-side-panel-with-steps
  */
 @customElement('create-side-panel-with-steps')
-export class CreateSidePanelWithSteps extends HostListenerMixin(LitElement) {
-  @state() private open = true;
+export class CreateSidePanelWithSteps extends SignalWatcher(
+  HostListenerMixin(LitElement)
+) {
+  @state() private _open = true;
+  @state() private _topicNameInvalid = false;
 
-  // ── Step state ──────────────────────────────────────────────────────────────
-  @state() private currentStep = 1;
+  // ── Step utility ────────────────────────────────────────────────────────────
+  private _stepInfo = new StepInstance();
 
-  // ── Form values ─────────────────────────────────────────────────────────────
-  @state() private topicName = '';
-  @state() private partitions = 1;
-  @state() private replicas = 1;
-  @state() private replicationFactor = 'default';
-  @state() private retentionSize = '1';
+  private readonly _stepLabels = [
+    'Topic name',
+    'Core configuration',
+    'Message retention',
+  ];
 
-  // ── Validation ──────────────────────────────────────────────────────────────
-  @state() private topicNameInvalid = false;
-
-  // ── Step metadata (drives the progress indicator) ───────────────────────────
-  private get stepData(): StepData[] {
-    return [
-      { title: 'Topic name', shouldIncludeStep: true },
-      { title: 'Core configuration', shouldIncludeStep: true },
-      { title: 'Message retention', shouldIncludeStep: true },
-    ];
-  }
-
-  private get totalSteps() {
-    return this.stepData.filter((s) => s.shouldIncludeStep !== false).length;
+  connectedCallback() {
+    super.connectedCallback();
+    this._stepInfo.updateTotalStepCount = this._stepLabels.length;
   }
 
   // ── Handlers ────────────────────────────────────────────────────────────────
-  private openPanel() {
-    this.open = true;
+  private _openPanel() {
+    this._open = true;
   }
 
-  private closePanel() {
-    this.open = false;
-    // Reset back to step 1 when the panel is dismissed
-    this.currentStep = 1;
+  private _closePanel() {
+    this._open = false;
+    this._stepInfo.reset();
+    this._topicNameInvalid = false;
   }
 
-  private handleNext() {
-    if (this.currentStep === 1 && this.topicName.trim() === '') {
-      this.topicNameInvalid = true;
+  private _handleCancelButton() {
+    this._closePanel();
+  }
+
+  private _handleBackButton() {
+    const { currentStep } = this._stepInfo.data;
+    if (currentStep === 0) return;
+    this._stepInfo.handlePrevious();
+  }
+
+  private _handleNextButton() {
+    const { currentStep, totalSteps, formState } = this._stepInfo.data;
+    const fs = formState as CreateSidePanelFormState;
+
+    // Step 1 validation — topic name required
+    if (currentStep === 0 && !fs.topicName?.trim()) {
+      this._topicNameInvalid = true;
       return;
     }
-    if (this.currentStep < this.totalSteps) {
-      this.currentStep++;
+
+    if (currentStep + 1 === totalSteps) {
+      // Final step — submit and close
+      this._closePanel();
+      return;
+    }
+
+    this._stepInfo.handleNext();
+  }
+
+  private _handleTopicNameInput(e: Event) {
+    const value = (e.target as HTMLInputElement).value;
+    const savedFormState = structuredClone(
+      this._stepInfo.data.formState
+    ) as CreateSidePanelFormState;
+    savedFormState.topicName = value;
+    this._stepInfo.updateFormState = savedFormState;
+    if (value.trim()) {
+      this._topicNameInvalid = false;
     }
   }
 
-  private handleBack() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
+  private _handlePartitionsChanged(e: CustomEvent) {
+    const savedFormState = structuredClone(
+      this._stepInfo.data.formState
+    ) as CreateSidePanelFormState;
+    savedFormState.partitions = Number(e.detail.value);
+    this._stepInfo.updateFormState = savedFormState;
   }
 
-  private handleSubmit() {
-    console.log('Partition created', {
-      topicName: this.topicName,
-      partitions: this.partitions,
-      replicas: this.replicas,
-      replicationFactor: this.replicationFactor,
-      retentionSize: this.retentionSize,
-    });
-    this.closePanel();
+  private _handleReplicasChanged(e: CustomEvent) {
+    const savedFormState = structuredClone(
+      this._stepInfo.data.formState
+    ) as CreateSidePanelFormState;
+    savedFormState.replicas = Number(e.detail.value);
+    this._stepInfo.updateFormState = savedFormState;
   }
 
-  private handleTopicNameInput(e: Event) {
-    this.topicName = (e.target as HTMLInputElement).value;
-    if (this.topicName.trim()) {
-      this.topicNameInvalid = false;
-    }
+  private _handleReplicationFactorChange(e: Event) {
+    const savedFormState = structuredClone(
+      this._stepInfo.data.formState
+    ) as CreateSidePanelFormState;
+    savedFormState.replicationFactor = (e.target as HTMLSelectElement).value;
+    this._stepInfo.updateFormState = savedFormState;
   }
 
-  private handlePartitionsChange(e: CustomEvent) {
-    this.partitions = e.detail.value;
+  private _handleRetentionSizeChange(e: Event) {
+    const savedFormState = structuredClone(
+      this._stepInfo.data.formState
+    ) as CreateSidePanelFormState;
+    savedFormState.retentionSize = (e.target as HTMLSelectElement).value;
+    this._stepInfo.updateFormState = savedFormState;
   }
 
-  private handleReplicasChange(e: CustomEvent) {
-    this.replicas = e.detail.value;
-  }
-
-  private handleReplicationFactorChange(e: Event) {
-    this.replicationFactor = (e.target as HTMLSelectElement).value;
-  }
-
-  private handleRetentionSizeChange(e: Event) {
-    this.retentionSize = (e.target as HTMLSelectElement).value;
-  }
-
-  // ── Step content ─────────────────────────────────────────────────────────────
-  private renderStep1() {
+  // ── Step rendering ───────────────────────────────────────────────────────────
+  private _renderStep1(fs: CreateSidePanelFormState) {
     return html`
       <create-side-panel-step
         title="Topic name"
         description="Provide a unique name that helps identify your topic."
-        ?disable-submit=${!this.topicName.trim()}
       >
-        <cds-form class="${blockClass}__form">
+        <cds-form>
           <cds-form-item>
             <cds-text-input
               label="Topic name"
+              id="create-side-panel-topic-name"
               placeholder="Enter topic name"
-              .value=${this.topicName}
-              ?invalid=${this.topicNameInvalid}
+              value=${fs.topicName ?? ''}
+              ?invalid=${this._topicNameInvalid}
               invalid-text="A topic name is required"
-              @input=${this.handleTopicNameInput}
+              @input=${this._handleTopicNameInput}
             ></cds-text-input>
           </cds-form-item>
         </cds-form>
@@ -149,22 +174,21 @@ export class CreateSidePanelWithSteps extends HostListenerMixin(LitElement) {
     `;
   }
 
-  private renderStep2() {
+  private _renderStep2(fs: CreateSidePanelFormState) {
     return html`
       <create-side-panel-step
         title="Core configuration"
-        subtitle="Configure the core settings for your topic."
         description="We recommend you fill out and evaluate these details at a minimum before deploying your topic."
       >
-        <cds-form class="${blockClass}__form">
+        <cds-form>
           <cds-form-item>
             <cds-number-input
               label="Partitions"
               min="1"
               max="100"
               step="1"
-              .value=${this.partitions}
-              @cds-number-input-changed=${this.handlePartitionsChange}
+              value=${fs.partitions ?? 1}
+              @cds-number-input-changed=${this._handlePartitionsChanged}
             ></cds-number-input>
           </cds-form-item>
           <cds-form-item>
@@ -173,15 +197,15 @@ export class CreateSidePanelWithSteps extends HostListenerMixin(LitElement) {
               min="1"
               max="10"
               step="1"
-              .value=${this.replicas}
-              @cds-number-input-changed=${this.handleReplicasChange}
+              value=${fs.replicas ?? 1}
+              @cds-number-input-changed=${this._handleReplicasChanged}
             ></cds-number-input>
           </cds-form-item>
           <cds-form-item>
             <cds-select
               label-text="Replication factor"
-              .value=${this.replicationFactor}
-              @change=${this.handleReplicationFactorChange}
+              value=${fs.replicationFactor ?? 'default'}
+              @change=${this._handleReplicationFactorChange}
             >
               <cds-select-item value="default">Default</cds-select-item>
               <cds-select-item value="high">High availability</cds-select-item>
@@ -193,19 +217,18 @@ export class CreateSidePanelWithSteps extends HostListenerMixin(LitElement) {
     `;
   }
 
-  private renderStep3() {
+  private _renderStep3(fs: CreateSidePanelFormState) {
     return html`
       <create-side-panel-step
         title="Message retention"
-        subtitle="Specify how long messages are kept."
-        description="This is how many copies of a topic will be made for high availability."
+        description="This is how long messages are retained before they are deleted."
       >
-        <cds-form class="${blockClass}__form">
+        <cds-form>
           <cds-form-item>
             <cds-select
               label-text="Retention size"
-              .value=${this.retentionSize}
-              @change=${this.handleRetentionSizeChange}
+              value=${fs.retentionSize ?? '1'}
+              @change=${this._handleRetentionSizeChange}
             >
               <cds-select-item value="1">1 GB</cds-select-item>
               <cds-select-item value="5">5 GB</cds-select-item>
@@ -219,82 +242,70 @@ export class CreateSidePanelWithSteps extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const isFirstStep = this.currentStep === 1;
-    const isLastStep = this.currentStep === this.totalSteps;
-
-    const currentStepDisabledSubmit = (() => {
-      if (this.currentStep === 1) {
-        return !this.topicName.trim();
-      }
-      return false;
-    })();
+    const { currentStep, totalSteps, formState } = this._stepInfo.data;
+    const fs = formState as CreateSidePanelFormState;
+    const isFirstStep = currentStep === 0;
+    const isLastStep = currentStep + 1 === totalSteps;
 
     return html`
       <style>
         ${styles}
       </style>
       <div class="${storyClass}__trigger-button">
-        <cds-button @click=${this.openPanel}>Create partitions</cds-button>
+        <cds-button @click=${this._openPanel}>Create partitions</cds-button>
       </div>
 
       <c4p-side-panel
-        @c4p-side-panel-closed=${this.closePanel}
+        @c4p-side-panel-closed=${this._handleCancelButton}
         class="${blockClass}"
+        ?animate-title=${false}
         include-overlay
-        ?open=${this.open}
+        ?open=${this._open}
         size="md"
         title="Create partitions"
-        ?animate-title=${false}
       >
         <div slot="subtitle">
-          Step ${this.currentStep} of ${this.totalSteps}
+          Specify the details of the partitions you're creating
         </div>
 
-        <!-- Progress indicator (influencer) -->
-        <create-side-panel-influencer
-          current-step="${this.currentStep}"
-          .stepData="${this.stepData}"
-          title="Create partitions"
-        ></create-side-panel-influencer>
+        <!-- Horizontal progress indicator in the "below-title" slot -->
+        <div slot="below-title">
+          <cds-progress-indicator class="${blockClass}__progress-indicator">
+            ${this._stepLabels.map(
+              (label, index) => html`
+                <cds-progress-step
+                  label=${label}
+                  state=${index < currentStep
+                    ? 'complete'
+                    : index === currentStep
+                      ? 'current'
+                      : 'incomplete'}
+                ></cds-progress-step>
+              `
+            )}
+          </cds-progress-indicator>
+        </div>
 
-        <!-- Step content — only the active step is shown -->
-        ${this.currentStep === 1 ? this.renderStep1() : nothing}
-        ${this.currentStep === 2 ? this.renderStep2() : nothing}
-        ${this.currentStep === 3 ? this.renderStep3() : nothing}
+        <!-- Step content — only the active step is rendered -->
+        ${currentStep === 0 ? this._renderStep1(fs) : nothing}
+        ${currentStep === 1 ? this._renderStep2(fs) : nothing}
+        ${currentStep === 2 ? this._renderStep3(fs) : nothing}
 
-        <!-- Back button (hidden on step 1) -->
-        ${!isFirstStep
-          ? html`
-              <cds-button
-                slot="actions"
-                kind="secondary"
-                @click=${this.handleBack}
-              >
-                Back
-              </cds-button>
-            `
-          : nothing}
-
-        <!-- Cancel button (only on step 1) -->
-        ${isFirstStep
-          ? html`
-              <cds-button
-                slot="actions"
-                kind="secondary"
-                @click=${this.closePanel}
-              >
-                Cancel
-              </cds-button>
-            `
-          : nothing}
-
-        <!-- Next / Create primary action -->
+        <!-- Action buttons -->
         <cds-button
           slot="actions"
-          kind="primary"
-          ?disabled=${currentStepDisabledSubmit}
-          @click=${isLastStep ? this.handleSubmit : this.handleNext}
+          kind="ghost"
+          @click=${this._handleCancelButton}
+          >Cancel</cds-button
         >
+        <cds-button
+          slot="actions"
+          kind="secondary"
+          ?disabled=${isFirstStep}
+          @click=${this._handleBackButton}
+          >Back</cds-button
+        >
+        <cds-button slot="actions" @click=${this._handleNextButton}>
           ${isLastStep ? 'Create' : 'Next'}
         </cds-button>
       </c4p-side-panel>

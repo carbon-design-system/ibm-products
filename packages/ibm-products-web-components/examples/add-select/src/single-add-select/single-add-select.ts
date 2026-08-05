@@ -15,8 +15,8 @@ import '@carbon/web-components/es/components/notification/toast-notification.js'
 
 import '../../../../src/components/tearsheet-preview/index';
 import '../../../../src/components/add-select/index';
-import { AddSelectData } from '@carbon/ibm-products-utilities';
-import type { AddSelectItem } from '@carbon/ibm-products-utilities';
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-web-components';
+
 
 import styles from './single-add-select.scss?lit';
 

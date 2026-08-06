@@ -78,7 +78,7 @@ export class SingleAddSelectWithHierarchyExample extends LitElement {
 
   private dataManager = new AddSelectData();
 
-  @state() private _open = false;
+  @state() private _open = true;
   @state() private _showNotification = false;
   @state() private _selectedItemId = '';
   @state() private _selectedValue = '';

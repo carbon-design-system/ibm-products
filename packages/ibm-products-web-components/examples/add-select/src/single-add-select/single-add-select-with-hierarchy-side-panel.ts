@@ -369,7 +369,6 @@ export class SingleAddSelectWithHierarchySidePanelExample extends LitElement {
               value="${item.value}"
               subtitle="${item.subtitle ?? ''}"
               ?has-children="${!!(item.children?.entries?.length)}"
-              ?has-item-panel="${!!(item.itemDetails)}"
               ?selected="${this._selectedItemId === item.id}"
               ?item-panel-open="${this._selectedItemId === item.id}"
               @c4p-add-select-row-select="${this._handleItemSelect}"
@@ -453,16 +452,22 @@ export class SingleAddSelectWithHierarchySidePanelExample extends LitElement {
             </c4p-tearsheet-summary-content>
           </c4p-tearsheet-body>
 
-          <c4p-tearsheet-footer slot="footer">
-            <div class="action-buttons">
-              <cds-button kind="secondary" @click="${this._handleClose}">Cancel</cds-button>
-              <cds-button
-                kind="primary"
-                @click="${this._handleSubmit}"
-                ?disabled="${!this._selectedItemId}"
-              >Add</cds-button>
-            </div>
-          </c4p-tearsheet-footer>
+          <c4p-tearsheet-footer
+            slot="footer"
+            .actions="${[
+              {
+                kind: 'secondary',
+                label: 'Cancel',
+                onClick: () => this._handleClose(),
+              },
+              {
+                kind: 'primary',
+                label: 'Add',
+                disabled: !this._selectedItemId,
+                onClick: () => this._handleSubmit(),
+              },
+            ]}"
+          ></c4p-tearsheet-footer>
         </c4p-preview-tearsheet>
       </c4p-add-select>
       </div>

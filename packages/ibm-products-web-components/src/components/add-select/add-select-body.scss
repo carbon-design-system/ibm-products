@@ -21,6 +21,7 @@ $prefix: 'c4p';
 /* Web Component specific overrides */
 :host(#{$prefix}-add-select-body) {
   display: block;
+  block-size: 100%;
 
   .#{$block-class__next}__body {
     display: flex;

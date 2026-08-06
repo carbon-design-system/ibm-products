@@ -189,7 +189,7 @@ export class SingleAddSelectWithHierarchyExample extends LitElement {
 
     return html`
       <div class="example-container">
-        <h3>Single Add Select – With Hierarchy</h3>
+        <h3>Single Add Select With Hierarchy Pattern Example</h3>
         <p>Click the button below to open the single add select dialog with hierarchical navigation.</p>
 
         <cds-button kind="primary" class="launch-button" @click="${this._openAddSelect}">

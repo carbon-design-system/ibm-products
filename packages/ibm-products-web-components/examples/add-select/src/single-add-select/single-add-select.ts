@@ -94,8 +94,8 @@ export class SingleAddSelectExample extends LitElement {
   render() {
     return html`
       <div class="example-container">
-        <h3>Single Add Select – Default</h3>
-        <p>Click the button below to open the single add select dialog (flat list).</p>
+        <h3>Single Add Select Pattern Example</h3>
+        <p>Click the button below to open the single add select dialog (first level only).</p>
 
         <cds-button kind="primary" class="launch-button" @click="${this._openAddSelect}">
           Select a category

@@ -1,3 +1,7 @@
+## `@jest-config-ibm-cloud-cognitive@1.55.0`
+### Housekeeping :house:
+- chore(deps): update babel/core from 7.26.10 to 7.29.6 (#9737)
+
 ## `@jest-config-ibm-cloud-cognitive@1.54.0`
 ### Housekeeping :house:
 - chore: upgrade jest to 30.0.5 (#9585)

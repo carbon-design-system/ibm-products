@@ -1,3 +1,9 @@
+## `@carbon/ibm-products-web-components@0.45.0`
+### Bug fixes :bug:
+- fix(useravatar): remove deprecated align options from wc stories (#9734)
+- fix(Tearsheet): design review changes and fixes in webcomponent (#9731)
+- fix(preview__Tearsheet): add aria-label for aside elements and fix double render (#9715)
+
 ## `@carbon/ibm-products-web-components@0.44.0`
 ### Features :rocket:
 - feat(tearsheet): preview tearsheet code connect integration (#9631)

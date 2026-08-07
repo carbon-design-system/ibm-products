@@ -139,6 +139,12 @@ export interface AddSelectRowProps {
     | 'onChange'
   >;
   /**
+   * Accessible label for the navigation indicator button.
+   * Defaults to `Navigate into <title>` when not provided.
+   * Override this prop to localize the label.
+   */
+  navIndicatorLabel?: string;
+  /**
    * Additional props to pass to the IconButton component (info panel)
    */
   itemPanelIconButtonProps?: Omit<
@@ -170,6 +176,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
       className,
       checkboxProps,
       radioButtonProps,
+      navIndicatorLabel,
       itemPanelIconButtonProps,
       ...rest
     },
@@ -180,6 +187,16 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
 
     // Use context's selected state if available
     const isSelected = selectedItems?.has(itemId) ?? selected;
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (selectedItems !== undefined && selected !== false) {
+        console.warn(
+          `[AddSelectRow] Both the \`selected\` prop and \`selectedItems\` context are set ` +
+            `on row "${itemId}". The context value takes precedence. ` +
+            `Remove the \`selected\` prop when using controlled mode via AddSelect.`
+        );
+      }
+    }
 
     const handleSelect = () => {
       if (disabled) {
@@ -323,7 +340,7 @@ const AddSelectRow = forwardRef<HTMLDivElement, AddSelectRowProps>(
                 }}
                 role="button"
                 tabIndex={-1}
-                aria-label="Navigate to children"
+                aria-label={navIndicatorLabel ?? `Navigate into ${title}`}
               >
                 <ChevronRight size={16} />
               </div>
@@ -351,6 +368,7 @@ AddSelectRow.propTypes = {
   itemPanelIconButtonProps: PropTypes.object,
   itemPanelIconDescription: PropTypes.string,
   itemPanelOpen: PropTypes.bool,
+  navIndicatorLabel: PropTypes.string,
   /**@ts-ignore */
   onItemPanelClick: PropTypes.func,
   parentId: PropTypes.string,

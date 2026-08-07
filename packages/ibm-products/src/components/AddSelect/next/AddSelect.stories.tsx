@@ -30,40 +30,55 @@ const sampleItems: AddSelectItem[] = [
     value: '1',
     title: 'Item 1',
     subtitle: 'Item 1 subtitle',
-    itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value: 'Description text for item 1',
-    },
+    itemDetails: [
+      { label: 'Description', value: 'First item in the list' },
+      { label: 'Category', value: 'Type A' },
+      { label: 'Owner', value: 'Team Alpha' },
+    ],
   },
   {
     id: '2',
     value: '2',
     title: 'Item 2',
     subtitle: 'Item 2 subtitle',
-    itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value: 'Description text for item 2',
-    },
+    itemDetails: [
+      { label: 'Description', value: 'Second item in the list' },
+      { label: 'Category', value: 'Type B' },
+      { label: 'Owner', value: 'Team Beta' },
+    ],
   },
   {
     id: '3',
     value: '3',
     title: 'Item 3',
     subtitle: 'Item 3 subtitle',
+    itemDetails: [
+      { label: 'Description', value: 'Third item in the list' },
+      { label: 'Category', value: 'Type A' },
+      { label: 'Owner', value: 'Team Alpha' },
+    ],
   },
   {
     id: '4',
     value: '4',
     title: 'Item 4',
     subtitle: 'Item 4 subtitle',
+    itemDetails: [
+      { label: 'Description', value: 'Fourth item in the list' },
+      { label: 'Category', value: 'Type C' },
+      { label: 'Owner', value: 'Team Gamma' },
+    ],
   },
   {
     id: '5',
     value: '5',
     title: 'Item 5',
     subtitle: 'Item 5 subtitle',
+    itemDetails: [
+      { label: 'Description', value: 'Fifth item in the list' },
+      { label: 'Category', value: 'Type B' },
+      { label: 'Owner', value: 'Team Beta' },
+    ],
   },
 ];
 
@@ -815,12 +830,35 @@ export const AddSelectRow = {
 const AddSelectSelectionSummaryStory = (args) => {
   const selectedItemsArray = args.showEmptyState ? [] : summaryItems;
 
+  const renderCustomItem = (item) => (
+    <div
+      className={`${storyClass}__summary-item-row`}
+      style={{
+        borderBlockEnd: '1px solid var(--cds-border-subtle-01)',
+      }}
+    >
+      <UserAvatar size="md" name={item.title} tooltipText={item.title} />
+      <div className={`${storyClass}__summary-item-row-text`}>
+        <p className={`${storyClass}__summary-item-row-text__title`}>
+          {item.title}
+        </p>
+        {item.subtitle && (
+          <p className={`${storyClass}__summary-item-row-text__subtitle`}>
+            {item.subtitle}
+          </p>
+        )}
+      </div>
+      <span className={`${storyClass}__summary-item-row-modifier`}>
+        Modifier
+      </span>
+    </div>
+  );
+
   return (
     <div className={`${storyClass}-summary-container`}>
       <AddSelect.SelectionSummary
         title={args.title}
-        selectedItems={selectedItemsArray}
-        showCount={args.showCount}
+        selectedItemCount={selectedItemsArray.length}
         showEditIcon={args.showEditIcon}
         onEdit={args.showEditIcon ? () => {} : undefined}
         editIconDescription={args.editIconDescription}
@@ -840,41 +878,6 @@ const AddSelectSelectionSummaryStory = (args) => {
           ) : undefined
         }
         className={args.className}
-        renderItem={
-          args.useCustomRenderer
-            ? (item) => (
-                <div
-                  className={`${storyClass}__summary-item-row`}
-                  style={{
-                    borderBlockEnd: '1px solid var(--cds-border-subtle-01)',
-                  }}
-                >
-                  <UserAvatar
-                    size="md"
-                    name={item.title}
-                    tooltipText={item.title}
-                  />
-                  <div className={`${storyClass}__summary-item-row-text`}>
-                    <p
-                      className={`${storyClass}__summary-item-row-text__title`}
-                    >
-                      {item.title}
-                    </p>
-                    {item.subtitle && (
-                      <p
-                        className={`${storyClass}__summary-item-row-text__subtitle`}
-                      >
-                        {item.subtitle}
-                      </p>
-                    )}
-                  </div>
-                  <span className={`${storyClass}__summary-item-row-modifier`}>
-                    Modifier
-                  </span>
-                </div>
-              )
-            : undefined
-        }
         headerContent={
           args.useCustomHeader ? (
             <div className={`${storyClass}__summary-header-content`}>
@@ -898,17 +901,22 @@ const AddSelectSelectionSummaryStory = (args) => {
           ) : undefined
         }
       >
-        {args.useCustomChildren &&
-          selectedItemsArray
-            .slice(0, 3)
-            .map((item) => (
+        {selectedItemsArray
+          .slice(0, 3)
+          .map((item) =>
+            args.useCustomChildren ? (
+              <React.Fragment key={item.id}>
+                {renderCustomItem(item)}
+              </React.Fragment>
+            ) : (
               <AddSelect.SelectionSummaryItem
                 key={item.id}
                 item={item}
                 onRemove={() => {}}
                 useAccordion
               />
-            ))}
+            )
+          )}
       </AddSelect.SelectionSummary>
     </div>
   );
@@ -919,13 +927,11 @@ export const AddSelectSelectionSummary = {
   render: AddSelectSelectionSummaryStory,
   args: {
     title: 'Selected items',
-    showCount: true,
     showEditIcon: true,
     showHeaderActions: false,
     showEmptyState: false,
     editIconDescription: 'Edit selections',
     className: '',
-    useCustomRenderer: false,
     useCustomHeader: false,
     useCustomChildren: false,
   },
@@ -933,10 +939,6 @@ export const AddSelectSelectionSummary = {
     title: {
       control: 'text',
       description: 'Heading displayed above the selection summary list',
-    },
-    showCount: {
-      control: 'boolean',
-      description: 'Display a count badge for selected items',
     },
     showEditIcon: {
       control: 'boolean',
@@ -956,11 +958,6 @@ export const AddSelectSelectionSummary = {
         'Toggle example custom children (SelectionSummaryItem components)',
       table: { category: 'Story controls' },
     },
-    useCustomRenderer: {
-      control: 'boolean',
-      description: 'Toggle example custom item renderer (renderItem prop)',
-      table: { category: 'Story controls' },
-    },
     useCustomHeader: {
       control: 'boolean',
       description: 'Toggle example custom header content (headerContent prop)',
@@ -976,9 +973,10 @@ export const AddSelectSelectionSummary = {
       description: 'Show the emptyState slot usage',
       table: { category: 'Story controls' },
     },
-    selectedItems: {
+    selectedItemCount: {
       control: false,
-      description: 'Array of selected items (AddSelectItem[])',
+      description:
+        'Number of selected items — drives the count badge and empty-state visibility',
     },
     children: {
       control: false,
@@ -986,16 +984,12 @@ export const AddSelectSelectionSummary = {
     },
     emptyState: {
       control: false,
-      description: 'Custom empty state component',
+      description:
+        'Custom empty state component — shown when selectedItemCount === 0',
     },
     onEdit: {
       control: false,
       description: 'Edit icon click handler. Signature: () => void',
-    },
-    renderItem: {
-      control: false,
-      description:
-        'Custom item renderer. Signature: (item: AddSelectItem) => ReactNode',
     },
     headerContent: {
       control: false,
@@ -1216,6 +1210,7 @@ const AddSelectItemPanelStory = (args) => {
       <AddSelect.ItemPanel
         title={args.title}
         item={panelItem}
+        open={args.open}
         onClose={args.showCloseButton ? () => {} : undefined}
         closeIconDescription={args.closeIconDescription}
         className={args.className}
@@ -1254,6 +1249,7 @@ export const AddSelectItemPanel = {
   render: AddSelectItemPanelStory,
   args: {
     title: 'Item details',
+    open: true,
     showCloseButton: true,
     closeIconDescription: 'Close item details',
     className: '',
@@ -1264,6 +1260,11 @@ export const AddSelectItemPanel = {
     title: {
       control: 'text',
       description: 'Panel title',
+    },
+    open: {
+      control: 'boolean',
+      description:
+        'Toggles the `--open` CSS modifier class. Use for CSS-driven slide-in/out transitions instead of conditional rendering.',
     },
     item: {
       control: false,

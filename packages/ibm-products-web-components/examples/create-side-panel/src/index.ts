@@ -8,3 +8,4 @@
  */
 
 export { default as CreateSidepanelDefault } from './create-side-panel-default';
+export { default as CreateSidepanelWithFormValidation } from './create-side-panel-with-form-validation';

@@ -45,6 +45,10 @@ const bodyWithReactNodeProps = {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders title', async () => {
     render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.title);

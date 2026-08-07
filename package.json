@@ -146,7 +146,7 @@
     "semver": "7.8.2",
     "ws": "^8.21.1",
     "@babel/runtime": "7.29.7",
-    "brace-expansion@^1.1.7": "1.1.16",
+    "brace-expansion@^1.1.7": "1.1.18",
     "brace-expansion@^3.0.0": "3.0.4",
     "brace-expansion@^5.0.0": "^5.0.8",
     "@isaacs/brace-expansion": "^5.0.8",

@@ -564,7 +564,7 @@ export const MultiSelectWithBulkActions = forwardRef<
                 ) : (
                   <AddSelect.SelectionSummary
                     title={selectionSummaryTitle}
-                    selectedItems={selectedItemsForDisplay}
+                    selectedItemCount={selectedItemsForDisplay.length}
                     headerActions={
                       selectedItemsForDisplay.length > 0 ? (
                         <IconButton

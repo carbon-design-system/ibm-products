@@ -8,6 +8,7 @@
 export { AddSelectData } from './add-select-data';
 export type {
   AddSelectItem,
+  ItemDetailEntry,
   ItemDetails,
   ItemStatus,
   SearchOptions,

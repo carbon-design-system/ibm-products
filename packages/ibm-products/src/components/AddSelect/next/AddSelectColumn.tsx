@@ -23,6 +23,7 @@ import {
   type CheckboxProps,
 } from '@carbon/react';
 import { blockClass, AddSelectContext } from './context';
+import { useId } from '../../../global/js/utils/useId';
 
 /**
  * ----------------
@@ -51,9 +52,10 @@ export interface AddSelectColumnProps {
    */
   searchPlaceholder?: string;
   /**
-   * Callback when search value changes
+   * Called when this column's local search input changes.
+   * Scoped to this column only — independent of AddSelectBody's global search.
    */
-  onSearch?: (value: string) => void;
+  onSearch?: (columnSearchTerm: string) => void;
   /**
    * Actions slot - adds custom actions (filter/sort) next to search
    */
@@ -140,11 +142,12 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const parentContext = React.useContext(AddSelectContext);
-    const [searchTerm, setSearchTerm] = useState('');
+    const uid = useId();
+    const [columnSearchTerm, setColumnSearchTerm] = useState('');
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      setSearchTerm(value);
+      setColumnSearchTerm(value);
       onSearch?.(value);
     };
 
@@ -185,7 +188,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
                     placeholder={searchPlaceholder}
                     size="md"
                     onChange={handleSearch}
-                    value={searchTerm}
+                    value={columnSearchTerm}
                     {...searchProps}
                   />
                 </div>
@@ -203,7 +206,7 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
             <div className={`${blockClass}-column__header`}>
               {showSelectAll && multi ? (
                 <Checkbox
-                  id={`select-all-${title}`}
+                  id={`${blockClass}-select-all-${uid}`}
                   className={`${blockClass}-column__select-all`}
                   checked={allSelected}
                   indeterminate={allIndeterminate}
@@ -236,7 +239,9 @@ const AddSelectColumn = forwardRef<HTMLDivElement, AddSelectColumnProps>(
           )}
 
           {/* Rows Container */}
-          <div className={`${blockClass}-column__rows`}>{children}</div>
+          <div className={`${blockClass}-column__rows`} role="rowgroup">
+            {children}
+          </div>
         </div>
       </AddSelectContext.Provider>
     );

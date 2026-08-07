@@ -1,3 +1,7 @@
+## `@carbon/storybook-addon-theme@2.45.0-rc.0`
+### Housekeeping :house:
+- chore(deps): update babel/core from 7.26.10 to 7.29.6 (#9737)
+
 ## `@carbon/storybook-addon-theme@2.34.0`
 ### Bug fixes :bug:
 - fix: delete tags and restore vesions to retry release 5

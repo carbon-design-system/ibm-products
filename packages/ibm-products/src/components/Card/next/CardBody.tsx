@@ -18,7 +18,7 @@ const blockClass = `${pkg.prefix}--card-next__body`;
 /**
  * CardBody component - Body section of the card for free-form content
  */
-export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
+export let CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
   ({ className, children, ...rest }, ref) => {
     const bodyClasses = cx(blockClass, className);
 
@@ -30,8 +30,6 @@ export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
   }
 );
 
-CardBody.displayName = componentName;
-
 CardBody.propTypes = {
   /**
    * Body content
@@ -42,3 +40,6 @@ CardBody.propTypes = {
    */
   className: PropTypes.string,
 };
+
+CardBody = pkg.checkComponentEnabled(CardBody, componentName);
+CardBody.displayName = componentName;

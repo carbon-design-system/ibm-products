@@ -21,8 +21,8 @@ $prefix: 'c4p';
 /* Web Component specific overrides */
 :host(#{$prefix}-add-select-body) {
   display: block;
+  block-size: 100%;
 
-  /* Apply shared styles within shadow DOM */
   .#{$block-class__next}__body {
     display: flex;
     flex-direction: column;
@@ -35,8 +35,29 @@ $prefix: 'c4p';
     border-block-end: 1px solid $border-subtle-01;
   }
 
-  .#{$block-class__next}__search {
+  // When consumer provides a custom header via slot="header",
+  // hide the default search/sub-header content.
+  .#{$block-class__next}__header--custom {
+    .#{$block-class__next}__search,
+    .#{$block-class__next}__sub-header {
+      display: none;
+    }
+  }
+
+  // Search row: input + actions side by side (matches __search--with-actions)
+  .#{$block-class__next}__search--with-actions {
+    display: flex;
+    align-items: flex-end;
     margin-block-end: $spacing-05;
+  }
+
+  .#{$block-class__next}__search-input {
+    flex: 1;
+  }
+
+  .#{$block-class__next}__global-actions {
+    display: flex;
+    align-items: flex-end;
   }
 
   .#{$block-class__next}__sub-header {
@@ -52,14 +73,30 @@ $prefix: 'c4p';
   }
 
   .#{$block-class__next}__tags-label {
-    @include type.type-style('body-compact-01');
+    @include type.type-style('heading-compact-02');
 
     margin: 0;
-    color: $text-secondary;
+    color: $text-primary;
+  }
+
+  .#{$block-class__next}__sub-header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    margin-inline-start: $spacing-05;
   }
 
   .#{$block-class__next}__content {
     overflow: auto;
     flex: 1;
+  }
+
+  .#{$block-class__next}-list-body {
+    display: flex;
+    flex-direction: column;
+
+    &--horizontal {
+      flex-direction: row;
+    }
   }
 }

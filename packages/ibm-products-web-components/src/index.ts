@@ -43,6 +43,8 @@ export { default as CDSBigNumberSkeleton } from './components/big-number/big-num
 export { AddSelectData } from '@carbon/ibm-products-utilities';
 export type {
   AddSelectItem,
+  ItemDetailEntry,
+  ItemDetails,
   ItemStatus,
   SearchOptions,
 } from '@carbon/ibm-products-utilities';

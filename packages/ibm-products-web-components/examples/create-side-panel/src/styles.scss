@@ -48,6 +48,13 @@ $block-class: #{$prefix}--create-side-panel;
   justify-content: center;
 }
 
+.#{$block-class}__retention-row {
+  display: grid;
+  align-items: flex-end;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
+}
+
 .#{$block-class}__form {
   padding-inline-start: 1rem;
 }

@@ -30,19 +30,9 @@ const renderBreadcrumbsTemplate = (args) => {
   });
 
   return html`
-    <style>
-      ${styles}
-    </style>
-    <div class="example">
-      <div class="annotation parent">
-        <div class="annotation__label">Parent container</div>
-        <div class="annotation__content">
-          <set-of-breadcrumbs
-            .breadcrumbsData=${breadcrumbsData}
-          ></set-of-breadcrumbs>
-        </div>
-      </div>
-    </div>
+    <set-of-breadcrumbs
+      .breadcrumbsData=${breadcrumbsData}
+    ></set-of-breadcrumbs>
   `;
 };
 
@@ -56,6 +46,19 @@ export const SetOfBreadcrumbs = {
 
 const meta = {
   title: 'Patterns/Item overflow',
+  decorators: [
+    (story: any) => html`
+      <style>
+        ${styles}
+      </style>
+      <div class="example">
+        <div class="annotation parent">
+          <div class="annotation__label">Parent container</div>
+          <div class="annotation__content">${story()}</div>
+        </div>
+      </div>
+    `,
+  ],
 };
 
 export default meta;

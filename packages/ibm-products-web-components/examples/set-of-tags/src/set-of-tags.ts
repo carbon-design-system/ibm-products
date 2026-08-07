@@ -155,7 +155,7 @@ export default class SetOfTags extends LitElement {
     return html` <div class=${blockClass}>
         ${this.tagsData.map(
           (tag) => html`
-            <span id=${tag?.text}>
+            <span class=${`${blockClass}__tag-container`} id=${tag?.text}>
               ${tag?.onClose
                 ? html`<cds-dismissible-tag
                     @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
@@ -171,7 +171,7 @@ export default class SetOfTags extends LitElement {
             </span>
           `
         )}
-        <span data-offset ?data-hidden=${this.hiddenTags.length === 0}>
+        <span class=${`${blockClass}__tag-container`} data-offset ?data-hidden=${this.hiddenTags.length === 0}>
           <cds-popover
             ?open=${this.isPopoverOpen}
             ?highContrast=${true}

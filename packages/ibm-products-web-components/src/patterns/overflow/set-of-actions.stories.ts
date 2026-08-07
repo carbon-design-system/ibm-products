@@ -43,25 +43,10 @@ const renderActionsTemplate = (args) => {
   });
 
   return html`
-    <style>
-      ${styles}
-    </style>
-    <div class="example">
-      <div
-        class="annotation parent"
-        style="height: ${orientation == 'horizontal'
-          ? 'unset'
-          : 'calc(100vh - 16rem)'}"
-      >
-        <div class="annotation__label">Parent container</div>
-        <div class="annotation__content">
-          <set-of-actions
-            orientation=${orientation}
-            .actionsData=${actionsData}
-          ></set-of-actions>
-        </div>
-      </div>
-    </div>
+    <set-of-actions
+      orientation=${orientation}
+      .actionsData=${actionsData}
+    ></set-of-actions>
   `;
 };
 
@@ -75,6 +60,24 @@ export const SetOfActions = {
 
 const meta = {
   title: 'Patterns/Item overflow',
+  decorators: [
+    (story: any, { args }: any) => html`
+      <style>
+        ${styles}
+      </style>
+      <div class="example">
+        <div
+          class="annotation parent"
+          style="height: ${args.orientation == 'horizontal'
+            ? 'unset'
+            : 'calc(100vh - 16rem)'}"
+        >
+          <div class="annotation__label">Parent container</div>
+          <div class="annotation__content">${story()}</div>
+        </div>
+      </div>
+    `,
+  ],
 };
 
 export default meta;

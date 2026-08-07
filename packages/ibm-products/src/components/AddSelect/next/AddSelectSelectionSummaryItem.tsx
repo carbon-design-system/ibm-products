@@ -177,43 +177,26 @@ const AddSelectSelectionSummaryItem = forwardRef<
       </div>
     );
 
-    // Default content rendering - show all props from item (except title, subtitle) and itemDetails
+    // Default content rendering — renders only labelled itemDetails tuples.
+    // Only renders when itemDetails is the preferred Array<{ label, value }>
+    // form. Legacy Record-shaped itemDetails (used by custom renderers) are
+    // intentionally skipped to avoid rendering internal keys in the UI.
     const defaultContent = () => {
-      // Collect all item props except title, subtitle, and itemDetails
-      const itemProps = Object.entries(item).filter(
-        ([key]) =>
-          key !== 'title' &&
-          key !== 'subtitle' &&
-          key !== 'icon' &&
-          key !== 'id' &&
-          key !== 'children' &&
-          key !== 'selected' &&
-          key !== 'status' &&
-          key !== 'disabled' &&
-          key !== 'itemDetails'
-      );
-
-      // Collect itemDetails props if they exist
-      const itemDetailsProps = item.itemDetails
-        ? Object.entries(item.itemDetails)
-        : [];
-
-      // Combine both sets of properties
-      const allEntries = [...itemProps, ...itemDetailsProps];
-
-      if (allEntries.length === 0) {
+      if (!item?.itemDetails || !Array.isArray(item.itemDetails)) {
         return null;
       }
-
+      if (item.itemDetails.length === 0) {
+        return null;
+      }
       return (
         <>
-          {allEntries.map(([key, val]) => (
+          {item.itemDetails.map(({ label, value: val }) => (
             <div
-              key={key}
+              key={label}
               className={`${blockClass}__selection-summary-item-entry`}
             >
               <p className={`${blockClass}__selection-summary-item-header`}>
-                {key}
+                {label}
               </p>
               <p className={`${blockClass}__selection-summary-item-body`}>
                 {String(val)}

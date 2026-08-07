@@ -404,18 +404,31 @@ describe('c4p-tearsheet-header', () => {
   it('hides close button when hideCloseButton is true', async () => {
     el.hideCloseButton = true;
     await elementUpdated(el);
-    const closeButton = el.shadowRoot?.querySelector('cds-modal-close-button');
-    expect(
-      closeButton?.classList.contains(`${blockClass}__header--no-close-icon`)
-    ).to.be.true;
+    // The close button is rendered inside c4p-tearsheet-header-content's shadow DOM
+    const headerContent = el.querySelector('c4p-tearsheet-header-content');
+    await elementUpdated(headerContent!);
+    const closeButtonWrapper = headerContent?.shadowRoot?.querySelector(
+      `.${blockClass}__close-button`
+    );
+    expect(closeButtonWrapper).to.be.null;
   });
 
   it('dispatches close button clicked event when close button is clicked', async () => {
-    const closeButton = el.shadowRoot?.querySelector(
-      'cds-modal-close-button'
+    // The close button is rendered inside c4p-tearsheet-header-content's shadow DOM
+    const headerContent = el.querySelector('c4p-tearsheet-header-content');
+    await elementUpdated(headerContent!);
+    const closeButton = headerContent?.shadowRoot?.querySelector(
+      'cds-icon-button'
     ) as HTMLElement;
 
-    setTimeout(() => closeButton?.click());
+    // Dispatch a synthetic click event directly on the icon button element so
+    // the Lit @click handler fires regardless of whether the inner <button>
+    // inside cds-icon-button's own shadow DOM is fully upgraded.
+    setTimeout(() =>
+      closeButton?.dispatchEvent(
+        new MouseEvent('click', { bubbles: true, composed: true })
+      )
+    );
 
     const event = await oneEvent(
       el,
@@ -428,10 +441,12 @@ describe('c4p-tearsheet-header', () => {
   it('sets custom close icon description', async () => {
     el.closeIconDescription = 'Custom Close';
     await elementUpdated(el);
-    const closeButton = el.shadowRoot?.querySelector('cds-modal-close-button');
-    expect(closeButton?.getAttribute('close-button-label')).to.equal(
-      'Custom Close'
-    );
+    // The close button is rendered inside c4p-tearsheet-header-content's shadow DOM
+    const headerContent = el.querySelector('c4p-tearsheet-header-content');
+    await elementUpdated(headerContent!);
+    const closeButton =
+      headerContent?.shadowRoot?.querySelector('cds-icon-button');
+    expect(closeButton?.getAttribute('aria-label')).to.equal('Custom Close');
   });
 
   it('disables header collapse when disableHeaderCollapse is true', async () => {
@@ -675,8 +690,11 @@ describe('Tearsheet close functionality', () => {
     const header = tearsheet.querySelector(
       'c4p-tearsheet-header'
     ) as CDSTearsheetHeader;
-    const closeButton = header.shadowRoot?.querySelector(
-      'cds-modal-close-button'
+    // The close button is rendered inside c4p-tearsheet-header-content's shadow DOM
+    const headerContent = header.querySelector('c4p-tearsheet-header-content');
+    await elementUpdated(headerContent!);
+    const closeButton = headerContent?.shadowRoot?.querySelector(
+      'cds-icon-button'
     ) as HTMLElement;
 
     setTimeout(() => closeButton?.click());

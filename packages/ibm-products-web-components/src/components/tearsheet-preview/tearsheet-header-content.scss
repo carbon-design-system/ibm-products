@@ -11,6 +11,7 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/layout/scss/convert';
 @use './tearsheet.scss' as *;
 
 $prefix: config.$pkg-prefix;
@@ -53,6 +54,9 @@ $motion-duration: $duration-moderate-02;
 }
 
 :host {
+  // Grid hosts header-content (col 1) and header-actions (col 2).
+  // Decorator and close button are absolutely positioned top-right,
+  // placed early in DOM order for correct keyboard tab sequence.
   display: grid;
   flex-basis: unset;
   gap: $spacing-05;
@@ -61,7 +65,7 @@ $motion-duration: $duration-moderate-02;
       1fr
     );
 
-  inline-size: calc(100% - var(--tearsheet-header-action-offset));
+  inline-size: 100%; // full width — close/decorator are abs-positioned, no offset needed
 
   @include breakpoint-down(md) {
     display: flex;
@@ -73,6 +77,39 @@ $motion-duration: $duration-moderate-02;
     }
   }
 }
+
+// ── Decorator (AI label) ─────────────────────────────────────────
+// DOM position: 2nd (after header-actions, before close, before header-content)
+// Visual position: absolute top-right (matches React TearsheetNext)
+.#{$block-class__next}__decorator {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: convert.to-rem(10px);
+  inset-inline-end: $spacing-09;
+  // Transition on base state so it animates in both directions (expand + collapse)
+  transition: inset-block-start $motion-duration motion(entrance, expressive);
+
+  // When header is collapsed, shift slightly down — matches React
+  :host-context(#{$c4p-prefix}-tearsheet-header[collapsed]) & {
+    inset-block-start: $spacing-03;
+  }
+}
+
+// ── Close button ─────────────────────────────────────────────────
+// DOM position: 3rd (after decorator, before header-content)
+// Visual position: absolute top-right corner — stays absolute on ALL screen sizes
+.#{$block-class__next}__close-button {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+
+  // Animate size change (lg → md on collapse) — matches React
+  .#{$carbon-prefix}--modal-close {
+    transition: all $motion-duration ease;
+  }
+}
+
 .#{$block-class__next}__header-actions {
   display: flex;
   justify-content: flex-end;
@@ -134,6 +171,10 @@ $motion-duration: $duration-moderate-02;
     @include type.type-style('label-02');
 
     align-items: center;
+    // Fixed block-size keeps the title row at the same height as the close button
+    block-size: $spacing-08;
+    // Gap between title-start icon and title text when collapsed
+    gap: $spacing-03;
     margin-block-start: $spacing-02;
     transition: all $motion-duration motion(entrance, expressive);
 
@@ -151,24 +192,29 @@ $motion-duration: $duration-moderate-02;
   }
 
   // Hide header actions on small screens when collapsed
+  // Normalize visible elements
+  .#{$block-class__next}__header-content,
+  .#{$block-class__next}__content__title-wrapper,
+  .#{$block-class__next}__header-title {
+    margin-block: 0;
+    transition: margin-block $motion-duration ease;
+  }
+
   @include breakpoint-down(md) {
     .#{$block-class__next}__header-actions {
       display: none;
     }
   }
 
-  // Normalize visible elements
-  .#{$block-class__next}__header-content,
-  .#{$block-class__next}__content__title-wrapper,
-  .#{$block-class__next}__header-actions,
-  .#{$block-class__next}__header-title {
-    margin-block: 0;
-    transition: margin-block $motion-duration ease;
+  @include breakpoint(md) {
+    .#{$block-class__next}__header-actions {
+      display: flex;
+      align-items: center;
+      margin-block: 0;
+      transition: margin-block $motion-duration ease;
+    }
   }
-  // Header actions adjustment
-  .#{$block-class__next}__header-actions {
-    margin-block-start: -$spacing-01;
-  }
+  // Header actions adjustment — removed negative offset that caused misalignment
   // Style for title-start slot content (like icons)
   .#{$block-class__next}__title-start {
     display: inline-flex;

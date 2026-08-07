@@ -1,7 +1,7 @@
 {
   "name": "babel-preset-ibm-cloud-cognitive",
   "private": true,
-  "version": "0.53.0",
+  "version": "0.54.0-rc.0",
   "license": "Apache-2.0",
   "type": "module",
   "main": "index.js",
@@ -19,7 +19,7 @@
     "carbon for ibm products"
   ],
   "dependencies": {
-    "@babel/core": "^7.26.10",
+    "@babel/core": "^7.29.6",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-export-default-from": "^7.25.9",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, Children, isValidElement, ReactNode } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { CardHeaderProps } from './Card.types';
@@ -16,77 +16,38 @@ const componentName = 'CardHeader';
 const blockClass = `${pkg.prefix}--card-next__header`;
 
 /**
- * CardHeader component - Header section of the card
+ * CardHeader component - Header section of the card.
+ * Layout is handled entirely by CSS Grid on __header:
+ *   - CardHeaderMedia spans both columns (full-width row above the title area)
+ *   - CardTitleMedia occupies column 1 (left icon slot)
+ *   - CardTitle occupies column 2 (right text slot), or spans full width when
+ *     CardTitleMedia is absent — detected by the :has selector in SCSS.
+ * No child-scanning or wrapper injection is needed.
  */
-export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
+export let CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, children, ...rest }, ref) => {
     const context = useCardContext();
     const cardBlockClass = `${pkg.prefix}--card-next`;
 
-    // Check if children contain CardTitleMedia using displayName
-    // This follows the pattern used in SidePanel, Tearsheet, and other components
-    const childrenArray = Children.toArray(children);
+    const handleDecoratorClick = useCallback(
+      (e: React.MouseEvent) => e.stopPropagation(),
+      []
+    );
 
-    const hasTitleMedia = childrenArray.some((child) => {
-      return (
-        isValidElement(child) &&
-        child.type?.['displayName'] === 'Card.TitleMedia'
-      );
-    });
-
-    // Separate CardTitleMedia, CardMedia, and other content
-    const titleMediaElements: ReactNode[] = [];
-    const mediaElements: ReactNode[] = [];
-    const otherContent: ReactNode[] = [];
-
-    if (hasTitleMedia) {
-      Children.forEach(children, (child) => {
-        if (
-          isValidElement(child) &&
-          child.type?.['displayName'] === 'Card.TitleMedia'
-        ) {
-          titleMediaElements.push(child);
-        } else if (
-          isValidElement(child) &&
-          child.type?.['displayName'] === 'Card.Media'
-        ) {
-          // When TitleMedia is present, CardMedia should be outside __title-content
-          mediaElements.push(child);
-        } else {
-          otherContent.push(child);
-        }
-      });
-    }
-
-    const headerClasses = cx(blockClass, className);
+    const handleDecoratorKeyDown = useCallback(
+      (e: React.KeyboardEvent) => e.stopPropagation(),
+      []
+    );
 
     return (
-      <div {...rest} ref={ref} className={headerClasses}>
-        {hasTitleMedia ? (
-          <>
-            {mediaElements}
-            <div className={`${cardBlockClass}__header-content`}>
-              {titleMediaElements}
-              <div className={`${cardBlockClass}__title-content`}>
-                {otherContent}
-              </div>
-            </div>
-          </>
-        ) : (
-          children
-        )}
+      <div {...rest} ref={ref} className={cx(blockClass, className)}>
+        {children}
         {context.decorator && (
           <div
             className={`${cardBlockClass}__decorator`}
             role="presentation"
-            onClick={(e) => {
-              // Stop propagation to prevent card click when clicking AILabel
-              e.stopPropagation();
-            }}
-            onKeyDown={(e) => {
-              // Stop propagation for keyboard events too
-              e.stopPropagation();
-            }}
+            onClick={handleDecoratorClick}
+            onKeyDown={handleDecoratorKeyDown}
           >
             {context.decorator}
           </div>
@@ -95,8 +56,6 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
     );
   }
 );
-
-CardHeader.displayName = componentName;
 
 CardHeader.propTypes = {
   /**
@@ -108,3 +67,6 @@ CardHeader.propTypes = {
    */
   className: PropTypes.string,
 };
+
+CardHeader = pkg.checkComponentEnabled(CardHeader, componentName);
+CardHeader.displayName = componentName;

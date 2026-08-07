@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef, useCallback, useMemo, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { AILabel } from '@carbon/react';
 import { CardProps } from './Card.types';
 import { CardContext } from './CardContext';
 import { pkg } from '../../../settings';
@@ -20,10 +21,8 @@ import { CardFooter } from './CardFooter';
 // Import header primitive components
 import { CardHeaderMedia } from './CardHeaderMedia';
 import { CardMedia } from './CardMedia';
-import { CardLabel } from './CardLabel';
 import { CardTitle } from './CardTitle';
 import { CardTitleMedia } from './CardTitleMedia';
-import { CardCaption } from './CardCaption';
 import { CardActions } from './CardActions';
 import { CardAction } from './CardAction';
 
@@ -33,7 +32,7 @@ const blockClass = `${pkg.prefix}--card-next`;
 /**
  * Card component - Root container for composable card
  */
-const CardComponent = forwardRef<HTMLDivElement, CardProps>(
+let CardComponent = forwardRef<HTMLDivElement, CardProps>(
   (
     {
       clickable = false,
@@ -49,49 +48,49 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
-    // Detect if decorator is AILabel
-    const hasAILabel = decorator?.['type']?.displayName === 'AILabel';
-
-    // Normalize AILabel size to 'xs' (following SidePanel pattern)
-    const normalizedDecorator = useMemo(() => {
-      if (hasAILabel && React.isValidElement(decorator)) {
-        return React.cloneElement(decorator as React.ReactElement<any>, {
-          size: 'xs',
-        });
-      }
-      return decorator;
-    }, [decorator, hasAILabel]);
+    // Detect if decorator is AILabel — used for the --has-ai-label CSS modifier.
+    // Size is intentionally not enforced — adopter controls it via the decorator prop.
+    const hasAILabel = useMemo(
+      () => isValidElement(decorator) && decorator.type === AILabel,
+      [decorator]
+    );
 
     // Create context value
     const contextValue = useMemo(
       () => ({
         clickable,
         disabled,
-        decorator: normalizedDecorator,
+        decorator,
         horizontal,
       }),
-      [clickable, disabled, normalizedDecorator, horizontal]
+      [clickable, disabled, decorator, horizontal]
     );
 
     // Handle keyboard interaction for clickable cards
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (
-        clickable &&
-        !disabled &&
-        (event.key === 'Enter' || event.key === ' ')
-      ) {
-        event.preventDefault();
-        onClick?.(event as unknown as React.MouseEvent<HTMLDivElement>);
-      }
-      onKeyDown?.(event);
-    };
+    const handleKeyDown = useCallback(
+      (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (
+          clickable &&
+          !disabled &&
+          (event.key === 'Enter' || event.key === ' ')
+        ) {
+          event.preventDefault();
+          onClick?.(event as unknown as React.MouseEvent<HTMLDivElement>);
+        }
+        onKeyDown?.(event);
+      },
+      [clickable, disabled, onClick, onKeyDown]
+    );
 
     // Handle click for clickable cards
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-      if (!disabled) {
-        onClick?.(event);
-      }
-    };
+    const handleClick = useCallback(
+      (event: React.MouseEvent<HTMLDivElement>) => {
+        if (!disabled) {
+          onClick?.(event);
+        }
+      },
+      [disabled, onClick]
+    );
 
     const cardClasses = cx(blockClass, className, {
       [`${blockClass}--clickable`]: clickable && !disabled,
@@ -117,27 +116,34 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     // In horizontal mode, split children into media and content, then order
     // them by the position of Card.Media in the JSX — media before content
     // children = left, media after content children = right.
-    let renderedChildren: React.ReactNode = children;
-    if (horizontal) {
+    // Memoised so repeated parent-state updates (hover, selection) on pages
+    // with many horizontal cards don't re-run the split on every render.
+    const { mediaChildren, contentChildren, mediaIsFirst } = useMemo(() => {
+      if (!horizontal) {
+        return { mediaChildren: [], contentChildren: [], mediaIsFirst: false };
+      }
+
       const childArray = React.Children.toArray(children);
-
       const isMedia = (child: React.ReactNode) =>
-        React.isValidElement(child) &&
-        (child.type === CardMedia ||
-          (child.type as React.ComponentType)?.displayName === 'Card.Media');
+        React.isValidElement(child) && child.type === CardMedia;
 
-      const mediaChildren = childArray.filter(isMedia);
-      const contentChildren = childArray.filter((c) => !isMedia(c));
-
-      // Detect JSX order: is media placed before the first content child?
+      const media = childArray.filter(isMedia);
+      const content = childArray.filter((c) => !isMedia(c));
       const firstMediaIndex = childArray.findIndex(isMedia);
       const firstContentIndex = childArray.findIndex((c) => !isMedia(c));
-      const mediaIsFirst = firstMediaIndex < firstContentIndex;
 
+      return {
+        mediaChildren: media,
+        contentChildren: content,
+        mediaIsFirst: firstMediaIndex < firstContentIndex,
+      };
+    }, [children, horizontal]);
+
+    let renderedChildren: React.ReactNode = children;
+    if (horizontal) {
       const contentWrapper = (
         <div className={`${blockClass}__content`}>{contentChildren}</div>
       );
-
       renderedChildren = mediaIsFirst ? (
         <>
           {mediaChildren}
@@ -158,8 +164,6 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     );
   }
 );
-
-CardComponent.displayName = componentName;
 
 CardComponent.propTypes = {
   /**
@@ -200,6 +204,9 @@ CardComponent.propTypes = {
   onKeyDown: PropTypes.func,
 };
 
+CardComponent = pkg.checkComponentEnabled(CardComponent, componentName);
+CardComponent.displayName = componentName;
+
 /**
  * -------
  * Exports
@@ -222,17 +229,11 @@ HeaderMedia.displayName = 'Card.HeaderMedia';
 const Media = CardMedia;
 Media.displayName = 'Card.Media';
 
-const Label = CardLabel;
-Label.displayName = 'Card.Label';
-
 const Title = CardTitle;
 Title.displayName = 'Card.Title';
 
 const TitleMedia = CardTitleMedia;
 TitleMedia.displayName = 'Card.TitleMedia';
-
-const Caption = CardCaption;
-Caption.displayName = 'Card.Caption';
 
 const Actions = CardActions;
 Actions.displayName = 'Card.Actions';
@@ -247,10 +248,8 @@ export const Card = Object.assign(CardComponent, {
   Footer,
   HeaderMedia,
   Media,
-  Label,
   Title,
   TitleMedia,
-  Caption,
   Actions,
   Action,
 });
@@ -262,10 +261,8 @@ export {
   CardFooter,
   CardHeaderMedia,
   CardMedia,
-  CardLabel,
   CardTitle,
   CardTitleMedia,
-  CardCaption,
   CardActions,
   CardAction,
 };
@@ -280,9 +277,7 @@ export type {
 // Export primitive component prop types
 export type { CardHeaderMediaProps } from './CardHeaderMedia';
 export type { CardMediaProps } from './CardMedia';
-export type { CardLabelProps } from './CardLabel';
 export type { CardTitleProps } from './CardTitle';
 export type { CardTitleMediaProps } from './CardTitleMedia';
-export type { CardCaptionProps } from './CardCaption';
 export type { CardActionsProps } from './CardActions';
 export type { CardActionProps } from './CardAction';

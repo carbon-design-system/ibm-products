@@ -21,12 +21,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Analytics',
     owner: 'Marketing Team',
     status: 'Active',
-    itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
-        'Comprehensive dashboard for analyzing customer interactions and purchase patterns',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Comprehensive dashboard for analyzing customer interactions and purchase patterns',
+      },
+      { label: 'Category', value: 'Analytics' },
+      { label: 'Owner', value: 'Marketing Team' },
+    ],
   },
   {
     id: '2',
@@ -36,12 +39,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Reports',
     owner: 'Sales Team',
     status: 'Active',
-    itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
-        'Detailed report showing sales trends, revenue, and team performance',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Detailed report showing sales trends, revenue, and team performance',
+      },
+      { label: 'Category', value: 'Reports' },
+      { label: 'Owner', value: 'Sales Team' },
+    ],
   },
   {
     id: '3',
@@ -51,6 +57,14 @@ const sampleItems: AddSelectItem[] = [
     category: 'Operations',
     owner: 'Logistics Team',
     status: 'Active',
+    itemDetails: [
+      {
+        label: 'Description',
+        value: 'Tracks stock levels, reorder points, and supply chain status',
+      },
+      { label: 'Category', value: 'Operations' },
+      { label: 'Owner', value: 'Logistics Team' },
+    ],
   },
   {
     id: '4',
@@ -60,12 +74,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Marketing',
     owner: 'Marketing Team',
     status: 'Active',
-    itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
-        'Track marketing campaigns across multiple channels with detailed analytics',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Track marketing campaigns across multiple channels with detailed analytics',
+      },
+      { label: 'Category', value: 'Marketing' },
+      { label: 'Owner', value: 'Marketing Team' },
+    ],
   },
   {
     id: '5',
@@ -75,6 +92,14 @@ const sampleItems: AddSelectItem[] = [
     category: 'HR',
     owner: 'HR Team',
     status: 'Active',
+    itemDetails: [
+      {
+        label: 'Description',
+        value: 'Company-wide employee profiles and contact information',
+      },
+      { label: 'Category', value: 'HR' },
+      { label: 'Owner', value: 'HR Team' },
+    ],
   },
   {
     id: '6',
@@ -84,12 +109,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Project Management',
     owner: 'PMO',
     status: 'Active',
-    itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
-        'Interactive timeline showing project phases, dependencies, and deadlines',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Interactive timeline showing project phases, dependencies, and deadlines',
+      },
+      { label: 'Category', value: 'Project Management' },
+      { label: 'Owner', value: 'PMO' },
+    ],
   },
   {
     id: '7',
@@ -99,6 +127,14 @@ const sampleItems: AddSelectItem[] = [
     category: 'Finance',
     owner: 'Finance Team',
     status: 'Archived',
+    itemDetails: [
+      {
+        label: 'Description',
+        value: 'Quarterly financial reports including P&L and balance sheets',
+      },
+      { label: 'Category', value: 'Finance' },
+      { label: 'Owner', value: 'Finance Team' },
+    ],
   },
   {
     id: '8',
@@ -108,12 +144,15 @@ const sampleItems: AddSelectItem[] = [
     category: 'Support',
     owner: 'Support Team',
     status: 'Active',
-    itemDetails: {
-      id: 'description',
-      title: 'Description',
-      value:
-        'Centralized system for managing customer support tickets and resolutions',
-    },
+    itemDetails: [
+      {
+        label: 'Description',
+        value:
+          'Centralized system for managing customer support tickets and resolutions',
+      },
+      { label: 'Category', value: 'Support' },
+      { label: 'Owner', value: 'Support Team' },
+    ],
   },
 ];
 

@@ -25,6 +25,7 @@
     "provenance": true
   },
   "exports": {
+    ".": "./es/index.js",
     "./es/*": "./es/*",
     "./es-custom/*": "./es-custom/*",
     "./lib/*": "./lib/*",

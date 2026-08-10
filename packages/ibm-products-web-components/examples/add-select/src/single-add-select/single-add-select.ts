@@ -16,7 +16,7 @@ import '@carbon/web-components/es/components/notification/toast-notification.js'
 import '../../../../src/components/tearsheet-preview/index';
 import '../../../../src/components/add-select/add-select';
 import '../../../../src/components/add-select/add-select-body';
-import '../../../../src/components/add-select/add-select-content';
+import '../../../../src/components/add-select/add-select-column';
 import '../../../../src/components/add-select/add-select-row';
 import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-web-components';
 
@@ -300,7 +300,7 @@ export class AddSelectExample extends LitElement {
                 >
                   ${this._filteredItems.length > 0
                     ? html`
-                        <c4p-add-select-content>
+                        <c4p-add-select-column>
                           ${this._filteredItems.map(
                             (item) => {
                               // Use the data manager to check if item has children
@@ -319,7 +319,7 @@ export class AddSelectExample extends LitElement {
                               `;
                             }
                           )}
-                        </c4p-add-select-content>
+                        </c4p-add-select-column>
                       `
                     : html`
                         <div class="no-results">

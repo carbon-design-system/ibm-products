@@ -1,0 +1,227 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+
+$prefix: 'c4p';
+
+@use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
+  as *;
+
+:host(#{$prefix}-add-select-selection-summary-item) {
+  display: block;
+
+  // ── Wrapper ─────────────────────────────────────────────────────────────────
+  .#{$block-class__next}__selection-summary-item {
+    position: relative;
+    background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+  }
+
+  // ── Accordion variant (custom — avoids shadow-boundary slot problems) ─────────
+
+  .#{$block-class__next}__selection-summary-item-accordion {
+    // No extra borders — wrapper owns the border-block-end
+  }
+
+  .#{$block-class__next}__selection-summary-item-accordion-heading {
+    position: relative; // anchor for absolutely-positioned remove button
+    display: flex;
+    align-items: center;
+    appearance: none;
+    border: none; // stylelint-disable-line order/properties-order
+    background: none;
+    color: $text-primary;
+    cursor: pointer;
+    inline-size: 100%;
+    // Figma: py-[10px] px-[16px]
+    padding-block: $spacing-04;
+    padding-inline: $spacing-05;
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
+
+  .#{$block-class__next}__selection-summary-item-accordion-arrow {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    margin-inline-end: $spacing-03; // 8px gap to title (= 16px total from edge)
+    margin-inline-start: 0;
+    transform: rotate(90deg); // collapsed: chevron points down ∨
+    transition: transform $duration-fast-01 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    svg {
+      fill: $icon-primary;
+    }
+
+    &--open {
+      transform: rotate(-90deg); // expanded: chevron points up ∧
+    }
+  }
+
+  .#{$block-class__next}__selection-summary-item-accordion-title {
+    @include type.type-style('body-compact-01');
+
+    display: block; // <span> inside <button> needs explicit block to honour flex layout
+    flex: 1;
+    padding-inline-end: $spacing-07; // Reserve 32px — prevents overlap with remove button
+    text-align: start;
+
+    // When wrapping slotted content, act as a flex container so the
+    // slot children (e.g. UserAvatar + text group) lay out correctly
+    &--slot {
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+
+  .#{$block-class__next}__selection-summary-item-accordion-body {
+    // Figma: p-[16px] on all sides for expanded content
+    padding-block: $spacing-05;
+    padding-inline: $spacing-05;
+  }
+
+  // ── Non-accordion (default) variant ─────────────────────────────────────────
+  .#{$block-class__next}__selection-summary-item--default {
+    .#{$block-class__next}__selection-summary-item-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: $spacing-04; // 10px
+      padding-inline: $spacing-05; // 16px
+    }
+
+    .#{$block-class__next}__selection-summary-item-content {
+      padding-block-end: $spacing-04;
+      padding-inline: $spacing-05;
+    }
+
+    .#{$block-class__next}__selection-summary-item-title {
+      @include type.type-style('heading-compact-01');
+    }
+  }
+
+  // ── Shared item sub-elements ─────────────────────────────────────────────────
+  .#{$block-class__next}__selection-summary-item-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$block-class__next}__selection-summary-item-selected-item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .#{$block-class__next}__selection-summary-item-title {
+    @include type.type-style('body-compact-01');
+
+    margin: 0;
+    color: $text-primary;
+  }
+
+  .#{$block-class__next}__selection-summary-item-subtitle {
+    @include type.type-style('body-01');
+
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  .#{$block-class__next}__selection-summary-item-content {
+    margin-block-start: 0;
+  }
+
+  .#{$block-class__next}__selection-summary-item-entry {
+    margin-block-end: $spacing-05;
+  }
+
+  .#{$block-class__next}__selection-summary-item-header {
+    @include type.type-style('label-01');
+
+    margin: 0;
+    color: $text-secondary;
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$block-class__next}__selection-summary-item-body {
+    @include type.type-style('body-01');
+
+    margin: 0;
+    margin-block-end: $spacing-05;
+  }
+
+  // ── Remove button ────────────────────────────────────────────────────────────
+
+  // render-item wrapper — `position:relative` anchors the absolute remove button;
+  // no flex so the slot content's own layout owns the full row width.
+  .#{$block-class__next}__selection-summary-item-render-item-wrapper {
+    position: relative;
+  }
+
+  // Default (non-accordion) — inline at the right of the title row.
+  .#{$block-class__next}__selection-summary-item-remove-button-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline-start: $spacing-03; // 8px gap before the 32px button
+  }
+
+  // Accordion heading and render-item — absolutely positioned, vertically centred.
+  // Both parents have `position: relative`.
+  .#{$block-class__next}__selection-summary-item-accordion-heading
+    .#{$block-class__next}__selection-summary-item-remove-button-container,
+  .#{$block-class__next}__selection-summary-item-render-item-wrapper
+    .#{$block-class__next}__selection-summary-item-remove-button-container {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05; // 16px from inline-end
+    padding-inline-start: 0;
+    transform: translateY(-50%);
+  }
+
+  // Remove button is hidden until hover/focus
+  .#{$block-class__next}__selection-summary-item-remove-button {
+    opacity: 0;
+    transition: opacity $duration-fast-01 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .#{$block-class__next}__selection-summary-item:hover
+    .#{$block-class__next}__selection-summary-item-remove-button,
+  .#{$block-class__next}__selection-summary-item:focus-within
+    .#{$block-class__next}__selection-summary-item-remove-button {
+    opacity: 1;
+  }
+}

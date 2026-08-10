@@ -13472,14 +13472,14 @@ __metadata:
   linkType: hard
 
 "dompurify@npm:^3.4.0":
-  version: 3.4.12
-  resolution: "dompurify@npm:3.4.12"
+  version: 3.4.13
+  resolution: "dompurify@npm:3.4.13"
   dependencies:
     "@types/trusted-types": "npm:^2.0.7"
   dependenciesMeta:
     "@types/trusted-types":
       optional: true
-  checksum: 10/f826b68920887eb75115a162facb42380d1c3fac441548217b30068c9fadeed14f63fa1f7a1d2ab6f63613e5a0f897aa245c9224d4abf7939cd8ae58c04646af
+  checksum: 10/0db0a309a868a38aca042f606b37446977c35ee4501850a8c1bf2781337d79871daf1f4344bbf5b545f2a8c62e4d4e192c8fd6f1ff49ecec7c865c55a0aefee3
   languageName: node
   linkType: hard
 
@@ -25947,9 +25947,9 @@ __metadata:
   linkType: hard
 
 "undici@npm:^7.19.1":
-  version: 7.28.0
-  resolution: "undici@npm:7.28.0"
-  checksum: 10/154423b280d623278a61decb437f8a7e581fb18b8c95556ef956b32a58cd668eadbb812d28e20678cb2dc545a566f35a3afc0962307ca801da30f4741117986d
+  version: 7.29.0
+  resolution: "undici@npm:7.29.0"
+  checksum: 10/ca73639071bdcbc41e57be1800847fa18f86f8fbf7a5641ff9899f7bbb6f5cecdd593e225f5fd94e31703dcbfaea4a722a3b81cab90c5c4e2b406aec1ae55732
   languageName: node
   linkType: hard
 

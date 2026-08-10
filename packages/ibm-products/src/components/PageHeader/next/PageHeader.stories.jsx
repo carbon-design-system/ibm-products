@@ -327,6 +327,7 @@ export const ContentWithContextualActions = (args) => (
           </Tag>
         </>
       }
+      titleTruncate={1}
       {...args}
     >
       <PageHeader.ContentText subtitle="Subtitle">
@@ -403,6 +404,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
           </Tag>
         </>
       }
+      titleTruncate={1}
       pageActions={
         <PageHeader.ContentPageActions
           menuButtonLabel="Actions"

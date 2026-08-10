@@ -55,6 +55,13 @@ export interface AddSelectItemPanelProps {
    */
   className?: string;
   /**
+   * Controls visibility of the panel by toggling the
+   * `${blockClass}__item-summary-panel--open` CSS modifier class.
+   * Use this instead of conditional rendering when you need CSS-driven
+   * slide-in/out transitions.
+   */
+  open?: boolean;
+  /**
    * Additional props to pass to the close IconButton
    */
   closeIconButtonProps?: Omit<
@@ -85,14 +92,20 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
       children,
       renderItem,
       className,
+      open,
       closeIconButtonProps,
       ...rest
     },
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const panelClasses = cx(`${blockClass}__item-summary-panel`, className);
+    const panelClasses = cx(`${blockClass}__item-summary-panel`, className, {
+      [`${blockClass}__item-summary-panel--open`]: open,
+    });
 
-    // Default content rendering - show all key-value data from itemDetails
+    // Default content rendering — renders only labelled itemDetails tuples.
+    // Only renders when itemDetails is the preferred Array<{ label, value }>
+    // form. Legacy Record-shaped itemDetails (used by custom renderers) are
+    // intentionally skipped to avoid rendering internal keys in the UI.
     const defaultContent = () => {
       if (!item) {
         return null;
@@ -100,21 +113,23 @@ const AddSelectItemPanel = forwardRef<HTMLDivElement, AddSelectItemPanelProps>(
 
       const { itemDetails } = item;
 
-      if (!itemDetails || Object.keys(itemDetails).length === 0) {
+      if (
+        !itemDetails ||
+        !Array.isArray(itemDetails) ||
+        itemDetails.length === 0
+      ) {
         return null;
       }
 
-      const entries = Object.entries(itemDetails);
-
       return (
         <>
-          {entries.map(([key, val]) => (
+          {itemDetails.map(({ label, value: val }) => (
             <div
-              key={key}
+              key={label}
               className={`${blockClass}__item-summary-panel-entry`}
             >
               <p className={`${blockClass}__item-summary-panel-entry-title`}>
-                {key}
+                {label}
               </p>
               <p className={`${blockClass}__item-summary-panel-entry-body`}>
                 {String(val)}
@@ -180,6 +195,7 @@ AddSelectItemPanel.propTypes = {
   item: PropTypes.object,
   /**@ts-ignore */
   onClose: PropTypes.func,
+  open: PropTypes.bool,
   /**@ts-ignore */
   renderItem: PropTypes.func,
   title: PropTypes.string,

@@ -575,24 +575,6 @@ $carbon-prefix: #{c4p-settings.$carbon-prefix};
     gap: $spacing-03;
     margin-inline-start: auto;
   }
-
-  &-item-default {
-    border-block-end: 1px solid $border-subtle-01;
-    padding-block: $spacing-04;
-    padding-inline: $spacing-05;
-  }
-
-  &-item-default-title {
-    @include type-style('body-compact-01');
-
-    color: $text-primary;
-  }
-
-  &-item-default-subtitle {
-    @include type-style('body-01');
-
-    color: $text-secondary;
-  }
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -787,7 +769,88 @@ $carbon-prefix: #{c4p-settings.$carbon-prefix};
 // ──────────────────────────────────────────────────────────────
 // AddSelectItemSummaryPanel - Item summary view
 // ──────────────────────────────────────────────────────────────
+
+@keyframes add-select-item-panel-entrance {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes add-select-item-panel-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes add-select-item-panel-entrance-reduced {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes add-select-item-panel-exit-reduced {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .#{$block-class__next}__item-summary-panel {
+  // Hidden by default — the panel must be explicitly opened with `open={true}`.
+  // `display: none` is toggled via `transition-behavior: allow-discrete` in
+  // modern browsers; older browsers fall back to visibility + animation.
+  display: none;
+  block-size: 100%;
+  inline-size: 100%;
+  transform: translateX(0);
+  transition-behavior: allow-discrete;
+  transition-duration: $duration-moderate-01;
+  transition-property: display, opacity, transform;
+
+  // Open state — entrance animation (slides in from the right)
+  &--open {
+    display: flex;
+    flex-direction: column;
+    animation: add-select-item-panel-entrance $duration-moderate-01
+      motion(entrance, productive) forwards;
+
+    // Modern browsers: fade + slide from right on first paint
+    @starting-style {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    // Reduced motion: fade only
+    @media (prefers-reduced-motion) {
+      animation: add-select-item-panel-entrance-reduced $duration-moderate-01
+        motion(entrance, productive) forwards;
+
+      @starting-style {
+        opacity: 0;
+        transform: translateX(0);
+      }
+    }
+  }
+
   &-header {
     display: flex;
     align-items: center;

@@ -1,0 +1,79 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './Saving.stories';
+
+# Saving
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/save/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Auto save](#auto-save)
+  - [Manual save](#manual-save)
+
+## Overview
+
+The Saving pattern provides a standard way to communicate the state of a save
+operation to the user. There are two variants:
+
+- **Auto** — saving happens automatically in the background (for example,
+  triggered by a debounced `onChange` handler). A short status string confirms
+  the current state.
+- **Manual** — the user initiates the save explicitly by clicking a button. The
+  save button reflects the current state via its label and icon; a Cancel button
+  is available only while saving is in progress.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [InlineLoading](https://react.carbondesignsystem.com/?path=/docs/components-inlineloading)
+- [TextArea](https://react.carbondesignsystem.com/?path=/docs/components-textarea)
+
+```jsx
+import { Button, InlineLoading, TextArea } from '@carbon/react';
+import {
+  CheckmarkOutline,
+  ErrorFilled,
+  ErrorOutline,
+  Save,
+} from '@carbon/react/icons';
+```
+
+### Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/Saving/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/Saving/example)
+
+<Canvas withSource="none">
+  <Story of={stories.Auto} />
+</Canvas>
+
+## Auto save
+
+The auto-save variant renders a status message only. The save is triggered
+automatically after a debounce delay following user input. No buttons are
+displayed — the user does not explicitly initiate the save.
+
+## Manual save
+
+The manual-save variant renders a pair of buttons. The primary button initiates
+the save and updates its label and icon to reflect the current state. The
+secondary Cancel button is enabled only while saving is in progress, allowing
+the user to abort.
+
+### Design guidelines
+
+- **Labels** — use sentence-case labels (e.g. "Save", "Saving…", "Saved",
+  "Failed to save").
+- **Icon descriptions** — always provide an accessible `iconDescription` for
+  each state's icon.
+- **Disabled states** — in the manual variant, disable the Save button while
+  `status === 'in-progress'` and disable Cancel whenever the status is not
+  `'in-progress'`.
+- **Auto mode** — hide the status indicator until the user has made their first
+  change (`dirtyInput`), and hide it again if the status returns to `'default'`.

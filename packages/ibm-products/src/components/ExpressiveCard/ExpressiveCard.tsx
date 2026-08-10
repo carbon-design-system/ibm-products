@@ -7,7 +7,6 @@
 
 import React, { PropsWithChildren, ReactNode, forwardRef } from 'react';
 
-import { CarbonIconType } from '@carbon/icons-react/lib/CarbonIcon';
 import { Card } from '../Card';
 import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -63,7 +62,7 @@ export interface ExpressiveCardProps extends PropsWithChildren {
   /**
    * Provides the icon that's displayed at the top of the card
    */
-  pictogram?: CarbonIconType;
+  pictogram?: ReactNode;
   /**
    * Optionally specify an href for your Button to become an <a> element
    */
@@ -192,8 +191,7 @@ ExpressiveCard.propTypes = {
   /**
    * Provides the icon that's displayed at the top of the card
    */
-  /**@ts-ignore */
-  pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  pictogram: PropTypes.node,
   /**
    * Optionally specify an href for your Button to become an <a> element
    */

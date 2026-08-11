@@ -12,6 +12,11 @@ import * as stories from './CreateSidePanel.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
+      deprecationNotice="This component is deprecated and will be removed in the next major version."
+      altDescription="The CreateSidePanel pattern provides a recipe for building single-form creation
+interfaces in a slide-in side panel. It is used for medium-complexity creations
+where the user needs to retain page context — the underlying content remains
+visible and interactive while the panel is open."
       altGuidelinesHref={[
         {
           href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#side-panel',

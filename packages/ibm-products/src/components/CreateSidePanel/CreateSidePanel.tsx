@@ -104,6 +104,7 @@ interface CreateSidePanelProps {
 
 /**
  * Use with medium complexity creations if the user needs page context. On-page content can be seen and interacted with.
+ * @deprecated This component is deprecated.
  */
 export const CreateSidePanel = React.forwardRef(
   (
@@ -195,6 +196,12 @@ export const CreateSidePanel = React.forwardRef(
     );
   }
 );
+
+/**@ts-ignore*/
+CreateSidePanel.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with CreateSidePanel true pattern`,
+};
 
 CreateSidePanel.displayName = componentName;
 

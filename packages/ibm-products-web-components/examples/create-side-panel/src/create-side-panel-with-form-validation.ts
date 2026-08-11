@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,13 +20,35 @@ import styles from './styles.scss?lit';
 
 const blockClass = 'c4p--create-side-panel';
 
-@customElement('create-side-panel-default')
-export class CreateSidepanelDefault extends LitElement {
+@customElement('create-side-panel-with-form-validation')
+export class CreateSidepanelWithFormValidation extends LitElement {
   @state()
   open: boolean = false;
 
+  @state()
+  private topicName: string = '';
+
+  @state()
+  private invalid: boolean = false;
+
   private _openHandler() {
     this.open = !this.open;
+    // Reset form state when closing
+    if (!this.open) {
+      this.topicName = '';
+      this.invalid = false;
+    }
+  }
+
+  private _handleTopicNameInput(e: Event) {
+    this.topicName = (e.target as HTMLInputElement).value;
+    this.invalid = false;
+  }
+
+  private _handleTopicNameBlur() {
+    if (this.topicName.length === 0) {
+      this.invalid = true;
+    }
   }
 
   render() {
@@ -55,9 +77,17 @@ export class CreateSidepanelDefault extends LitElement {
             We recommend you fill out and evaluate these details at a minimum
             before deploying your topic.
           </p>
-          <cds-form id="example-form" class="${blockClass}__form">
+          <cds-form id="validation-form" class="${blockClass}__form">
             <cds-form-item>
-              <cds-text-input placeholder="Enter topic name" label="Topic name"></cds-text-input>
+              <cds-text-input
+                placeholder="Enter topic name"
+                label="Topic name"
+                value=${this.topicName}
+                ?invalid=${this.invalid}
+                invalid-text="This is a required field"
+                @input=${this._handleTopicNameInput}
+                @blur=${this._handleTopicNameBlur}
+              ></cds-text-input>
             </cds-form-item>
             <cds-form-item>
               <cds-number-input
@@ -130,7 +160,11 @@ export class CreateSidepanelDefault extends LitElement {
             @click=${this._openHandler}
             >Cancel</cds-button
           >
-          <cds-button slot="actions" kind="primary" @click=${this._openHandler}
+          <cds-button
+            slot="actions"
+            kind="primary"
+            ?disabled=${!this.topicName.length}
+            @click=${this._openHandler}
             >Create</cds-button
           >
         </c4p-side-panel>
@@ -139,4 +173,4 @@ export class CreateSidepanelDefault extends LitElement {
   }
 }
 
-export default CreateSidepanelDefault;
+export default CreateSidepanelWithFormValidation;

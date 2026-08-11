@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.96.0-rc.0`
+## `@carbon/ibm-products@2.96.0`
 ### Features :rocket:
 - feat(Card): implement horizontal card (#9704)
 

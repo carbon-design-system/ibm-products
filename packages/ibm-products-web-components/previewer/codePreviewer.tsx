@@ -31,12 +31,17 @@ interface ComponentSources {
   unknown: string[];
 }
 
+type statusType = null | {
+  preview?: string[];
+};
+
 interface previewerObject {
   story: any;
   customImports: string[];
   customFunctionDefs: string[];
   title: string;
   componentName: string;
+  status?: statusType;
 }
 export const stackblitzPrefillConfig = async ({
   story,
@@ -44,6 +49,7 @@ export const stackblitzPrefillConfig = async ({
   customFunctionDefs = [],
   title,
   componentName,
+  status = null,
 }: previewerObject) => {
   const { args } = story;
   const productComponents = await import('../src/index');
@@ -81,7 +87,29 @@ export const stackblitzPrefillConfig = async ({
 
       // only include assets for requested component
       if (folderName === componentName) {
-        files[`src/story-assets/${fileName}`] = content as string;
+        let fileContent = content as string;
+        if (fileName.endsWith('.ts')) {
+          // In Storybook, ?lit converts scss → CSSResult via a custom Vite plugin.
+          // In plain Vite (Stackblitz), use ?inline to get the css string, then
+          // add an unsafeCSS import and wrap the assignment so static styles works.
+          if (fileContent.includes('.scss?lit')) {
+            fileContent = fileContent
+              // Add unsafeCSS to the lit import
+              .replace(
+                /import\s*\{([^}]+)\}\s*from\s*['"]lit['"]/,
+                (_, imports) =>
+                  `import {${imports.includes('unsafeCSS') ? imports : imports.trimEnd() + ', unsafeCSS'}} from 'lit'`
+              )
+              // Replace ?lit with ?inline
+              .replace(/\.scss\?lit/g, '.scss?inline')
+              // Wrap static styles = styles with unsafeCSS()
+              .replace(
+                /static\s+styles\s*=\s*styles\s*;/g,
+                'static styles = unsafeCSS(styles);'
+              );
+          }
+        }
+        files[`src/story-assets/${fileName}`] = fileContent;
       }
     });
     return files;
@@ -90,7 +118,9 @@ export const stackblitzPrefillConfig = async ({
     storyCode,
     customImports,
     customFunctionDefs,
-    args
+    args,
+    status,
+    componentName
   );
 
   //separate scss imports and selectors - to wrap the selectors inside :host{}
@@ -234,7 +264,7 @@ const filterStoryCode = (storyCode, args) => {
     .replace(/^"|"$/g, '')
     //Remove the args block and the render wrapper (with or without TypeScript type annotations)
     .replace(
-      /{\s*args:\s*{[\s\S]*?}\s*,\s*render:\s*\(?\s*args\s*(?::\s*any)?\s*\)?\s*=>\s*{/,
+      /{\s*args:\s*{[\s\S]*?}\s*,\s*(?:argTypes:\s*{[\s\S]*?}\s*,\s*)?render:\s*\(?\s*args\s*(?::\s*any)?\s*\)?\s*=>\s*{/,
       ''
     )
     //Remove the args block with defaultArgs reference
@@ -242,7 +272,12 @@ const filterStoryCode = (storyCode, args) => {
       /\{\s*args:\s*defaultArgs\s*,\s*render:\s*\(?\s*args\s*(?::\s*any)?\s*\)?\s*=>\s*\{/g,
       ''
     )
-    //replace the render closing braces
+    // Remove no-args render wrapper: { render: () => { return html`...`; } }
+    // Strips opening: { render: () => { return
+    .replace(/\{\s*render:\s*\(\)\s*=>\s*\{\s*return\s+/, '')
+    // Strip trailing `; },` or `; }` left by the no-args render closing
+    .replace(/;\s*},?\s*$/, '')
+    //replace the remaining render closing braces
     .replace(/}\s*$/, '')
     // Remove <style>${styles}</style> injections anywhere
     .replace(/<style>\s*\$\{styles\}\s*<\/style>/g, '')
@@ -290,6 +325,13 @@ const filterStoryCode = (storyCode, args) => {
         stringInTemplateRegex,
         `"${value}"`
       );
+      // Replace bare args.xxx references in expressions (e.g. args.decorator !== 'NONE')
+      // Must run after template-literal pass to avoid double-substitution
+      const bareRefRegex = new RegExp(`args\\.${escapedKey}\\b`, 'g');
+      storyCodeUpdated = storyCodeUpdated.replace(
+        bareRefRegex,
+        JSON.stringify(value)
+      );
     } else {
       const valueStr = JSON.stringify(value);
       const regex = new RegExp(`args\\.${escapedKey}\\b`, 'g');
@@ -329,14 +371,16 @@ const appGenerator = async (
   storyCode: string,
   customImports: Array<string>,
   customFunctionDefs: Array<string>,
-  args: any
+  args: any,
+  status: statusType,
+  componentName: string
 ) => {
   const {
     carbon: matchedCarbonComponents,
     ibmProducts: matchedComponents,
     icons: matchedIcons,
     unknown: unknownComponents,
-  } = findComponentsInCode(storyCode);
+  } = findComponentsInCode(storyCode, status, componentName);
   if (unknownComponents.length > 0) {
     storyCode = removeUnknownComponents(storyCode, unknownComponents);
   }
@@ -364,9 +408,15 @@ const appGenerator = async (
     matchedComponents.length > 0
       ? matchedComponents
           .map((comp: string) => {
+            // When status.preview is set, the componentName barrel import already
+            // covers all sub-components — only emit the barrel itself.
+            if (status?.preview?.length && comp !== componentName) {
+              return null;
+            }
             const importPath = getComponentImportPath(comp, matchedComponents);
             return `import '@carbon/ibm-products-web-components/es/components/${importPath}/index.js';`;
           })
+          .filter(Boolean)
           .join('\n')
       : ''
   }
@@ -392,7 +442,7 @@ const appGenerator = async (
       ${customFunctionDefs?.length > 0 ? customFunctionDefs.join('\n') : ''}
       ${hasArgs ? formattedArgs : ''}
    
-      ${storyCode}
+      ${/^\s*html`/.test(storyCode) ? `return ${storyCode}` : storyCode}
     }
   }
 `;
@@ -400,7 +450,16 @@ const appGenerator = async (
   return app.trim();
 };
 
-const findComponentsInCode = (code: string): ComponentSources => {
+// Returns true if the value is found in status.preview, otherwise false.
+const isInPreviewStatus = (obj: statusType, value: string): boolean => {
+  return Array.isArray(obj?.preview) && obj.preview.includes(value);
+};
+
+const findComponentsInCode = (
+  code: string,
+  status: statusType,
+  componentName: string
+): ComponentSources => {
   const componentRegex = /<\s*((?:c4p|cds)-[a-z0-9-]+)(?=[\s>])/gi;
   const matches: string[] = [];
 
@@ -443,16 +502,22 @@ const findComponentsInCode = (code: string): ComponentSources => {
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join('');
 
+    // Strip prefix to get the bare tag name (e.g. "preview-tearsheet")
+    const bareTagName = component.replace(/^(c4p-|cds-)/i, '');
+
     if (normalizedCarbon.includes(normalized)) {
       result.carbon.push(component.replace(/^(cds-)/i, ''));
     } else if (normalizedProducts.includes(normalized)) {
       result.ibmProducts.push(component.replace(/^(c4p-)/i, ''));
+    } else if (status && isInPreviewStatus(status, bareTagName)) {
+      // Explicitly listed in status.preview — push the component folder name
+      // so the import path resolves correctly (e.g. 'tearsheet-preview').
+      result.ibmProducts.push(componentName);
     } else if (iconsNames.includes(component)) {
       result.icons.push(component);
     } else if (component.startsWith('c4p-')) {
       // Check if this is a subcomponent of a known c4p component
       // e.g., c4p-coachmark-body is a subcomponent of c4p-coachmark
-      // Extract parent component names by removing the last segment
       const parts = component.split('-');
       let isSubcomponent = false;
 
@@ -465,7 +530,6 @@ const findComponentsInCode = (code: string): ComponentSources => {
           .join('');
 
         if (normalizedProducts.includes(parentNormalized)) {
-          // This is a subcomponent of a known product component
           result.ibmProductsSubComp.push(component.replace(/^(c4p-)/i, ''));
           isSubcomponent = true;
           break;

@@ -484,6 +484,7 @@ $motion-duration: $duration-moderate-02;
     flex-grow: 1;
     grid-template-columns: 100%;
     grid-template-rows: 1fr auto;
+    min-inline-size: 0;
   }
 
   .#{$block-class}__main {
@@ -492,6 +493,7 @@ $motion-duration: $duration-moderate-02;
     background-color: $background;
     grid-column: 1 / -1;
     grid-row: 1 / -1;
+    min-inline-size: 0;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__main {
@@ -507,6 +509,7 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__content {
     overflow: auto;
     flex-grow: 1;
+    min-inline-size: 0;
   }
 
   &.#{$block-class}--has-slug .#{$block-class}__content,

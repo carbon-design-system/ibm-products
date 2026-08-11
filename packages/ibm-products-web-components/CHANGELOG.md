@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.45.0-rc.0`
+## `@carbon/ibm-products-web-components@0.45.0`
 ### Bug fixes :bug:
 - fix(useravatar): remove deprecated align options from wc stories (#9734)
 - fix(Tearsheet): design review changes and fixes in webcomponent (#9731)

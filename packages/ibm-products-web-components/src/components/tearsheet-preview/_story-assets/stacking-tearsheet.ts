@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { ref, createRef } from 'lit/directives/ref.js';
-import '../index.js';
+import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import styles from './_storybook-styles.scss?lit';
@@ -20,20 +20,28 @@ import BottomPanelOpen32 from '@carbon/icons/es/bottom-panel--open/32';
 @customElement('stacking-tearsheet-demo')
 export class StackingTearsheetDemo extends LitElement {
   @property({ type: String, attribute: 'tearsheet-type' })
-  tearsheetType = 'wide';
+  declare tearsheetType: string;
 
   @state()
-  private _open1 = false;
+  declare private _open1: boolean;
 
   @state()
-  private _open2 = false;
+  declare private _open2: boolean;
 
   @state()
-  private _open3 = false;
+  declare private _open3: boolean;
 
   private _launcherButtonRef1 = createRef<HTMLElement>();
   private _launcherButtonRef2 = createRef<HTMLElement>();
   private _launcherButtonRef3 = createRef<HTMLElement>();
+
+  constructor() {
+    super();
+    this.tearsheetType = 'wide';
+    this._open1 = false;
+    this._open2 = false;
+    this._open3 = false;
+  }
 
   connectedCallback(): void {
     super.connectedCallback();

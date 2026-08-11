@@ -10,17 +10,17 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { SignalWatcher } from '@lit-labs/signals';
-import { prefix } from '../../../globals/settings';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
 import RightPanelClose32 from '@carbon/icons/es/right-panel--close/32';
+
+const prefix = 'c4p';
 import '@carbon/web-components/es/components/progress-indicator/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/button/index.js';
-import '../../../utilities/step-flow/index.js';
-import '../index.js';
 import styles from './_storybook-styles.scss?lit';
-import { StepInstance } from '../../../utilities/step-flow/step-flow-signal';
-import type { ActionButton } from '../../action-set/action-set';
+import { StepInstance } from '@carbon/ibm-products-web-components/es/utilities/step-flow/step-flow-signal.js';
+import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
+import type { ActionButton } from '@carbon/ibm-products-web-components/es/components/action-set/action-set.js';
 
 interface FormStateType {
   email?: string;
@@ -31,10 +31,16 @@ interface FormStateType {
 @customElement('step-tearsheet-preview')
 export class StepTearsheetNext extends SignalWatcher(LitElement) {
   @property({ type: Boolean })
-  horizontal = false;
+  declare horizontal: boolean;
 
   @state()
-  private _open: boolean = false;
+  declare private _open: boolean;
+
+  constructor() {
+    super();
+    this.horizontal = false;
+    this._open = false;
+  }
 
   private _stepInfo = new StepInstance();
 

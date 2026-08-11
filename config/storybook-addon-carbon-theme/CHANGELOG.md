@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.45.0-rc.0`
+## `@carbon/storybook-addon-theme@2.45.0`
 ### Housekeeping :house:
 - chore(deps): update babel/core from 7.26.10 to 7.29.6 (#9737)
 

@@ -88,7 +88,6 @@ collect:
         - disableColumnSwapping
         - disabled
         - disabledCell
-        - disableHeaderCollapse
         - disableSubmit
         - displayMetalPanel
         - downloadLinkLabel
@@ -197,7 +196,6 @@ collect:
         - itemCount
         - items
         - itemsLabel
-        - keepMounted
         - key
         - kind
         - label
@@ -416,7 +414,6 @@ collect:
         - variableRowHeight
         - variant
         - verticalAlign
-        - verticalGap
         - verticalPosition
         - viewAllLabel
         - viewLessLabel
@@ -586,13 +583,19 @@ collect:
         - clickable
         - density
         - getStarted
+        - horizontal
         # CardFooter
         - hasButton
         # CardHeader
         - inClickableCard
         - noActionIcons
+        # CardMedia
+        - mediaWidth
         # CardTitle
+        - descriptionTruncate
+        - labelTruncate
         - maxWidth
+        - titleTruncate
         # Carousel
         - disableArrowScroll
         - disableResetOnResize
@@ -1031,8 +1034,11 @@ collect:
         # Tearsheet
         - containerClassName
         - disablePortal
+        - keepMounted
         - summaryContentWidth
+        - verticalGap
         # TearsheetHeader
+        - disableHeaderCollapse
         - onHeaderCollapse
         # TearsheetHeaderActionItem
         - overflowItemLabel
@@ -1049,9 +1055,6 @@ collect:
         - summaryPanelAriaLabel
         - summaryPanelOpen
         - summaryPanelTriggerRef
-        # TearsheetWithSteps
-        - progressIndicator
-        - setOpen
         # Toolbar
         - vertical
         # TruncatedList
@@ -1382,9 +1385,6 @@ collect:
         - lg
         - md
         - sm
-        # TearsheetWithSteps - progressIndicator
-        - horizontal
-        - vertical
   npm:
     dependencies: null
   js:

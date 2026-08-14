@@ -11,13 +11,20 @@ import { pkg } from '../../../settings';
 export const blockClass = `${pkg.prefix}--add-select__next`;
 
 export interface AddSelectContextType {
-  multi?: boolean;
   onItemSelect?: (itemId: string, selected: boolean, value: string) => void;
-  onNavigate?: (itemId: string, title: string, parentId: string) => void;
   selectedItems?: Set<string>;
+  /**
+   * Column-scoped: injected by AddSelectColumn, not by the root AddSelect.
+   * Determines whether rows use checkboxes (true) or radio buttons (false).
+   */
+  multi?: boolean;
+  /**
+   * Column-scoped: injected by AddSelectColumn, not by the root AddSelect.
+   * Called when a row's navigation indicator is clicked.
+   */
+  onNavigate?: (itemId: string, title: string, parentId: string) => void;
 }
 
 export const AddSelectContext = createContext<AddSelectContextType>({
-  multi: false,
   selectedItems: undefined,
 });

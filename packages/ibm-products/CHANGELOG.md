@@ -1,3 +1,16 @@
+## `@carbon/ibm-products@2.96.0`
+### Features :rocket:
+- feat(Card): implement horizontal card (#9704)
+
+### Bug fixes :bug:
+- fix(preview__Tearsheet): add aria-label for aside elements and fix double render (#9715)
+- fix: add example for tearsheet with steps (#9635)
+
+### Housekeeping :house:
+- chore(deps): update babel/core from 7.26.10 to 7.29.6 (#9737)
+- chore(deps): update dependency typescript-config-carbon to ^0.11.0 (#9754)
+- chore(Card): Review and analyse Card implementation (WIP) (#9738)
+
 ## `@carbon/ibm-products@2.95.0`
 ### Features :rocket:
 - feat(Card): implement card footer and primitives (#9659)

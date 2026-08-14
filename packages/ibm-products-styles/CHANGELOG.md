@@ -1,3 +1,15 @@
+## `@carbon/ibm-products-styles@2.92.0`
+### Features :rocket:
+- feat(Card): implement horizontal card (#9704)
+
+### Bug fixes :bug:
+- fix(aboutmodal): hyperlinks spacing to 12px (#9756)
+- fix(Tearsheet): design review changes and fixes in webcomponent (#9731)
+- fix(pageheader): fix overflow breadcrumb menu zindex (#9735)
+
+### Housekeeping :house:
+- chore(Card): Review and analyse Card implementation (WIP) (#9738)
+
 ## `@carbon/ibm-products-styles@2.91.0`
 ### Features :rocket:
 - feat(Card): implement card footer and primitives (#9659)

@@ -19,3 +19,10 @@ export const Default = {
     return html`<create-side-panel-default></create-side-panel-default>`;
   },
 };
+
+export const WithFormValidation = {
+  render: () => {
+    return html`<create-side-panel-with-form-validation></create-side-panel-with-form-validation>`;
+  },
+};
+WithFormValidation.storyName = 'With Form Validation';

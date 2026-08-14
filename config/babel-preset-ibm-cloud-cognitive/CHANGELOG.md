@@ -1,3 +1,7 @@
+## `@babel-preset-ibm-cloud-cognitive@0.54.0`
+### Housekeeping :house:
+- chore(deps): update babel/core from 7.26.10 to 7.29.6 (#9737)
+
 ## `@babel-preset-ibm-cloud-cognitive@0.43.0`
 ### Bug fixes :bug:
 - fix: delete tags and restore vesions to retry release 5

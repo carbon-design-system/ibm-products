@@ -49,10 +49,9 @@ export const ItemOptionForValueField = ({
   const { popOverSearchThreshold, getOptions, rootState } = useContext(
     ConditionBuilderContext
   );
-  const [propertyText, clearSearchText] = useTranslations([
-    'propertyText',
-    'clearSearchText',
-  ]);
+  const [propertyText, clearSearchText, searchPropertiesText] = useTranslations(
+    ['propertyText', 'clearSearchText', 'searchPropertiesText']
+  );
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -175,7 +174,8 @@ export const ItemOptionForValueField = ({
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
-            labelText={clearSearchText}
+            labelText={searchPropertiesText}
+            placeholder=""
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
             onKeyDown={(evt) => {
@@ -206,6 +206,7 @@ export const ItemOptionForValueField = ({
         aria-label={getAriaLabel()}
         role="listbox"
         data-multi-select={multiSelectable}
+        aria-multiselectable={multiSelectable || undefined}
       >
         {filteredItems?.map((option) => {
           const isSelected = selection

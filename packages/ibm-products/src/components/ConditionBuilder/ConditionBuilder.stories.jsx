@@ -217,16 +217,30 @@ const translateWithId = (key) => {
 
 const ConditionBuilderTemplate = (args) => {
   const ref = useRef(undefined);
+  const descriptionId = 'condition-builder-a11y-desc';
   return (
-    <ConditionBuilder
-      {...args}
-      ref={ref}
-      {...requiredProps}
-      onAddItem={(type) => action(`onAddItem is triggered , type: ${type}`)()}
-      onRemoveItem={(config) =>
-        action(`onRemoveItem is triggered , type: ${config?.type}`)(config)
-      }
-    />
+    <>
+      {/* Visually hidden description for screen reader users.
+          Consumers should provide context-specific text that names the
+          available properties and explains the keyboard interaction model. */}
+      <p id={descriptionId} className="cds--visually-hidden">
+        Use this builder to create filter conditions. Each condition has three
+        parts: a property (what to filter on), an operator (how to compare), and
+        a value. Use arrow keys to navigate between conditions and cells. Press
+        Enter or Space to open a selector. Press Escape to close a selector
+        without saving.
+      </p>
+      <ConditionBuilder
+        {...args}
+        ref={ref}
+        {...requiredProps}
+        aria-describedby={descriptionId}
+        onAddItem={(type) => action(`onAddItem is triggered , type: ${type}`)()}
+        onRemoveItem={(config) =>
+          action(`onRemoveItem is triggered , type: ${config?.type}`)(config)
+        }
+      />
+    </>
   );
 };
 

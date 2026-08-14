@@ -13,7 +13,7 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@carbon/react';
+import { Button, usePrefix } from '@carbon/react';
 import { Add, TextNewLine } from '@carbon/react/icons';
 import ConditionGroupBuilder from '../ConditionGroupBuilder/ConditionGroupBuilder';
 import {
@@ -74,11 +74,16 @@ const ConditionBuilderContent = ({
     addConditionGroupText,
     conditionHeadingText,
     conditionBuilderHierarchicalText,
+    conditionRemovedText,
   ] = useTranslations([
     'addConditionGroupText',
     'conditionHeadingText',
     'conditionBuilderHierarchicalText',
+    'conditionRemovedText',
   ]);
+
+  const carbonPrefix = usePrefix();
+  const [statusMessage, setStatusMessage] = useState('');
   const showConditionGroupPreviewHandler = () => {
     setShowConditionGroupPreview(true);
   };
@@ -150,9 +155,10 @@ const ConditionBuilderContent = ({
         if (groups?.length === 0) {
           initialConditionState.current = null;
         }
+        setStatusMessage(conditionRemovedText);
       }
     },
-    [setRootState, rootState, onRemoveItem]
+    [setRootState, rootState, onRemoveItem, conditionRemovedText]
   );
 
   const onChangeHandler = (updatedGroup, groupIndex) => {
@@ -189,6 +195,8 @@ const ConditionBuilderContent = ({
             ? [...rootState.groups, newGroup]
             : [newGroup],
       });
+      // No status announcement: the new group's property picker popover opens immediately
+      // and auto-focuses the search field, which screen readers announce via focus.
     }
   };
 
@@ -218,6 +226,15 @@ const ConditionBuilderContent = ({
 
   return (
     <>
+      {/* Visually hidden live region — announces condition add/remove to screen readers */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className={`${carbonPrefix}--visually-hidden`}
+      >
+        {statusMessage}
+      </div>
       <Section className={`${blockClass}__heading`} level={4}>
         <Heading>{conditionHeadingText}</Heading>
       </Section>
@@ -241,6 +258,8 @@ const ConditionBuilderContent = ({
                 onChange={(updatedGroup) => {
                   onChangeHandler(updatedGroup, groupIndex);
                 }}
+                setStatusMessage={setStatusMessage}
+                conditionRemovedText={conditionRemovedText}
               />
 
               {/* displaying the connector field between groups */}

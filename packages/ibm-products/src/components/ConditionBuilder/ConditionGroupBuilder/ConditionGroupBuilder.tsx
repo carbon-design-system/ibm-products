@@ -55,6 +55,8 @@ interface ConditionGroupBuilderProps {
     posinset: number;
     setsize: number;
   };
+  setStatusMessage?: (message: string) => void;
+  conditionRemovedText?: string;
 }
 
 const ConditionGroupBuilder = ({
@@ -63,6 +65,8 @@ const ConditionGroupBuilder = ({
   onRemove,
   onChange,
   className,
+  setStatusMessage,
+  conditionRemovedText,
 }: ConditionGroupBuilderProps) => {
   const [conditionBuilderGroupText, conditionText, conditionBuilderText] =
     useTranslations([
@@ -215,6 +219,7 @@ const ConditionGroupBuilder = ({
     } else {
       onRemove?.(evt);
     }
+    setStatusMessage?.(conditionRemovedText ?? '');
   };
   //check to identify a group without a plain condition
   const checkGroupHaveCondition = (conditions, conditionId) => {
@@ -255,6 +260,10 @@ const ConditionGroupBuilder = ({
         ...(group.conditions ? group.conditions.slice(conditionIndex + 1) : []),
       ],
     } as ConditionGroup);
+    // No status announcement here: the property picker popover opens immediately and
+    // auto-focuses the search field, which screen readers already announce via focus.
+    // An additional aria-live announcement would race with and be overridden by that
+    // focus event, or produce redundant noise.
   };
 
   const handleFocusOnClose = (e, conditionIndex) => {
@@ -598,6 +607,10 @@ ConditionGroupBuilder.propTypes = {
    */
   className: PropTypes.string,
 
+  /**
+   * translation string announced when a condition is removed
+   */
+  conditionRemovedText: PropTypes.string,
   group: PropTypes.object,
   /**
    * callback to update the current condition of the state tree
@@ -607,4 +620,8 @@ ConditionGroupBuilder.propTypes = {
    * call back to remove the particular group from the state tree
    */
   onRemove: PropTypes.func,
+  /**
+   * callback to update the aria-live status message in the parent
+   */
+  setStatusMessage: PropTypes.func,
 };

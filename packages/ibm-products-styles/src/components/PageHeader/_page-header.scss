@@ -921,7 +921,6 @@ $duration: 1000ms;
     @include type.type-style('productive-heading-04');
 
     display: -webkit-box;
-    overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     max-inline-size: to-rem(640px);

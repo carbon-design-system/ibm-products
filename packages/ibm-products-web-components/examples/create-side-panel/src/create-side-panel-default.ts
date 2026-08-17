@@ -13,6 +13,7 @@ import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
 import '@carbon/web-components/es/components/text-input/index.js';
 import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/number-input/index.js';
+import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/form/form-item.js';
 import '@carbon/web-components/es/components/form/form.js';
 import styles from './styles.scss?lit';
@@ -22,7 +23,7 @@ const blockClass = 'c4p--create-side-panel';
 @customElement('create-side-panel-default')
 export class CreateSidepanelDefault extends LitElement {
   @state()
-  open: boolean = true;
+  open: boolean = false;
 
   private _openHandler() {
     this.open = !this.open;
@@ -34,19 +35,15 @@ export class CreateSidepanelDefault extends LitElement {
         ${styles}
       </style>
       <div>
-        <cds-button @click=${this._openHandler}>Create partitions</cds-button>
+        <cds-button @click=${this._openHandler}>Open SidePanel</cds-button>
         <c4p-side-panel
           @c4p-side-panel-closed=${this._openHandler}
           class="${blockClass}"
           ?animate-title=${false}
-          include-overlay
           ?open=${this.open}
           size="md"
           title="Create partitions"
         >
-          <div slot="subtitle">
-            Specify the details of the partitions you're creating
-          </div>
           <h3
             class="${blockClass}__form-title-text ${blockClass}__content-text"
           >
@@ -60,13 +57,13 @@ export class CreateSidepanelDefault extends LitElement {
           </p>
           <cds-form id="example-form" class="${blockClass}__form">
             <cds-form-item>
-              <cds-text-input value="Topic" label="Topic name"></cds-text-input>
+              <cds-text-input placeholder="Enter topic name" label="Topic name"></cds-text-input>
             </cds-form-item>
             <cds-form-item>
               <cds-number-input
-                value="50"
+                value="1"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 label="Partitions"
                 size="md"
@@ -75,11 +72,53 @@ export class CreateSidepanelDefault extends LitElement {
             </cds-form-item>
             <cds-form-item>
               <cds-number-input
-                value="50"
+                value="1"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 label="Replicas"
+                size="md"
+              >
+              </cds-number-input>
+            </cds-form-item>
+            <cds-form-item>
+              <cds-number-input
+                value="1"
+                min="0"
+                max="50"
+                step="1"
+                label="Minimum in-sync replicas"
+                size="md"
+              >
+              </cds-number-input>
+            </cds-form-item>
+            <cds-form-item class="${blockClass}__retention-row">
+              <cds-number-input
+                value="30"
+                min="0"
+                max="50"
+                step="1"
+                label="Retention time"
+                size="md"
+              >
+              </cds-number-input>
+              <cds-dropdown
+                title-text="Options"
+                label="Options"
+                value="Day(s)"
+              >
+                <cds-dropdown-item value="Day(s)">Day(s)</cds-dropdown-item>
+                <cds-dropdown-item value="Month(s)">Month(s)</cds-dropdown-item>
+                <cds-dropdown-item value="Year(s)">Year(s)</cds-dropdown-item>
+              </cds-dropdown>
+            </cds-form-item>
+            <cds-form-item>
+              <cds-number-input
+                value="1"
+                min="0"
+                max="50"
+                step="1"
+                label="Quantity"
                 size="md"
               >
               </cds-number-input>

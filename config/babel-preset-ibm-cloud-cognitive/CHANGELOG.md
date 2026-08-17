@@ -1,4 +1,4 @@
-## `@babel-preset-ibm-cloud-cognitive@0.54.0-rc.0`
+## `@babel-preset-ibm-cloud-cognitive@0.54.0`
 ### Housekeeping :house:
 - chore(deps): update babel/core from 7.26.10 to 7.29.6 (#9737)
 

@@ -176,7 +176,7 @@ export const StoryDocsPage = ({
         )}
       </ul>
       <h2 id="overview">Overview</h2>
-      <Description>{altDescription}</Description>
+      {altDescription ? <Markdown>{altDescription}</Markdown> : <Description />}
       {!omitCodedExample && storyInfo.expectCodedExample ? (
         <>
           <h2 id="coded-examples">Coded examples</h2>

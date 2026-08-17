@@ -119,6 +119,9 @@ For additional information on differentiating between delete / remove and low / 
 interface PrevType {
   open: boolean;
 }
+/**
+ * @deprecated This component is deprecated.
+ */
 export const RemoveModal = forwardRef(
   (
     {
@@ -234,6 +237,12 @@ export const RemoveModal = forwardRef(
     );
   }
 );
+
+/**@ts-ignore*/
+RemoveModal.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Delete and remove pattern`,
+};
 
 // Return a placeholder if not released and not enabled by feature flag
 

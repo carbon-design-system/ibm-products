@@ -402,7 +402,7 @@ export class SingleAddSelectWithHierarchySidePanelExample extends LitElement {
           summary-content-width="22.5rem"
           @c4p-preview-tearsheet-closed="${this._handleClose}"
         >
-          <c4p-tearsheet-header hide-close-button slot="header">
+          <c4p-tearsheet-header hide-close-button disable-header-collapse slot="header">
             <c4p-tearsheet-header-content title="Add asset">
               <div slot="description">Select asset from the list lorem ipsum dolor infotext.</div>
             </c4p-tearsheet-header-content>

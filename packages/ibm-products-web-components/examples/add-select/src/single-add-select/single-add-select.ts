@@ -108,7 +108,7 @@ export class SingleAddSelectExample extends LitElement {
           variant="narrow"
           @c4p-preview-tearsheet-closed="${this._handleClose}"
         >
-          <c4p-tearsheet-header hide-close-button slot="header">
+          <c4p-tearsheet-header hide-close-button disable-header-collapse slot="header" >
             <c4p-tearsheet-header-content title="Select category">
               <div slot="description">Choose one category from the list below</div>
             </c4p-tearsheet-header-content>

@@ -19,12 +19,12 @@
     "react"
   ],
   "resolutions": {
-    "@octokit/plugin-paginate-rest": "^14.0.0",
+    "@octokit/plugin-paginate-rest": "^15.0.0",
     "@octokit/request": "^10.0.0",
     "undici": "^7.11.0"
   },
   "dependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^2.0.0",
     "@actions/github": "^8.0.1",
     "@xhmikosr/decompress": "^11.1.3",
     "octokit": "^5.0.0"

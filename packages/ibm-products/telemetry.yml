@@ -343,7 +343,6 @@ collect:
         - selectAllToggle
         - selected
         - selectedHeaderReorderActive
-        - selectedItems
         - selectedOption
         - selectionAreas
         - selectorPageContent
@@ -394,6 +393,7 @@ collect:
         - titleEnd
         - titleSize
         - titleStart
+        - titleTruncate
         - toolbarBatchActions
         - toolbarBatchActionsDisplayMin
         - tooltipAlign
@@ -444,6 +444,7 @@ collect:
         - disableStacking
         # AddSelect
         - onItemSelect
+        - selectedItems
         # AddSelectBody
         - breadcrumbItemProps
         - breadcrumbProps
@@ -496,6 +497,7 @@ collect:
         - itemPanelIconButtonProps
         - itemPanelIconDescription
         - itemPanelOpen
+        - navIndicatorLabel
         - onItemPanelClick
         - radioButtonProps
         - rowContent
@@ -505,7 +507,7 @@ collect:
         - editIconDescription
         - emptyState
         - onEdit
-        - showCount
+        - selectedItemCount
         - showEditIcon
         # AddSelectSelectionSummaryItem
         - removeButtonLabel
@@ -595,7 +597,6 @@ collect:
         - descriptionTruncate
         - labelTruncate
         - maxWidth
-        - titleTruncate
         # Carousel
         - disableArrowScroll
         - disableResetOnResize
@@ -1259,13 +1260,25 @@ collect:
         - top
         # General - tooltipAlignment
         - bottom
+        - bottom-end
         - bottom-left
         - bottom-right
+        - bottom-start
         - left
+        - left-bottom
+        - left-end
+        - left-start
+        - left-top
         - right
+        - right-bottom
+        - right-end
+        - right-start
+        - right-top
         - top
+        - top-end
         - top-left
         - top-right
+        - top-start
         # General - truncateValue
         - end
         - start

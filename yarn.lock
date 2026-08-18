@@ -11346,22 +11346,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^15.2.0":
-  version: 15.2.0
-  resolution: "chromatic@npm:15.2.0"
+"chromatic@npm:^18.0.0":
+  version: 18.2.0
+  resolution: "chromatic@npm:18.2.0"
+  dependencies:
+    semver: "npm:^7.3.5"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+    "@chromatic-com/vitest": ^0.*.* || ^1.0.0
+  dependenciesMeta:
+    "@sentry/cli":
+      built: true
+    esbuild:
+      built: true
   peerDependenciesMeta:
     "@chromatic-com/cypress":
       optional: true
     "@chromatic-com/playwright":
       optional: true
+    "@chromatic-com/vitest":
+      optional: true
   bin:
-    chroma: dist/bin.js
-    chromatic: dist/bin.js
-    chromatic-cli: dist/bin.js
-  checksum: 10/66353aaf937897d77c95e9162169330c526ad8d07a9997190a2bb2938feabe051add65d6718c0fc2eb813f0361b828d69eff5df4513c43b672f9c8514100a556
+    chroma: dist/bin.cjs
+    chromatic: dist/bin.cjs
+    chromatic-cli: dist/bin.cjs
+  checksum: 10/09c61f0d2ce8ce16536b720cb61c1ae0666dacebf72eb740b4cae3b0c3512f1e1653238fadb91f62b9a7e05f579afd3b214fb27c68979b7b9a5ebcc7409a8e7f
   languageName: node
   linkType: hard
 
@@ -16273,7 +16283,7 @@ __metadata:
     "@types/carbon__layout": "npm:^0.0.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.26.1"
     accessibility-checker: "npm:^4.0.12"
-    chromatic: "npm:^15.2.0"
+    chromatic: "npm:^18.0.0"
     commander: "npm:^14.0.0"
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^9.0.0"

@@ -54,6 +54,14 @@ $carbon-prefix: 'cds';
   z-index: 9999;
 }
 
+// When disable-header-collapse is used on the tearsheet, the tearsheet's
+// __main-content layer is the sole scroll container. Setting overflow:hidden
+// on the c4p-add-select-body host clips the shadow-root content to the host
+// box, preventing a second scrollbar from appearing inside __content.
+c4p-add-select-body {
+  overflow: hidden;
+}
+
 // Equal-width footer action buttons
 .action-buttons {
   display: flex;

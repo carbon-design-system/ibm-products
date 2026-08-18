@@ -33,3 +33,10 @@ $story-prefix: create-side-panel-stories__;
 }
 
 @include side-panel-decorator($story-prefix);
+
+.#{c4p-settings.$pkg-prefix}--annotation--deprecation-notice
+  > .#{c4p-settings.$pkg-prefix}--annotation__label {
+  position: sticky;
+  z-index: 9000;
+  inset-block-start: 0;
+}

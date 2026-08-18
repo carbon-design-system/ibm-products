@@ -6,9 +6,6 @@
  */
 import React, { useState } from 'react';
 import {
-  Button,
-  Grid,
-  Column,
   TextInput,
   NumberInput,
   Dropdown,
@@ -28,6 +25,7 @@ import styles from './_storybook-styles.scss?inline';
 import DocsPage from './CreateSidePanel.docs-page';
 import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 import { renderTrigger } from '../../global/js/utils/story-helper';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
@@ -78,7 +76,7 @@ const renderUIShellHeader = () => (
 );
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Create flows/CreateSidePanel',
+  title: 'Deprecated/Prebuilt patterns/Create flows/CreateSidePanel',
   component: CreateSidePanel,
   tags: ['autodocs'],
   parameters: {
@@ -101,7 +99,26 @@ export default {
       options: [0, 1],
     },
   },
-  decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
+  decorators: [
+    sidePanelDecorator(renderUIShellHeader, prefix),
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to {/* cspell:disable-next-line */}
+            <a href="/?path=/docs/patterns-create-flows-createsidepanel--overview">
+              CreateSidePanel true pattern
+            </a>
+            .
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const DefaultTemplate = ({ slug, ...args }, context) => {

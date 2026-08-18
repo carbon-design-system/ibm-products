@@ -49,6 +49,10 @@ const renderComponent = ({ ...rest } = {}, children = <p>test</p>) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders the side panel', async () => {
     renderComponent();
     expect(screen.getByRole('complementary')).toHaveClass(blockClass);

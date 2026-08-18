@@ -86,6 +86,9 @@ resource. It is triggered by a user’s action, appears on top of the main page
 content, and is persistent until dismissed. The purpose of this modal should be
 immediately apparent to the user, with a clear and obvious path to completion.
  */
+/**
+ * @deprecated This component is deprecated.
+ */
 export const CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
   (props, ref) => {
     const {
@@ -156,6 +159,11 @@ export const CreateModal = React.forwardRef<HTMLDivElement, CreateModalProps>(
   }
 );
 
+/**@ts-ignore*/
+CreateModal.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Modal pattern`,
+};
 // Return a placeholder if not released and not enabled by feature flag
 
 CreateModal.propTypes = {

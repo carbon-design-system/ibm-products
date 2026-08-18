@@ -10,6 +10,7 @@ import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Compact, Default } from './PageHeader.stories';
 import { preview__PageHeader as PageHeader, pkg } from '../../..';
+import { blockClass } from '../PageHeaderUtils';
 import {
   PageHeader as PageHeaderDirect,
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,
@@ -1129,6 +1130,246 @@ describe('PageHeader', () => {
       const breadcrumbParent = ref.current.firstChild;
       expect(breadcrumbParent.childElementCount).toEqual(4);
       expect(renderPropFn).toHaveBeenCalled();
+    });
+  });
+
+  describe('PageHeader.Root observer callbacks', () => {
+    let savedIntersectionCallbacks;
+
+    beforeEach(() => {
+      savedIntersectionCallbacks = [];
+      window.IntersectionObserver = jest.fn().mockImplementation((callback) => {
+        savedIntersectionCallbacks.push(callback);
+        return {
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+          disconnect: jest.fn(),
+        };
+      });
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    // Helper: fire the nth IntersectionObserver callback with a synthetic entry
+    const fireIntersection = (cbIndex, target, isIntersecting) =>
+      act(() => {
+        savedIntersectionCallbacks[cbIndex]([{ target, isIntersecting }]);
+      });
+
+    it('calls onContentFullyCollapsed with true when content scrolls out of view and false when it scrolls back in', async () => {
+      const onContentFullyCollapsed = jest.fn();
+      const { container } = render(
+        <PageHeader.Root onContentFullyCollapsed={onContentFullyCollapsed}>
+          <PageHeader.Content title="title" />
+        </PageHeader.Root>
+      );
+
+      // Wait for refs to be set and observers to be created
+      await act(async () => {});
+
+      // The content observer is created first; its index is 0
+      const contentEl = container.querySelector(
+        `.${prefix}--page-header__content`
+      );
+
+      fireIntersection(0, contentEl, false);
+      expect(onContentFullyCollapsed).toHaveBeenLastCalledWith(true);
+
+      fireIntersection(0, contentEl, true);
+      expect(onContentFullyCollapsed).toHaveBeenLastCalledWith(false);
+    });
+
+    it('calls onTitleClipped with true when title scrolls out of view and false when it scrolls back in', async () => {
+      const onTitleClipped = jest.fn();
+      const { container } = render(
+        <PageHeader.Root onTitleClipped={onTitleClipped}>
+          <PageHeader.Content title="title" />
+        </PageHeader.Root>
+      );
+
+      await act(async () => {});
+
+      // The title observer is created second; its index is 1
+      const titleEl = container.querySelector(
+        `.${prefix}--page-header__content__title`
+      );
+
+      fireIntersection(1, titleEl, false);
+      expect(onTitleClipped).toHaveBeenLastCalledWith(true);
+
+      fireIntersection(1, titleEl, true);
+      expect(onTitleClipped).toHaveBeenLastCalledWith(false);
+    });
+
+    it('calls onContentActionsClipped with true/false when content actions cross the threshold', async () => {
+      const onContentActionsClipped = jest.fn();
+      const mockActions = [
+        {
+          id: 'action1',
+          onClick: jest.fn(),
+          body: <button>Action 1</button>,
+          menuItem: { label: 'Action 1' },
+        },
+      ];
+      const { container } = render(
+        <PageHeader.Root onContentActionsClipped={onContentActionsClipped}>
+          <PageHeader.Content title="title" />
+          <PageHeader.ContentPageActions actions={mockActions} />
+        </PageHeader.Root>
+      );
+
+      await act(async () => {});
+
+      // ContentPageActions sets refs.contentActions to its container ul
+      const actionsEl = container.querySelector(
+        `.${prefix}--page-header__content__page-actions`
+      );
+
+      // Fire each captured callback; only the one whose entry.target matches
+      // refs.contentActions.current will invoke onContentActionsClipped
+      savedIntersectionCallbacks.forEach((cb) => {
+        act(() => {
+          cb([{ target: actionsEl, isIntersecting: false }]);
+        });
+      });
+      expect(onContentActionsClipped).toHaveBeenCalledWith(true);
+
+      savedIntersectionCallbacks.forEach((cb) => {
+        act(() => {
+          cb([{ target: actionsEl, isIntersecting: true }]);
+        });
+      });
+      expect(onContentActionsClipped).toHaveBeenCalledWith(false);
+    });
+  });
+
+  describe('PageHeaderContent pageActions render prop receives live observerState', () => {
+    let savedIntersectionCallbacks;
+
+    beforeEach(() => {
+      savedIntersectionCallbacks = [];
+      window.IntersectionObserver = jest.fn().mockImplementation((callback) => {
+        savedIntersectionCallbacks.push(callback);
+        return {
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+          disconnect: jest.fn(),
+        };
+      });
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('passes the live observer state to a functional pageActions prop', async () => {
+      const pageActionsFn = jest.fn(() => <button>page action</button>);
+      const { container } = render(
+        <PageHeader.Root>
+          <PageHeader.Content title="title" pageActions={pageActionsFn} />
+        </PageHeader.Root>
+      );
+
+      await act(async () => {});
+
+      // Trigger fully-collapsed by firing the content IntersectionObserver
+      const contentEl = container.querySelector(
+        `.${prefix}--page-header__content`
+      );
+      act(() => {
+        savedIntersectionCallbacks[0]([
+          { target: contentEl, isIntersecting: false },
+        ]);
+      });
+
+      // The render prop should eventually be called with fullyCollapsed: true
+      await waitFor(() => {
+        const calls = pageActionsFn.mock.calls;
+        const lastCall = calls[calls.length - 1][0];
+        expect(lastCall).toMatchObject({ fullyCollapsed: true });
+      });
+    });
+  });
+
+  describe('PageHeaderBreadcrumbOverflow with renderOverflowBreadcrumb and overflow trigger', () => {
+    it('renders the overflow breadcrumb in second-to-last position and passes hidden breadcrumbs to render prop', () => {
+      const renderOverflowBreadcrumb = jest.fn((hiddenBreadcrumbs) => (
+        <BreadcrumbItem>
+          <OverflowMenu aria-label="Overflow menu">
+            {hiddenBreadcrumbs.map((el, i) => (
+              <OverflowMenuItem key={i} itemText={`hidden-${i}`} />
+            ))}
+          </OverflowMenu>
+        </BreadcrumbItem>
+      ));
+
+      const ref = React.createRef();
+      render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar>
+            <PageHeader.BreadcrumbOverflow
+              ref={ref}
+              renderOverflowBreadcrumb={renderOverflowBreadcrumb}
+            >
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 3</BreadcrumbItem>
+              <PageHeader.TitleBreadcrumb data-fixed>
+                Title
+              </PageHeader.TitleBreadcrumb>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+        </PageHeader.Root>
+      );
+
+      // Trigger overflow: 2 visible breadcrumbs, 2 hidden
+      const hiddenItems = [
+        document.createElement('li'),
+        document.createElement('li'),
+      ];
+      act(() => {
+        mockOverflowOnChange([], hiddenItems);
+      });
+
+      // renderOverflowBreadcrumb should have been called with the hidden items
+      expect(renderOverflowBreadcrumb).toHaveBeenCalledWith(hiddenItems);
+
+      // The breadcrumb list should now contain 5 items:
+      // Breadcrumb 1, Breadcrumb 2, Breadcrumb 3, overflow item (2nd to last), Title
+      const breadcrumbParent = ref.current.firstChild;
+      expect(breadcrumbParent.childElementCount).toEqual(5);
+
+      // Overflow item is at second-to-last index (index 3, before Title at index 4)
+      const children = breadcrumbParent.children;
+      expect(children[3]).toHaveClass(
+        `${prefix}--page-header-breadcrumb-overflow-item`
+      );
+    });
+  });
+
+  describe('PageHeader.TabBar disableStickyTabBar', () => {
+    it('adds the disable-sticky-tab-bar class to PageHeader.Root when disableStickyTabBar is true', () => {
+      const { container } = render(
+        <PageHeader.Root role="banner">
+          <PageHeader.TabBar disableStickyTabBar={true} />
+        </PageHeader.Root>
+      );
+
+      const root = screen.getByRole('banner');
+      expect(root).toHaveClass(`${blockClass}--disable-sticky-tab-bar`);
+    });
+
+    it('does not add the disable-sticky-tab-bar class to PageHeader.Root when disableStickyTabBar is false', () => {
+      const { container } = render(
+        <PageHeader.Root role="banner">
+          <PageHeader.TabBar disableStickyTabBar={false} />
+        </PageHeader.Root>
+      );
+
+      const root = screen.getByRole('banner');
+      expect(root).not.toHaveClass(`${blockClass}--disable-sticky-tab-bar`);
     });
   });
 });

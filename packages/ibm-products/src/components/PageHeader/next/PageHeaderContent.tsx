@@ -80,7 +80,7 @@ export const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs, setPageActionsInstance } = usePageHeader();
+  const { setRefs, setPageActionsInstance, observerState } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -140,11 +140,7 @@ export const PageHeaderContent = React.forwardRef<
               )}
             </div>
             {typeof pageActions === 'function'
-              ? pageActions({
-                  fullyCollapsed: false,
-                  titleClipped: false,
-                  contentActionsClipped: false,
-                })
+              ? pageActions(observerState)
               : pageActions}
           </div>
           {children}

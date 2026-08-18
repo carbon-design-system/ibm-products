@@ -60,11 +60,17 @@ const ConditionBuilderContent = ({
     onRemoveItem,
     readOnly,
     statementConfigCustom,
+    value: seedValue,
+    onChange,
+    startActive,
   } = useContext<ConditionBuilderContextProps>(ConditionBuilderContext);
 
   const initialConditionState = useRef(
     initialState?.state ? JSON.parse(JSON.stringify(initialState?.state)) : null
   );
+  // Tracks whether the user has explicitly clicked "Add condition".
+  // Used to lift the startActive=false gate after the first click.
+  const userActivated = useRef(false);
   const [isConditionBuilderActive, setIsConditionBuilderActive] =
     useState(false);
   const [showConditionGroupPreview, setShowConditionGroupPreview] =
@@ -93,12 +99,24 @@ const ConditionBuilderContent = ({
   };
 
   useEffect(() => {
+    // When startActive is explicitly false, suppress auto-activation until
+    // the user has clicked the "Add condition" button (userActivated.current).
+    if (startActive === false && !userActivated.current) {
+      // getConditionState (legacy) is a state-read callback — calling on mount
+      // is intentional for backward compat.
+      if (getConditionState) {
+        getConditionState(rootState ?? {});
+      }
+      return;
+    }
+
     if (rootState?.groups?.length) {
       setIsConditionBuilderActive(true);
     } else {
       setIsConditionBuilderActive(false);
     }
 
+    // getConditionState (legacy): fires on every state update including mount.
     if (getConditionState) {
       getConditionState(rootState ?? {});
     }
@@ -111,23 +129,39 @@ const ConditionBuilderContent = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actionState]);
   useEffect(() => {
-    if (initialState?.enabledDefault) {
+    // `value` takes precedence over `initialState` — skip if the new API is in use.
+    if (initialState?.enabledDefault && seedValue === undefined) {
       setRootState?.(initialState.state);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialState]);
 
   const onStartConditionBuilder = () => {
-    //when add condition button is clicked.
+    userActivated.current = true;
+    // Always activate immediately — the useEffect on rootState will also set
+    // this, but it fires asynchronously; setting it here ensures the builder
+    // is visible in the same React batch as the button click.
     setIsConditionBuilderActive(true);
+    if (seedValue !== undefined && onChange !== undefined) {
+      // Fully controlled path (value + onChange): the parent owns the state.
+      // Just reveal the builder — do NOT call setRootState, which would emit
+      // a spurious onChange even when the state is already empty-groups.
+      return;
+    }
+    if (seedValue !== undefined && rootState?.groups?.length) {
+      // Uncontrolled seed (value without onChange) and internalState still has
+      // groups (e.g. startActive=false on first click) — state is already
+      // correct, just reveal the builder.
+      return;
+    }
+    // No seed, or seed was cleared: initialize with legacy initialState or a
+    // fresh empty state.
     if (initialConditionState?.current?.groups?.length) {
       setRootState?.(initialConditionState.current);
       initialConditionState.current = null;
     } else {
-      setRootState?.(getEmptyState(statementConfigCustom)); //here we can set an empty skeleton object for an empty condition builder,
+      setRootState?.(getEmptyState(statementConfigCustom));
     }
-
-    //or we can even pre-populate some existing builder and continue editing
   };
 
   const onRemove = useCallback(
@@ -137,11 +171,11 @@ const ConditionBuilderContent = ({
       );
 
       const { preventRemove } =
-        onRemoveItem?.({
+        (onRemoveItem?.({
           type: 'group',
           state: rootState as ConditionBuilderState,
           item: groupToRemove,
-        }) ?? {};
+        }) as { preventRemove?: boolean }) ?? {};
 
       if (!preventRemove) {
         const groups = rootState?.groups?.filter(
@@ -181,10 +215,10 @@ const ConditionBuilderContent = ({
 
   const addConditionGroupHandler = () => {
     const { preventAdd } =
-      onAddItem?.({
+      (onAddItem?.({
         type: 'group',
         state: rootState as ConditionBuilderState,
-      }) ?? {};
+      }) as { preventAdd?: boolean }) ?? {};
     if (!preventAdd) {
       const newGroup = getEmptyState(statementConfigCustom)
         .groups?.[0] as ConditionGroup;

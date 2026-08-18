@@ -182,7 +182,7 @@ type RemoveItemConfig = {
   group?: ConditionGroup;
 };
 
-type ConditionBuilderTextKeys =
+export type ConditionBuilderTextKeys =
   | 'ifText'
   | 'unlessText'
   | 'excl_if'
@@ -218,6 +218,7 @@ type ConditionBuilderTextKeys =
   | 'addConditionRowText'
   | 'startText'
   | 'endText'
+  | 'searchPropertiesText'
   | 'clearSearchText'
   | 'actionsText'
   | 'then'
@@ -226,12 +227,14 @@ type ConditionBuilderTextKeys =
   | 'invalidText'
   | 'invalidNumberWarnText'
   | 'conditionBuilderText'
+  | 'conditionBuilderGroupText'
   | 'actionSectionText'
   | 'conditionHeadingText'
   | 'addPropertyText'
   | 'addOperatorText'
   | 'addValueText'
-  | 'conditionBuilderHierarchicalText';
+  | 'conditionBuilderHierarchicalText'
+  | 'conditionRemovedText';
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
   initialState?: InitialState;
@@ -243,14 +246,43 @@ export type ConditionBuilderProps = {
   ) => Promise<Option[]>;
   actions?: Action[];
   className?: string;
-  popOverSearchThreshold: number;
+  /** When omitted, defaults to 4. A search field appears in option popovers
+   *  when the option list length exceeds this threshold. */
+  popOverSearchThreshold?: number;
   startConditionLabel?: string;
   variant?: 'Non-Hierarchical' | 'Hierarchical';
   translateWithId?: (id: ConditionBuilderTextKeys) => string;
-  statementConfigCustom: statementConfig[];
-  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
-  onRemoveItem?: (config: RemoveItemConfig) => { preventRemove: boolean };
+  /** Override the default four statements (if all / if any / unless all / unless any).
+   *  When omitted, the built-in defaults are used. */
+  statementConfigCustom?: statementConfig[];
+  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean } | void;
+  onRemoveItem?: (
+    config: RemoveItemConfig
+  ) => { preventRemove: boolean } | void;
   readOnly?: boolean;
+  /**
+   * When `false`, the builder starts behind the "Add condition" button even
+   * if `value` contains groups. The user must click the button to activate.
+   * Defaults to `true` (builder activates immediately when groups are present).
+   */
+  startActive?: boolean;
+  /**
+   * Pre-populate the builder with an existing condition state.
+   *
+   * - **Uncontrolled seed** (no `onChange`): the builder uses this as its
+   *   starting state and then manages state internally — equivalent to
+   *   `initialState.state` but without the `enabledDefault` flag.
+   * - **Controlled** (with `onChange`): the parent owns the state on every
+   *   render. Must be kept in sync via `onChange`.
+   */
+  value?: ConditionBuilderState;
+  /**
+   * Called with the full new state on every change.
+   * - Pair with `value` for fully controlled mode.
+   * - Omit to use `value` as a one-time uncontrolled seed.
+   * - Can also be used standalone instead of `getConditionState`.
+   */
+  onChange?: (state: ConditionBuilderState) => void;
 };
 
 export type InitialState = {
@@ -261,7 +293,7 @@ export type InitialState = {
 export interface ConditionBuilderContextInputProps extends PropsWithChildren {
   children?: ReactNode;
   inputConfig?: inputConfig;
-  popOverSearchThreshold: number;
+  popOverSearchThreshold?: number;
   getOptions?: (
     state: ConditionBuilderState,
     condition: Condition
@@ -271,6 +303,9 @@ export interface ConditionBuilderContextInputProps extends PropsWithChildren {
   statementConfigCustom?: statementConfig[];
   conditionBuilderRef?: ForwardedRef<HTMLDivElement>;
   readOnly?: boolean;
+  startActive?: boolean;
+  value?: ConditionBuilderState;
+  onChange?: (state: ConditionBuilderState) => void;
 }
 
 export type ConditionBuilderContextProps = {
@@ -278,6 +313,8 @@ export type ConditionBuilderContextProps = {
   setRootState?: Dispatch<SetStateAction<ConditionBuilderState>>;
   actionState?: Action[];
   setActionState?: Dispatch<SetStateAction<Action[]>>;
-  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean };
-  onRemoveItem?: (config: RemoveItemConfig) => { preventRemove: boolean };
+  onAddItem?: (config: AddItemConfig) => { preventAdd: boolean } | void;
+  onRemoveItem?: (
+    config: RemoveItemConfig
+  ) => { preventRemove: boolean } | void;
 } & ConditionBuilderContextInputProps;

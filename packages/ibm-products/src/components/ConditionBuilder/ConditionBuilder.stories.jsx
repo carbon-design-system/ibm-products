@@ -5,13 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { action } from 'storybook/actions';
 
 // TODO: import action to handle events if required.
 // import { action } from 'storybook/actions';
 import { Wikis } from '@carbon/react/icons';
-import { previewCandidate__ConditionBuilder as ConditionBuilder } from '../';
+import { Button } from '@carbon/react';
+import {
+  previewCandidate__ConditionBuilder as ConditionBuilder,
+  getEmptyState,
+} from '../';
 import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss?inline';
@@ -281,10 +285,7 @@ export const conditionBuilderWithInitialState = ConditionBuilderTemplate.bind(
 );
 conditionBuilderWithInitialState.storyName = 'With initial state';
 conditionBuilderWithInitialState.args = {
-  initialState: {
-    state: sampleDataStructure_nonHierarchical,
-    enabledDefault: true,
-  },
+  value: sampleDataStructure_nonHierarchical,
   inputConfig: inputData,
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
@@ -306,11 +307,8 @@ export const conditionBuilderWithCustomOperators =
 conditionBuilderWithCustomOperators.storyName =
   'With Custom operator configuration';
 conditionBuilderWithCustomOperators.args = {
+  value: initialStateWithCustomOperators,
   inputConfig: inputDataForCustomOperator,
-  initialState: {
-    state: initialStateWithCustomOperators,
-    enabledDefault: true,
-  },
   variant: NON_HIERARCHICAL_VARIANT,
   translateWithId: translateWithId,
 };
@@ -346,10 +344,8 @@ export const conditionBuilderWithInitialStateHierarchical =
 conditionBuilderWithInitialStateHierarchical.storyName =
   'With initial state (Hierarchical)';
 conditionBuilderWithInitialStateHierarchical.args = {
-  initialState: {
-    state: sampleDataStructure_Hierarchical,
-    enabledDefault: false,
-  },
+  value: sampleDataStructure_Hierarchical,
+  startActive: false,
   inputConfig: inputData,
   variant: HIERARCHICAL_VARIANT,
 };
@@ -364,3 +360,105 @@ conditionBuilderWithActionsHierarchical.args = {
   actions: actions,
   getActionsState: (actionState) => {},
 };
+
+// An alternative state used by the "Update conditions" button below.
+const alternativeState = {
+  operator: 'and',
+  groups: [
+    {
+      groupOperator: 'or',
+      statement: 'ifAny',
+      id: 'alt-group-1',
+      conditions: [
+        {
+          property: 'continent',
+          operator: 'is',
+          value: { label: 'Europe', id: 'Europe' },
+          id: 'alt-cond-1',
+        },
+        {
+          property: 'region',
+          operator: 'is',
+          value: { label: 'Albania', id: 'AL' },
+          id: 'alt-cond-2',
+        },
+      ],
+    },
+  ],
+};
+
+// Controlled mode story — demonstrates value + onChange with Hierarchical variant.
+// Use the buttons to reset or swap the state from outside the builder.
+const ControlledHierarchicalTemplate = () => {
+  const descriptionId = 'controlled-hierarchical-a11y-desc';
+  const [conditionState, setConditionState] = useState(
+    sampleDataStructure_Hierarchical
+  );
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      {/* External controls — demonstrate driving value from outside */}
+      <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <Button
+          kind="secondary"
+          size="sm"
+          onClick={() => setConditionState(getEmptyState())}
+        >
+          Reset conditions
+        </Button>
+        <Button
+          kind="primary"
+          size="sm"
+          onClick={() => setConditionState(alternativeState)}
+        >
+          Update conditions
+        </Button>
+      </div>
+
+      <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+        <div style={{ flex: '1 1 60%' }}>
+          <p id={descriptionId} className="cds--visually-hidden">
+            Use this builder to create filter conditions. Each condition has
+            three parts: a property, an operator, and a value. Use arrow keys to
+            navigate between conditions. Press Enter or Space to open a
+            selector. Press Escape to close without saving.
+          </p>
+          <ConditionBuilder
+            inputConfig={inputData}
+            variant={HIERARCHICAL_VARIANT}
+            popOverSearchThreshold={4}
+            aria-describedby={descriptionId}
+            value={conditionState}
+            onChange={(newState) => {
+              setConditionState(newState);
+            }}
+          />
+        </div>
+        <div
+          style={{
+            flex: '1 1 40%',
+            background: 'var(--cds-layer)',
+            padding: '1rem',
+            borderRadius: '4px',
+            fontFamily: 'monospace',
+            fontSize: '12px',
+            overflowX: 'auto',
+            whiteSpace: 'pre',
+          }}
+        >
+          <strong style={{ fontFamily: 'sans-serif', fontSize: '13px' }}>
+            Live condition state (value prop)
+          </strong>
+          <br />
+          <br />
+          {JSON.stringify(conditionState, null, 2)}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const conditionBuilderControlledHierarchical =
+  ControlledHierarchicalTemplate.bind({});
+conditionBuilderControlledHierarchical.storyName =
+  'Controlled mode — value + onChange (Hierarchical)';

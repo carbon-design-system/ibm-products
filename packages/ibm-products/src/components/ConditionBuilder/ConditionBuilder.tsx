@@ -57,7 +57,7 @@ export const ConditionBuilder = React.forwardRef(
       className,
       inputConfig,
       startConditionLabel = 'Add Condition',
-      popOverSearchThreshold,
+      popOverSearchThreshold = 4,
       getOptions,
       initialState,
       getConditionState,
@@ -69,6 +69,9 @@ export const ConditionBuilder = React.forwardRef(
       onAddItem,
       onRemoveItem,
       readOnly,
+      startActive = true,
+      value,
+      onChange,
       ...rest
     }: ConditionBuilderProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -79,7 +82,6 @@ export const ConditionBuilder = React.forwardRef(
     const handleKeyDownHandler = (evt) => {
       handleKeyDown(evt, conditionBuilderRef, variant);
     };
-
     return (
       <ConditionBuilderProvider
         inputConfig={inputConfig}
@@ -92,6 +94,9 @@ export const ConditionBuilder = React.forwardRef(
         onAddItem={onAddItem}
         onRemoveItem={onRemoveItem}
         readOnly={!!readOnly}
+        startActive={startActive}
+        value={value}
+        onChange={onChange}
       >
         <div
           {
@@ -259,20 +264,32 @@ ConditionBuilder.propTypes = {
    */
   onAddItem: PropTypes.func,
   /**
+   * Called with the full new state on every change. Use with `value` for
+   * controlled mode, or standalone instead of `getConditionState`.
+   */
+  onChange: PropTypes.func,
+  /**
    * this is an optional callback triggered before removing any condition , subgroup, group or action.
    * User can optionally perform any validation and can stop remove action if they return back {preventRemove:true}
    */
   onRemoveItem: PropTypes.func,
 
   /**
-   * This will enable search in option popovers when option list length is more than this threshold
+   * This will enable search in option popovers when option list length is more than this threshold.
+   * Defaults to 4 when not provided.
    */
-  popOverSearchThreshold: PropTypes.number.isRequired,
+  popOverSearchThreshold: PropTypes.number,
 
   /**
    * Whether the conditionBuilder should be readOnly
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * When false, the builder starts behind the "Add condition" button even
+   * if value contains groups. Defaults to true.
+   */
+  startActive: PropTypes.bool,
 
   /**
    * Provide a label to the button that starts condition builder
@@ -293,12 +310,17 @@ ConditionBuilder.propTypes = {
   /**
    * Optional prop, if you need to pass translations to the texts on the component instead of the defined defaults.
    * This callback function will receive the message id and you need to return the corresponding text for that id.
-   
    */
   /**@ts-ignore */
   translateWithId: PropTypes.func,
 
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * Controlled state. When provided, the builder is controlled and `onChange`
+   * must be supplied to keep the state in sync.
+   */
+  /**@ts-ignore */
+  value: PropTypes.object,
+
   /**
    * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */

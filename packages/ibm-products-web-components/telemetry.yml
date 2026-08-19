@@ -21,15 +21,16 @@ collect:
         - expand-label
         - expandText
         - hide-close-button
+        - hide-search
         - id
         - influencer-width
         - is-flush
+        - item-count
         - kind
         - label
         - label-text
         - lines
-        - onc4p-add-select-row-navigate
-        - onc4p-add-select-row-select
+        - multi
         - open
         - overflow-aria-label
         - prevent-close-on-click-outside
@@ -56,22 +57,50 @@ collect:
         - version
         # c4p-action-set
         - disable-stacking
-        # c4p-add-select
-        - multi
         # c4p-add-select-body
         - global-search-label
         - global-search-placeholder
-        - item-count
         - items-label
+        - onc4p-add-select-body-breadcrumb-click
         - onc4p-add-select-body-search
         - path
         - search-results-title
+        # c4p-add-select-column
+        - all-indeterminate
+        - all-selected
+        - onc4p-add-select-column-search
+        - onc4p-add-select-column-select-all
+        - search-label
+        - search-placeholder
+        - show-select-all
+        # c4p-add-select-item-panel
+        - onc4p-add-select-item-panel-close
+        - show-close-button
         # c4p-add-select-row
+        - _column-multi
         - disabled
         - has-children
+        - has-item-panel
+        - indeterminate
         - item-id
+        - item-panel-icon-description
+        - item-panel-open
+        - onc4p-add-select-row-item-panel-click
+        - onc4p-add-select-row-navigate
+        - onc4p-add-select-row-select
         - parent-id
         - selected
+        - skeleton
+        # c4p-add-select-selection-summary
+        - edit-icon-description
+        - onc4p-add-select-selection-summary-edit
+        - selected-item-count
+        - show-edit-icon
+        # c4p-add-select-selection-summary-item
+        - hide-remove-button
+        - onc4p-add-select-selection-summary-item-remove
+        - remove-button-label
+        - use-accordion
         # c4p-big-number
         - fraction-digits
         - loading

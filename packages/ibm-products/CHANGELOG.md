@@ -1,3 +1,19 @@
+## `@carbon/ibm-products@2.97.0`
+### Features :rocket:
+- feat(webTerminal): implemented as react pattern (#9723)
+- feat(saving): implemented as react pattern (#9733)
+
+### Bug fixes :bug:
+- fix: tooltip uses popoveralignment (#9790)
+- fix(expressivecard): use reactnode as type for pictogram prop (#9757)
+
+### Housekeeping :house:
+- chore: deprecate create modal and remove modal (#9764)
+- chore: deprecated create side panel (#9791)
+- chore(Card): hide from Storybook (#9771)
+- chore(preview_PageHeader): use `TruncatedText` for title instead of `DefinitionTooltip` (#9742)
+- refactor(addselect): code cleanup and implementation improvements (#9729)
+
 ## `@carbon/ibm-products@2.96.0`
 ### Features :rocket:
 - feat(Card): implement horizontal card (#9704)

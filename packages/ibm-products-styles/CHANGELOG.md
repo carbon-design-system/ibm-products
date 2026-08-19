@@ -1,3 +1,12 @@
+## `@carbon/ibm-products-styles@2.93.0`
+### Bug fixes :bug:
+- fix(tearsheet): horizontal scroll not working (#9778)
+- fix(preview-pageheader): fix tags spacing when tabs are absent (#9775)
+
+### Housekeeping :house:
+- chore(preview_PageHeader): use `TruncatedText` for title instead of `DefinitionTooltip` (#9742)
+- refactor(addselect): code cleanup and implementation improvements (#9729)
+
 ## `@carbon/ibm-products-styles@2.92.0`
 ### Features :rocket:
 - feat(Card): implement horizontal card (#9704)

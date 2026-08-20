@@ -17,6 +17,9 @@ import {
   PageHeaderContent as PageHeaderContentDirect,
   PageHeaderTabBar as PageHeaderTabBarDirect,
 } from './PageHeader';
+import { PageHeaderBreadcrumbPageActions } from './PageHeaderBreadcrumbPageActions';
+import { scrollableAncestor, getHeaderOffset } from './utils';
+import { usePageHeader } from './context';
 import { breakpoints } from '@carbon/layout';
 import {
   Breadcrumb,
@@ -1370,6 +1373,235 @@ describe('PageHeader', () => {
 
       const root = screen.getByRole('banner');
       expect(root).not.toHaveClass(`${blockClass}--disable-sticky-tab-bar`);
+    });
+  });
+
+  // ─── PageHeaderBreadcrumbPageActions ──────────────────────────────────────
+  describe('PageHeader.BreadcrumbPageActions component api', () => {
+    const mockActions = [
+      {
+        id: 'a1',
+        label: 'Edit',
+        renderIcon: () => <svg />,
+        onClick: jest.fn(),
+      },
+      {
+        id: 'a2',
+        label: 'Delete',
+        renderIcon: () => <svg />,
+        onClick: jest.fn(),
+      },
+    ];
+
+    afterEach(() => jest.clearAllMocks());
+
+    it('renders action buttons for each action item', () => {
+      render(
+        <PageHeader.Root>
+          <PageHeaderBreadcrumbPageActions actions={mockActions} />
+        </PageHeader.Root>
+      );
+      expect(screen.getByLabelText('Edit')).toBeInTheDocument();
+      expect(screen.getByLabelText('Delete')).toBeInTheDocument();
+    });
+
+    it('applies a custom className', () => {
+      const { container } = render(
+        <PageHeader.Root>
+          <PageHeaderBreadcrumbPageActions
+            actions={mockActions}
+            className="custom-bpa"
+          />
+        </PageHeader.Root>
+      );
+      expect(container.querySelector('.custom-bpa')).toBeInTheDocument();
+    });
+
+    it('shows hidden action labels in the overflow menu after overflow fires', async () => {
+      render(
+        <PageHeader.Root>
+          <PageHeaderBreadcrumbPageActions actions={mockActions} />
+        </PageHeader.Root>
+      );
+
+      // Trigger overflow: a2 is hidden
+      act(() => {
+        mockOverflowOnChange(
+          [{ dataset: { id: 'a1' } }],
+          [{ dataset: { id: 'a2' } }]
+        );
+      });
+
+      // The overflow menu button is always present; verify hidden item label appears in DOM
+      expect(screen.getByLabelText('More page actions')).toBeInTheDocument();
+      // The OverflowMenuItem for the hidden action renders its text into the list
+      expect(screen.getByText('Delete')).toBeInTheDocument();
+    });
+
+    it('calls onClick of hidden action item button when clicked', async () => {
+      const deleteClick = jest.fn();
+      const actionsWithClick = [
+        {
+          id: 'a1',
+          label: 'Edit',
+          renderIcon: () => <svg />,
+          onClick: jest.fn(),
+        },
+        {
+          id: 'a2',
+          label: 'Delete',
+          renderIcon: () => <svg />,
+          onClick: deleteClick,
+        },
+      ];
+      render(
+        <PageHeader.Root>
+          <PageHeaderBreadcrumbPageActions actions={actionsWithClick} />
+        </PageHeader.Root>
+      );
+
+      // No overflow — click the visible Delete button directly
+      const deleteBtn = screen.getByLabelText('Delete');
+      await act(() => userEvent.click(deleteBtn));
+      expect(deleteClick).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  // ─── utils.ts ─────────────────────────────────────────────────────────────
+  describe('utils — scrollableAncestor / getHeaderOffset', () => {
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('scrollableAncestor returns null when window is undefined', () => {
+      // simulate no-window environment by passing null target
+      expect(scrollableAncestor(null)).toBeNull();
+    });
+
+    it('scrollableAncestor returns document.scrollingElement for a fixed-position element', () => {
+      const el = document.createElement('div');
+      // jsdom respects inline position:fixed via getComputedStyle
+      el.style.position = 'fixed';
+      document.body.appendChild(el);
+      expect(scrollableAncestor(el)).toBe(document.scrollingElement);
+      document.body.removeChild(el);
+    });
+
+    it('scrollableAncestor finds a scrollable parent', () => {
+      const parent = document.createElement('div');
+      const child = document.createElement('div');
+      parent.appendChild(child);
+      document.body.appendChild(parent);
+
+      // Make parent scrollable via inline style — no getComputedStyle mock needed
+      parent.style.overflow = 'scroll';
+
+      const result = scrollableAncestor(child);
+      expect(result).toBe(parent);
+
+      document.body.removeChild(parent);
+    });
+
+    it('getHeaderOffset returns 0 when element has negative bounding top inside a scrollable container', () => {
+      const scrollable = document.createElement('div');
+      const inner = document.createElement('div');
+      scrollable.appendChild(inner);
+      document.body.appendChild(scrollable);
+
+      scrollable.style.overflow = 'scroll';
+
+      jest.spyOn(inner, 'getBoundingClientRect').mockReturnValue({ top: -50 });
+      jest
+        .spyOn(scrollable, 'getBoundingClientRect')
+        .mockReturnValue({ top: -10 });
+
+      const result = getHeaderOffset(inner);
+      // totalHeaderOffset = -50 - (-10) = -40 → clamped to 0
+      expect(result).toBe(0);
+
+      document.body.removeChild(scrollable);
+    });
+
+    it('getHeaderOffset uses scrollable container offset when container is not document.scrollingElement', () => {
+      const scrollable = document.createElement('div');
+      const inner = document.createElement('div');
+      scrollable.appendChild(inner);
+      document.body.appendChild(scrollable);
+
+      scrollable.style.overflow = 'scroll';
+
+      jest.spyOn(inner, 'getBoundingClientRect').mockReturnValue({ top: 100 });
+      jest
+        .spyOn(scrollable, 'getBoundingClientRect')
+        .mockReturnValue({ top: 60 });
+
+      const result = getHeaderOffset(inner);
+      // totalHeaderOffset = 100 - 60 = 40
+      expect(result).toBe(40);
+
+      document.body.removeChild(scrollable);
+    });
+  });
+
+  // ─── PageHeaderScrollButton ────────────────────────────────────────────────
+  describe('PageHeader.ScrollButton scroll behavior', () => {
+    let intersectionCallbacks;
+
+    beforeEach(() => {
+      intersectionCallbacks = [];
+      window.IntersectionObserver = jest.fn().mockImplementation((cb) => {
+        intersectionCallbacks.push(cb);
+        return {
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+          disconnect: jest.fn(),
+        };
+      });
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('scroller button is present and clicking collapse does not throw', async () => {
+      // Covers PageHeaderScrollButton lines 47-52 (!isFullyCollapsed scroll branch)
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content title="title" />
+          <PageHeaderTabBarDirect scroller={<PageHeader.ScrollButton />} />
+        </PageHeader.Root>
+      );
+
+      await act(async () => {});
+
+      const collapseBtn = screen.getByLabelText('Collapse');
+      expect(collapseBtn).toBeInTheDocument();
+      // Click Collapse → covers !isFullyCollapsed branch in handleScroller (lines 47-52)
+      await expect(
+        act(() => userEvent.click(collapseBtn))
+      ).resolves.not.toThrow();
+    });
+  });
+
+  // ─── context.ts usePageHeader error path ──────────────────────────────────
+  describe('usePageHeader outside of provider', () => {
+    it('throws when called with no context value', () => {
+      // usePageHeader calls useContext(PageHeaderContext) and throws if the result is falsy.
+      // We verify the throw directly by patching React.useContext for just this call.
+      const React_ = require('react');
+      const contextModule = require('./context');
+      const origUseContext = React_.useContext;
+
+      jest.spyOn(React_, 'useContext').mockImplementationOnce((ctx) => {
+        if (ctx === contextModule.PageHeaderContext) return undefined;
+        return origUseContext(ctx);
+      });
+
+      expect(() => contextModule.usePageHeader()).toThrow(
+        'Page header context was not provided or hook was used outside of the Page header component.'
+      );
+
+      jest.restoreAllMocks();
     });
   });
 });

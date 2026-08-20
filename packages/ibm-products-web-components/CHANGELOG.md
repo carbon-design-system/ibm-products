@@ -1,3 +1,15 @@
+## `@carbon/ibm-products-web-components@0.46.0-rc.0`
+### Features :rocket:
+- feat(preview-tearsheet): implement open in stackblitz in web component (#9760)
+- feat(addselect): web component implementation (#9740)
+
+### Bug fixes :bug:
+- fix(createsidepanel): parity between the react and wc storybook (#9783)
+
+### Housekeeping :house:
+- chore(deps): update dependency @open-wc/testing to v5 (#9801)
+- chore(deps): update dependency c8 to v12 (#9810)
+
 ## `@carbon/ibm-products-web-components@0.45.0`
 ### Bug fixes :bug:
 - fix(useravatar): remove deprecated align options from wc stories (#9734)

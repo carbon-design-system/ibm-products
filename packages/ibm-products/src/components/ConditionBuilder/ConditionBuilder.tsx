@@ -16,6 +16,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { deprecateProp } from '../../global/js/utils/props-helper';
+export { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
@@ -57,7 +59,7 @@ export const ConditionBuilder = React.forwardRef(
       className,
       inputConfig,
       startConditionLabel = 'Add Condition',
-      popOverSearchThreshold,
+      popOverSearchThreshold = 4,
       getOptions,
       initialState,
       getConditionState,
@@ -69,6 +71,9 @@ export const ConditionBuilder = React.forwardRef(
       onAddItem,
       onRemoveItem,
       readOnly,
+      startActive = true,
+      value,
+      onChange,
       ...rest
     }: ConditionBuilderProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -79,7 +84,6 @@ export const ConditionBuilder = React.forwardRef(
     const handleKeyDownHandler = (evt) => {
       handleKeyDown(evt, conditionBuilderRef, variant);
     };
-
     return (
       <ConditionBuilderProvider
         inputConfig={inputConfig}
@@ -92,6 +96,9 @@ export const ConditionBuilder = React.forwardRef(
         onAddItem={onAddItem}
         onRemoveItem={onRemoveItem}
         readOnly={!!readOnly}
+        startActive={startActive}
+        value={value}
+        onChange={onChange}
       >
         <div
           {
@@ -134,6 +141,39 @@ export const ConditionBuilder = React.forwardRef(
 // is used in preference to relying on function.name.
 ConditionBuilder.displayName = componentName;
 
+// Deprecated props — kept separate so they can be spread into propTypes and
+// also exported for use with getDeprecatedArgTypes in stories.
+export const deprecatedProps = {
+  /**
+   * @deprecated Use the `value` prop instead. `initialState` will be removed
+   * in a future major release.
+   *
+   * Optional prop to pass a saved condition state. `state` holds the
+   * condition structure; `enabledDefault: true` renders the builder
+   * immediately, `enabledDefault: false` (default) requires the user to
+   * click the start button first.
+   */
+  /**@ts-ignore */
+  initialState: deprecateProp(
+    PropTypes.shape({
+      state: PropTypes.object,
+      enabledDefault: PropTypes.bool,
+    }),
+    'Use the `value` prop instead (pair with `onChange` for controlled mode).'
+  ),
+
+  /**
+   * @deprecated Use `onChange` instead. `getConditionState` will be removed
+   * in a future major release.
+   *
+   * Callback that receives the updated condition state on every change.
+   */
+  getConditionState: deprecateProp(
+    PropTypes.func,
+    'Use the `onChange` prop instead.'
+  ),
+};
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -157,62 +197,16 @@ ConditionBuilder.propTypes = {
    * This is a callback that gives back the updated action state
    */
   getActionsState: PropTypes.func,
+
   /**
-   * This is a callback that gives back updated condition state
+   * Callback triggered to dynamically fetch options for a property of type 'option'.
+   * This is invoked when no static options array is provided in the input config.
+   * The function should return a Promise that resolves with an array of options in the required format.
    */
-  getConditionState: PropTypes.func.isRequired,
-  /**
- * Callback triggered to dynamically fetch options for a property of type 'option'.
- * This is invoked when no static options array is provided in the input config.
- * The function should return a Promise that resolves with an array of options in the required format.
- 
- */
   getOptions: PropTypes.func,
-  /**
-   * Optional prop if you want to pass a saved condition state, pass as "initialState.state".
-   * "initialState.enabledDefault" will populate the builder with the provided initial state before clicking Add Condition button.
-   *
-   *  This state should respect the structure of condition state that is available in getConditionState callback
-   */
-  /**@ts-ignore */
-  initialState: PropTypes.shape({
-    state: PropTypes.shape({
-      groups: PropTypes.arrayOf(
-        PropTypes.shape({
-          groupOperator: PropTypes.string,
-          statement: PropTypes.string,
-          conditions: PropTypes.arrayOf(
-            PropTypes.oneOfType([
-              PropTypes.shape({
-                property: PropTypes.string,
-                operator: PropTypes.string,
-                value: PropTypes.oneOfType([
-                  PropTypes.string,
-                  PropTypes.arrayOf(
-                    PropTypes.shape({
-                      id: PropTypes.string,
-                      label: PropTypes.string,
-                    })
-                  ),
-                  PropTypes.shape({
-                    id: PropTypes.string,
-                    label: PropTypes.string,
-                  }),
-                ]),
-              }),
-              PropTypes.object,
-            ])
-          ),
-        })
-      ),
-      operator: PropTypes.string,
-    }),
-    enabledDefault: PropTypes.bool,
-  }),
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.
-
    */
   /**@ts-ignore */
   inputConfig: PropTypes.shape({
@@ -259,20 +253,32 @@ ConditionBuilder.propTypes = {
    */
   onAddItem: PropTypes.func,
   /**
+   * Called with the full new state on every change. Use with `value` for
+   * controlled mode, or standalone instead of `getConditionState`.
+   */
+  onChange: PropTypes.func,
+  /**
    * this is an optional callback triggered before removing any condition , subgroup, group or action.
    * User can optionally perform any validation and can stop remove action if they return back {preventRemove:true}
    */
   onRemoveItem: PropTypes.func,
 
   /**
-   * This will enable search in option popovers when option list length is more than this threshold
+   * This will enable search in option popovers when option list length is more than this threshold.
+   * Defaults to 4 when not provided.
    */
-  popOverSearchThreshold: PropTypes.number.isRequired,
+  popOverSearchThreshold: PropTypes.number,
 
   /**
    * Whether the conditionBuilder should be readOnly
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * When false, the builder starts behind the "Add condition" button even
+   * if value contains groups. Defaults to true.
+   */
+  startActive: PropTypes.bool,
 
   /**
    * Provide a label to the button that starts condition builder
@@ -293,14 +299,22 @@ ConditionBuilder.propTypes = {
   /**
    * Optional prop, if you need to pass translations to the texts on the component instead of the defined defaults.
    * This callback function will receive the message id and you need to return the corresponding text for that id.
-   
    */
   /**@ts-ignore */
   translateWithId: PropTypes.func,
 
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * Seed state or controlled state for the builder. When passed alongside
+   * `onChange`, updates to `value` from outside will sync the builder.
+   * Use without `onChange` for a one-time seed (uncontrolled).
+   */
+  /**@ts-ignore */
+  value: PropTypes.object,
+
   /**
    * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */
   variant: PropTypes.oneOf(['Non-Hierarchical', 'Hierarchical']),
+
+  ...deprecatedProps,
 };

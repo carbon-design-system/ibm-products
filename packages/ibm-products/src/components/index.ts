@@ -47,7 +47,6 @@ export * from './WebTerminal';
 export { AddSelectData } from '@carbon/ibm-products-utilities';
 export type {
   AddSelectItem,
-  ItemDetailEntry,
   ItemDetails,
   ItemStatus,
   SearchOptions,
@@ -84,7 +83,6 @@ export {
   useFeatureFlags as preview__useFeatureFlags,
 } from './FeatureFlags';
 export * as preview__PageHeader from './PageHeader/next';
-export * as preview__Card from './Card/next';
 
 export {
   Tearsheet as preview__Tearsheet,
@@ -112,6 +110,7 @@ export type {
   AddSelectProps as preview__AddSelectProps,
   AddSelectComponentType,
   AddSelectBodyProps,
+  AddSelectContentProps,
   AddSelectRowProps,
   AddSelectContextType,
 } from './AddSelect/next';
@@ -152,6 +151,10 @@ export {
 export { CoachmarkStack as previewCandidate__CoachmarkStack } from './CoachmarkStack';
 export { ConditionBuilder as previewCandidate__ConditionBuilder } from './ConditionBuilder';
 export * from './ConditionBuilder/ConditionBuilder.types';
+export {
+  ConditionBuilderContext,
+  getEmptyState,
+} from './ConditionBuilder/ConditionBuilderContext/ConditionBuilderProvider';
 export {
   DataSpreadsheet as previewCandidate__DataSpreadsheet,
   type DataSpreadsheetProps,

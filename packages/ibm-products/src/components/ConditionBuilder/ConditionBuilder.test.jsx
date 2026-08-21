@@ -494,11 +494,6 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', async () => {
-    render(<ConditionBuilder data-testid={dataTestId} {...defaultProps} />);
-    screen.getByTestId(dataTestId);
-  });
-
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<ConditionBuilder ref={ref} {...defaultProps} />);
@@ -2132,7 +2127,7 @@ describe(componentName, () => {
   });
 
   //for Hierarchical variant
-  it('add and remove conditions using keyboard', async () => {
+  it('add and remove conditions using keyboard (Hierarchical)', async () => {
     render(
       <ConditionBuilder
         {...defaultProps}
@@ -2372,5 +2367,335 @@ describe(componentName, () => {
     expect(
       document.querySelector(`[role="row"][aria-level="2"][aria-posinset="1"]`)
     ).toHaveFocus();
+  });
+
+  // ─── value / onChange / startActive prop tests ───────────────────────────
+
+  describe('value prop (seed)', () => {
+    // Shared seed fixture — used across all value-prop tests.
+    const seedState = {
+      operator: 'or',
+      groups: [
+        {
+          groupOperator: 'and',
+          statement: 'ifAll',
+          id: 'seed-group-1',
+          conditions: [
+            {
+              property: 'continent',
+              operator: 'is',
+              value: { label: 'Asia', id: 'Asia' },
+              id: 'seed-cond-1',
+            },
+          ],
+        },
+      ],
+    };
+
+    it('auto-activates and renders pre-populated conditions when value has groups (startActive omitted)', () => {
+      // startActive defaults to true → builder should show immediately
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+        />
+      );
+
+      expect(
+        document.querySelector(`.${blockClass}__addConditionText-button`)
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Asia' })).toBeVisible();
+    });
+
+    it('value seed only (no onChange) — builder is still fully editable', async () => {
+      // When only value is passed (no onChange), the builder owns its state
+      // from mount. Edits must be reflected in the UI.
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+        />
+      );
+
+      // Delete the seeded condition
+      const closeButton = document.querySelector(
+        `.${blockClass}__close-condition`
+      );
+      expect(closeButton).toBeInTheDocument();
+      await act(() => userEvent.click(closeButton));
+
+      // The condition should be gone from the UI
+      expect(
+        screen.queryByRole('button', { name: 'Asia' })
+      ).not.toBeInTheDocument();
+    });
+
+    it('value seed + onChange (void) — user edits update the UI and call onChange', async () => {
+      // The key regression: value + onChange where onChange does NOT call
+      // setState (void return). The builder must own its state — edits should
+      // still update the UI, and onChange must be called with the new state.
+      const onChange = jest.fn(); // void — does not feed state back
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+          onChange={onChange}
+        />
+      );
+
+      const closeButton = document.querySelector(
+        `.${blockClass}__close-condition`
+      );
+      await act(() => userEvent.click(closeButton));
+
+      // UI must reflect the deletion even though onChange is void
+      expect(
+        screen.queryByRole('button', { name: 'Asia' })
+      ).not.toBeInTheDocument();
+      // onChange must have been called with the state after deletion
+      expect(onChange).toHaveBeenCalledTimes(1);
+      const newState = onChange.mock.calls[0][0];
+      expect(newState.groups).toHaveLength(0);
+    });
+
+    it('onChange called with updated state on every user interaction', async () => {
+      // onChange should fire every time state mutates, not just on delete.
+      const onChange = jest.fn();
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputConfigOptionType}
+          value={seedState}
+          onChange={onChange}
+        />
+      );
+
+      // Change the value of the existing condition
+      await act(() =>
+        userEvent.click(screen.getByRole('button', { name: 'Asia' }))
+      );
+      await act(() =>
+        userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+      );
+
+      expect(onChange).toHaveBeenCalled();
+      const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
+      expect(lastCall.groups[0].conditions[0].value).toMatchObject({
+        id: 'Africa',
+        label: 'Africa',
+      });
+    });
+
+    it('external value reference change syncs internal state (reset/update pattern)', () => {
+      // When the parent passes a NEW value reference, the builder should sync
+      // its internal state — enabling Reset / Update buttons in a wrapper.
+      const updatedState = {
+        ...seedState,
+        groups: [
+          {
+            ...seedState.groups[0],
+            conditions: [
+              {
+                ...seedState.groups[0].conditions[0],
+                value: { label: 'Europe', id: 'Europe' },
+              },
+            ],
+          },
+        ],
+      };
+
+      const onChange = jest.fn();
+      const { rerender } = render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+          onChange={onChange}
+        />
+      );
+
+      expect(screen.getByRole('button', { name: 'Asia' })).toBeVisible();
+
+      // Pass a new object reference → builder should sync
+      rerender(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={updatedState}
+          onChange={onChange}
+        />
+      );
+
+      expect(screen.getByRole('button', { name: 'Europe' })).toBeVisible();
+      expect(
+        screen.queryByRole('button', { name: 'Asia' })
+      ).not.toBeInTheDocument();
+    });
+
+    it('same value reference on re-render does NOT reset user edits', async () => {
+      // If the parent re-renders but passes the same value reference,
+      // user edits should NOT be overwritten.
+      const onChange = jest.fn();
+      const { rerender } = render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+          onChange={onChange}
+        />
+      );
+
+      // Delete the condition
+      const closeButton = document.querySelector(
+        `.${blockClass}__close-condition`
+      );
+      await act(() => userEvent.click(closeButton));
+      expect(
+        screen.queryByRole('button', { name: 'Asia' })
+      ).not.toBeInTheDocument();
+
+      // Re-render with the SAME seedState reference → should NOT restore the deleted condition
+      rerender(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+          onChange={onChange}
+        />
+      );
+
+      expect(
+        screen.queryByRole('button', { name: 'Asia' })
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('getConditionState callback', () => {
+    it('calls getConditionState with updated state on every condition change', async () => {
+      const getConditionState = jest.fn();
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputConfigOptionType}
+          getConditionState={getConditionState}
+        />
+      );
+
+      await act(() => userEvent.click(screen.getByText('Add condition')));
+      await act(() =>
+        userEvent.click(screen.getByRole('option', { name: 'Continent' }))
+      );
+      await act(() =>
+        userEvent.click(screen.getByRole('option', { name: 'is' }))
+      );
+      await act(() =>
+        userEvent.click(screen.getByRole('option', { name: 'Africa' }))
+      );
+
+      expect(screen.getByRole('button', { name: 'Africa' })).toBeVisible();
+      expect(getConditionState).toHaveBeenCalled();
+      const lastCall =
+        getConditionState.mock.calls[
+          getConditionState.mock.calls.length - 1
+        ][0];
+      expect(lastCall.groups[0].conditions[0].value).toMatchObject({
+        id: 'Africa',
+        label: 'Africa',
+      });
+    });
+  });
+
+  describe('startActive prop', () => {
+    const seedState = {
+      operator: 'or',
+      groups: [
+        {
+          groupOperator: 'and',
+          statement: 'ifAll',
+          id: 'sa-group-1',
+          conditions: [
+            {
+              property: 'continent',
+              operator: 'is',
+              value: { label: 'Asia', id: 'Asia' },
+              id: 'sa-cond-1',
+            },
+          ],
+        },
+      ],
+    };
+
+    it('hides the builder and shows Add condition button when startActive={false}', () => {
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+          startActive={false}
+        />
+      );
+
+      expect(
+        document.querySelector(`.${blockClass}__addConditionText-button`)
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'Asia' })
+      ).not.toBeInTheDocument();
+    });
+
+    it('reveals the seeded state after the user clicks Add condition when startActive={false}', async () => {
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+          startActive={false}
+        />
+      );
+
+      await act(() =>
+        userEvent.click(
+          document.querySelector(`.${blockClass}__addConditionText-button`)
+        )
+      );
+
+      expect(screen.getByRole('button', { name: 'Asia' })).toBeVisible();
+      expect(
+        document.querySelector(`.${blockClass}__addConditionText-button`)
+      ).not.toBeInTheDocument();
+    });
+
+    it('onChange is still called after user edits when startActive={false}', async () => {
+      const onChange = jest.fn();
+      render(
+        <ConditionBuilder
+          {...defaultProps}
+          inputConfig={inputData}
+          value={seedState}
+          startActive={false}
+          onChange={onChange}
+        />
+      );
+
+      // Activate
+      await act(() =>
+        userEvent.click(
+          document.querySelector(`.${blockClass}__addConditionText-button`)
+        )
+      );
+
+      // Delete the seeded condition
+      const closeButton = document.querySelector(
+        `.${blockClass}__close-condition`
+      );
+      await act(() => userEvent.click(closeButton));
+
+      expect(onChange).toHaveBeenCalled();
+      const newState = onChange.mock.calls[onChange.mock.calls.length - 1][0];
+      expect(newState.groups).toHaveLength(0);
+    });
   });
 });

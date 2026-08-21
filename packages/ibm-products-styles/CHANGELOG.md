@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.93.0-rc.0`
+## `@carbon/ibm-products-styles@2.93.0`
 ### Bug fixes :bug:
 - fix(tearsheet): horizontal scroll not working (#9778)
 - fix(preview-pageheader): fix tags spacing when tabs are absent (#9775)

@@ -127,6 +127,55 @@ describe('PageHeader', () => {
       const pageHeaderOuter = screen.getByRole('banner');
       expect(pageHeaderOuter).toHaveClass('custom-class');
     });
+
+    it('should apply fullWidth to internal grids when fullWidthGrid=true', () => {
+      const { container } = render(
+        <PageHeader.Root fullWidthGrid role="banner">
+          <PageHeader.BreadcrumbBar>
+            <Breadcrumb>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            </Breadcrumb>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content title="title" />
+          <PageHeader.TabBar />
+        </PageHeader.Root>
+      );
+      // All three internal grids should carry the Carbon full-width class
+      const fullWidthGrids = container.querySelectorAll(
+        `.${carbonPrefix}--css-grid--full-width`
+      );
+      expect(fullWidthGrids.length).toBeGreaterThanOrEqual(3);
+    });
+
+    it('should apply --width--xl class when fullWidthGrid="xl"', () => {
+      const { container } = render(
+        <PageHeader.Root fullWidthGrid="xl" role="banner">
+          <PageHeader.Content title="title" />
+        </PageHeader.Root>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--page-header--width--xl`
+      );
+    });
+
+    it('should apply narrow to internal grids when narrowGrid=true', () => {
+      const { container } = render(
+        <PageHeader.Root narrowGrid role="banner">
+          <PageHeader.BreadcrumbBar>
+            <Breadcrumb>
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+            </Breadcrumb>
+          </PageHeader.BreadcrumbBar>
+          <PageHeader.Content title="title" />
+          <PageHeader.TabBar />
+        </PageHeader.Root>
+      );
+      // All three internal grids should carry the Carbon narrow class
+      const narrowGrids = container.querySelectorAll(
+        `.${carbonPrefix}--css-grid--narrow`
+      );
+      expect(narrowGrids.length).toBeGreaterThanOrEqual(3);
+    });
   });
 
   describe('PageHeader.BreadcrumbBar component api', () => {

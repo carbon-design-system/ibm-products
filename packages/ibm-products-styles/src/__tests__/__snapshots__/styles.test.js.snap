@@ -8522,6 +8522,9 @@ button.c4p--add-select__global-filter-toggle--open {
   inset-block-start: var(--c4p-page-header-header-top);
   overflow-x: clip;
 }
+.c4p--page-header__next.c4p--page-header.c4p--page-header--width--xl {
+  padding-inline: 2rem;
+}
 .c4p--page-header__next.c4p--page-header.c4p--page-header--disable-sticky-tab-bar {
   position: static;
   padding-block-start: 2.5rem;

@@ -865,7 +865,7 @@ All sub-components are accessed directly on the namespace object, e.g.
 | `collapseHeader`                  | No direct equivalent — scroll the page programmatically                                                   |
 | `collapseTitle`                   | Removed — title collapses automatically via scroll observation                                            |
 | `withoutBackground`               | No direct equivalent — style via CSS custom properties                                                    |
-| `fullWidthGrid` / `narrowGrid`    | Wrap with Carbon `<Grid>` / `<Column>` as needed                                                          |
+| `fullWidthGrid` / `narrowGrid`    | `<PageHeader.Root fullWidthGrid narrowGrid>` — values propagate to all internal grids via context         |
 | `enableBreadcrumbScroll`          | Removed — breadcrumb bar is always sticky                                                                 |
 | `allTagsModalTitle/SearchLabel/…` | Pass those props directly to your custom `<PageHeader.TagOverflow>` trigger                               |
 

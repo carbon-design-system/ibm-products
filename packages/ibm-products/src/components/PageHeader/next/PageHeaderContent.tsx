@@ -80,7 +80,13 @@ export const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs, setPageActionsInstance, observerState } = usePageHeader();
+  const {
+    setRefs,
+    setPageActionsInstance,
+    observerState,
+    fullWidthGrid,
+    narrowGrid,
+  } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -108,7 +114,7 @@ export const PageHeaderContent = React.forwardRef<
 
   return (
     <Section as="div" className={classNames} ref={componentRef} {...other}>
-      <Grid>
+      <Grid fullWidth={!!fullWidthGrid} narrow={narrowGrid}>
         <Column lg={16} md={8} sm={4}>
           <div className={`${blockClass}__content__title-wrapper`}>
             <div className={`${blockClass}__content__start`}>

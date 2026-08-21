@@ -245,6 +245,8 @@ Default.args = {
   title:
     'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
   renderBreadcrumbIcon: true,
+  fullWidthGrid: false,
+  narrowGrid: false,
 };
 
 Default.argTypes = {
@@ -278,6 +280,20 @@ Default.argTypes = {
   renderBreadcrumbIcon: {
     description:
       'Specify whether to render the BreadcrumbBar icon (storybook control only)',
+    control: {
+      type: 'boolean',
+    },
+  },
+  fullWidthGrid: {
+    description:
+      'Apply Carbon full-width grid mode to all sub-component grids. Pass `true` for full width or `"xl"` for full width with xl padding override.',
+    control: {
+      type: 'select',
+      options: [false, true, 'xl'],
+    },
+  },
+  narrowGrid: {
+    description: 'Apply Carbon narrow grid mode to all sub-component grids.',
     control: {
       type: 'boolean',
     },

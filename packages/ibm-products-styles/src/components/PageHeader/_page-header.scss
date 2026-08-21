@@ -724,6 +724,11 @@ $duration: 1000ms;
     overflow-x: clip;
   }
 
+  // fullWidthGrid='xl': extra inline padding to match deprecated behavior
+  &.#{$block-class}.#{$block-class}--width--xl {
+    padding-inline: $spacing-07;
+  }
+
   // When disableStickyTabBar is true, remove sticky positioning from root
   // This allows breadcrumb to stick to viewport while tab bar scrolls normally
   &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar {

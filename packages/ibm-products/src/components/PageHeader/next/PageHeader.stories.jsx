@@ -542,9 +542,11 @@ export const TabBarWithTabsAndTags = (args) => (
                 renderOverflowTag={(
                   hiddenItems,
                   handleOverflowClick,
-                  openPopover
+                  openPopover,
+                  triggerId
                 ) => (
                   <OperationalTag
+                    id={triggerId}
                     onClick={handleOverflowClick}
                     aria-expanded={openPopover}
                     aria-label={`Show ${hiddenItems.length} more tags`}
@@ -664,9 +666,11 @@ export const Compact = (args) => (
             renderOverflowTag={(
               hiddenItems,
               handleOverflowClick,
-              openPopover
+              openPopover,
+              triggerId
             ) => (
               <OperationalTag
+                id={triggerId}
                 onClick={handleOverflowClick}
                 aria-expanded={openPopover}
                 aria-label={`Show ${hiddenItems.length} more tags`}

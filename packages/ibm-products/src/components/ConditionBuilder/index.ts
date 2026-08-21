@@ -7,3 +7,4 @@
 
 export { ConditionBuilder } from './ConditionBuilder';
 export * from './ConditionBuilder.types';
+export { getEmptyState } from './ConditionBuilderContext/ConditionBuilderProvider';

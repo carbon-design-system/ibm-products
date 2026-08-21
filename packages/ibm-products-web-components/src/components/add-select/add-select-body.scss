@@ -21,6 +21,7 @@ $prefix: 'c4p';
 /* Web Component specific overrides */
 :host(#{$prefix}-add-select-body) {
   display: block;
+  block-size: 100%;
 
   .#{$block-class__next}__body {
     display: flex;
@@ -93,5 +94,9 @@ $prefix: 'c4p';
   .#{$block-class__next}-list-body {
     display: flex;
     flex-direction: column;
+
+    &--horizontal {
+      flex-direction: row;
+    }
   }
 }

@@ -41,6 +41,7 @@ export const translationsObject = {
   addConditionRowText: 'Add condition row',
   startText: 'Start',
   endText: 'End',
+  searchPropertiesText: 'Search properties',
   clearSearchText: 'Clear search input',
   actionsText: 'Actions',
   then: 'then',
@@ -55,4 +56,5 @@ export const translationsObject = {
   addOperatorText: 'Add operator',
   addValueText: 'Add value',
   conditionBuilderHierarchicalText: 'Condition Builder Hierarchical',
+  conditionRemovedText: 'Condition removed',
 };

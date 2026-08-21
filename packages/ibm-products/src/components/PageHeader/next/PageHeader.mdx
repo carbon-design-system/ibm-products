@@ -734,9 +734,11 @@ return (
             renderOverflowTag={(
               hiddenItems,
               handleOverflowClick,
-              openPopover
+              openPopover,
+              triggerId
             ) => (
               <OperationalTag
+                id={triggerId}
                 onClick={handleOverflowClick}
                 aria-expanded={openPopover}
                 text={`+${hiddenItems.length}`}

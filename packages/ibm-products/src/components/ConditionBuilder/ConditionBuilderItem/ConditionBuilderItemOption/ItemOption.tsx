@@ -43,10 +43,9 @@ export const ItemOption = ({
 }: ItemOptionProps) => {
   const { popOverSearchThreshold } = useContext(ConditionBuilderContext);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [propertyText, clearSearchText] = useTranslations([
-    'propertyText',
-    'clearSearchText',
-  ]);
+  const [propertyText, clearSearchText, searchPropertiesText] = useTranslations(
+    ['propertyText', 'clearSearchText', 'searchPropertiesText']
+  );
   const { conditionBuilderRef } = useContext(ConditionBuilderContext);
   const allOptions = config?.options;
   const [searchValue, setSearchValue] = useState('');
@@ -108,7 +107,8 @@ export const ItemOption = ({
         <div className={`${blockClass}__item-option__search`}>
           <Search
             size="sm"
-            labelText={clearSearchText}
+            labelText={searchPropertiesText}
+            placeholder=""
             closeButtonLabelText={clearSearchText}
             onChange={onSearchChangeHandler}
             onKeyDown={(evt: React.KeyboardEvent<HTMLInputElement>) => {

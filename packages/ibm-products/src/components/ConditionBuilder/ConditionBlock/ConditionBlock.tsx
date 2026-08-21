@@ -276,6 +276,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         <ConditionBuilderItem
           label={group.statement}
           title={conditionText}
+          dialogAriaLabel={`${conditionText} — ${conditionIndex + 1}`}
           data-name="connectorField"
           popOverClassName={`${blockClass}__gap ${blockClass}__connector`}
           className={`${blockClass}__statement-button`}

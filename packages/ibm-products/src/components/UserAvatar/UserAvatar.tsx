@@ -15,12 +15,9 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
-import { Tooltip, usePrefix } from '@carbon/react';
+import { PopoverAlignment, Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 import { User } from '@carbon/react/icons';
-import '../../global/js/utils/props-helper';
-// Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--user-avatar`;
@@ -45,16 +42,6 @@ type BackgroundColor =
   | 'order-11-purple'
   | 'order-12-teal';
 type Size = 'xl' | 'lg' | 'md' | 'sm';
-type TooltipAlignment =
-  | 'top'
-  | 'top-left'
-  | 'top-right'
-  | 'bottom'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'left'
-  | 'right';
-
 type ImageProps =
   | {
       /**
@@ -96,7 +83,7 @@ type UserAvatarBaseProps = {
   /**
    * Specify how the trigger should align with the tooltip
    */
-  tooltipAlignment?: TooltipAlignment;
+  tooltipAlignment?: PopoverAlignment;
   /**
    * Pass in the display name to have it shown on hover
    */
@@ -269,11 +256,23 @@ UserAvatar.propTypes = {
     'top',
     'top-left',
     'top-right',
+    'top-start',
+    'top-end',
     'bottom',
     'bottom-left',
     'bottom-right',
+    'bottom-start',
+    'bottom-end',
     'left',
+    'left-bottom',
+    'left-top',
+    'left-start',
+    'left-end',
     'right',
+    'right-bottom',
+    'right-top',
+    'right-start',
+    'right-end',
   ]),
   /**
    * Pass in the display name to have it shown on hover

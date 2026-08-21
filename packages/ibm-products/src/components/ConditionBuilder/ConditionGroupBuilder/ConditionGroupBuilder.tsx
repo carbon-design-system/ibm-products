@@ -475,6 +475,7 @@ const ConditionGroupBuilder = ({
             <ConditionBuilderItem
               label={group.statement}
               title={conditionText}
+              dialogAriaLabel={`${conditionText} — ${conditionBuilderGroupText} ${Math.ceil(aria.posinset / 2)}`}
               data-name="connectorField"
               popOverClassName={`${blockClass}__gap ${blockClass}__connector`}
               className={`${blockClass}__statement-button`}

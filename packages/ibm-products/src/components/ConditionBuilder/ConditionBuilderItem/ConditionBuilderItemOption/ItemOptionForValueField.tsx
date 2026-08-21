@@ -206,7 +206,7 @@ export const ItemOptionForValueField = ({
         aria-label={getAriaLabel()}
         role="listbox"
         data-multi-select={multiSelectable}
-        aria-multiselectable={multiSelectable || undefined}
+        aria-multiselectable={multiSelectable ? true : undefined}
       >
         {filteredItems?.map((option) => {
           const isSelected = selection

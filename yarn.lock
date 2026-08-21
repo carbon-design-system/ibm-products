@@ -2179,7 +2179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/ibm-products-styles@npm:^2.92.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.93.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -2188,7 +2188,7 @@ __metadata:
     cross-env: "npm:^10.0.0"
     glob: "npm:^13.0.0"
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.55.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.56.0-rc.0"
     jest-environment-jsdom: "npm:^29.7.0"
     npm-run-all2: "npm:^8.0.0"
     rimraf: "npm:^6.0.1"
@@ -2208,7 +2208,7 @@ __metadata:
   resolution: "@carbon/ibm-products-utilities@workspace:packages/ibm-products-utilities"
   dependencies:
     jest: "npm:^29.7.0"
-    jest-config-ibm-cloud-cognitive: "npm:^1.55.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.56.0-rc.0"
     npm-run-all2: "npm:^8.0.0"
     rimraf: "npm:^6.0.1"
     typescript: "npm:^6.0.0"
@@ -2223,7 +2223,7 @@ __metadata:
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.22.0"
     "@carbon-labs/wc-resizer": "npm:^0.3.0"
-    "@carbon/ibm-products-styles": "npm:^2.92.0"
+    "@carbon/ibm-products-styles": "npm:^2.93.0-rc.0"
     "@carbon/ibm-products-utilities": "workspace:*"
     "@carbon/icon-helpers": "npm:^10.77.0"
     "@carbon/icons": "npm:^11.83.0"
@@ -2238,7 +2238,7 @@ __metadata:
     "@lit-labs/signals": "npm:^0.3.0"
     "@lit/context": "npm:^1.1.5"
     "@mordech/vite-lit-loader": "npm:^0.40.0"
-    "@open-wc/testing": "npm:^4.0.0"
+    "@open-wc/testing": "npm:^5.0.0"
     "@stackblitz/sdk": "npm:^1.11.0"
     "@storybook/addon-a11y": "npm:^10.3.5"
     "@storybook/addon-docs": "npm:^10.3.5"
@@ -2248,7 +2248,7 @@ __metadata:
     "@vitest/browser": "npm:^3.2.0"
     "@vitest/coverage-v8": "npm:^3.2.0"
     autoprefixer: "npm:^10.4.20"
-    c8: "npm:^11.0.0"
+    c8: "npm:^12.0.0"
     cssnano: "npm:^7.0.6"
     eslint: "npm:^9.14.0"
     eslint-config-carbon: "npm:^3.25.0"
@@ -2289,7 +2289,7 @@ __metadata:
     "@carbon-labs/react-resizer": "npm:^0.25.0"
     "@carbon/charts-react": "npm:^1.27.16"
     "@carbon/feature-flags": "npm:^1.4.0"
-    "@carbon/ibm-products-styles": "npm:^2.92.0"
+    "@carbon/ibm-products-styles": "npm:^2.93.0-rc.0"
     "@carbon/ibm-products-utilities": "workspace:*"
     "@carbon/styles": "npm:^1.110.1"
     "@carbon/telemetry": "npm:^0.1.0"
@@ -2311,7 +2311,7 @@ __metadata:
     "@types/react-table": "npm:^7.7.20"
     "@vitejs/plugin-react": "npm:^5.0.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.54.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.55.0-rc.0"
     change-case: "npm:5.4.4"
     classnames: "npm:^2.5.1"
     copyfiles: "npm:^2.4.1"
@@ -2319,7 +2319,7 @@ __metadata:
     fs-extra: "npm:^11.3.0"
     glob: "npm:^13.0.0"
     jest: "npm:^30.0.5"
-    jest-config-ibm-cloud-cognitive: "npm:^1.55.0"
+    jest-config-ibm-cloud-cognitive: "npm:^1.56.0-rc.0"
     jest-environment-jsdom: "npm:^30.0.5"
     namor: "npm:^1.1.2"
     npm-run-all2: "npm:^8.0.0"
@@ -6470,13 +6470,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@open-wc/semantic-dom-diff@npm:^0.20.0":
-  version: 0.20.1
-  resolution: "@open-wc/semantic-dom-diff@npm:0.20.1"
+"@open-wc/semantic-dom-diff@npm:^0.21.0":
+  version: 0.21.0
+  resolution: "@open-wc/semantic-dom-diff@npm:0.21.0"
   dependencies:
     "@types/chai": "npm:^4.3.1"
-    "@web/test-runner-commands": "npm:^0.9.0"
-  checksum: 10/09401877c0c01d35d165603c92ce366cfdb8a344ad8316c82993f186c04576465564536d4f53190a99d16e95529091e0a28e4e3ea15ec97eb3c9259801fe0493
+    "@web/test-runner-commands": "npm:^1.0.0"
+  checksum: 10/9605c8b66e52fcae62a951e601876e5f9be12c8e74982678e3159369a8e4e64ccf401ae2053baef89f7c93a98ba7aece80a72b7df926afee4d3dbf6903f033d1
   languageName: node
   linkType: hard
 
@@ -6491,17 +6491,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@open-wc/testing@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@open-wc/testing@npm:4.0.0"
+"@open-wc/testing@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@open-wc/testing@npm:5.0.0"
   dependencies:
     "@esm-bundle/chai": "npm:^4.3.4-fix.0"
-    "@open-wc/semantic-dom-diff": "npm:^0.20.0"
+    "@open-wc/semantic-dom-diff": "npm:^0.21.0"
     "@open-wc/testing-helpers": "npm:^3.0.0"
     "@types/chai-dom": "npm:^1.11.0"
     "@types/sinon-chai": "npm:^3.2.3"
     chai-a11y-axe: "npm:^1.5.0"
-  checksum: 10/5a09f87485409c7ed30ae274dcba9368f45d85dcb7316f5aedd7868eb31edd02017ed8733c91b458fcd88403627c0a176b29558f3604ba89eeb72487bc0e3ebd
+  checksum: 10/bb8c1791cf998527aa5d6fd9b62d43d4a38beeee3c9c8561634468c055937c198dbd84ef502baa757d57bc37b8c96d1e0f8631dad8b74303ae7aa1508939121d
   languageName: node
   linkType: hard
 
@@ -9471,64 +9471,64 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web/browser-logs@npm:^0.4.0":
-  version: 0.4.1
-  resolution: "@web/browser-logs@npm:0.4.1"
+"@web/browser-logs@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@web/browser-logs@npm:1.0.0"
   dependencies:
     errorstacks: "npm:^2.4.1"
-  checksum: 10/668d12b6ff50f356c9352c2437714a0d897d04688e314b42a01219e611a0393eb792867fbcf8da0e25e2f8565e194dfd243ea16ccba1331a57a924b1671d0ea9
+  checksum: 10/55101c97e157d33756cdb7857739b5eb6bdea88f9dbce045ccf1cb479b277e3cd9d0378916f74d977e46ca1f004f78808db2688efe12c308c9bc85cd47e2f949
   languageName: node
   linkType: hard
 
-"@web/dev-server-core@npm:^0.7.3":
-  version: 0.7.5
-  resolution: "@web/dev-server-core@npm:0.7.5"
+"@web/dev-server-core@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@web/dev-server-core@npm:1.0.1"
   dependencies:
     "@types/koa": "npm:^2.11.6"
     "@types/ws": "npm:^7.4.0"
-    "@web/parse5-utils": "npm:^2.1.0"
+    "@web/parse5-utils": "npm:^3.0.0"
     chokidar: "npm:^4.0.1"
     clone: "npm:^2.1.2"
     es-module-lexer: "npm:^1.0.0"
     get-stream: "npm:^6.0.0"
     is-stream: "npm:^2.0.0"
     isbinaryfile: "npm:^5.0.0"
-    koa: "npm:^2.13.0"
+    koa: "npm:^2.16.1"
     koa-etag: "npm:^4.0.0"
     koa-send: "npm:^5.0.1"
     koa-static: "npm:^5.0.0"
     lru-cache: "npm:^8.0.4"
     mime-types: "npm:^2.1.27"
     parse5: "npm:^6.0.1"
-    picomatch: "npm:^2.2.2"
+    picomatch: "npm:^2.3.2"
     ws: "npm:^7.5.10"
-  checksum: 10/86b731b069df5807bed8e2bfe535d4b427e30e27c36d0cc0c63c838d99cf06ea760d3c1659dec479a3a96956fe066fddf40bea602e60b1d9404c7b7b2a4f8145
+  checksum: 10/7c21dbd0be7c99e3afa625a2ecbff23a2d73e1711f0f4771177b92fba5c441b5800c5efa9874d4c3b910cb6f737a656e1476d2ef509bf448c7aa3134731c2065
   languageName: node
   linkType: hard
 
-"@web/parse5-utils@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@web/parse5-utils@npm:2.1.0"
+"@web/parse5-utils@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@web/parse5-utils@npm:3.0.0"
   dependencies:
     "@types/parse5": "npm:^6.0.1"
     parse5: "npm:^6.0.1"
-  checksum: 10/c701061a162393e67fca053590c97303d85f57d4712b4a0b79401f6296d6c606af40b9faccd51b1e70145ae57e2ff51a04e8a611a1e9b6c4183eaf6285e3d8ce
+  checksum: 10/22b201896070845d2f8388dea87f5240c86a081f4181b48241e22fbf10aba340e9e220d8a701898eb2b9d6a9cf49ed4a5baded65c612b9d16a4757f929ce792c
   languageName: node
   linkType: hard
 
-"@web/test-runner-commands@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "@web/test-runner-commands@npm:0.9.0"
+"@web/test-runner-commands@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@web/test-runner-commands@npm:1.0.1"
   dependencies:
-    "@web/test-runner-core": "npm:^0.13.0"
+    "@web/test-runner-core": "npm:^1.0.0"
     mkdirp: "npm:^1.0.4"
-  checksum: 10/1026fc080bcb7b5a46dbbc2258d64b66ff8a167e57234e53f831a6f570ba5fc4af414f24cbba75d94b97911cabd3975d469483e838540af9ad2c26e65690ad47
+  checksum: 10/956cdf1b0879ef997ae12affd484cf52502871a6bc6fb4d1e509b27cf510c6aecd3de7df1df54567c9117a41a838f0ce9118d8bc6749c61a77edc0e9b6bd1d8e
   languageName: node
   linkType: hard
 
-"@web/test-runner-core@npm:^0.13.0":
-  version: 0.13.4
-  resolution: "@web/test-runner-core@npm:0.13.4"
+"@web/test-runner-core@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@web/test-runner-core@npm:1.0.0"
   dependencies:
     "@babel/code-frame": "npm:^7.12.11"
     "@types/babel__code-frame": "npm:^7.0.2"
@@ -9537,8 +9537,8 @@ __metadata:
     "@types/debounce": "npm:^1.2.0"
     "@types/istanbul-lib-coverage": "npm:^2.0.3"
     "@types/istanbul-reports": "npm:^3.0.0"
-    "@web/browser-logs": "npm:^0.4.0"
-    "@web/dev-server-core": "npm:^0.7.3"
+    "@web/browser-logs": "npm:^1.0.0"
+    "@web/dev-server-core": "npm:^1.0.0"
     chokidar: "npm:^4.0.1"
     cli-cursor: "npm:^3.1.0"
     co-body: "npm:^6.1.0"
@@ -9554,9 +9554,9 @@ __metadata:
     nanocolors: "npm:^0.2.1"
     nanoid: "npm:^3.1.25"
     open: "npm:^8.0.2"
-    picomatch: "npm:^2.2.2"
+    picomatch: "npm:^2.3.2"
     source-map: "npm:^0.7.3"
-  checksum: 10/181b2554f1d29c534d8eb5be910fe054db4fbd522741762e5c187cf82b3728eca695328df4247ea6709b0286838273c3c4bbd69fd1a21a87535faf7a25cc27d2
+  checksum: 10/8f37789fb036a7f6069796e282a536fd3d850a2c512d3cd41f6251e3c3691e4058ad2079402e8084465099819c59a779bf8a70ecdb31f5050448243b62096f31
   languageName: node
   linkType: hard
 
@@ -10619,7 +10619,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@npm:^0.54.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@npm:^0.55.0-rc.0, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -10973,9 +10973,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"c8@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "c8@npm:11.0.0"
+"c8@npm:^12.0.0":
+  version: 12.0.0
+  resolution: "c8@npm:12.0.0"
   dependencies:
     "@bcoe/v8-coverage": "npm:^1.0.1"
     "@istanbuljs/schema": "npm:^0.1.3"
@@ -10986,7 +10986,7 @@ __metadata:
     istanbul-reports: "npm:^3.1.6"
     test-exclude: "npm:^8.0.0"
     v8-to-istanbul: "npm:^9.0.0"
-    yargs: "npm:^17.7.2"
+    yargs: "npm:^18.0.0"
     yargs-parser: "npm:^21.1.1"
   peerDependencies:
     monocart-coverage-reports: ^2
@@ -10995,7 +10995,7 @@ __metadata:
       optional: true
   bin:
     c8: bin/c8.js
-  checksum: 10/4c01de0fa49dab5b99bcb85bfff359764b7c027028f390841ece6e907c6ecb33eef8253291564665a5ddc81c39983947327bf0e12db88a8ab42fd5dffaf73b4b
+  checksum: 10/cb4b08b8170b9004766f2e51bbe41916454c0952ac5f811a11d98250fc1539704b92b65dfe6b76f1319d64d1111596b7f04fe088f6df69942345960859a65d49
   languageName: node
   linkType: hard
 
@@ -11346,22 +11346,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^15.2.0":
-  version: 15.2.0
-  resolution: "chromatic@npm:15.2.0"
+"chromatic@npm:^18.0.0":
+  version: 18.2.0
+  resolution: "chromatic@npm:18.2.0"
+  dependencies:
+    semver: "npm:^7.3.5"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+    "@chromatic-com/vitest": ^0.*.* || ^1.0.0
+  dependenciesMeta:
+    "@sentry/cli":
+      built: true
+    esbuild:
+      built: true
   peerDependenciesMeta:
     "@chromatic-com/cypress":
       optional: true
     "@chromatic-com/playwright":
       optional: true
+    "@chromatic-com/vitest":
+      optional: true
   bin:
-    chroma: dist/bin.js
-    chromatic: dist/bin.js
-    chromatic-cli: dist/bin.js
-  checksum: 10/66353aaf937897d77c95e9162169330c526ad8d07a9997190a2bb2938feabe051add65d6718c0fc2eb813f0361b828d69eff5df4513c43b672f9c8514100a556
+    chroma: dist/bin.cjs
+    chromatic: dist/bin.cjs
+    chromatic-cli: dist/bin.cjs
+  checksum: 10/09c61f0d2ce8ce16536b720cb61c1ae0666dacebf72eb740b4cae3b0c3512f1e1653238fadb91f62b9a7e05f579afd3b214fb27c68979b7b9a5ebcc7409a8e7f
   languageName: node
   linkType: hard
 
@@ -16273,7 +16283,7 @@ __metadata:
     "@types/carbon__layout": "npm:^0.0.3"
     "@typescript-eslint/eslint-plugin": "npm:^8.26.1"
     accessibility-checker: "npm:^4.0.12"
-    chromatic: "npm:^15.2.0"
+    chromatic: "npm:^18.0.0"
     commander: "npm:^14.0.0"
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^9.0.0"
@@ -17397,7 +17407,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@npm:^1.55.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@npm:^1.56.0-rc.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -17412,7 +17422,7 @@ __metadata:
     accessibility-checker: "npm:^4.0.12"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^30.0.5"
-    babel-preset-ibm-cloud-cognitive: "npm:^0.54.0"
+    babel-preset-ibm-cloud-cognitive: "npm:^0.55.0-rc.0"
     identity-obj-proxy: "npm:^3.0.0"
     jest-watch-typeahead: "npm:^3.0.0"
     sass: "npm:^1.93.2"
@@ -18738,7 +18748,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"koa@npm:^2.13.0":
+"koa@npm:^2.16.1":
   version: 2.16.4
   resolution: "koa@npm:2.16.4"
   dependencies:

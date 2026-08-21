@@ -8,6 +8,7 @@ import React, {
   type ComponentType,
   type FunctionComponent,
   useEffect,
+  useId,
   useRef,
   RefObject,
 } from 'react';
@@ -80,7 +81,13 @@ export const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs, setPageActionsInstance, observerState } = usePageHeader();
+  const {
+    setRefs,
+    setPageActionsInstance,
+    observerState,
+    fullWidthGrid,
+    narrowGrid,
+  } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -89,6 +96,8 @@ export const PageHeaderContent = React.forwardRef<
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
   const titleLines = titleTruncate ?? (contextualActions ? 1 : 2);
+  const generatedId = useId();
+  const truncatedTextId = `${blockClass}__content__title__truncatedText-${generatedId}`;
 
   useEffect(() => {
     if (componentRef?.current) {
@@ -108,13 +117,16 @@ export const PageHeaderContent = React.forwardRef<
 
   return (
     <Section as="div" className={classNames} ref={componentRef} {...other}>
-      <Grid>
+      <Grid fullWidth={!!fullWidthGrid} narrow={narrowGrid}>
         <Column lg={16} md={8} sm={4}>
           <div className={`${blockClass}__content__title-wrapper`}>
             <div className={`${blockClass}__content__start`}>
               <div className={`${blockClass}__content__title-container`}>
                 {IconElement && (
-                  <div className={`${blockClass}__content__icon`}>
+                  <div
+                    className={`${blockClass}__content__icon`}
+                    aria-hidden="true"
+                  >
                     <IconElement />
                   </div>
                 )}
@@ -124,7 +136,7 @@ export const PageHeaderContent = React.forwardRef<
                   className={`${blockClass}__content__title`}
                 >
                   <TruncatedText
-                    id={`${blockClass}__content__title__truncatedText`}
+                    id={truncatedTextId}
                     className={`${blockClass}__content__title-text`}
                     align="bottom"
                     value={title}
@@ -173,10 +185,6 @@ PageHeaderContent.propTypes = {
    * Provide an optional icon to render in front of the PageHeaderContent's title.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  /**
-   * The PageHeaderContent's subtitle
-   */
-  subtitle: PropTypes.string,
   /**
    * The PageHeaderContent's title
    */

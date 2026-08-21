@@ -104,17 +104,7 @@ export const PageHeaderBreadcrumbPageActions = ({
   }, [actions]);
 
   return (
-    <ul
-      ref={containerRef}
-      className={classNames}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        inlineSize: '50%',
-      }}
-      {...other}
-    >
+    <ul ref={containerRef} className={classNames} {...other}>
       {actions.map((item) => (
         <li key={item.id} data-id={item.id}>
           <Button
@@ -131,9 +121,7 @@ export const PageHeaderBreadcrumbPageActions = ({
         data-offset
         data-hidden
         data-floating-menu-container
-        style={{
-          position: 'relative',
-        }}
+        className={`${blockClass}__breadcrumb-page-actions__overflow-item`}
       >
         <FeatureFlags enableV12Overflowmenu>
           <OverflowMenu size={buttonSize} aria-label={overflowMenuLabel}>

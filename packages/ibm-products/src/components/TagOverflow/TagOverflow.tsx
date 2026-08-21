@@ -6,7 +6,6 @@
  */
 
 import React, {
-  ReactNode,
   RefObject,
   createElement,
   forwardRef,
@@ -54,7 +53,7 @@ export interface TagOverflowProps {
   allTagsModalAriaLabel?: string;
   allTagsModalSearchLabel?: string;
   allTagsModalSearchPlaceholderText?: string;
-  allTagsModalTarget?: ReactNode;
+  allTagsModalTarget?: HTMLElement;
   allTagsModalTitle?: string;
   autoAlign?: boolean;
   className?: string;
@@ -277,9 +276,13 @@ TagOverflow.propTypes = {
    */
   allTagsModalSearchPlaceholderText: PropTypes.string,
   /**
-   * portal target for the all tags modal
+   * DOM element to portal the all tags modal into. Defaults to `document.body`.
    */
-  allTagsModalTarget: PropTypes.node,
+  allTagsModalTarget:
+    typeof HTMLElement === 'undefined'
+      ? PropTypes.object
+      : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
+        PropTypes.instanceOf(HTMLElement),
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */

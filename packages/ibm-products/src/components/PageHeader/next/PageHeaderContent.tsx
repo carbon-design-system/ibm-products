@@ -8,6 +8,7 @@ import React, {
   type ComponentType,
   type FunctionComponent,
   useEffect,
+  useId,
   useRef,
   RefObject,
 } from 'react';
@@ -95,6 +96,8 @@ export const PageHeaderContent = React.forwardRef<
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
   const titleLines = titleTruncate ?? (contextualActions ? 1 : 2);
+  const generatedId = useId();
+  const truncatedTextId = `${blockClass}__content__title__truncatedText-${generatedId}`;
 
   useEffect(() => {
     if (componentRef?.current) {
@@ -133,7 +136,7 @@ export const PageHeaderContent = React.forwardRef<
                   className={`${blockClass}__content__title`}
                 >
                   <TruncatedText
-                    id={`${blockClass}__content__title__truncatedText`}
+                    id={truncatedTextId}
                     className={`${blockClass}__content__title-text`}
                     align="bottom"
                     value={title}

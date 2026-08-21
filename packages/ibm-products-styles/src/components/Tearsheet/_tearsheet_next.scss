@@ -463,6 +463,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   gap: $spacing-05;
   margin-block-end: $spacing-03;
 
+  &--no-content-below {
+    margin-block-end: 0;
+  }
+
   svg {
     flex-shrink: 0;
   }

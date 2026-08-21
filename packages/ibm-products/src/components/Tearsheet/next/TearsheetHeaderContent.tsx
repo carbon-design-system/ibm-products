@@ -94,7 +94,13 @@ const TearsheetHeaderContent = React.forwardRef<
         <div className={`${blockClass}__header-label`}>{label}</div>
       ) : null}
       <div className={`${blockClass}__content__title-wrapper`}>
-        <h2 className={cx(`${blockClass}__header-title`)} id={titleId}>
+        <h2
+          className={cx(`${blockClass}__header-title`, {
+            [`${blockClass}__header-title--no-content-below`]:
+              !description && !children,
+          })}
+          id={titleId}
+        >
           {titleStart ? (
             <span className={`${blockClass}__title-start`}>{titleStart}</span>
           ) : null}
@@ -116,7 +122,9 @@ const TearsheetHeaderContent = React.forwardRef<
         </h2>
       </div>
 
-      <div className={`${blockClass}__header-description`}>{description}</div>
+      {description ? (
+        <div className={`${blockClass}__header-description`}>{description}</div>
+      ) : null}
       {children && (
         <div className={`${blockClass}__header-content--extra`}>{children}</div>
       )}

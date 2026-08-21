@@ -120,7 +120,10 @@ export const PageHeaderContent = React.forwardRef<
             <div className={`${blockClass}__content__start`}>
               <div className={`${blockClass}__content__title-container`}>
                 {IconElement && (
-                  <div className={`${blockClass}__content__icon`}>
+                  <div
+                    className={`${blockClass}__content__icon`}
+                    aria-hidden="true"
+                  >
                     <IconElement />
                   </div>
                 )}

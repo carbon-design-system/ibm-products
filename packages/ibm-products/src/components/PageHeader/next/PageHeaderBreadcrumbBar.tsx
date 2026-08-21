@@ -125,20 +125,22 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
                 )}
                 {children}
               </div>
-              <div
-                className={`${blockClass}__breadcrumb__actions`}
-                role="toolbar"
-                aria-label={actionsAriaLabel}
-              >
-                <div className={contentActionsClasses}>
-                  {typeof contentActions === 'function'
-                    ? contentActions(observerState)
-                    : contentActions}
+              {(contentActions || pageActions) && (
+                <div
+                  className={`${blockClass}__breadcrumb__actions`}
+                  role="toolbar"
+                  aria-label={actionsAriaLabel}
+                >
+                  <div className={contentActionsClasses}>
+                    {typeof contentActions === 'function'
+                      ? contentActions(observerState)
+                      : contentActions}
+                  </div>
+                  {typeof pageActions === 'function'
+                    ? pageActions(observerState)
+                    : pageActions}
                 </div>
-                {typeof pageActions === 'function'
-                  ? pageActions(observerState)
-                  : pageActions}
-              </div>
+              )}
             </div>
           </Column>
         </Grid>

@@ -25,8 +25,9 @@ $block-class: #{$prefix}--set-of-tags;
     box-sizing: border-box;
     display: flex;
     white-space: nowrap;
-    // Spacing between tags.
-    gap: $spacing-03;
+    &__tag-container{
+      padding-inline: $spacing-02;
+    }
 
     &__popover-container {
       padding: 0.9rem;
@@ -84,7 +85,7 @@ $block-class: #{$prefix}--set-of-tags;
     @extend .#{$carbon-prefix}--modal-scroll-content;
 
     cds-tag {
-      margin-inline-start: 0;
+      margin: $spacing-02;
     }
   }
 }

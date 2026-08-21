@@ -40,21 +40,11 @@ const renderUsersTemplate = (args, { globals }) => {
   const theme = ['white', 'g10'].includes(globals.theme) ? 'light' : 'dark';
 
   return html`
-    <style>
-      ${styles}
-    </style>
-    <div class="example">
-      <div class="annotation parent">
-        <div class="annotation__label">Parent container</div>
-        <div class="annotation__content">
-          <set-of-users
-            theme=${theme}
-            ?condensed=${condensed}
-            .usersData=${usersData}
-          ></set-of-users>
-        </div>
-      </div>
-    </div>
+    <set-of-users
+      theme=${theme}
+      ?condensed=${condensed}
+      .usersData=${usersData}
+    ></set-of-users>
   `;
 };
 
@@ -68,6 +58,19 @@ export const SetOfUsers = {
 
 const meta = {
   title: 'Patterns/Item overflow',
+  decorators: [
+    (story: any) => html`
+      <style>
+        ${styles}
+      </style>
+      <div class="example">
+        <div class="annotation parent">
+          <div class="annotation__label">Parent container</div>
+          <div class="annotation__content">${story()}</div>
+        </div>
+      </div>
+    `,
+  ],
 };
 
 export default meta;

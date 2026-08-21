@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ForwardedRef, useRef } from 'react';
+import React, { ForwardedRef, useEffect, useRef } from 'react';
 
 /**@ts-ignore */
 import { VStack } from '@carbon/react';
@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import pconsole from '../../global/js/utils/pconsole';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
@@ -78,6 +79,23 @@ export const ConditionBuilder = React.forwardRef(
   ) => {
     const localRef = useRef(null);
     const conditionBuilderRef = ref || localRef;
+
+    useEffect(() => {
+      if (initialState !== undefined) {
+        pconsole.warn(
+          `ConditionBuilder: The \`initialState\` prop is deprecated and will be removed in a future major release. ` +
+            `Use the \`value\` prop instead (pair with \`onChange\` for controlled mode).`
+        );
+      }
+      if (getConditionState !== undefined) {
+        pconsole.warn(
+          `ConditionBuilder: The \`getConditionState\` prop is deprecated and will be removed in a future major release. ` +
+            `Use the \`onChange\` prop instead.`
+        );
+      }
+      // Intentionally run once on mount only.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleKeyDownHandler = (evt) => {
       handleKeyDown(evt, conditionBuilderRef, variant);
@@ -163,9 +181,12 @@ ConditionBuilder.propTypes = {
    */
   getActionsState: PropTypes.func,
   /**
+   * @deprecated Use `onChange` instead. `getConditionState` will be removed
+   * in a future major release.
+   *
    * This is a callback that gives back updated condition state
    */
-  getConditionState: PropTypes.func.isRequired,
+  getConditionState: PropTypes.func,
   /**
  * Callback triggered to dynamically fetch options for a property of type 'option'.
  * This is invoked when no static options array is provided in the input config.
@@ -174,6 +195,9 @@ ConditionBuilder.propTypes = {
  */
   getOptions: PropTypes.func,
   /**
+   * @deprecated Use the `value` prop instead (pair with `onChange` for controlled
+   * mode). `initialState` will be removed in a future major release.
+   *
    * Optional prop if you want to pass a saved condition state, pass as "initialState.state".
    * "initialState.enabledDefault" will populate the builder with the provided initial state before clicking Add Condition button.
    *

@@ -39,8 +39,10 @@ import {
 import { blockClass, HIERARCHICAL_VARIANT } from '../utils/util';
 interface ConditionBuilderContentProps {
   startConditionLabel: string;
-  getConditionState: (state: ConditionBuilderState) => void;
+  /** @deprecated Use `onChange` (from context) instead. */
+  getConditionState?: (state: ConditionBuilderState) => void;
   getActionsState?: (state: Action[]) => void;
+  /** @deprecated Use `value` (and `onChange` for controlled mode) instead. */
   initialState?: InitialState;
   actions?: Action[];
 }
@@ -371,10 +373,15 @@ ConditionBuilderContent.propTypes = {
    */
   getActionsState: PropTypes.func,
   /**
+   * @deprecated Use `onChange` instead. `getConditionState` will be removed
+   * in a future major release.
+   *
    * This is a callback function that returns the updated state
    */
-  getConditionState: PropTypes.func.isRequired,
+  getConditionState: PropTypes.func,
   /**
+   * @deprecated Use `value` (and `onChange` for controlled mode) instead.
+   *
    * Optional prop if the condition building need to start from a predefined initial state
    */
   initialState: PropTypes.shape({

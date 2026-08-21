@@ -237,9 +237,17 @@ export type ConditionBuilderTextKeys =
   | 'conditionRemovedText';
 export type ConditionBuilderProps = {
   inputConfig: inputConfig;
+  /**
+   * @deprecated Use `value` (and `onChange` for controlled mode) instead.
+   * `initialState` will be removed in a future major release.
+   */
   initialState?: InitialState;
   getActionsState?: (state: Action[] | undefined) => void;
-  getConditionState: (state: ConditionBuilderState | undefined) => void;
+  /**
+   * @deprecated Use `onChange` instead. `getConditionState` will be removed
+   * in a future major release.
+   */
+  getConditionState?: (state: ConditionBuilderState | undefined) => void;
   getOptions?: (
     state: ConditionBuilderState,
     condition: Condition

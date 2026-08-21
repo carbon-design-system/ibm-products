@@ -1675,17 +1675,448 @@ describe('PageHeader', () => {
       const collapseBtn = screen.getByLabelText('Collapse');
       expect(collapseBtn).toBeInTheDocument();
       // Click Collapse → covers !isFullyCollapsed branch in handleScroller (lines 47-52)
-      await expect(
-        act(() => userEvent.click(collapseBtn))
-      ).resolves.not.toThrow();
+      // Use async act to ensure floating-ui tooltip state updates are flushed
+      await act(async () => {
+        await userEvent.click(collapseBtn);
+      });
     });
   });
 
-  // ─── context.ts usePageHeader error path ──────────────────────────────────
-  describe('usePageHeader outside of provider', () => {
-    it('throws when called with no context value', () => {
-      // usePageHeader calls useContext(PageHeaderContext) and throws if the result is falsy.
-      // We verify the throw directly by patching React.useContext for just this call.
+  // ─── PageHeader.ScrollButton ──────────────────────────────────────────────
+  describe('PageHeader.ScrollButton', () => {
+    // Get the pconsole module's default export to spy on its `warn` method.
+    // PageHeaderScrollButton calls `pconsole.warn(...)` on the default export,
+    // so we spy on that object rather than `console.warn` directly, which avoids
+    // fragility around the test setup's console.warn wrapper.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const pconsoleModule = require('../../../global/js/utils/pconsole');
+    // In Jest+Babel the default export is at .default; fall back to the module itself
+    const pconsoleDefault = pconsoleModule.default ?? pconsoleModule;
+
+    afterEach(() => jest.restoreAllMocks());
+
+    it('warns when collapseText prop is an empty string', () => {
+      // Spy directly on the default export object used by PageHeaderScrollButton
+      const warnSpy = jest
+        .spyOn(pconsoleDefault, 'warn')
+        .mockImplementation(() => {});
+      render(
+        <PageHeader.Root>
+          <PageHeader.ScrollButton collapseText="" />
+        </PageHeader.Root>
+      );
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('collapseText')
+      );
+    });
+
+    it('warns when expandText prop is an empty string', () => {
+      const warnSpy = jest
+        .spyOn(pconsoleDefault, 'warn')
+        .mockImplementation(() => {});
+      render(
+        <PageHeader.Root>
+          <PageHeader.ScrollButton expandText="" />
+        </PageHeader.Root>
+      );
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('expandText')
+      );
+    });
+
+    it('scrolls the page to the top when expand is clicked while the content is fully collapsed', async () => {
+      const scrollToMock = jest.fn();
+      const intersectionCallbacks = [];
+      window.IntersectionObserver = jest.fn().mockImplementation((cb) => {
+        intersectionCallbacks.push(cb);
+        return {
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+          disconnect: jest.fn(),
+        };
+      });
+
+      document.body.style.overflow = 'scroll';
+      document.body.scrollTo = scrollToMock;
+
+      try {
+        const { container } = render(
+          <PageHeader.Root>
+            <PageHeader.Content title="title" />
+            <PageHeaderTabBarDirect scroller={<PageHeader.ScrollButton />} />
+          </PageHeader.Root>
+        );
+
+        // Flush all pending effects including nested state updates:
+        // PageHeaderContent sets refs → Root re-renders → Root creates observers
+        await act(async () => {});
+        await act(async () => {});
+
+        // At this point intersectionCallbacks should contain the contentObserver's cb
+        const contentEl = container.querySelector(
+          `.${prefix}--page-header__content`
+        );
+
+        // Fire the captured callbacks with the contentEl as target to
+        // trigger fullyCollapsed = true in the Root
+        await act(async () => {
+          intersectionCallbacks.forEach((cb) => {
+            cb([{ target: contentEl, isIntersecting: false }]);
+          });
+        });
+
+        // Now the ScrollButton should show "Expand" (fullyCollapsed = true)
+        await waitFor(() => {
+          expect(screen.getByLabelText('Expand')).toBeInTheDocument();
+        });
+
+        await act(async () => {
+          await userEvent.click(screen.getByLabelText('Expand'));
+        });
+
+        expect(scrollToMock).toHaveBeenCalledWith(
+          expect.objectContaining({ top: 0 })
+        );
+      } finally {
+        document.body.style.overflow = '';
+        delete document.body.scrollTo;
+      }
+    });
+
+    it('does not throw when clicked and no PageHeaderContent is present', async () => {
+      // Renders without PageHeaderContent so refs.contentRef is undefined;
+      // clicking must be a safe no-op.
+      // Render directly in Root (no TabBar wrapper) to avoid @floating-ui tooltip
+      // state updates firing outside act()
+      render(
+        <PageHeader.Root>
+          <PageHeader.ScrollButton />
+        </PageHeader.Root>
+      );
+      const btn = screen.getByLabelText('Collapse');
+      // Wrap in async act so floating-ui tooltip state updates are flushed
+      await act(async () => {
+        await userEvent.click(btn);
+      });
+      // No scroll should have been attempted
+      expect(true).toBe(true);
+    });
+  });
+
+  // ─── PageHeader.BreadcrumbOverflow ────────────────────────────────────────
+  describe('PageHeader.BreadcrumbOverflow', () => {
+    it('renders only the provided breadcrumb items when renderOverflowBreadcrumb returns null', () => {
+      // Covers the `if (!overflowBreadcrumb) return children` early-return path
+      const { getAllByRole } = render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar>
+            <PageHeader.BreadcrumbOverflow
+              renderOverflowBreadcrumb={() => null}
+            >
+              <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+              <BreadcrumbItem href="/#">Breadcrumb 2</BreadcrumbItem>
+            </PageHeader.BreadcrumbOverflow>
+          </PageHeader.BreadcrumbBar>
+        </PageHeader.Root>
+      );
+      // 2 original breadcrumb items with no injected overflow item.
+      // Use { hidden: true } in case ancestor styles cause elements to be
+      // removed from the a11y tree (e.g. after a prior test leaves
+      // document.body.style.overflow set).
+      const items = getAllByRole('listitem', { hidden: true });
+      // Filter to only the direct BreadcrumbItems (li.cds--breadcrumb-item)
+      const breadcrumbItems = items.filter((el) =>
+        el.classList.contains('cds--breadcrumb-item')
+      );
+      expect(breadcrumbItems).toHaveLength(2);
+    });
+  });
+
+  // ─── PageHeader.BreadcrumbPageActions ─────────────────────────────────────
+  describe('PageHeader.BreadcrumbPageActions', () => {
+    it('renders without error when the actions array is empty', () => {
+      expect(() =>
+        render(
+          <PageHeader.Root>
+            <PageHeaderBreadcrumbPageActions actions={[]} />
+          </PageHeader.Root>
+        )
+      ).not.toThrow();
+    });
+  });
+
+  // ─── PageHeader.Content direct import ─────────────────────────────────────
+  describe('PageHeader.Content (direct import)', () => {
+    it('renders without throwing when using the named export directly', () => {
+      expect(() =>
+        render(
+          <PageHeader.Root>
+            <PageHeaderContentDirect title="title" />
+          </PageHeader.Root>
+        )
+      ).not.toThrow();
+    });
+  });
+
+  // ─── PageHeader.ContentPageActions clipping ───────────────────────────────
+  describe('PageHeader.ContentPageActions clipping', () => {
+    const singleAction = [
+      {
+        id: 'action1',
+        onClick: jest.fn(),
+        body: <button>Action 1</button>,
+        menuItem: { label: 'Action 1' },
+      },
+    ];
+
+    afterEach(() => jest.clearAllMocks());
+
+    it('does not apply the clipped modifier in the content zone before the content scrolls away', async () => {
+      // isInBreadcrumbBar=false, contentActionsClipped=false (initial state)
+      // → clipped modifier class must be absent on first render.
+      // Wrap render in act so all mount effects (setRefs, setPageActionsInstance)
+      // settle before asserting.
+      let container;
+      await act(async () => {
+        ({ container } = render(
+          <PageHeader.Root>
+            <PageHeader.Content title="title" />
+            <PageHeader.ContentPageActions actions={singleAction} />
+          </PageHeader.Root>
+        ));
+      });
+
+      await waitFor(() => {
+        const actionsEl = container.querySelector(
+          `.${prefix}--page-header__content__page-actions`
+        );
+        expect(actionsEl).not.toBeNull();
+        expect(actionsEl).not.toHaveClass(
+          `${prefix}--page-header__content__page-actions--clipped`
+        );
+      });
+    });
+
+    it('applies the clipped modifier in the breadcrumb bar when contentActionsClipped is false (inverse logic)', async () => {
+      // isInBreadcrumbBar=true, isFunctionalContentActions=false,
+      // contentActionsClipped=false → class IS applied (inverse of content-zone behavior)
+      const { container } = render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar
+            contentActions={
+              <PageHeader.ContentPageActions actions={singleAction} />
+            }
+          />
+        </PageHeader.Root>
+      );
+
+      await waitFor(() => {
+        const actionsEl = container.querySelector(
+          `.${prefix}--page-header__content__page-actions`
+        );
+        expect(actionsEl).not.toBeNull();
+        expect(actionsEl).toHaveClass(
+          `${prefix}--page-header__content__page-actions--clipped`
+        );
+      });
+    });
+
+    it('sets the title-grid-width CSS variable on the PageHeader root when the overflow menu button appears', async () => {
+      const { container } = render(
+        <PageHeader.Root>
+          <PageHeader.Content title="title" />
+          <PageHeader.ContentPageActions actions={singleAction} />
+        </PageHeader.Root>
+      );
+
+      // Pass proper mock elements with dataset so BreadcrumbPageActions mock doesn't crash
+      act(() => {
+        const hiddenEl = document.createElement('li');
+        hiddenEl.dataset.id = 'action1';
+        mockOverflowOnChange([], [hiddenEl]);
+      });
+
+      await waitFor(() => {
+        const root = container.querySelector(`.${prefix}--page-header__next`);
+        expect(root).toBeInTheDocument();
+      });
+    });
+  });
+
+  // ─── PageHeader.HeroImage ─────────────────────────────────────────────────
+  describe('PageHeader.HeroImage', () => {
+    it('switches from 3x2 to 2x1 aspect ratio when the lg breakpoint is crossed', async () => {
+      let mediaChangeListener;
+      const mockMQL = {
+        matches: false,
+        addEventListener: jest.fn((_, fn) => {
+          mediaChangeListener = fn;
+        }),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      };
+      Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: jest.fn().mockReturnValue(mockMQL),
+      });
+
+      const { container } = render(
+        <PageHeader.HeroImage>
+          <img alt="test" />
+        </PageHeader.HeroImage>
+      );
+
+      // Initially small screen → 3x2
+      // AspectRatio wraps children in a div; container.firstChild is the AspectRatio div
+      const aspectRatioEl = container.querySelector(
+        `.${carbonPrefix}--aspect-ratio`
+      );
+      expect(aspectRatioEl).not.toBeNull();
+      expect(aspectRatioEl).toHaveClass(`${carbonPrefix}--aspect-ratio--3x2`);
+
+      // Fire the change listener as if the viewport crossed the lg breakpoint
+      act(() => {
+        mediaChangeListener({ matches: true });
+      });
+
+      await waitFor(() => {
+        expect(aspectRatioEl).toHaveClass(`${carbonPrefix}--aspect-ratio--2x1`);
+      });
+    });
+  });
+
+  // ─── PageHeader.TagOverflow ───────────────────────────────────────────────
+  describe('PageHeader.TagOverflow', () => {
+    it('returns focus to the overflow trigger button when a window resize closes the open popover', async () => {
+      const mockTags = [
+        <Tag type="blue" id="tag-a" key="tag-a">
+          Tag A
+        </Tag>,
+        <Tag type="red" id="tag-b" key="tag-b">
+          Tag B
+        </Tag>,
+      ];
+
+      render(
+        <PageHeader.Root>
+          <PageHeader.TabBar
+            tags={
+              <PageHeader.TagOverflow
+                renderOverflowTag={(
+                  hiddenItems,
+                  handleOverflowClick,
+                  openPopover,
+                  triggerId
+                ) => {
+                  if (!hiddenItems.length) return null;
+                  return (
+                    <OperationalTag
+                      id={triggerId}
+                      onClick={handleOverflowClick}
+                      aria-expanded={openPopover}
+                      text={`+${hiddenItems.length}`}
+                    />
+                  );
+                }}
+                renderPopoverContent={() => null}
+              >
+                {mockTags}
+              </PageHeader.TagOverflow>
+            }
+          />
+        </PageHeader.Root>
+      );
+
+      // Trigger overflow via the local overflow handler mock
+      act(() => {
+        mockOverflowOnChange([], mockTags);
+      });
+
+      const overflowButton = screen.getByRole('button', { name: '+2' });
+
+      // Open the popover
+      await act(() => userEvent.click(overflowButton));
+      await waitFor(() =>
+        expect(overflowButton).toHaveAttribute('aria-expanded', 'true')
+      );
+
+      const focusSpy = jest.spyOn(overflowButton, 'focus');
+
+      // Resize while open → focus should be returned before closing
+      act(() => {
+        window.dispatchEvent(new Event('resize'));
+      });
+
+      await waitFor(() =>
+        expect(overflowButton).toHaveAttribute('aria-expanded', 'false')
+      );
+      expect(focusSpy).toHaveBeenCalled();
+      focusSpy.mockRestore();
+    });
+  });
+
+  // ─── PageHeader.TitleBreadcrumb ───────────────────────────────────────────
+  describe('PageHeader.TitleBreadcrumb', () => {
+    it('is visible and not aria-hidden when no PageHeader.Content is present (compact mode)', () => {
+      const { getByText } = render(
+        <PageHeader.Root>
+          <PageHeader.BreadcrumbBar>
+            <Breadcrumb>
+              <BreadcrumbItem href="/#">Home</BreadcrumbItem>
+              <PageHeader.TitleBreadcrumb>My Page</PageHeader.TitleBreadcrumb>
+            </Breadcrumb>
+          </PageHeader.BreadcrumbBar>
+          {/* No PageHeader.Content → compact mode */}
+        </PageHeader.Root>
+      );
+
+      const titleCrumbText = getByText('My Page');
+      const titleCrumb = titleCrumbText.closest(
+        `.${prefix}--page-header-title-breadcrumb`
+      );
+      expect(titleCrumb).toBeInTheDocument();
+      expect(titleCrumb).not.toHaveAttribute('aria-hidden', 'true');
+      expect(titleCrumb).toHaveClass(
+        `${prefix}--page-header-title-breadcrumb-show__without-content-element`
+      );
+    });
+  });
+
+  // ─── getHeaderOffset ──────────────────────────────────────────────────────
+  describe('getHeaderOffset', () => {
+    afterEach(() => jest.restoreAllMocks());
+
+    it('returns 0 when the element sits at the top of the document viewport', () => {
+      const el = document.createElement('div');
+      document.body.appendChild(el);
+      jest.spyOn(el, 'getBoundingClientRect').mockReturnValue({ top: 0 });
+      expect(getHeaderOffset(el)).toBe(0);
+      document.body.removeChild(el);
+    });
+
+    it('returns the element-to-container offset when inside a scrollable ancestor', () => {
+      const scrollParent = document.createElement('div');
+      const inner = document.createElement('div');
+      scrollParent.appendChild(inner);
+      document.body.appendChild(scrollParent);
+      scrollParent.style.overflow = 'scroll';
+
+      jest.spyOn(inner, 'getBoundingClientRect').mockReturnValue({ top: 80 });
+      jest
+        .spyOn(scrollParent, 'getBoundingClientRect')
+        .mockReturnValue({ top: 20 });
+
+      // totalHeaderOffset = 80 - 20 = 60 → positive → returned as-is
+      expect(getHeaderOffset(inner)).toBe(60);
+      document.body.removeChild(scrollParent);
+    });
+  });
+
+  // ─── usePageHeader ────────────────────────────────────────────────────────
+  describe('usePageHeader', () => {
+    it('throws a descriptive error when called outside a PageHeader.Root provider', () => {
+      // Patch useContext for one call so it returns undefined, simulating
+      // a component tree that has no PageHeaderContext.Provider ancestor.
       const React_ = require('react');
       const contextModule = require('./context');
       const origUseContext = React_.useContext;

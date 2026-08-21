@@ -818,6 +818,17 @@ $duration: 1000ms;
     margin-inline-end: $spacing-04;
   }
 
+  .#{$block-class}__breadcrumb-page-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    inline-size: 50%;
+  }
+
+  .#{$block-class}__breadcrumb-page-actions__overflow-item {
+    position: relative;
+  }
+
   .#{$block-class}__breadcrumb-wrapper {
     display: inline-flex;
     flex: 1 1 auto;
@@ -884,7 +895,7 @@ $duration: 1000ms;
     display: grid;
     gap: $spacing-05;
     grid-template-columns: auto minmax(
-        var(--page-header-title-grid-width, 0),
+        var(--#{$pkg-prefix}-page-header-title-grid-width, 0),
         1fr
       );
     margin-block-end: $spacing-05;

@@ -357,6 +357,53 @@ describe('PageHeader', () => {
       expect(screen.getByText(/functional page actions/i)).toBeInTheDocument();
     });
 
+    it('should pass live observerState to functional pageActions', () => {
+      // Capture each IntersectionObserver callback and the element it observes
+      const observerInstances = [];
+      window.IntersectionObserver = jest.fn().mockImplementation((cb) => {
+        let observedElement = null;
+        const instance = {
+          observe: jest.fn((el) => {
+            observedElement = el;
+          }),
+          unobserve: jest.fn(),
+          disconnect: jest.fn(),
+          fire: (isIntersecting) => {
+            if (observedElement) {
+              cb([{ isIntersecting, target: observedElement }]);
+            }
+          },
+        };
+        observerInstances.push(instance);
+        return instance;
+      });
+
+      const pageActionsSpy = jest.fn(({ fullyCollapsed }) => (
+        <button>{fullyCollapsed ? 'collapsed state' : 'expanded state'}</button>
+      ));
+
+      render(
+        <PageHeader.Root>
+          <PageHeader.Content title="title" pageActions={pageActionsSpy} />
+        </PageHeader.Root>
+      );
+
+      // Initially rendered with default (false) state
+      expect(screen.getByText(/expanded state/i)).toBeInTheDocument();
+      expect(pageActionsSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ fullyCollapsed: false })
+      );
+
+      // Fire the content observer (first one created) with isIntersecting: false
+      act(() => {
+        observerInstances[0]?.fire(false);
+      });
+
+      expect(pageActionsSpy).toHaveBeenLastCalledWith(
+        expect.objectContaining({ fullyCollapsed: true })
+      );
+    });
+
     it('should render functional breadcrumb actions without errors', () => {
       render(
         <PageHeader.Root>

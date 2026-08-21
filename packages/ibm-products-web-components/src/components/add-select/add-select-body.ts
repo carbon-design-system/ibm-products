@@ -87,6 +87,12 @@ class CDSAddSelectBody extends LitElement {
   hideSearch = false;
 
   /**
+   * Layout direction for the list body: 'vertical' (default) or 'horizontal' (for hierarchy)
+   */
+  @property({ type: String, reflect: true })
+  layout: 'vertical' | 'horizontal' = 'vertical';
+
+  /**
    * Navigation path for breadcrumbs
    */
   @property({ type: Array })
@@ -128,6 +134,7 @@ class CDSAddSelectBody extends LitElement {
       searchResultsTitle,
       itemCount,
       hideSearch,
+      layout,
       path,
       _searchTerm: searchTerm,
       _handleSearch: handleSearch,
@@ -252,7 +259,12 @@ class CDSAddSelectBody extends LitElement {
 
         <!-- Body Content -->
         <div class="${blockClass}__content" role="grid" tabindex="0">
-          <div class="${blockClass}-list-body" role="rowgroup">
+          <div
+            class="${blockClass}-list-body${layout === 'horizontal'
+              ? ` ${blockClass}-list-body--horizontal`
+              : ''}"
+            role="rowgroup"
+          >
             <slot></slot>
           </div>
         </div>

@@ -1,7 +1,6 @@
-import { Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 
-import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
-import SingleAddSelectStories from './single-add-select.stories';
+import * as SingleAddSelectStories from './single-add-select.stories';
 
 <Meta of={SingleAddSelectStories} />
 
@@ -21,127 +20,41 @@ Patterns have multiple ways of accomplishing a user need and typically use a com
 
 To build this pattern, we recommend including the following components:
 
-- [c4p-tearsheet](/?path=/docs/components-tearsheet--docs) - Container for the pattern
+- [c4p-preview-tearsheet](/?path=/docs/components-tearsheet--docs) - Container for the pattern
 - [c4p-add-select](/?path=/docs/components-add-select--docs) - Wrapper component
 - [c4p-add-select-body](/?path=/docs/components-add-select--docs) - Container with search and breadcrumb navigation
-- [c4p-add-select-breadcrumbs](/?path=/docs/components-add-select--docs) - Breadcrumb navigation for hierarchical data (used internally by c4p-add-select-body)
-- [c4p-add-select-list](/?path=/docs/components-add-select--docs) - List container
+- [c4p-add-select-column](/?path=/docs/components-add-select--docs) - Column wrapper for hierarchical navigation
 - [c4p-add-select-row](/?path=/docs/components-add-select--docs) - Individual selectable items
+- [c4p-add-select-selection-summary](/?path=/docs/components-add-select--docs) - Side panel showing selected item details
+- [c4p-tearsheet-summary-content](/?path=/docs/components-tearsheet--docs) - Right-side summary content slot in wide tearsheet
 - [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview) - Action buttons
 - [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview) - Success feedback
 
-> 💡 Check our
-> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/single-add-select)
-> example implementation.
+## Variants
 
-[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/single-add-select)
+### Default
 
-## Single item selection
+Simple single selection from a flat list. The tearsheet is narrow and uses `c4p-add-select-body` directly wrapping `c4p-add-select-row` items.
 
-The single add select pattern allows users to select one item from a list. It includes:
+<Canvas withSource="none">
+  <Story of={SingleAddSelectStories.Default} />
+</Canvas>
 
-- A search/filter capability to narrow down options
-- Radio button selection for single choice
-- Clear visual feedback on the selected item
-- Submit and cancel actions
+### With Hierarchy
 
-### Example
+Single selection with hierarchical navigation and breadcrumbs. Uses `c4p-add-select-column` (with `hide-search`) inside `c4p-add-select-body`. Items with children show a chevron — clicking navigates deeper. Breadcrumbs update accordingly.
 
-Here's a quick example to get you started.
+<Canvas withSource="none">
+  <Story of={SingleAddSelectStories.WithHierarchy} />
+</Canvas>
 
-#### JS (via import)
+### With Hierarchy and Side Panel
 
-```javascript
-import '@carbon/web-components/es/components/button/index.js';
-import '@carbon/web-components/es/components/notification/toast-notification.js';
+Single selection with hierarchical multi-column navigation and a side panel for item details. Uses a wide tearsheet with `c4p-tearsheet-summary-content` and `c4p-add-select-selection-summary` to display selected item metadata. Clicking an item with `has-item-panel` shows details in the side panel.
 
-import '../../../../src/components/tearsheet/index';
-import '../../../../src/components/add-select/add-select/add-select';
-import '../../../../src/components/add-select/add-select-body/add-select-body';
-import '../../../../src/components/add-select/add-select-list/add-select-list';
-import '../../../../src/components/add-select/add-select-row/add-select-row';
-```
-
-#### HTML
-
-```html
-<!-- Trigger button -->
-<cds-button
-  type="button"
-  kind="primary"
-  size="md"
-  @click="${this._openAddSelect}"
->
-  Select an item
-</cds-button>
-
-<!-- Single Add Select Pattern using Tearsheet -->
-<c4p-add-select>
-  <c4p-tearsheet
-    ?open=${this._open}
-    width="narrow"
-    @c4p-tearsheet-closed="${this._handleClose}"
-  >
-    <!-- Header -->
-    <h3 slot="title">Select category</h3>
-    <div slot="description">Choose one category from the list below</div>
-
-    <!-- Body with Add Select Content -->
-    <c4p-add-select-body
-      global-search-label="Search categories"
-      global-search-placeholder="Search..."
-      items-label="Categories"
-      search-results-title="Search results"
-      .itemCount="${this._filteredItems.length}"
-      .path="${this._getBreadcrumbPath()}"
-      @c4p-add-select-body-search="${this._handleSearch}"
-      @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
-    >
-      <c4p-add-select-list>
-        ${this._filteredItems.map((item) => html`
-          <c4p-add-select-row
-            item-id="${item.id}"
-            title="${item.title}"
-            value="${item.value}"
-            ?has-children="${!!item.children}"
-            ?selected="${this._selectedItem === item.id}"
-            @c4p-add-select-row-select="${this._handleItemSelect}"
-            @c4p-add-select-row-navigate="${this._handleNavigate}"
-          >
-          </c4p-add-select-row>
-        `)}
-      </c4p-add-select-list>
-    </c4p-add-select-body>
-
-    <!-- Footer with Action Buttons -->
-    <cds-button
-      slot="actions"
-      kind="secondary"
-      @click="${this._handleClose}"
-    >
-      Cancel
-    </cds-button>
-    <cds-button
-      slot="actions"
-      kind="primary"
-      @click="${this._handleSubmit}"
-      ?disabled="${!this._selectedItem}"
-    >
-      Select
-    </cds-button>
-  </c4p-tearsheet>
-</c4p-add-select>
-
-<!-- Success notification -->
-<cds-toast-notification
-  kind="success"
-  title="Item selected"
-  subtitle="You selected: ${selectedItemData?.title}"
-  timeout="3000"
-  @cds-notification-closed="${this._onNotificationClose}"
->
-</cds-toast-notification>
-```
+<Canvas withSource="none">
+  <Story of={SingleAddSelectStories.WithHierarchyAndSidePanel} />
+</Canvas>
 
 ## Key features
 
@@ -155,51 +68,84 @@ Users can select only one item at a time using radio buttons. The selected item 
 
 ### Hierarchical navigation
 
-The pattern supports nested data structures with breadcrumb navigation, allowing users to drill down into categories and navigate back up the hierarchy.
+The **With Hierarchy** and **With Hierarchy and Side Panel** variants support nested data structures with breadcrumb navigation, allowing users to drill down into categories and navigate back up the hierarchy.
+
+### Side panel for item details
+
+The **With Hierarchy and Side Panel** variant uses a wide tearsheet with `summary-content-width` set alongside `c4p-tearsheet-summary-content` and `c4p-add-select-selection-summary`. When no item is selected an empty state is shown; selecting an item populates the panel with description, details, and tags.
 
 ### Event handling
 
 The pattern emits custom events for key interactions:
 
-- `c4p-tearsheet-closed` - Fired when the tearsheet is closed
-- `c4p-add-select-body-search` - Fired when search term changes
-- `c4p-add-select-body-breadcrumb-click` - Fired when breadcrumb is clicked
-- `c4p-add-select-row-select` - Fired when item is selected/deselected
-- `c4p-add-select-row-navigate` - Fired when navigating to item children
-
-### Accessibility
-
-The pattern follows accessibility best practices:
-
-- Proper ARIA attributes for screen readers
-- Keyboard navigation support
-- Focus management
-- Clear visual indicators for selected items
+- `c4p-preview-tearsheet-closed` - Fired when the tearsheet is closed
+- `c4p-add-select-body-search` - Fired when search term changes; `detail: { searchTerm }`
+- `c4p-add-select-body-breadcrumb-click` - Fired when breadcrumb is clicked; `detail: { index }`
+- `c4p-add-select-row-select` - Fired when item is selected/deselected; `detail: { itemId, selected, value }`
+- `c4p-add-select-row-navigate` - Fired when navigating to item children; `detail: { itemId, title, parentId }`
+- `c4p-add-select-row-item-panel-click` - Fired when the view details icon is clicked; `detail: { itemId }`
+- `c4p-add-select-column-search` - Fired when column-level search changes; `detail: { searchTerm }`
 
 ## Component properties
 
+### c4p-add-select
+
+| Property | Type    | Default | Description                                   |
+|----------|---------|---------|-----------------------------------------------|
+| `multi`  | Boolean | `false` | `false` for single-select (radio), `true` for multi-select (checkbox) |
+
 ### c4p-add-select-body
 
-- `global-search-label` (String) - Search input label
-- `global-search-placeholder` (String) - Search placeholder text
-- `items-label` (String) - Label for items section
-- `search-results-title` (String) - Title for search results
-- `itemCount` (Number) - Number of items for display
-- `path` (Array) - Breadcrumb navigation path
+| Property                    | Type    | Default          | Description                          |
+|-----------------------------|---------|------------------|--------------------------------------|
+| `global-search-label`       | String  | `''`             | Search input label                   |
+| `global-search-placeholder` | String  | `'Search'`       | Search placeholder text              |
+| `items-label`               | String  | `''`             | Label for items section              |
+| `search-results-title`      | String  | `'Search results'` | Title shown when searching          |
+| `item-count`                | Number  | `undefined`      | Item count badge next to label       |
+| `hide-search`               | Boolean | `false`          | Hide the search input                |
+| `path`                      | Array   | `[]`             | Breadcrumb navigation path `[{ id, title }]` |
+
+### c4p-add-select-column
+
+| Property             | Type    | Default   | Description                           |
+|----------------------|---------|-----------|---------------------------------------|
+| `title`              | String  | `''`      | Column title                          |
+| `search-label`       | String  | `'Search'`| Column search label                   |
+| `search-placeholder` | String  | `'Search'`| Column search placeholder             |
+| `hide-search`        | Boolean | `false`   | Hide the column search input          |
+| `item-count`         | Number  | `0`       | Item count badge                      |
 
 ### c4p-add-select-row
 
-- `item-id` (String) - Unique identifier
-- `title` (String) - Item title
-- `value` (String) - Item value
-- `selected` (Boolean) - Selection state
-- `has-children` (Boolean) - Whether item has child items
-- `disabled` (Boolean) - Disabled state
+| Property                     | Type    | Default         | Description                       |
+|------------------------------|---------|-----------------|-----------------------------------|
+| `item-id`                    | String  | `''`            | Unique identifier                 |
+| `title`                      | String  | `''`            | Item title                        |
+| `subtitle`                   | String  | `''`            | Item subtitle                     |
+| `value`                      | String  | `''`            | Item value                        |
+| `selected`                   | Boolean | `false`         | Selection state                   |
+| `has-children`               | Boolean | `false`         | Whether item has child items      |
+| `has-item-panel`             | Boolean | `false`         | Show view-details icon button     |
+| `item-panel-open`            | Boolean | `false`         | Whether side panel is open        |
+| `item-panel-icon-description`| String  | `'View details'`| Accessible label for icon         |
+| `disabled`                   | Boolean | `false`         | Disabled state                    |
 
-### c4p-tearsheet
+### c4p-add-select-selection-summary
 
-- `open` (Boolean) - Controls tearsheet visibility
-- `width` (String) - Tearsheet width ("narrow", "wide")
+| Property              | Type    | Default           | Description                          |
+|-----------------------|---------|-------------------|--------------------------------------|
+| `title`               | String  | `'Selected items'`| Panel title                          |
+| `selected-item-count` | Number  | `undefined`       | Count badge; body shown when `> 0`   |
+| `show-edit-icon`      | Boolean | `false`           | Show edit icon in header             |
+
+### c4p-preview-tearsheet (relevant props)
+
+| Property                | Type   | Default | Description                              |
+|-------------------------|--------|---------|------------------------------------------|
+| `open`                  | Boolean| `false` | Controls tearsheet visibility            |
+| `variant`               | String | `'wide'`| `'narrow'` or `'wide'`                   |
+| `summary-content-width` | String | `''`    | Override right panel width, e.g. `22.5rem` |
 
 ## Best practices
 
@@ -213,4 +159,4 @@ The pattern follows accessibility best practices:
 
 5. **Handle empty states**: Provide helpful messages when no results are found or when navigating to empty categories.
 
-6. **Maintain selection state**: Keep track of the selected item and display it clearly in the UI, even when navigating through hierarchies.
+6. **Side panel for rich metadata**: Use the **With Hierarchy and Side Panel** variant when items carry rich metadata (descriptions, key-value details, tags) that aids the user's decision.

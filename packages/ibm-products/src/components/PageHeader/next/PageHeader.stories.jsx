@@ -168,7 +168,10 @@ export const Default = (args) => {
                   aria-label="Overflow menu in a breadcrumb"
                 >
                   {hiddenItems.map((el) => (
-                    <OverflowMenuItem itemText={el.innerText} />
+                    <OverflowMenuItem
+                      key={el.innerText}
+                      itemText={el.innerText}
+                    />
                   ))}
                 </OverflowMenu>
               </BreadcrumbItem>
@@ -500,7 +503,10 @@ export const TabBarWithTabsAndTags = (args) => (
                     aria-label="Overflow menu in a breadcrumb"
                   >
                     {hiddenItems.map((el) => (
-                      <OverflowMenuItem itemText={el.innerText} />
+                      <OverflowMenuItem
+                        key={el.innerText}
+                        itemText={el.innerText}
+                      />
                     ))}
                   </OverflowMenu>
                 </BreadcrumbItem>
@@ -642,7 +648,10 @@ export const Compact = (args) => (
                 aria-label="Overflow menu in a breadcrumb"
               >
                 {hiddenItems.map((el) => (
-                  <OverflowMenuItem itemText={el.innerText} />
+                  <OverflowMenuItem
+                    key={el.innerText}
+                    itemText={el.innerText}
+                  />
                 ))}
               </OverflowMenu>
             </BreadcrumbItem>
@@ -904,7 +913,10 @@ export const WithDisabledStickyTabBar = ({
                 aria-label="Overflow menu in a breadcrumb"
               >
                 {hiddenItems.map((el) => (
-                  <OverflowMenuItem itemText={el.innerText} />
+                  <OverflowMenuItem
+                    key={el.innerText}
+                    itemText={el.innerText}
+                  />
                 ))}
               </OverflowMenu>
             </BreadcrumbItem>

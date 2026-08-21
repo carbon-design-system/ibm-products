@@ -276,6 +276,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         <ConditionBuilderItem
           label={group.statement}
           title={conditionText}
+          dialogAriaLabel={`${conditionText} — ${conditionIndex + 1}`}
           data-name="connectorField"
           popOverClassName={`${blockClass}__gap ${blockClass}__connector`}
           className={`${blockClass}__statement-button`}
@@ -295,6 +296,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
         <ConditionBuilderItem
           label={label ?? condition?.property}
           title={propertyText}
+          dialogAriaLabel={`${propertyText} — ${conditionText} ${conditionIndex + 1}`}
           renderIcon={icon ?? undefined}
           className={`${blockClass}__property-field`}
           data-name="propertyField"
@@ -308,6 +310,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
           <ConditionBuilderItem
             label={operator}
             title={operatorText}
+            dialogAriaLabel={`${operatorText} — ${conditionText} ${conditionIndex + 1}`}
             data-name="operatorField"
             condition={condition}
             type={type}
@@ -331,6 +334,7 @@ const ConditionBlock = (props: ConditionBlockProps) => {
             label={value}
             type={type}
             title={label}
+            dialogAriaLabel={`${label} — ${conditionText} ${conditionIndex + 1}`}
             showToolTip={true}
             data-name="valueField"
             condition={condition}

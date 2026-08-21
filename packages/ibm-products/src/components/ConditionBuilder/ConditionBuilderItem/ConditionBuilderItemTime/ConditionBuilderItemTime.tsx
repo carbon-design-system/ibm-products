@@ -69,7 +69,11 @@ export const ConditionBuilderItemTime = ({
       <TimePicker
         defaultValue={initialTimeValue}
         id="time-picker"
-        labelText="Select a time"
+        labelText={
+          conditionState.label
+            ? `Select time for ${conditionState.label}`
+            : 'Select a time'
+        }
         onChange={setTime}
       >
         <TimePickerSelect

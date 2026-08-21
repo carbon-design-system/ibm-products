@@ -45,10 +45,13 @@ import { useEvent } from '../utils/useEvent';
 
 interface ConditionBuilderItemProps extends PropsWithChildren {
   className?: string;
-
   label?: string | Option | Option[];
   renderIcon?: CarbonIconType;
   title?: string;
+  /** Screen-reader-only label for the popover dialog. Defaults to `title` when not set.
+   *  Use this to supply richer context (e.g. "Property — Condition 1") without
+   *  changing the visible heading rendered inside the popover. */
+  dialogAriaLabel?: string;
   showToolTip?: boolean;
   popOverClassName?: string;
   type?: string;
@@ -72,6 +75,7 @@ export const ConditionBuilderItem = ({
   label,
   renderIcon,
   title,
+  dialogAriaLabel,
   type,
   showToolTip,
   condition,
@@ -219,7 +223,13 @@ export const ConditionBuilderItem = ({
     const targetInsidePopover = popoverEl.contains(focusEvent.target as Node);
 
     const targetEl = focusEvent.target as Element | null;
-    const focusMovedToDatePicker = targetEl?.closest('.flatpickr-calendar');
+    // Also check relatedTarget for the date-picker calendar so that clicking
+    // inside a flatpickr popup (which lives outside the popover DOM) doesn't
+    // trigger a spurious close (fixes #22/#25).
+    const relatedEl = focusEvent.relatedTarget as Element | null;
+    const focusMovedToDatePicker =
+      targetEl?.closest('.flatpickr-calendar') ||
+      relatedEl?.closest?.('.flatpickr-calendar');
 
     if ((focusLeftPopover || !targetInsidePopover) && !focusMovedToDatePicker) {
       closePopover();
@@ -311,13 +321,21 @@ export const ConditionBuilderItem = ({
         isInvalid={isInvalid}
         description={description}
         {...rest}
+        // When the field is invalid, give the button a descriptive aria-label so
+        // screen readers announce e.g. "Incomplete: Property — Condition 1"
+        // instead of just "Incomplete". Placed after {...rest} so it wins.
+        // Visible label text (<span>) is unchanged.
+        {...(isInvalid && dialogAriaLabel
+          ? { 'aria-label': `${invalidText}: ${dialogAriaLabel}` }
+          : {})}
       />
 
       {open && (
         <PopoverContent
           className={`${blockClass}__popover-content-wrapper`}
           role="dialog"
-          aria-label={title}
+          aria-modal="true"
+          aria-label={dialogAriaLabel ?? title}
           onKeyDown={handleKeyDownHandler}
         >
           <Layer>

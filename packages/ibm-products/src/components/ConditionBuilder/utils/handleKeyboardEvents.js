@@ -132,7 +132,7 @@ const handleKeyPressForPopover = (
         allItems = [
           ...Array.from(
             parentContainer.querySelectorAll(
-              `.${blockClass}__selectAll-button,[role="searchbox"]`
+              `.${blockClass}__selectAll-button,input[type="search"]`
             )
           ),
           getVisibleOptions(parentContainer)?.[0],
@@ -165,7 +165,7 @@ const handleKeyPressForPopover = (
       case ' ':
         if (isMultiSelect === 'true') {
           if (document.activeElement.type !== 'button') {
-            //for button , enter key is click which already handled by framework, for other elements trigger click
+            //for button, space is click which is already handled by framework, for other elements trigger click
             document.activeElement?.click();
           }
           evt.preventDefault();
@@ -173,10 +173,20 @@ const handleKeyPressForPopover = (
 
         break;
       case 'Enter':
-        if (document.activeElement.type !== 'button') {
-          //for button , enter key is click which already handled by framework, else trigger click
-          focusThisField(evt, conditionBuilderRef);
-          document.activeElement?.click();
+        if (isMultiSelect === 'true') {
+          // In a multi-select listbox, Enter toggles the focused option (same as Space)
+          // and keeps the popover open — matching ARIA APG listbox pattern.
+          if (document.activeElement.type !== 'button') {
+            document.activeElement?.click();
+          }
+          evt.preventDefault();
+        } else {
+          // Single-select: Enter selects the item. focusThisField moves focus back to the
+          // grid cell, which triggers focusout and closes the popover.
+          if (document.activeElement.type !== 'button') {
+            focusThisField(evt, conditionBuilderRef);
+            document.activeElement?.click();
+          }
         }
 
         break;

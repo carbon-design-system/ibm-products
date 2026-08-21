@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { ForwardedRef, useEffect, useRef } from 'react';
+import React, { ForwardedRef, useRef } from 'react';
 
 /**@ts-ignore */
 import { VStack } from '@carbon/react';
@@ -16,7 +16,8 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import pconsole from '../../global/js/utils/pconsole';
+import { deprecateProp } from '../../global/js/utils/props-helper';
+export { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import ConditionBuilderContent from './ConditionBuilderContent/ConditionBuilderContent';
 import { ConditionBuilderProvider } from './ConditionBuilderContext/ConditionBuilderProvider';
@@ -80,23 +81,6 @@ export const ConditionBuilder = React.forwardRef(
     const localRef = useRef(null);
     const conditionBuilderRef = ref || localRef;
 
-    useEffect(() => {
-      if (initialState !== undefined) {
-        pconsole.warn(
-          `ConditionBuilder: The \`initialState\` prop is deprecated and will be removed in a future major release. ` +
-            `Use the \`value\` prop instead (pair with \`onChange\` for controlled mode).`
-        );
-      }
-      if (getConditionState !== undefined) {
-        pconsole.warn(
-          `ConditionBuilder: The \`getConditionState\` prop is deprecated and will be removed in a future major release. ` +
-            `Use the \`onChange\` prop instead.`
-        );
-      }
-      // Intentionally run once on mount only.
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     const handleKeyDownHandler = (evt) => {
       handleKeyDown(evt, conditionBuilderRef, variant);
     };
@@ -157,6 +141,39 @@ export const ConditionBuilder = React.forwardRef(
 // is used in preference to relying on function.name.
 ConditionBuilder.displayName = componentName;
 
+// Deprecated props — kept separate so they can be spread into propTypes and
+// also exported for use with getDeprecatedArgTypes in stories.
+export const deprecatedProps = {
+  /**
+   * @deprecated Use the `value` prop instead. `initialState` will be removed
+   * in a future major release.
+   *
+   * Optional prop to pass a saved condition state. `state` holds the
+   * condition structure; `enabledDefault: true` renders the builder
+   * immediately, `enabledDefault: false` (default) requires the user to
+   * click the start button first.
+   */
+  /**@ts-ignore */
+  initialState: deprecateProp(
+    PropTypes.shape({
+      state: PropTypes.object,
+      enabledDefault: PropTypes.bool,
+    }),
+    'Use the `value` prop instead (pair with `onChange` for controlled mode).'
+  ),
+
+  /**
+   * @deprecated Use `onChange` instead. `getConditionState` will be removed
+   * in a future major release.
+   *
+   * Callback that receives the updated condition state on every change.
+   */
+  getConditionState: deprecateProp(
+    PropTypes.func,
+    'Use the `onChange` prop instead.'
+  ),
+};
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -180,68 +197,16 @@ ConditionBuilder.propTypes = {
    * This is a callback that gives back the updated action state
    */
   getActionsState: PropTypes.func,
+
   /**
-   * @deprecated Use `onChange` instead. `getConditionState` will be removed
-   * in a future major release.
-   *
-   * This is a callback that gives back updated condition state
+   * Callback triggered to dynamically fetch options for a property of type 'option'.
+   * This is invoked when no static options array is provided in the input config.
+   * The function should return a Promise that resolves with an array of options in the required format.
    */
-  getConditionState: PropTypes.func,
-  /**
- * Callback triggered to dynamically fetch options for a property of type 'option'.
- * This is invoked when no static options array is provided in the input config.
- * The function should return a Promise that resolves with an array of options in the required format.
- 
- */
   getOptions: PropTypes.func,
-  /**
-   * @deprecated Use the `value` prop instead (pair with `onChange` for controlled
-   * mode). `initialState` will be removed in a future major release.
-   *
-   * Optional prop if you want to pass a saved condition state, pass as "initialState.state".
-   * "initialState.enabledDefault" will populate the builder with the provided initial state before clicking Add Condition button.
-   *
-   *  This state should respect the structure of condition state that is available in getConditionState callback
-   */
-  /**@ts-ignore */
-  initialState: PropTypes.shape({
-    state: PropTypes.shape({
-      groups: PropTypes.arrayOf(
-        PropTypes.shape({
-          groupOperator: PropTypes.string,
-          statement: PropTypes.string,
-          conditions: PropTypes.arrayOf(
-            PropTypes.oneOfType([
-              PropTypes.shape({
-                property: PropTypes.string,
-                operator: PropTypes.string,
-                value: PropTypes.oneOfType([
-                  PropTypes.string,
-                  PropTypes.arrayOf(
-                    PropTypes.shape({
-                      id: PropTypes.string,
-                      label: PropTypes.string,
-                    })
-                  ),
-                  PropTypes.shape({
-                    id: PropTypes.string,
-                    label: PropTypes.string,
-                  }),
-                ]),
-              }),
-              PropTypes.object,
-            ])
-          ),
-        })
-      ),
-      operator: PropTypes.string,
-    }),
-    enabledDefault: PropTypes.bool,
-  }),
 
   /**
    * This is a mandatory prop that defines the input to the condition builder.
-
    */
   /**@ts-ignore */
   inputConfig: PropTypes.shape({
@@ -339,8 +304,9 @@ ConditionBuilder.propTypes = {
   translateWithId: PropTypes.func,
 
   /**
-   * Controlled state. When provided, the builder is controlled and `onChange`
-   * must be supplied to keep the state in sync.
+   * Seed state or controlled state for the builder. When passed alongside
+   * `onChange`, updates to `value` from outside will sync the builder.
+   * Use without `onChange` for a one-time seed (uncontrolled).
    */
   /**@ts-ignore */
   value: PropTypes.object,
@@ -349,4 +315,6 @@ ConditionBuilder.propTypes = {
    * Provide the condition builder variant: Non-Hierarchical/ Hierarchical
    */
   variant: PropTypes.oneOf(['Non-Hierarchical', 'Hierarchical']),
+
+  ...deprecatedProps,
 };

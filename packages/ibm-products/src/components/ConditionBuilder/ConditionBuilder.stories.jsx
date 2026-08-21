@@ -16,6 +16,7 @@ import {
   previewCandidate__ConditionBuilder as ConditionBuilder,
   getEmptyState,
 } from '../';
+import { deprecatedProps } from './ConditionBuilder';
 import mdx from './ConditionBuilder.mdx';
 
 import styles from './_storybook-styles.scss?inline';
@@ -43,6 +44,18 @@ export default {
     docs: {
       page: mdx,
     },
+  },
+
+  argTypes: {
+    // Deprecated props are kept visible in Storybook controls so adopters
+    // can see the deprecation information. The @deprecated JSDoc on each
+    // prop surfaces in the controls panel description.
+    ...Object.fromEntries(
+      Object.keys(deprecatedProps).map((key) => [
+        key,
+        { table: { category: 'deprecated' } },
+      ])
+    ),
   },
 };
 

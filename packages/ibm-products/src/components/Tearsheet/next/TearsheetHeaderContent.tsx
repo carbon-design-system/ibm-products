@@ -25,9 +25,10 @@ export interface TearsheetHeaderContentProps {
    */
   children?: React.ReactNode;
   /**
-   * The main title of the tearsheet.
+   * The main title of the tearsheet. Accepts a string or ReactNode.
+   * If a string is provided, TruncatedText is used with automatic overflow handling.
    */
-  title: string;
+  title: ReactNode;
   /**
    * A label for the tearsheet, displayed above the title
    * to maintain context for the tearsheet (e.g. as the title changes from page
@@ -97,14 +98,18 @@ const TearsheetHeaderContent = React.forwardRef<
           {titleStart ? (
             <span className={`${blockClass}__title-start`}>{titleStart}</span>
           ) : null}
-          <TruncatedText
-            id={`${blockClass}__header-title__truncatedText`}
-            className={`${blockClass}__content__title`}
-            align="bottom"
-            autoAlign={true}
-            value={title}
-            lines={fullyCollapsed ? 1 : 2}
-          />
+          {typeof title === 'string' ? (
+            <TruncatedText
+              id={`${blockClass}__header-title__truncatedText`}
+              className={`${blockClass}__content__title`}
+              align="bottom"
+              autoAlign={true}
+              value={title}
+              lines={fullyCollapsed ? 1 : 2}
+            />
+          ) : (
+            <span className={`${blockClass}__content__title`}>{title}</span>
+          )}
           {titleEnd ? (
             <span className={`${blockClass}__title-end`}>{titleEnd}</span>
           ) : null}

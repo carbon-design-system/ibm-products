@@ -801,13 +801,15 @@ describe('PageHeader', () => {
               renderOverflowTag={(
                 hiddenItems,
                 handleOverflowClick,
-                openPopover
+                openPopover,
+                triggerId
               ) => {
                 if (!hiddenItems.length) {
                   return;
                 }
                 return (
                   <OperationalTag
+                    id={triggerId}
                     onClick={handleOverflowClick}
                     aria-expanded={openPopover}
                     text={`+${hiddenItems.length}`}

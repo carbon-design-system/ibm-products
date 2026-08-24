@@ -61,6 +61,13 @@ export interface TagOverflowProps {
    * @deprecated The `containingElementRef` prop is no longer going to be used in favor of the forwarded ref.
    */
   containingElementRef?: RefObject<HTMLDivElement>;
+  /**
+   * Disable the portal and render the modal inline. Useful for tests and
+   * contexts where you need to inherit React context from parent components.
+   *
+   * @default true
+   */
+  disablePortal?: boolean;
   items: TagOverflowItem[];
   maxVisible?: number;
   /**
@@ -110,6 +117,7 @@ export const TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
       allTagsModalTitle,
       autoAlign,
       className,
+      disablePortal,
       items,
       maxVisible,
       overflowAlign = 'bottom',
@@ -238,6 +246,7 @@ export const TagOverflow = forwardRef<HTMLDivElement, TagOverflowProps>(
                 searchLabel={allTagsModalSearchLabel}
                 searchPlaceholder={allTagsModalSearchPlaceholderText}
                 portalTarget={allTagsModalTarget}
+                disablePortal={disablePortal}
               />
             </div>
           )}
@@ -295,6 +304,11 @@ TagOverflow.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * Disable the portal and render the modal inline. Useful for tests and
+   * contexts where you need to inherit React context from parent components.
+   */
+  disablePortal: PropTypes.bool,
   /**
    * The items to be shown in the TagOverflow. Each item is specified as an object with properties:
    * **label**\* (required) to supply the content,

@@ -76,7 +76,7 @@
     "@carbon/icon-helpers": "^10.77.0",
     "@carbon/icons": "^11.83.0",
     "@carbon/motion": "^11.47.0",
-    "@figma/code-connect": "^1.4.0",
+    "@figma/code-connect": "^2.0.0",
     "@ibm/telemetry-js-config-generator": "^2.1.0",
     "@mordech/vite-lit-loader": "^0.40.0",
     "@open-wc/testing": "^5.0.0",

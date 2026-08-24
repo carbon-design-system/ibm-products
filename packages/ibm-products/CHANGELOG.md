@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.97.0-rc.0`
+## `@carbon/ibm-products@2.97.0`
 ### Features :rocket:
 - feat(webTerminal): implemented as react pattern (#9723)
 - feat(saving): implemented as react pattern (#9733)

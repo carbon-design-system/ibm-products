@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.46.0-rc.0`
+## `@carbon/ibm-products-web-components@0.46.0`
 ### Features :rocket:
 - feat(preview-tearsheet): implement open in stackblitz in web component (#9760)
 - feat(addselect): web component implementation (#9740)

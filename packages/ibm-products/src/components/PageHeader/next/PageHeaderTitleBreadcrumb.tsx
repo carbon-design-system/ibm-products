@@ -22,12 +22,15 @@ export const PageHeaderTitleBreadcrumb = forwardRef<
   const hasContentElement = refs?.contentRef?.current;
   const shouldShow = !hasContentElement || (titleClipped && !!refs?.titleRef);
 
+  const isAriaHidden = hasContentElement && !titleClipped;
+
   return (
     <BreadcrumbItem
       ref={ref}
       isCurrentPage
       {...other}
-      aria-hidden={hasContentElement && !titleClipped ? true : undefined}
+      aria-hidden={isAriaHidden ? true : undefined}
+      tabIndex={isAriaHidden ? -1 : undefined}
       className={classnames(
         className,
         `${pkg.prefix}--page-header-title-breadcrumb`,

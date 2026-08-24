@@ -23,7 +23,8 @@ export interface PageHeaderTagOverflowProps {
   renderOverflowTag?: (
     hiddenBreadcrumbs: HTMLElement[],
     handleOverflowClick: (event: React.MouseEvent) => void,
-    openPopover: boolean
+    openPopover: boolean,
+    triggerId?: string
   ) => React.ReactElement;
   renderPopoverContent?: (
     hiddenBreadcrumbs: HTMLElement[]
@@ -36,6 +37,7 @@ export const PageHeaderTagOverflow = React.forwardRef<
 >(({ renderOverflowTag, renderPopoverContent, children }, ref) => {
   const [openPopover, setOpenPopover] = useState(false);
   const [hiddenTags, setHiddenTags] = useState<HTMLElement[]>([]);
+  const overflowButtonId = `${pkg.prefix}--page-header--tag-overflow-btn`;
 
   const localRef = useRef<HTMLDivElement>(null);
   const tagsContainerRef = (ref || localRef) as RefObject<HTMLDivElement>;
@@ -84,6 +86,7 @@ export const PageHeaderTagOverflow = React.forwardRef<
         open={openPopover}
         onRequestClose={() => setOpenPopover(false)}
         data-fixed
+        aria-labelledby={overflowButtonId}
         className={classnames(
           `${pkg.prefix}--page-header--tag-overflow-popover`,
           {
@@ -92,7 +95,12 @@ export const PageHeaderTagOverflow = React.forwardRef<
           }
         )}
       >
-        {renderOverflowTag?.(hiddenTags, handleOverflowClick, openPopover)}
+        {renderOverflowTag?.(
+          hiddenTags,
+          handleOverflowClick,
+          openPopover,
+          overflowButtonId
+        )}
         <PopoverContent>
           <div className={`${blockClass}__tags-popover-list`}>
             {renderPopoverContent?.(hiddenTags)}

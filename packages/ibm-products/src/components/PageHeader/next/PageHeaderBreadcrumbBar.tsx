@@ -111,7 +111,10 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
             <div className={`${blockClass}__breadcrumb-container`}>
               <div className={`${blockClass}__breadcrumb-wrapper`}>
                 {IconElement && (
-                  <div className={`${blockClass}__breadcrumb__icon`}>
+                  <div
+                    className={`${blockClass}__breadcrumb__icon`}
+                    aria-hidden="true"
+                  >
                     <IconElement />
                   </div>
                 )}
@@ -119,7 +122,7 @@ export const PageHeaderBreadcrumbBar = React.forwardRef<
               </div>
               <div
                 className={`${blockClass}__breadcrumb__actions`}
-                role="navigation"
+                role="toolbar"
                 aria-label={actionsAriaLabel}
               >
                 <div className={contentActionsClasses}>

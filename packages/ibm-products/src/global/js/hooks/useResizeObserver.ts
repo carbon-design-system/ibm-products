@@ -50,8 +50,13 @@ export const useResizeObserver = (
             ? parseFloat(refComputedStyle?.paddingBottom)
             : 0);
 
-        setWidth(initialWidth);
-        setHeight(initialHeight);
+        // React 19: calling setState synchronously inside a useEffect that fires
+        // during React's passive-effects flush can increment nestedUpdateCount and
+        // trigger "Maximum update depth exceeded". Defer the setters past the flush.
+        queueMicrotask(() => {
+          setWidth(initialWidth);
+          setHeight(initialHeight);
+        });
       }
     };
     if (!ref?.current || (width >= 0 && height >= 0)) {
@@ -96,7 +101,11 @@ export const useResizeObserver = (
     return () => {
       observer.disconnect();
     };
+    // ref.current is a mutable value — listing it in the dep array causes spurious
+    // re-runs in React 19 (safelyDetachRef path) that call setState during commit.
+    // The ResizeObserver callback handles all subsequent DOM node changes, so []
+    // is semantically correct.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref.current]);
+  }, []);
   return { width, height };
 };

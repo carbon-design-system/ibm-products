@@ -662,6 +662,7 @@ collect:
         - wrapperClassName
         - wrapperProps
         # ConditionBuilderItem
+        - dialogAriaLabel
         - popOverClassName
         - renderChildren
         # ConditionBuilderItemDate
@@ -674,6 +675,9 @@ collect:
         - setRootState
         # ConditionConnector
         - operator
+        # ConditionGroupBuilder
+        - conditionRemovedText
+        - setStatusMessage
         # ConditionPreview
         - colorIndex
         - previewType

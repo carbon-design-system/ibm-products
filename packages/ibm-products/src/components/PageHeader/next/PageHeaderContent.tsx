@@ -38,9 +38,10 @@ export interface PageHeaderContentProps {
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
-   * The PageHeaderContent's title
+   * The PageHeaderContent's title. Accepts a string or ReactNode.
+   * If a string is provided, TruncatedText is used with automatic overflow handling.
    */
-  title: string;
+  title: React.ReactNode;
   /**
    * Specify the element or component used to render the title.
    */
@@ -135,14 +136,20 @@ export const PageHeaderContent = React.forwardRef<
                   ref={titleRef}
                   className={`${blockClass}__content__title`}
                 >
-                  <TruncatedText
-                    id={truncatedTextId}
-                    className={`${blockClass}__content__title-text`}
-                    align="bottom"
-                    value={title}
-                    lines={titleLines}
-                    type="tooltip"
-                  />
+                  {typeof title === 'string' ? (
+                    <TruncatedText
+                      id={`${blockClass}__content__title__truncatedText`}
+                      className={`${blockClass}__content__title-text`}
+                      align="bottom"
+                      value={title}
+                      lines={titleLines}
+                      type="tooltip"
+                    />
+                  ) : (
+                    <span className={`${blockClass}__content__title-text`}>
+                      {title}
+                    </span>
+                  )}
                 </TitleTag>
               </div>
               {contextualActions && (
@@ -188,7 +195,7 @@ PageHeaderContent.propTypes = {
   /**
    * The PageHeaderContent's title
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   /**
    * Specify the element or component used to render the title.
    */

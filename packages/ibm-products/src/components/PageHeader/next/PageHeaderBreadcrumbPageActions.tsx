@@ -7,12 +7,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-  FeatureFlags,
-} from '@carbon/react';
+import { Button, OverflowMenu, MenuItem, FeatureFlags } from '@carbon/react';
 import { createOverflowHandler } from '@carbon/utilities';
 import { blockClass } from '../PageHeaderUtils';
 
@@ -126,9 +121,9 @@ export const PageHeaderBreadcrumbPageActions = ({
         <FeatureFlags enableV12Overflowmenu>
           <OverflowMenu size={buttonSize} aria-label={overflowMenuLabel}>
             {hiddenItems.map((item) => (
-              <OverflowMenuItem
+              <MenuItem
                 key={item.id}
-                itemText={item.label}
+                label={item.label}
                 onClick={item.onClick}
               />
             ))}

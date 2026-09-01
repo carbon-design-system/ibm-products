@@ -160,6 +160,7 @@ export const Default = (args) => {
           pageActions={breadcrumbPageActions}
         >
           <PageHeader.BreadcrumbOverflow
+            noTrailingSlash
             renderOverflowBreadcrumb={(hiddenItems) => (
               <BreadcrumbItem data-floating-menu-container>
                 <OverflowMenu
@@ -306,6 +307,7 @@ export const ContentWithIcon = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar pageActions={breadcrumbPageActions}>
       <PageHeader.BreadcrumbOverflow
+        noTrailingSlash
         renderOverflowBreadcrumb={(hiddenItems) => (
           <BreadcrumbItem data-floating-menu-container>
             <OverflowMenu
@@ -345,6 +347,7 @@ export const ContentWithContextualActions = (args) => (
       pageActions={breadcrumbPageActions}
     >
       <PageHeader.BreadcrumbOverflow
+        noTrailingSlash
         renderOverflowBreadcrumb={(hiddenItems) => (
           <BreadcrumbItem data-floating-menu-container>
             <OverflowMenu
@@ -390,6 +393,7 @@ export const ContentWithHeroImage = (args) => (
       <Column lg={8} md={4} sm={4}>
         <PageHeader.BreadcrumbBar border={false} renderIcon={BreadcrumbBeeIcon}>
           <PageHeader.BreadcrumbOverflow
+            noTrailingSlash
             renderOverflowBreadcrumb={(hiddenItems) => (
               <BreadcrumbItem data-floating-menu-container>
                 <OverflowMenu
@@ -451,6 +455,7 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       pageActions={breadcrumbPageActions}
     >
       <PageHeader.BreadcrumbOverflow
+        noTrailingSlash
         renderOverflowBreadcrumb={(hiddenItems) => (
           <BreadcrumbItem data-floating-menu-container>
             <OverflowMenu
@@ -550,6 +555,7 @@ export const TabBarWithTabsAndTags = (args) => (
             }
           >
             <PageHeader.BreadcrumbOverflow
+              noTrailingSlash
               renderOverflowBreadcrumb={(hiddenItems) => (
                 <BreadcrumbItem data-floating-menu-container>
                   <OverflowMenu
@@ -695,6 +701,7 @@ export const Compact = (args) => (
         }
       >
         <PageHeader.BreadcrumbOverflow
+          noTrailingSlash
           renderOverflowBreadcrumb={(hiddenItems) => (
             <BreadcrumbItem data-floating-menu-container>
               <OverflowMenu
@@ -836,6 +843,7 @@ export const CustomRenderWithCallbacks = (args) => {
           pageActions={breadcrumbPageActions}
         >
           <PageHeader.BreadcrumbOverflow
+            noTrailingSlash
             renderOverflowBreadcrumb={(hiddenItems) => (
               <BreadcrumbItem data-floating-menu-container>
                 <OverflowMenu
@@ -976,6 +984,7 @@ export const WithDisabledStickyTabBar = ({
         pageActions={breadcrumbPageActions}
       >
         <PageHeader.BreadcrumbOverflow
+          noTrailingSlash
           renderOverflowBreadcrumb={(hiddenItems) => (
             <BreadcrumbItem data-floating-menu-container>
               <OverflowMenu

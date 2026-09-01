@@ -1061,7 +1061,12 @@ $duration: 1000ms;
   .#{$block-class}__tab-bar {
     position: sticky;
     z-index: 1;
+    // Use flex at all breakpoints so the scroller button is always a
+    // natural in-flow sibling of the Grid column — no absolute positioning
+    // needed and no overlap with the tag overflow area.
+    display: flex;
     align-content: center;
+    align-items: center;
     background-color: $layer;
     /* stylelint-disable-next-line carbon/layout-use */
     inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
@@ -1072,16 +1077,15 @@ $duration: 1000ms;
   &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
     .#{$block-class}__tab-bar {
     position: static;
-    // On smaller screens, use flex to keep scroller button in flow
-    // position: relative;
     display: flex;
     align-items: center;
-    // background-color: $layer;
+  }
 
-    // // On max breakpoint and above, use block to maintain Carbon alignment (scroller uses absolute positioning)
-    @include breakpoint(sm) {
-      display: block;
-    }
+  // Grid column grows to fill the row, leaving the scroller as a fixed-width
+  // item at the end — no absolute positioning hacks needed.
+  .#{$block-class}__tab-bar > .#{$carbon-prefix}--css-grid {
+    flex: 1;
+    min-inline-size: 0;
   }
 
   .#{$block-class}__tab-bar--tablist {
@@ -1108,15 +1112,6 @@ $duration: 1000ms;
     display: flex;
     align-items: center;
     justify-content: right;
-    transform: translateX(calc($spacing-06 * -1));
-
-    @include breakpoint(md) {
-      padding-inline-end: $spacing-03;
-      transform: translateX(0);
-    }
-    @include breakpoint(max) {
-      padding-inline-end: $spacing-05;
-    }
   }
 
   .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tab--overflow-nav-button {
@@ -1155,16 +1150,11 @@ $duration: 1000ms;
     align-content: center;
     justify-content: flex-end;
     inline-size: 40%;
-    padding-inline-end: $spacing-06;
     text-align: end;
 
     .#{$carbon-prefix}--tag {
       flex-shrink: 0;
       margin-inline-end: $spacing-03;
-    }
-
-    @include breakpoint-down(lg) {
-      padding-inline-end: $spacing-06;
     }
   }
 
@@ -1189,18 +1179,12 @@ $duration: 1000ms;
   }
 
   .#{$pkg-prefix}--page-header--scroller-button-container {
-    position: relative;
+    // Always in-flow alongside the Grid column — no absolute positioning.
+    // flex-shrink: 0 ensures it always occupies its natural 40px width and
+    // never competes for space with the tabs or tag overflow area.
     display: inline-flex;
+    flex-shrink: 0;
     align-items: center;
-    margin-inline-start: $spacing-03;
-
-    // On max breakpoint and above, position absolutely to the right (enough gutter space)
-    @include breakpoint(sm) {
-      position: absolute;
-      inset-block-start: 0;
-      inset-inline-end: 0;
-      margin-inline-start: 0;
-    }
   }
 
   @keyframes page-header-title-breadcrumb-animation {

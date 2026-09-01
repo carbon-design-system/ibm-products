@@ -26,7 +26,6 @@ import {
   Tag,
   Grid,
   Column,
-  Breadcrumb,
   BreadcrumbItem,
   TabList,
   Tab,
@@ -306,10 +305,23 @@ Default.argTypes = {
 export const ContentWithIcon = (args) => (
   <PageHeader.Root>
     <PageHeader.BreadcrumbBar pageActions={breadcrumbPageActions}>
-      <Breadcrumb>
+      <PageHeader.BreadcrumbOverflow
+        renderOverflowBreadcrumb={(hiddenItems) => (
+          <BreadcrumbItem data-floating-menu-container>
+            <OverflowMenu
+              align="bottom"
+              aria-label="Overflow menu in a breadcrumb"
+            >
+              {hiddenItems.map((el) => (
+                <OverflowMenuItem key={el.innerText} itemText={el.innerText} />
+              ))}
+            </OverflowMenu>
+          </BreadcrumbItem>
+        )}
+      >
         <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </Breadcrumb>
+      </PageHeader.BreadcrumbOverflow>
     </PageHeader.BreadcrumbBar>
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -332,10 +344,23 @@ export const ContentWithContextualActions = (args) => (
       renderIcon={BreadcrumbBeeIcon}
       pageActions={breadcrumbPageActions}
     >
-      <Breadcrumb>
+      <PageHeader.BreadcrumbOverflow
+        renderOverflowBreadcrumb={(hiddenItems) => (
+          <BreadcrumbItem data-floating-menu-container>
+            <OverflowMenu
+              align="bottom"
+              aria-label="Overflow menu in a breadcrumb"
+            >
+              {hiddenItems.map((el) => (
+                <OverflowMenuItem key={el.innerText} itemText={el.innerText} />
+              ))}
+            </OverflowMenu>
+          </BreadcrumbItem>
+        )}
+      >
         <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </Breadcrumb>
+      </PageHeader.BreadcrumbOverflow>
     </PageHeader.BreadcrumbBar>
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -364,12 +389,28 @@ export const ContentWithHeroImage = (args) => (
     <Grid>
       <Column lg={8} md={4} sm={4}>
         <PageHeader.BreadcrumbBar border={false} renderIcon={BreadcrumbBeeIcon}>
-          <Breadcrumb>
+          <PageHeader.BreadcrumbOverflow
+            renderOverflowBreadcrumb={(hiddenItems) => (
+              <BreadcrumbItem data-floating-menu-container>
+                <OverflowMenu
+                  align="bottom"
+                  aria-label="Overflow menu in a breadcrumb"
+                >
+                  {hiddenItems.map((el) => (
+                    <OverflowMenuItem
+                      key={el.innerText}
+                      itemText={el.innerText}
+                    />
+                  ))}
+                </OverflowMenu>
+              </BreadcrumbItem>
+            )}
+          >
             <BreadcrumbItem>
               <a href="/#">Breadcrumb 1</a>
             </BreadcrumbItem>
             <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-          </Breadcrumb>
+          </PageHeader.BreadcrumbOverflow>
         </PageHeader.BreadcrumbBar>
         <PageHeader.Content
           title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -409,10 +450,23 @@ export const ContentWithContextualActionsAndPageActions = (args) => (
       renderIcon={BreadcrumbBeeIcon}
       pageActions={breadcrumbPageActions}
     >
-      <Breadcrumb>
+      <PageHeader.BreadcrumbOverflow
+        renderOverflowBreadcrumb={(hiddenItems) => (
+          <BreadcrumbItem data-floating-menu-container>
+            <OverflowMenu
+              align="bottom"
+              aria-label="Overflow menu in a breadcrumb"
+            >
+              {hiddenItems.map((el) => (
+                <OverflowMenuItem key={el.innerText} itemText={el.innerText} />
+              ))}
+            </OverflowMenu>
+          </BreadcrumbItem>
+        )}
+      >
         <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
         <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-      </Breadcrumb>
+      </PageHeader.BreadcrumbOverflow>
     </PageHeader.BreadcrumbBar>
     <PageHeader.Content
       title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
@@ -781,10 +835,26 @@ export const CustomRenderWithCallbacks = (args) => {
           }
           pageActions={breadcrumbPageActions}
         >
-          <Breadcrumb>
+          <PageHeader.BreadcrumbOverflow
+            renderOverflowBreadcrumb={(hiddenItems) => (
+              <BreadcrumbItem data-floating-menu-container>
+                <OverflowMenu
+                  align="bottom"
+                  aria-label="Overflow menu in a breadcrumb"
+                >
+                  {hiddenItems.map((el) => (
+                    <OverflowMenuItem
+                      key={el.innerText}
+                      itemText={el.innerText}
+                    />
+                  ))}
+                </OverflowMenu>
+              </BreadcrumbItem>
+            )}
+          >
             <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
             <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-          </Breadcrumb>
+          </PageHeader.BreadcrumbOverflow>
         </PageHeader.BreadcrumbBar>
         <PageHeader.Content
           title={title}

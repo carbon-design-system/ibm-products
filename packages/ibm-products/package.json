@@ -69,7 +69,7 @@
     "@carbon/charts-react": "^1.27.16",
     "@carbon/ibm-products-utilities": "workspace:*",
     "@carbon/styles": "^1.110.1",
-    "@figma/code-connect": "^1.4.0",
+    "@figma/code-connect": "^2.0.0",
     "@ibm/telemetry-js-config-generator": "^2.0.1",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",

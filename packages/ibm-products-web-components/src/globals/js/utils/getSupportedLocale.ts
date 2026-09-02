@@ -19,9 +19,10 @@ export const getSupportedLocale = (
 
   try {
     // This line will throw an error if `locale` is not supported.
-    Intl.NumberFormat.supportedLocalesOf(locale);
-    // If no error is thrown, return `locale`,
-    supportedLocale = locale;
+    const supported = Intl.NumberFormat.supportedLocalesOf(
+      locale as string | string[]
+    );
+    return supported.length > 0 ? locale : defaultLocale;
   } catch (error) {
     // else return `defaultLocale`.
     supportedLocale = defaultLocale;

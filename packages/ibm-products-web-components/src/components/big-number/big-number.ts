@@ -69,19 +69,13 @@ class CDSBigNumber extends LitElement {
   @property({ type: Number })
   value?: number;
 
-  private _getSupportedLocale(
-    locale: Intl.LocalesArgument
-  ): Intl.LocalesArgument {
-    return getSupportedLocale(locale, DefaultLocale);
-  }
-
   private _formatValue(
     locale: Intl.LocalesArgument,
     value: number | null | undefined,
     fractionDigits: number,
     truncate: boolean
   ): string | null | undefined {
-    if (value === null || value === undefined || typeof value !== 'number') {
+    if (value === null || value === undefined) {
       return null;
     }
 
@@ -98,7 +92,7 @@ class CDSBigNumber extends LitElement {
     value: number | undefined,
     placeholder: string
   ): string {
-    const supportedLocale = this._getSupportedLocale(this.locale);
+    const supportedLocale = getSupportedLocale(this.locale, DefaultLocale);
     const truncatedValue = this._formatValue(
       supportedLocale,
       value,
@@ -114,8 +108,8 @@ class CDSBigNumber extends LitElement {
   ): boolean {
     return (
       !this.percentage &&
-      !!this.total &&
-      !!this.value &&
+      this.total !== undefined &&
+      this.value !== undefined &&
       this.total > this.value &&
       truncatedValue !== truncatedTotal
     );
@@ -136,14 +130,14 @@ class CDSBigNumber extends LitElement {
     const { loading, label, percentage, size, total, trending, value } = this;
 
     const bigNumberClasses = classMap({
-      [`${blockClass}`]: true,
-      [`${blockClass}--lg`]: size === 'lg',
-      [`${blockClass}--xl`]: size === 'xl',
+      [blockClass]: true,
+      [`${blockClass}--lg`]: size === BigNumberSize.Large,
+      [`${blockClass}--xl`]: size === BigNumberSize.XLarge,
     });
 
     const truncatedValue = this._getTruncatedValue(value, Characters.Dash);
     const truncatedTotal = this._getTruncatedValue(total, UNKNOWN);
-    const shouldDisplayDenominator: boolean = this._shouldDisplayDenominator(
+    const shouldDisplayDenominator = this._shouldDisplayDenominator(
       truncatedValue,
       truncatedTotal
     );
@@ -156,7 +150,7 @@ class CDSBigNumber extends LitElement {
 
     return html`
       <figure class=${bigNumberClasses}>
-        <!-- Label and tooltip  -->
+        <!-- Label slot  -->
         <span class="${blockClass}__row">
           <slot name="label">
             <figcaption class="${blockClass}__label">${label}</figcaption>

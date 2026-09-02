@@ -53,6 +53,7 @@ class CDSNotificationFooter extends HostListenerMixin(LitElement) {
       <cds-button
         kind="ghost"
         size="sm"
+        tooltip-text="Settings"
         class="${blockClass}__settings-button"
         @click=${onClickSettings}
       >

@@ -11,6 +11,7 @@ import { ChevronUp } from '@carbon/react/icons';
 import { usePageHeader } from './context';
 import { scrollableAncestor } from './utils';
 import { pkg } from '../../../settings';
+import pconsole from '../../../global/js/utils/pconsole';
 
 export interface PageHeaderScrollButtonProps extends IconButtonProps {
   collapseText?: string;
@@ -32,6 +33,16 @@ export const PageHeaderScrollButton = React.forwardRef<
   }: PageHeaderScrollButtonProps,
   ref
 ) {
+  if (!collapseText) {
+    pconsole.warn(
+      'PageHeaderScrollButton: The `collapseText` prop is the accessible label for the collapse button. Provide a translated string.'
+    );
+  }
+  if (!expandText) {
+    pconsole.warn(
+      'PageHeaderScrollButton: The `expandText` prop is the accessible label for the expand button. Provide a translated string.'
+    );
+  }
   const { refs, observerState } = usePageHeader();
   const fullyCollapsed = observerState.fullyCollapsed;
 

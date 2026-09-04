@@ -8,6 +8,7 @@ import React, {
   type ComponentType,
   type FunctionComponent,
   useEffect,
+  useId,
   useRef,
   RefObject,
 } from 'react';
@@ -37,9 +38,10 @@ export interface PageHeaderContentProps {
    */
   renderIcon?: ComponentType | FunctionComponent;
   /**
-   * The PageHeaderContent's title
+   * The PageHeaderContent's title. Accepts a string or ReactNode.
+   * If a string is provided, TruncatedText is used with automatic overflow handling.
    */
-  title: string;
+  title: React.ReactNode;
   /**
    * Specify the element or component used to render the title.
    */
@@ -80,7 +82,13 @@ export const PageHeaderContent = React.forwardRef<
 ) {
   const contentRef = useRef<HTMLDivElement>(null);
   const componentRef = (ref ?? contentRef) as RefObject<HTMLDivElement>;
-  const { setRefs, setPageActionsInstance, observerState } = usePageHeader();
+  const {
+    setRefs,
+    setPageActionsInstance,
+    observerState,
+    fullWidthGrid,
+    narrowGrid,
+  } = usePageHeader();
   const classNames = classnames(
     {
       [`${blockClass}__content`]: true,
@@ -89,6 +97,8 @@ export const PageHeaderContent = React.forwardRef<
   );
   const titleRef = useRef<HTMLHeadingElement>(null);
   const titleLines = titleTruncate ?? (contextualActions ? 1 : 2);
+  const generatedId = useId();
+  const truncatedTextId = `${blockClass}__content__title__truncatedText-${generatedId}`;
 
   useEffect(() => {
     if (componentRef?.current) {
@@ -108,13 +118,16 @@ export const PageHeaderContent = React.forwardRef<
 
   return (
     <Section as="div" className={classNames} ref={componentRef} {...other}>
-      <Grid>
+      <Grid fullWidth={!!fullWidthGrid} narrow={narrowGrid}>
         <Column lg={16} md={8} sm={4}>
           <div className={`${blockClass}__content__title-wrapper`}>
             <div className={`${blockClass}__content__start`}>
               <div className={`${blockClass}__content__title-container`}>
                 {IconElement && (
-                  <div className={`${blockClass}__content__icon`}>
+                  <div
+                    className={`${blockClass}__content__icon`}
+                    aria-hidden="true"
+                  >
                     <IconElement />
                   </div>
                 )}
@@ -123,14 +136,20 @@ export const PageHeaderContent = React.forwardRef<
                   ref={titleRef}
                   className={`${blockClass}__content__title`}
                 >
-                  <TruncatedText
-                    id={`${blockClass}__content__title__truncatedText`}
-                    className={`${blockClass}__content__title-text`}
-                    align="bottom"
-                    value={title}
-                    lines={titleLines}
-                    type="tooltip"
-                  />
+                  {typeof title === 'string' ? (
+                    <TruncatedText
+                      id={`${blockClass}__content__title__truncatedText`}
+                      className={`${blockClass}__content__title-text`}
+                      align="bottom"
+                      value={title}
+                      lines={titleLines}
+                      type="tooltip"
+                    />
+                  ) : (
+                    <span className={`${blockClass}__content__title-text`}>
+                      {title}
+                    </span>
+                  )}
                 </TitleTag>
               </div>
               {contextualActions && (
@@ -174,13 +193,9 @@ PageHeaderContent.propTypes = {
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
-   * The PageHeaderContent's subtitle
-   */
-  subtitle: PropTypes.string,
-  /**
    * The PageHeaderContent's title
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   /**
    * Specify the element or component used to render the title.
    */

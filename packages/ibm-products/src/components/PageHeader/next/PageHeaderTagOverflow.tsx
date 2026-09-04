@@ -41,10 +41,18 @@ export const PageHeaderTagOverflow = React.forwardRef<
 
   const localRef = useRef<HTMLDivElement>(null);
   const tagsContainerRef = (ref || localRef) as RefObject<HTMLDivElement>;
+
   // To close popover when window resizes
   useEffect(() => {
     const handleResize = () => {
-      // Close the popover when window resizes to prevent unwanted opens
+      // Return focus to the trigger before closing so keyboard users are not
+      // stranded when the popover is dismissed programmatically.
+      if (openPopover) {
+        const trigger = tagsContainerRef.current?.querySelector<HTMLElement>(
+          `#${overflowButtonId}`
+        );
+        trigger?.focus();
+      }
       setOpenPopover(false);
     };
 
@@ -52,7 +60,7 @@ export const PageHeaderTagOverflow = React.forwardRef<
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [openPopover, overflowButtonId, tagsContainerRef]);
 
   const handleOverflowClick = useCallback((event: React.MouseEvent) => {
     event.stopPropagation();
@@ -102,9 +110,12 @@ export const PageHeaderTagOverflow = React.forwardRef<
           overflowButtonId
         )}
         <PopoverContent>
-          <div className={`${blockClass}__tags-popover-list`}>
+          <ul
+            className={`${blockClass}__tags-popover-list`}
+            aria-label="Hidden tags"
+          >
             {renderPopoverContent?.(hiddenTags)}
-          </div>
+          </ul>
         </PopoverContent>
       </Popover>
     </div>

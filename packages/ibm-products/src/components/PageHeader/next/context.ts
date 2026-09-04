@@ -42,6 +42,8 @@ type PageHeaderContextType = {
   isFunctionalContentActions?: boolean;
   disableStickyTabBar?: boolean;
   setDisableStickyTabBar?: React.Dispatch<React.SetStateAction<boolean>>;
+  fullWidthGrid?: boolean | 'xl';
+  narrowGrid?: boolean;
 };
 
 export const PageHeaderContext = createContext<
@@ -58,6 +60,8 @@ export const PageHeaderContext = createContext<
   },
   disableStickyTabBar: false,
   setDisableStickyTabBar: () => {},
+  fullWidthGrid: undefined,
+  narrowGrid: undefined,
 });
 
 export function usePageHeader() {

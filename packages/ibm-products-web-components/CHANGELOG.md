@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.47.0-rc.0`
+## `@carbon/ibm-products-web-components@0.47.0`
 ### Features :rocket:
 - feat(addselect): single select patterns (#9776)
 

@@ -98,8 +98,7 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
     });
 
     return (
-      <Layer
-        withBackground
+      <div
         className={cx(`${blockClass}__main-content`, className, {
           [`${blockClass}__flush`]: isFlush,
         })}
@@ -107,7 +106,7 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
         {...rest}
       >
         {children}
-      </Layer>
+      </div>
     );
   }
 );
@@ -258,15 +257,19 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
     }, [influencerPanelOpen, influencerPanelTriggerRef]);
 
     return !isSm ? (
-      <aside
-        aria-label={influencerPanelAriaLabel}
-        className={cx(`${blockClass}__influencer`, className, {
-          [`${blockClass}__flush`]: isFlush,
-        })}
-        ref={ref}
-      >
-        {children}
-      </aside>
+      // Wrap influencer in Layer to bump Carbon token level (matching old tearsheet behavior).
+      // __layer has display:contents so it doesn't affect layout.
+      <Layer className={`${blockClass}__layer`}>
+        <aside
+          aria-label={influencerPanelAriaLabel}
+          className={cx(`${blockClass}__influencer`, className, {
+            [`${blockClass}__flush`]: isFlush,
+          })}
+          ref={ref}
+        >
+          {children}
+        </aside>
+      </Layer>
     ) : (
       <SidePanel
         size="sm"

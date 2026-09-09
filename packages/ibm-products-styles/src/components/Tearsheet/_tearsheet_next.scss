@@ -176,6 +176,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
+    background-color: $layer;
     border-block-end: 1px solid $border-subtle-01;
     margin-block: 0;
     max-block-size: 50vh;
@@ -672,9 +673,15 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   }
 }
 
+.#{$block-class__next}__layer {
+  display: contents;
+}
+
 .#{$block-class__next}__main-content {
   position: relative;
+  background-color: $background;
 }
+
 .#{$block-class__next}__side-panel {
   position: absolute;
   z-index: 9999;

@@ -33,9 +33,8 @@ class CDSPageHeaderContent extends LitElement {
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
-    this._hasContextualActions = Boolean(
-      (target as HTMLSlotElement).assignedNodes()
-    );
+    this._hasContextualActions =
+      (target as HTMLSlotElement).assignedNodes().length > 0;
     if (this._hasContextualActions) {
       this.setAttribute('contextual-actions', 'true');
     } else {

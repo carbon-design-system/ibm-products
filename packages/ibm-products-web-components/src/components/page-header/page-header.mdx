@@ -192,6 +192,24 @@ The `c4p-page-header-tabs` component has a `tags` slot for tag components.
 </c4p-page-header>
 ```
 
+## Custom events
+
+`c4p-page-header` dispatches the following custom events when scroll state changes. All events bubble and are composed.
+
+| Event | Detail | Description |
+|---|---|---|
+| `c4p-page-header-fully-collapsed` | `{ fullyCollapsed: boolean }` | Fired when the page header content scrolls fully out of view (`true`) or back into view (`false`). Equivalent to the React `onContentFullyCollapsed` prop. |
+| `c4p-page-header-title-clipped` | `{ titleClipped: boolean }` | Fired when the page header title is clipped by the viewport (`true`) or becomes visible again (`false`). Equivalent to the React `onTitleClipped` prop. |
+| `c4p-page-header-content-actions-clipped` | `{ contentActionsClipped: boolean }` | Fired when the page actions area is clipped by the breadcrumb bar (`true`) or becomes visible again (`false`). Equivalent to the React `onContentActionsClipped` prop. |
+
+```javascript
+document
+  .querySelector('c4p-page-header')
+  .addEventListener('c4p-page-header-fully-collapsed', (event) => {
+    console.log('fully collapsed:', event.detail.fullyCollapsed);
+  });
+```
+
 ## Component API
 
 <ArgTypes of="c4p-page-header" />

@@ -8,6 +8,7 @@
  */
 
 import { html } from 'lit';
+import styles from './page-header.scss?lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -158,4 +159,5 @@ export class PageHeaderScroller extends CDSButton {
       </span>
     </cds-icon-button>`;
   }
+  static styles = styles;
 }

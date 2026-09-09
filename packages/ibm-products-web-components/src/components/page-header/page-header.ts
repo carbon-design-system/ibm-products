@@ -39,6 +39,9 @@ class CDSPageHeader extends LitElement {
   context: pageHeaderContextType = {};
 
   private resizeObserver: ResizeObserver | undefined;
+  private contentObserver: IntersectionObserver | undefined;
+  private titleObserver: IntersectionObserver | undefined;
+  private actionsObserver: IntersectionObserver | undefined;
 
   updated(changedProperties: Map<string, any>) {
     super.updated(changedProperties);
@@ -92,19 +95,19 @@ class CDSPageHeader extends LitElement {
 
     const predefinedContentPadding = 24;
     const totalHeaderOffset = getHeaderOffset(this);
-    const contentObserver = new IntersectionObserver(
+    this.contentObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            this.context = {
-              ...this.context,
-              fullyCollapsed: true,
-            };
-          } else {
-            this.context = {
-              ...this.context,
-              fullyCollapsed: false,
-            };
+          const fullyCollapsed = !entry.isIntersecting;
+          if (this.context.fullyCollapsed !== fullyCollapsed) {
+            this.context = { ...this.context, fullyCollapsed };
+            this.dispatchEvent(
+              new CustomEvent(`${prefix}-page-header-fully-collapsed`, {
+                bubbles: true,
+                composed: true,
+                detail: { fullyCollapsed },
+              })
+            );
           }
         });
       },
@@ -115,19 +118,19 @@ class CDSPageHeader extends LitElement {
       }
     );
 
-    const titleObserver = new IntersectionObserver(
+    this.titleObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            this.context = {
-              ...this.context,
-              titleClipped: true,
-            };
-          } else {
-            this.context = {
-              ...this.context,
-              titleClipped: false,
-            };
+          const titleClipped = !entry.isIntersecting;
+          if (this.context.titleClipped !== titleClipped) {
+            this.context = { ...this.context, titleClipped };
+            this.dispatchEvent(
+              new CustomEvent(`${prefix}-page-header-title-clipped`, {
+                bubbles: true,
+                composed: true,
+                detail: { titleClipped },
+              })
+            );
           }
         });
       },
@@ -138,19 +141,19 @@ class CDSPageHeader extends LitElement {
       }
     );
 
-    const actionsObserver = new IntersectionObserver(
+    this.actionsObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            this.context = {
-              ...this.context,
-              contentActionsClipped: true,
-            };
-          } else {
-            this.context = {
-              ...this.context,
-              contentActionsClipped: false,
-            };
+          const contentActionsClipped = !entry.isIntersecting;
+          if (this.context.contentActionsClipped !== contentActionsClipped) {
+            this.context = { ...this.context, contentActionsClipped };
+            this.dispatchEvent(
+              new CustomEvent(`${prefix}-page-header-content-actions-clipped`, {
+                bubbles: true,
+                composed: true,
+                detail: { contentActionsClipped },
+              })
+            );
           }
         });
       },
@@ -163,14 +166,17 @@ class CDSPageHeader extends LitElement {
       }
     );
     if (contentElement) {
-      contentObserver.observe(contentElement);
-      titleObserver.observe(contentElement);
-      actionsObserver.observe(contentElement);
+      this.contentObserver.observe(contentElement);
+      this.titleObserver.observe(contentElement);
+      this.actionsObserver.observe(contentElement);
     }
   }
 
   disconnectedCallback() {
-    this.resizeObserver?.disconnect(); // Clean up
+    this.resizeObserver?.disconnect();
+    this.contentObserver?.disconnect();
+    this.titleObserver?.disconnect();
+    this.actionsObserver?.disconnect();
     super.disconnectedCallback();
   }
 

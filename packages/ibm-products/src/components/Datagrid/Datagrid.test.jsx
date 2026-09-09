@@ -2021,6 +2021,23 @@ describe(componentName, () => {
       );
     });
   });
+  it('should not announce sortable headers as toggle buttons (issue #9839)', () => {
+    render(<SortableColumns data-testid={dataTestId} />);
+
+    const rows = screen.getAllByRole('row');
+    const headerRow = rows[0];
+    const columnHeaders = within(headerRow).getAllByRole('columnheader');
+
+    Array.from(columnHeaders).map(async (colHeader, index) => {
+      if (index === defaultHeader.length) {
+        return;
+      }
+      const sortableColumnHeaderButton = within(colHeader).getByRole('button');
+      // aria-pressed made screen readers announce the header as a toggle
+      // button; sort direction is conveyed by aria-sort on the columnheader.
+      expect(sortableColumnHeaderButton.getAttribute('aria-pressed')).toBeNull();
+    });
+  });
   it('Customizing Columns disable save button when un-select all columns', async () => {
     const columnsWithoutSticky = [
       {

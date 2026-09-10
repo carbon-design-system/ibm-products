@@ -77,6 +77,56 @@ integration of action buttons aligned with the content section.
 </c4p-page-header>
 ```
 
+### Custom title content (`title` slot)
+
+The `title` attribute on `c4p-page-header-content` accepts a plain string. When
+you need arbitrary content in the title position — for example a status badge
+alongside the heading text — use the `title` named slot instead. When the
+`title` slot is populated, the `title` attribute is ignored.
+
+```html
+<c4p-page-header-content>
+  <span slot="title">
+    <strong>My page</strong>
+    <cds-tag type="green" size="sm">Live</cds-tag>
+  </span>
+</c4p-page-header-content>
+```
+
+### Custom breadcrumb title content (`breadcrumb-content` slot)
+
+When the page header uses `c4p-page-header-breadcrumbs-set`, the collapsed
+breadcrumb bar shows the page title as a truncated text link. Use the
+`breadcrumb-content` slot to replace that truncated text with custom content —
+useful when the collapsed title should match a rich `title` slot rather than a
+plain string.
+
+```html
+<c4p-page-header-breadcrumbs-set title="My page" breadcrumbs-data="...">
+  <span slot="breadcrumb-content">
+    <strong>My page</strong>
+    <cds-tag type="green" size="sm">Live</cds-tag>
+  </span>
+</c4p-page-header-breadcrumbs-set>
+```
+
+### Rich subtitle content (`subtitle-content` slot)
+
+The `subtitle` attribute on `c4p-page-header-content-text` accepts a plain
+string. For rich subtitle content — links, badges, or status indicators — use
+the `subtitle-content` named slot. When the slot is populated it is rendered
+inside the subtitle heading element in place of the `subtitle` attribute value.
+
+```html
+<c4p-page-header-content-text>
+  <span slot="subtitle-content">
+    Version 2.4
+    <cds-link href="/changelog">View changelog</cds-link>
+  </span>
+  Body text goes here.
+</c4p-page-header-content-text>
+```
+
 ### Content With Hero Image
 
 <Canvas

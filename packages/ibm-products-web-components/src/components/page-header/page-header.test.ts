@@ -395,6 +395,244 @@ describe('c4p-page-header', function () {
     });
   });
 
+  describe('c4p-page-header-content title slot', () => {
+    it('should render custom title slot content in place of the title attribute', async () => {
+      const el: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Attribute title">
+            <span slot="title" class="custom-title">Custom title node</span>
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+
+      const content = el.querySelector('c4p-page-header-content') as any;
+      await content?.updateComplete;
+
+      const titleSlot = content?.shadowRoot?.querySelector(
+        'slot[name="title"]'
+      ) as HTMLSlotElement;
+      const assigned = titleSlot?.assignedNodes({ flatten: true });
+
+      const customTitle = assigned.find(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE &&
+          (node as Element).classList.contains('custom-title')
+      );
+      expect(customTitle).to.exist;
+      expect(customTitle?.textContent?.trim()).toBe('Custom title node');
+    });
+
+    it('should suppress the title attribute heading when the title slot is populated', async () => {
+      const el: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Attribute title">
+            <span slot="title">Custom title node</span>
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+
+      const content = el.querySelector('c4p-page-header-content') as any;
+      await content?.updateComplete;
+
+      // The generated heading (h1/h2/…) should not be present when the slot is used
+      const generatedHeading = content?.shadowRoot?.querySelector(
+        `.${prefix}--page-header__content__title`
+      );
+      expect(generatedHeading).to.not.exist;
+    });
+
+    it('should still render the title attribute heading when the title slot is empty', async () => {
+      const el: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Attribute title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+
+      const content = el.querySelector('c4p-page-header-content') as any;
+      await content?.updateComplete;
+
+      const generatedHeading = content?.shadowRoot?.querySelector(
+        `.${prefix}--page-header__content__title`
+      );
+      expect(generatedHeading).to.exist;
+      expect(generatedHeading?.textContent?.trim()).toBe('Attribute title');
+    });
+  });
+
+  describe('c4p-page-header-breadcrumbs-set breadcrumb-content slot', () => {
+    it('should render custom breadcrumb-content slot in the title breadcrumb', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-breadcrumbs-set
+          title="Attribute title"
+          .breadcrumbsData="${[{ text: 'Home', href: '#' }]}"
+        >
+          <span slot="breadcrumb-content" class="custom-bc">Custom BC</span>
+        </c4p-page-header-breadcrumbs-set>
+      `);
+
+      await (el as any).updateComplete;
+
+      // The slotted node must be reachable in light DOM
+      const customBc = el.querySelector('.custom-bc');
+      expect(customBc).to.exist;
+      expect(customBc?.textContent?.trim()).toBe('Custom BC');
+    });
+
+    it('should render the breadcrumb-content slot via the shadow slot element', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-breadcrumbs-set
+          title="Attribute title"
+          .breadcrumbsData="${[{ text: 'Home', href: '#' }]}"
+        >
+          <span slot="breadcrumb-content">Custom BC</span>
+        </c4p-page-header-breadcrumbs-set>
+      `);
+
+      await (el as any).updateComplete;
+
+      const bcSlot = el.shadowRoot?.querySelector(
+        'slot[name="breadcrumb-content"]'
+      ) as HTMLSlotElement;
+      expect(bcSlot).to.exist;
+
+      const assigned = bcSlot?.assignedNodes({ flatten: true });
+      expect(assigned.length).toBeGreaterThan(0);
+      expect(assigned[0].textContent?.trim()).toBe('Custom BC');
+    });
+
+    it('should show truncated text when breadcrumb-content slot is empty', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-breadcrumbs-set
+          title="Page title"
+          .breadcrumbsData="${[{ text: 'Home', href: '#' }]}"
+        ></c4p-page-header-breadcrumbs-set>
+      `);
+
+      await (el as any).updateComplete;
+
+      const truncatedText = el.shadowRoot?.querySelector('c4p-truncated-text');
+      expect(truncatedText).to.exist;
+      expect(truncatedText?.getAttribute('value')).toBe('Page title');
+    });
+
+    it('should hide truncated text when breadcrumb-content slot is populated', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-breadcrumbs-set
+          title="Page title"
+          .breadcrumbsData="${[{ text: 'Home', href: '#' }]}"
+        >
+          <span slot="breadcrumb-content">Custom BC</span>
+        </c4p-page-header-breadcrumbs-set>
+      `);
+
+      await (el as any).updateComplete;
+      // Trigger slotchange processing
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const truncatedText = el.shadowRoot?.querySelector('c4p-truncated-text');
+      expect(truncatedText).to.not.exist;
+    });
+  });
+
+  describe('c4p-page-header-content-text subtitle-content slot', () => {
+    it('should render the subtitle-content slot inside the subtitle heading', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content-text>
+          <span slot="subtitle-content" class="custom-subtitle"
+            >Rich subtitle</span
+          >
+        </c4p-page-header-content-text>
+      `);
+
+      await (el as any).updateComplete;
+
+      const customSubtitle = el.querySelector('.custom-subtitle');
+      expect(customSubtitle).to.exist;
+      expect(customSubtitle?.textContent?.trim()).toBe('Rich subtitle');
+    });
+
+    it('should render the subtitle-content slot via the shadow slot element', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content-text>
+          <span slot="subtitle-content">Rich subtitle</span>
+        </c4p-page-header-content-text>
+      `);
+
+      await (el as any).updateComplete;
+
+      const subtitleSlot = el.shadowRoot?.querySelector(
+        'slot[name="subtitle-content"]'
+      ) as HTMLSlotElement;
+      expect(subtitleSlot).to.exist;
+
+      const assigned = subtitleSlot?.assignedNodes({ flatten: true });
+      expect(assigned.length).toBeGreaterThan(0);
+      expect(assigned[0].textContent?.trim()).toBe('Rich subtitle');
+    });
+
+    it('should render the subtitle attribute text when no subtitle-content slot is used', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content-text
+          subtitle="Plain subtitle"
+          subtitle-level="h2"
+        >
+        </c4p-page-header-content-text>
+      `);
+
+      await (el as any).updateComplete;
+
+      const subtitleEl = el.shadowRoot?.querySelector(
+        `.${prefix}--page-header__content__subtitle`
+      );
+      expect(subtitleEl).to.exist;
+      expect(subtitleEl?.textContent?.trim()).toBe('Plain subtitle');
+    });
+
+    it('should not render the subtitle heading when both subtitle attribute and slot are empty', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content-text></c4p-page-header-content-text>
+      `);
+
+      await (el as any).updateComplete;
+
+      const subtitleEl = el.shadowRoot?.querySelector(
+        `.${prefix}--page-header__content__subtitle`
+      );
+      expect(subtitleEl).to.not.exist;
+    });
+
+    it('should suppress the subtitle attribute when the subtitle-content slot is populated', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content-text subtitle="Plain subtitle">
+          <span slot="subtitle-content">Rich subtitle</span>
+        </c4p-page-header-content-text>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const subtitleEl = el.shadowRoot?.querySelector(
+        `.${prefix}--page-header__content__subtitle`
+      );
+      // The subtitle heading is rendered because slot content is present
+      expect(subtitleEl).to.exist;
+      // The plain attribute text must NOT appear as a direct shadow text node
+      expect(subtitleEl?.textContent?.trim()).not.toBe('Plain subtitle');
+
+      // The slot element is present and the slotted node is assigned
+      const subtitleSlot = subtitleEl?.querySelector(
+        'slot[name="subtitle-content"]'
+      ) as HTMLSlotElement;
+      expect(subtitleSlot).to.exist;
+      const assigned = subtitleSlot?.assignedNodes({ flatten: true });
+      expect(assigned.length).toBeGreaterThan(0);
+      expect(assigned[0].textContent?.trim()).toBe('Rich subtitle');
+    });
+  });
+
   describe('c4p-page-header-tabs', () => {
     it('should render tabs', async () => {
       const el: CDSPageHeaderTabs = await fixture(

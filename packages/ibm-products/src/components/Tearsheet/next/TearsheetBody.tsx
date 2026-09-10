@@ -257,9 +257,6 @@ export const Influencer = forwardRef<HTMLDivElement, InfluencerProps>(
     }, [influencerPanelOpen, influencerPanelTriggerRef]);
 
     return !isSm ? (
-      // Wrap influencer in Layer to bump Carbon token level (matching old tearsheet behavior).
-      // __layer has display:contents so it doesn't affect layout.
-
       <aside
         aria-label={influencerPanelAriaLabel}
         className={cx(`${blockClass}__influencer`, className, {

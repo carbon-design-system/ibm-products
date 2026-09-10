@@ -24,6 +24,7 @@ import {
   ComposedModal,
   type ComposedModalProps,
   unstable_FeatureFlags as FeatureFlags,
+  ModalBody,
   usePrefix,
 } from '@carbon/react';
 import { blockClass, TearsheetContext } from './context';
@@ -428,23 +429,20 @@ const TearsheetInternal = forwardRef<
           >
             {header}
 
-            <div
-              className={cx(
-                `${carbonPrefix}--modal-content`,
-                `${blockClass}__body-layout`,
-                {
-                  [`${blockClass}__body-layout--has-influencer`]:
-                    influencer && !isSm,
-                }
-              )}
+            <ModalBody
+              className={cx(`${blockClass}__body-layout`, {
+                [`${blockClass}__body-layout--has-influencer`]:
+                  influencer && !isSm,
+              })}
               ref={bodyRef}
+              level={0}
             >
               {influencer}
 
               {body}
 
               {footer}
-            </div>
+            </ModalBody>
           </ComposedModal>
         </FeatureFlags>
       </TearsheetContext.Provider>

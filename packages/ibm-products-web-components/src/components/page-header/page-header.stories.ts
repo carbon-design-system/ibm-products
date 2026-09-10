@@ -113,14 +113,37 @@ export const Default = {
               .breadcrumbsData="${sampleBreadcrumbsDefault}"
               title="${title}"
             ></c4p-page-header-breadcrumbs-set>
-            <div slot="content-actions">
-              <div class="content-actions-wrapper">
-                <cds-button size="md"
-                  >Primary action
-                  ${iconLoader(Add16, { slot: 'icon' })}</cds-button
-                >
-              </div>
-            </div>
+            <c4p-page-header-actions-set
+              slot="content-actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+                { label: 'action 4' },
+                { label: 'Add Primary action' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 4</span>
+              </cds-icon-button>
+              <cds-button size="md" aria-label="Add Primary action"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
+            </c4p-page-header-actions-set>
             <c4p-page-header-actions-set
               slot="page-actions"
               .actionsData="${[
@@ -154,12 +177,37 @@ export const Default = {
               ship faster, scale efficiently, and stay in control every step of
               the way.
             </c4p-page-header-content-text>
-            <div slot="page-actions">
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+                { label: 'action 4' },
+                { label: 'Add Primary action' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 4</span>
+              </cds-icon-button>
               <cds-button size="md" aria-label="Add Primary action"
                 >Primary action
                 ${iconLoader(Add16, { slot: 'icon' })}</cds-button
               >
-            </div>
+            </c4p-page-header-actions-set>
           </c4p-page-header-content>
           <c4p-page-header-tabs>
             <c4p-page-header-scroller slot="scroller">

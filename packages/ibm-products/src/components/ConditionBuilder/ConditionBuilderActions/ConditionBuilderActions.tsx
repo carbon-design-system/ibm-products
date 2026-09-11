@@ -82,11 +82,11 @@ const ConditionBuilderActions = ({
       (action) => action.id === selectedId
     );
     const { preventRemove } =
-      onRemoveItem?.({
+      (onRemoveItem?.({
         type: 'action',
         state: rootState as any,
         item: actionToRemove,
-      }) ?? {};
+      }) as { preventRemove?: boolean }) ?? {};
     if (!preventRemove) {
       setActionState?.(
         actionState.filter((action) => action.id !== selectedId)

@@ -156,12 +156,12 @@ const ConditionGroupBuilder = ({
       ? 'subgroup'
       : 'condition';
     const { preventRemove } =
-      onRemoveItem?.({
+      (onRemoveItem?.({
         type: removeType,
         state: rootState as any,
         item: itemToRemove,
         group,
-      }) ?? {};
+      }) as { preventRemove?: boolean }) ?? {};
 
     if (preventRemove) {
       return;

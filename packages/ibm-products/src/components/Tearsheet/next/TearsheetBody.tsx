@@ -98,8 +98,7 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
     });
 
     return (
-      <Layer
-        withBackground
+      <div
         className={cx(`${blockClass}__main-content`, className, {
           [`${blockClass}__flush`]: isFlush,
         })}
@@ -107,7 +106,7 @@ export const MainContent = forwardRef<HTMLDivElement, MainContentProps>(
         {...rest}
       >
         {children}
-      </Layer>
+      </div>
     );
   }
 );

@@ -94,12 +94,8 @@ export const Default = {
       <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main aria-label="Header">
+
+      <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
             border=${border}
@@ -113,11 +109,746 @@ export const Default = {
               .breadcrumbsData="${sampleBreadcrumbsDefault}"
               title="${title}"
             ></c4p-page-header-breadcrumbs-set>
+            <c4p-page-header-actions-set
+              slot="content-actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+                { label: 'action 4' },
+                { label: 'Add Primary action' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 4</span>
+              </cds-icon-button>
+              <cds-button size="md" aria-label="Add Primary action"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
+            </c4p-page-header-actions-set>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+            </c4p-page-header-actions-set>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="${title}" title-level="h1">
+            <c4p-page-header-content-text
+              subtitle="Subtitle"
+              subtitle-level="h2"
+            >
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </c4p-page-header-content-text>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+                { label: 'action 4' },
+                { label: 'Add Primary action' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 4</span>
+              </cds-icon-button>
+              <cds-button size="md" aria-label="Add Primary action"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
+            </c4p-page-header-actions-set>
+          </c4p-page-header-content>
+          <c4p-page-header-tabs>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+                >Tab 2</cds-tab
+              >
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+                >Tab 3</cds-tab
+              >
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+                >Tab 4</cds-tab
+              >
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+                >Tab 5</cds-tab
+              >
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+                >Tab 6</cds-tab
+              >
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+                >Tab 7</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+        <div class="tabs-demo">
+          <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+            Tab Panel 1
+          </div>
+          <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+            Tab Panel 2
+          </div>
+          <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+            Tab Panel 3
+          </div>
+          <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+            Tab Panel 4
+          </div>
+          <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+            Tab Panel 5
+          </div>
+          <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
+            Tab Panel 6
+          </div>
+          <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
+            Tab Panel 7
+          </div>
+        </div>
+      </main>
+    `;
+  },
+};
+export const ContentWithIcon = {
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <main aria-label="Header" class="page-header-story__wrapper">
+      <c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          ${iconLoader(Bee16, { slot: 'icon' })}
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${iconLoader(Activity16, { slot: 'icon' })}
+            <span slot="tooltip-content">action 1</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${iconLoader(AiGenerate16, { slot: 'icon' })}
+            <span slot="tooltip-content">action 2</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+            <span slot="tooltip-content">action 3</span>
+          </cds-icon-button>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          title-level="h1"
+        >
+          ${iconLoader(Bee32, { slot: 'icon' })}
+          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+      </c4p-page-header>
+    </main>
+  `,
+};
+
+export const ContentWithContextualActions = {
+  render: () =>
+    html` <style>
+        ${styles}
+      </style>
+      <main aria-label="Header" class="page-header-story__wrapper">
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            ${iconLoader(Bee16, { slot: 'icon' })}
+            <cds-breadcrumb>
+              <cds-breadcrumb-item>
+                <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+              </cds-breadcrumb-item>
+              <cds-breadcrumb-item>
+                <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+              </cds-breadcrumb-item>
+            </cds-breadcrumb>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${iconLoader(Activity16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 1</span>
+            </cds-icon-button>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${iconLoader(AiGenerate16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 2</span>
+            </cds-icon-button>
+            <cds-icon-button
+              slot="page-actions"
+              kind="ghost"
+              size="md"
+              align="bottom"
+            >
+              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 3</span>
+            </cds-icon-button>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+            title-level="h1"
+          >
+            <div slot="contextual-actions">
+              <cds-tag type="blue" size="lg">Tag</cds-tag>
+            </div>
+            <c4p-page-header-content-text
+              subtitle="Subtitle"
+              subtitle-level="h2"
+            >
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </c4p-page-header-content-text>
+          </c4p-page-header-content> </c4p-page-header
+        >,
+      </main>`,
+};
+
+export const ContentWithHeroImage = {
+  render: () =>
+    html`
+    <style>
+        ${styles}
+      </style>
+      <main aria-label="Header" class="page-header-story__wrapper">
+<c4p-page-header>
+      <div class="cds--css-grid">
+        <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
+          <c4p-page-header-breadcrumb .border=${false} within-grid>
+        ${iconLoader(Bee16, { slot: 'icon' })}
+        <cds-breadcrumb>
+          <cds-breadcrumb-item>
+            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+          </cds-breadcrumb-item>
+          <cds-breadcrumb-item>
+            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+          </cds-breadcrumb-item>
+        </cds-breadcrumb>
+      </c4p-page-header-breadcrumb>
+          <c4p-page-header-content
+            within-grid
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+            title-level="h1"
+            >
+            <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
+             Built for modern teams, our technology platform simplifies complexity with powerful APIs, real-time collaboration tools, and seamless integration. From deployment to monitoring, we help you ship faster, scale efficiently, and stay in control every step of the way.
+            </c4p-page-header-content-text>
+          </c4p-page-header-content>
+        </div>
+        <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
+          <c4p-page-header-hero-image object-fit="cover">
+            <picture>
+              <source
+                srcset="${image1}"
+                media=${`(min-width: ${breakpoints.lg.width})`}
+              ></source>
+              <source
+                srcset="${image2}"
+                media=${`(max-width: ${breakpoints.lg.width})`}
+              ></source>
+              <img
+                src="${image1}"
+                alt="a default image"
+              />
+            </picture>
+          </c4p-page-header-hero-image>
+        </div>
+      </div>
+      </div>
+    </c4p-page-header>
+      </main>
+    `,
+};
+
+export const ContentWithContextualActionsAndPageActions = {
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <main aria-label="Header" class="page-header-story__wrapper">
+      <c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          ${iconLoader(Bee16, { slot: 'icon' })}
+          <cds-breadcrumb>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          </cds-breadcrumb>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${iconLoader(Activity16, { slot: 'icon' })}
+            <span slot="tooltip-content">action 1</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${iconLoader(AiGenerate16, { slot: 'icon' })}
+            <span slot="tooltip-content">action 2</span>
+          </cds-icon-button>
+          <cds-icon-button
+            slot="page-actions"
+            kind="ghost"
+            size="md"
+            align="bottom"
+          >
+            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+            <span slot="tooltip-content">action 3</span>
+          </cds-icon-button>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          title-level="h1"
+        >
+          <div slot="contextual-actions">
+            <cds-tag type="blue" size="lg">Tag</cds-tag>
+          </div>
+          <div slot="page-actions">
+            <cds-button size="md" aria-label="Add Primary action"
+              >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+            >
+          </div>
+          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+      </c4p-page-header>
+    </main>
+  `,
+};
+
+const sampleBreadcrumbs = [
+  {
+    text: 'Breadcrumb 1',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 2',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 3',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Breadcrumb 4',
+    href: 'https://www.carbondesignsystem.com',
+  },
+  {
+    text: 'Virtual-Machine-DAL-really-long-title-example',
+    href: 'https://www.carbondesignsystem.com',
+  },
+];
+const generatedTags = generateTags({ count: 10 });
+export const TabBarWithTabsAndTags = {
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
+      <cds-header-name href="javascript:void 0" prefix="IBM"
+        >[Platform]</cds-header-name
+      >
+    </cds-header>
+    <main class="page-header-story__wrapper-with-ui-shell" aria-label="Header">
+      <c4p-page-header>
+        <c4p-page-header-breadcrumb>
+          ${iconLoader(Bee16, { slot: 'icon' })}
+          <c4p-page-header-breadcrumbs-set
+            .breadcrumbsData="${sampleBreadcrumbs}"
+            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          ></c4p-page-header-breadcrumbs-set>
+          <c4p-page-header-actions-set
+            slot="page-actions"
+            .actionsData="${[
+              { label: 'action 1' },
+              { label: 'action 2' },
+              { label: 'action 3' },
+            ]}"
+          >
+            <cds-icon-button kind="ghost" size="md" align="bottom">
+              ${iconLoader(Activity16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 1</span>
+            </cds-icon-button>
+            <cds-icon-button kind="ghost" size="md" align="bottom">
+              ${iconLoader(AiGenerate16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 2</span>
+            </cds-icon-button>
+            <cds-icon-button kind="ghost" size="md" align="bottom">
+              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+              <span slot="tooltip-content">action 3</span>
+            </cds-icon-button>
+          </c4p-page-header-actions-set>
+        </c4p-page-header-breadcrumb>
+        <c4p-page-header-content
+          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
+          title-level="h1"
+        >
+          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+        <c4p-page-header-tabs>
+          <cds-tabs value="tab-1">
+            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+              >Tab 1</cds-tab
+            >
+            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+              >Tab 2</cds-tab
+            >
+            <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+              >Tab 3</cds-tab
+            >
+            <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+              >Tab 4</cds-tab
+            >
+            <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+              >Tab 5</cds-tab
+            >
+            <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+              >Tab 6</cds-tab
+            >
+            <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+              >Tab 7</cds-tab
+            >
+          </cds-tabs>
+          <div slot="tags">
+            <c4p-page-header-tags-set
+              .tagsData="${generatedTags ?? []}"
+            ></c4p-page-header-tags-set>
+          </div>
+        </c4p-page-header-tabs>
+      </c4p-page-header>
+      <div class="tabs-demo">
+        <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+          Tab Panel 1
+        </div>
+        <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+          Tab Panel 2
+        </div>
+        <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+          Tab Panel 3
+        </div>
+        <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+          Tab Panel 4
+        </div>
+        <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+          Tab Panel 5
+        </div>
+        <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
+          Tab Panel 6
+        </div>
+        <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
+          Tab Panel 7
+        </div>
+      </div>
+    </main>
+  `,
+};
+
+export const Compact = {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      border,
+      pageActionsFlush,
+      contentActionsFlush,
+      title,
+      renderBreadcrumbIcon,
+    } = args ?? {};
+    const sampleBreadcrumbsCompact = [
+      {
+        text: 'Breadcrumb 1',
+        href: 'https://www.carbondesignsystem.com',
+      },
+      {
+        text: 'Breadcrumb 2',
+        href: 'https://www.carbondesignsystem.com',
+      },
+      {
+        text: 'Breadcrumb 3',
+        href: 'https://www.carbondesignsystem.com',
+      },
+      {
+        text: 'Breadcrumb 4',
+        href: 'https://www.carbondesignsystem.com',
+      },
+      {
+        text: 'Virtual-Machine-DAL-really-long-title-example',
+        href: 'https://www.carbondesignsystem.com',
+      },
+    ];
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <main class="page-header-story__wrapper" aria-label="Header">
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb
+            border=${border}
+            ?page-actions-flush="${pageActionsFlush}"
+            ?content-actions-flush="${contentActionsFlush}"
+          >
+            ${renderBreadcrumbIcon
+              ? iconLoader(Bee16, { slot: 'icon' })
+              : undefined}
+            <c4p-page-header-breadcrumbs-set
+              .breadcrumbsData="${sampleBreadcrumbsCompact}"
+              title="${title}"
+            ></c4p-page-header-breadcrumbs-set>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+            </c4p-page-header-actions-set>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-tabs>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+                >Tab 2</cds-tab
+              >
+              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+                >Tab 3</cds-tab
+              >
+              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+                >Tab 4</cds-tab
+              >
+              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+                >Tab 5</cds-tab
+              >
+              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+                >Tab 6</cds-tab
+              >
+              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+                >Tab 7</cds-tab
+              >
+            </cds-tabs>
+            <div slot="tags">
+              <c4p-page-header-tags-set
+                .tagsData="${generatedTags ?? []}"
+              ></c4p-page-header-tags-set>
+            </div>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+        <div class="tabs-demo">
+          <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+            Tab Panel 1
+          </div>
+          <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+            Tab Panel 2
+          </div>
+          <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+            Tab Panel 3
+          </div>
+          <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+            Tab Panel 4
+          </div>
+          <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+            Tab Panel 5
+          </div>
+          <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
+            Tab Panel 6
+          </div>
+          <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
+            Tab Panel 7
+          </div>
+        </div>
+      </main>
+    `;
+  },
+};
+
+export const CustomRenderWithCallbacks = {
+  args: {
+    border: true,
+    contentActionsFlush: false,
+    title:
+      'Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long',
+    renderBreadcrumbIcon: true,
+  },
+  argTypes: {
+    border: {
+      description:
+        'Specify whether to render `c4p-page-header-breadcrumb` border',
+      control: 'boolean',
+    },
+    contentActionsFlush: {
+      description:
+        'Specify whether the content actions within `c4p-page-header-breadcrumb` should be flush with the page actions',
+      control: 'boolean',
+    },
+    title: {
+      description:
+        'Provide the title text to be rendered within `c4p-page-header-content`',
+      control: 'text',
+    },
+    renderBreadcrumbIcon: {
+      description:
+        'Specify whether to render the `c4p-page-header-breadcrumb` icon (storybook control only)',
+      control: 'boolean',
+    },
+  },
+  render: (args) => {
+    const { border, contentActionsFlush, title, renderBreadcrumbIcon } =
+      args ?? {};
+
+    const sampleBreadcrumbsCallbacks = [
+      { text: 'Breadcrumb 1', href: '#' },
+      { text: 'Breadcrumb 2', href: '#' },
+    ];
+
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <main aria-label="Header" class="page-header-story__wrapper">
+        <c4p-page-header
+          @c4p-page-header-fully-collapsed=${(e: CustomEvent) =>
+            console.log('onContentFullyCollapsed:', e.detail.fullyCollapsed)}
+          @c4p-page-header-title-clipped=${(e: CustomEvent) =>
+            console.log('onTitleClipped:', e.detail.titleClipped)}
+          @c4p-page-header-content-actions-clipped=${(e: CustomEvent) =>
+            console.log(
+              'onContentActionsClipped:',
+              e.detail.contentActionsClipped
+            )}
+        >
+          <c4p-page-header-breadcrumb
+            border=${border}
+            ?content-actions-flush="${contentActionsFlush}"
+          >
+            ${renderBreadcrumbIcon
+              ? iconLoader(Bee16, { slot: 'icon' })
+              : undefined}
+            <c4p-page-header-breadcrumbs-set
+              .breadcrumbsData="${sampleBreadcrumbsCallbacks}"
+              title="${title}"
+            ></c4p-page-header-breadcrumbs-set>
             <div slot="content-actions">
               <div class="content-actions-wrapper">
                 <cds-button size="md"
-                  >Primary action
-                  ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+                  >Actions ${iconLoader(Add16, { slot: 'icon' })}</cds-button
                 >
               </div>
             </div>
@@ -216,6 +947,7 @@ export const Default = {
     `;
   },
 };
+
 export const WithDisabledStickyTabBar = {
   args,
   argTypes,
@@ -245,12 +977,7 @@ export const WithDisabledStickyTabBar = {
       <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main>
+      <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
             border=${border}
@@ -363,413 +1090,6 @@ export const WithDisabledStickyTabBar = {
   },
 };
 
-export const ContentWithContextualActions = {
-  render: () =>
-    html` <style>
-        ${styles}
-      </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main aria-label="Header">
-        <c4p-page-header>
-          <c4p-page-header-breadcrumb>
-            ${iconLoader(Bee16, { slot: 'icon' })}
-            <cds-breadcrumb>
-              <cds-breadcrumb-item>
-                <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-              </cds-breadcrumb-item>
-              <cds-breadcrumb-item>
-                <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-              </cds-breadcrumb-item>
-            </cds-breadcrumb>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(Activity16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 1</span>
-            </cds-icon-button>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(AiGenerate16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 2</span>
-            </cds-icon-button>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 3</span>
-            </cds-icon-button>
-          </c4p-page-header-breadcrumb>
-          <c4p-page-header-content
-            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-            title-level="h1"
-          >
-            <div slot="contextual-actions">
-              <cds-tag type="blue" size="lg">Tag</cds-tag>
-            </div>
-            <c4p-page-header-content-text
-              subtitle="Subtitle"
-              subtitle-level="h2"
-            >
-              Built for modern teams, our technology platform simplifies
-              complexity with powerful APIs, real-time collaboration tools, and
-              seamless integration. From deployment to monitoring, we help you
-              ship faster, scale efficiently, and stay in control every step of
-              the way.
-            </c4p-page-header-content-text>
-          </c4p-page-header-content> </c4p-page-header
-        >,
-      </main>`,
-};
-
-export const ContentWithContextualActionsAndPageActions = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-      <cds-header-name href="javascript:void 0" prefix="IBM"
-        >[Platform]</cds-header-name
-      >
-    </cds-header>
-    <main aria-label="Header">
-      <c4p-page-header>
-        <c4p-page-header-breadcrumb>
-          ${iconLoader(Bee16, { slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          </cds-breadcrumb>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(Activity16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 1</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(AiGenerate16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 2</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 3</span>
-          </cds-icon-button>
-        </c4p-page-header-breadcrumb>
-        <c4p-page-header-content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          title-level="h1"
-        >
-          <div slot="contextual-actions">
-            <cds-tag type="blue" size="lg">Tag</cds-tag>
-          </div>
-          <div slot="page-actions">
-            <cds-button size="md" aria-label="Add Primary action"
-              >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
-            >
-          </div>
-          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </c4p-page-header-content-text>
-        </c4p-page-header-content>
-      </c4p-page-header>
-    </main>
-  `,
-};
-
-export const ContentWithHeroImage = {
-  render: () =>
-    html`
-    <style>
-        ${styles}
-      </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main aria-label="Header">
-<c4p-page-header>
-      <div class="cds--css-grid">
-        <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-breadcrumb .border=${false} within-grid>
-        ${iconLoader(Bee16, { slot: 'icon' })}
-        <cds-breadcrumb>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-        </cds-breadcrumb>
-      </c4p-page-header-breadcrumb>
-          <c4p-page-header-content
-            within-grid
-            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-            title-level="h1"
-            >
-            <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
-             Built for modern teams, our technology platform simplifies complexity with powerful APIs, real-time collaboration tools, and seamless integration. From deployment to monitoring, we help you ship faster, scale efficiently, and stay in control every step of the way.
-            </c4p-page-header-content-text>
-          </c4p-page-header-content>
-        </div>
-        <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-hero-image object-fit="cover">
-            <picture>
-              <source
-                srcset="${image1}"
-                media=${`(min-width: ${breakpoints.lg.width})`}
-              ></source>
-              <source
-                srcset="${image2}"
-                media=${`(max-width: ${breakpoints.lg.width})`}
-              ></source>
-              <img
-                src="${image1}"
-                alt="a default image"
-              />
-            </picture>
-          </c4p-page-header-hero-image>
-        </div>
-      </div>
-      </div>
-    </c4p-page-header>
-      </main>
-    `,
-};
-
-export const ContentWithIcon = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-      <cds-header-name href="javascript:void 0" prefix="IBM"
-        >[Platform]</cds-header-name
-      >
-    </cds-header>
-    <main aria-label="Header">
-      <c4p-page-header>
-        <c4p-page-header-breadcrumb>
-          ${iconLoader(Bee16, { slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          </cds-breadcrumb>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(Activity16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 1</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(AiGenerate16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 2</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 3</span>
-          </cds-icon-button>
-        </c4p-page-header-breadcrumb>
-        <c4p-page-header-content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          title-level="h1"
-        >
-          ${iconLoader(Bee32, { slot: 'icon' })}
-          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </c4p-page-header-content-text>
-        </c4p-page-header-content>
-      </c4p-page-header>
-    </main>
-  `,
-};
-const sampleBreadcrumbs = [
-  {
-    text: 'Breadcrumb 1',
-    href: 'https://www.carbondesignsystem.com',
-  },
-  {
-    text: 'Breadcrumb 2',
-    href: 'https://www.carbondesignsystem.com',
-  },
-  {
-    text: 'Breadcrumb 3',
-    href: 'https://www.carbondesignsystem.com',
-  },
-  {
-    text: 'Breadcrumb 4',
-    href: 'https://www.carbondesignsystem.com',
-  },
-  {
-    text: 'Virtual-Machine-DAL-really-long-title-example',
-    href: 'https://www.carbondesignsystem.com',
-  },
-];
-const generatedTags = generateTags({ count: 10 });
-export const TabBarWithTabsAndTags = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-      <cds-header-name href="javascript:void 0" prefix="IBM"
-        >[Platform]</cds-header-name
-      >
-    </cds-header>
-    <main class="page-header-story__wrapper" aria-label="Header">
-      <c4p-page-header>
-        <c4p-page-header-breadcrumb>
-          ${iconLoader(Bee16, { slot: 'icon' })}
-          <c4p-page-header-breadcrumbs-set
-            .breadcrumbsData="${sampleBreadcrumbs}"
-            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          ></c4p-page-header-breadcrumbs-set>
-          <c4p-page-header-actions-set
-            slot="page-actions"
-            .actionsData="${[
-              { label: 'action 1' },
-              { label: 'action 2' },
-              { label: 'action 3' },
-            ]}"
-          >
-            <cds-icon-button kind="ghost" size="md" align="bottom">
-              ${iconLoader(Activity16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 1</span>
-            </cds-icon-button>
-            <cds-icon-button kind="ghost" size="md" align="bottom">
-              ${iconLoader(AiGenerate16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 2</span>
-            </cds-icon-button>
-            <cds-icon-button kind="ghost" size="md" align="bottom">
-              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 3</span>
-            </cds-icon-button>
-          </c4p-page-header-actions-set>
-        </c4p-page-header-breadcrumb>
-        <c4p-page-header-content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          title-level="h1"
-        >
-          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </c4p-page-header-content-text>
-        </c4p-page-header-content>
-        <c4p-page-header-tabs>
-          <cds-tabs value="tab-1">
-            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
-              >Tab 1</cds-tab
-            >
-            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
-              >Tab 2</cds-tab
-            >
-            <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
-              >Tab 3</cds-tab
-            >
-            <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
-              >Tab 4</cds-tab
-            >
-            <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
-              >Tab 5</cds-tab
-            >
-            <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
-              >Tab 6</cds-tab
-            >
-            <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
-              >Tab 7</cds-tab
-            >
-          </cds-tabs>
-          <div slot="tags">
-            <c4p-page-header-tags-set
-              .tagsData="${generatedTags ?? []}"
-            ></c4p-page-header-tags-set>
-          </div>
-        </c4p-page-header-tabs>
-      </c4p-page-header>
-      <div class="tabs-demo">
-        <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
-          Tab Panel 1
-        </div>
-        <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
-          Tab Panel 2
-        </div>
-        <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
-          Tab Panel 3
-        </div>
-        <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
-          Tab Panel 4
-        </div>
-        <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
-          Tab Panel 5
-        </div>
-        <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
-          Tab Panel 6
-        </div>
-        <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
-          Tab Panel 7
-        </div>
-      </div>
-    </main>
-  `,
-};
 const meta = {
   title: 'Components/PageHeader',
   decorators: [

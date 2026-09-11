@@ -30,18 +30,31 @@ class CDSPageHeaderContent extends LitElement {
   private _hasContextualActions = false;
 
   /**
+   * Set to `true` if there is custom title slot content
+   */
+  @state()
+  private _hasTitleSlotContent = false;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
-    this._hasContextualActions = Boolean(
-      (target as HTMLSlotElement).assignedNodes()
-    );
+    this._hasContextualActions =
+      (target as HTMLSlotElement).assignedNodes().length > 0;
     if (this._hasContextualActions) {
       this.setAttribute('contextual-actions', 'true');
     } else {
       this.removeAttribute('contextual-actions');
     }
     this.requestUpdate();
+  }
+
+  /**
+   * Handles `slotchange` for the title slot.
+   */
+  protected _handleTitleSlotChange({ target }: Event) {
+    this._hasTitleSlotContent =
+      (target as HTMLSlotElement).assignedNodes({ flatten: true }).length > 0;
   }
 
   /**
@@ -108,6 +121,7 @@ class CDSPageHeaderContent extends LitElement {
     });
 
     const titleTag = unsafeStatic(this.titleLevel);
+    const { _hasTitleSlotContent: hasTitleSlotContent } = this;
 
     return html` <div class="${gridClasses}">
       <div
@@ -117,20 +131,26 @@ class CDSPageHeaderContent extends LitElement {
           <div class="${prefix}--page-header__content__start">
             <div class="${prefix}--page-header__content__title-container">
               <slot name="icon"></slot>
-              ${hasEllipsisApplied
-                ? html`
-                    <cds-definition-tooltip>
-                      <span slot="definition">${title}</span>
-                      ${staticHtml`<${titleTag} class="${prefix}--page-header__content__title">
+              <slot
+                name="title"
+                @slotchange=${this._handleTitleSlotChange}
+              ></slot>
+              ${!hasTitleSlotContent
+                ? hasEllipsisApplied
+                  ? html`
+                      <cds-definition-tooltip>
+                        <span slot="definition">${title}</span>
+                        ${staticHtml`<${titleTag} class="${prefix}--page-header__content__title">
+                          ${title}
+                        </${titleTag}>`}
+                      </cds-definition-tooltip>
+                    `
+                  : staticHtml`
+                      <${titleTag} class="${prefix}--page-header__content__title">
                         ${title}
-                      </${titleTag}>`}
-                    </cds-definition-tooltip>
-                  `
-                : staticHtml`
-                    <${titleTag} class="${prefix}--page-header__content__title">
-                      ${title}
-                    </${titleTag}>
-                  `}
+                      </${titleTag}>
+                    `
+                : null}
             </div>
             <slot
               name="contextual-actions"

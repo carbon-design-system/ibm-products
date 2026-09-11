@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.98.0-rc.0`
+## `@carbon/ibm-products@2.98.0`
 ### Bug fixes :bug:
 - fix(pageheader): accessibility fixes (#9819)
 - fix(ConditionBuilder): WCAG 2.1 accessibility audit fixes (JAWS/Firefox, v2.44.0-rc.1) (#9812)

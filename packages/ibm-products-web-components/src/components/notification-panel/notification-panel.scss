@@ -38,14 +38,22 @@ $block-class-action-set: #{$prefix}--action-set;
 }
 
 .#{$block-class}__header-container {
-  --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-compact-01-font-size;
-  --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-heading-compact-01-font-weight;
-  --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-heading-compact-01-line-height;
-  --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-heading-compact-01-letter-spacing;
+  --#{$carbon-prefix}-heading-06-font-size: var(
+    --#{$carbon-prefix}-heading-compact-01-font-size
+  );
+  --#{$carbon-prefix}-heading-06-font-weight: var(
+    --#{$carbon-prefix}-heading-compact-01-font-weight
+  );
+  --#{$carbon-prefix}-heading-06-line-height: var(
+    --#{$carbon-prefix}-heading-compact-01-line-height
+  );
+  --#{$carbon-prefix}-heading-06-letter-spacing: var(
+    --#{$carbon-prefix}-heading-compact-01-letter-spacing
+  );
 }
 .#{$block-class}__dismiss-button {
-  --#{$carbon-prefix}-link-primary: --#{$carbon-prefix}-text-primary;
-  --#{$carbon-prefix}-link-primary-hover: --#{$carbon-prefix}-text-primary;
+  --#{$carbon-prefix}-link-primary: var(--#{$carbon-prefix}-text-primary);
+  --#{$carbon-prefix}-link-primary-hover: var(--#{$carbon-prefix}-text-primary);
 }
 .#{$block-class}__bottom-actions-container {
   position: sticky;

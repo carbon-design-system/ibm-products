@@ -36,16 +36,16 @@ export const useCreateComponentFocus = ({
       );
     };
 
+    // The currently visible step is the one carrying the visible modifier
+    // class. NOTE: the `blockClass` prop ends with `__step` (`.prefix--create-
+    // full-page .prefix--create-full-page__step`), so appending
+    // `__step--visible-step` targets
+    // `.prefix--create-full-page__step__step--visible-step`.
+    // (Fix for carbon-design-system/ibm-products#9864: the previous inert-walk
+    // logic never matched because CreateFullPageStep hides steps with
+    // display:none instead of the `inert` attribute.)
     const getActiveStep = () => {
-      const allSteps = Array.from(document.querySelectorAll(blockClass));
-      return allSteps.find((el) => {
-        let currentStep = el;
-        while (currentStep) {
-          if (currentStep.hasAttribute('inert')) return false;
-          currentStep = currentStep.parentElement;
-        }
-        return true;
-      });
+      return document.querySelector(`${blockClass}__step--visible-step`);
     };
 
     const getFocusableElement = (containingElement) => {

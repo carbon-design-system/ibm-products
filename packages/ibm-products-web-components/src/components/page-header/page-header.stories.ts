@@ -94,12 +94,8 @@ export const Default = {
       <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main aria-label="Header">
+
+      <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
             border=${border}
@@ -210,8 +206,6 @@ export const Default = {
             </c4p-page-header-actions-set>
           </c4p-page-header-content>
           <c4p-page-header-tabs>
-            <c4p-page-header-scroller slot="scroller">
-            </c4p-page-header-scroller>
             <cds-tabs value="tab-1">
               <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
                 >Tab 1</cds-tab
@@ -269,12 +263,7 @@ export const ContentWithIcon = {
     <style>
       ${styles}
     </style>
-    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-      <cds-header-name href="javascript:void 0" prefix="IBM"
-        >[Platform]</cds-header-name
-      >
-    </cds-header>
-    <main aria-label="Header">
+    <main aria-label="Header" class="page-header-story__wrapper">
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
@@ -337,12 +326,7 @@ export const ContentWithContextualActions = {
     html` <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main aria-label="Header">
+      <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb>
             ${iconLoader(Bee16, { slot: 'icon' })}
@@ -410,12 +394,7 @@ export const ContentWithHeroImage = {
     <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main aria-label="Header">
+      <main aria-label="Header" class="page-header-story__wrapper">
 <c4p-page-header>
       <div class="cds--css-grid">
         <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
@@ -470,12 +449,7 @@ export const ContentWithContextualActionsAndPageActions = {
     <style>
       ${styles}
     </style>
-    <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-      <cds-header-name href="javascript:void 0" prefix="IBM"
-        >[Platform]</cds-header-name
-      >
-    </cds-header>
-    <main aria-label="Header">
+    <main aria-label="Header" class="page-header-story__wrapper">
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
@@ -573,7 +547,7 @@ export const TabBarWithTabsAndTags = {
         >[Platform]</cds-header-name
       >
     </cds-header>
-    <main class="page-header-story__wrapper" aria-label="Header">
+    <main class="page-header-story__wrapper-with-ui-shell" aria-label="Header">
       <c4p-page-header>
         <c4p-page-header-breadcrumb>
           ${iconLoader(Bee16, { slot: 'icon' })}
@@ -710,11 +684,6 @@ export const Compact = {
       <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
       <main class="page-header-story__wrapper" aria-label="Header">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
@@ -853,12 +822,7 @@ export const CustomRenderWithCallbacks = {
       <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main aria-label="Header">
+      <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header
           @c4p-page-header-fully-collapsed=${(e: CustomEvent) =>
             console.log('onContentFullyCollapsed:', e.detail.fullyCollapsed)}
@@ -1013,12 +977,7 @@ export const WithDisabledStickyTabBar = {
       <style>
         ${styles}
       </style>
-      <cds-header class="ui-shell--header" aria-label="IBM Platform Name">
-        <cds-header-name href="javascript:void 0" prefix="IBM"
-          >[Platform]</cds-header-name
-        >
-      </cds-header>
-      <main>
+      <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
             border=${border}

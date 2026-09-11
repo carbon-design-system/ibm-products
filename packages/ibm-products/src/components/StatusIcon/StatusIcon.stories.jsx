@@ -11,9 +11,10 @@ import { StatusIcon } from '.';
 
 // import styles from './_storybook-styles.scss?inline'; // import storybook which includes component and additional storybook styles
 import DocsPage from './StatusIcon.docs-page';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/StatusIcon',
+  title: 'Deprecated/Prebuilt patterns/StatusIcon',
   component: StatusIcon,
   tags: ['autodocs'],
   argTypes: {
@@ -54,6 +55,27 @@ export default {
       page: DocsPage,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in next major
+              version. Please migrate to{' '}
+              <a href="https://react.carbondesignsystem.com/?path=/docs/preview-statusindicators-preview-iconindicator--overview">
+                Icon indicator
+              </a>{' '}
+              from carbon.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const defaultProps = {

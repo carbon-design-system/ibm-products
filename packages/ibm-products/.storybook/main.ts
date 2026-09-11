@@ -23,6 +23,7 @@ const storyGlobs = [
   '../src/**/!(*.internal).stories.*',
   './ComponentPlayground/**/*.stories.*',
   './Welcome/**/*.stories.*',
+  './Announcements/**/*.stories.*',
   './PrebuiltPatterns/**/*.mdx',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];

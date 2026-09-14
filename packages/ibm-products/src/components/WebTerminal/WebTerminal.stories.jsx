@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ import { WebTerminalProvider } from './hooks';
 
 import styles from './_storybook-styles.scss?inline';
 import DocsPage from './WebTerminal.docs-page';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const actions = [
   {
@@ -83,7 +84,7 @@ WithActions.args = {
 };
 
 export default {
-  title: 'Patterns/Prebuilt patterns/WebTerminal',
+  title: 'Deprecated/Prebuilt patterns/WebTerminal',
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
@@ -93,5 +94,26 @@ export default {
       page: DocsPage,
     },
   },
+  decorators: [
+    (story) => (
+      <div className="deprecation-notice">
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in next major
+              version. Please migrate to{' '}
+              <a href="https://react.carbondesignsystem.com/?path=/docs/preview-statusindicators-preview-iconindicator--overview">
+                Web Terminal
+              </a>{' '}
+              pattern.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
   component: WebTerminal, // Required to pick up WebTerminal doc block
 };

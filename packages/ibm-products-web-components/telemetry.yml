@@ -61,6 +61,7 @@ collect:
         - global-search-label
         - global-search-placeholder
         - items-label
+        - layout
         - onc4p-add-select-body-breadcrumb-click
         - onc4p-add-select-body-search
         - path
@@ -320,6 +321,9 @@ collect:
         - success
         - tooltip
         - warning
+        # c4p-add-select-body - layout
+        - horizontal
+        - vertical
         # c4p-edit-in-place - toggletip-alignment
         - bottom
         - bottom-left

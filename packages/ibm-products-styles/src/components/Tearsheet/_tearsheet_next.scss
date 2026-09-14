@@ -347,6 +347,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     .#{$block-class__next}__header-content {
       align-self: center;
       margin-block-end: 0;
+
+      @include breakpoint-down(md) {
+        align-self: stretch;
+      }
     }
 
     .#{$carbon-prefix}--modal-close {
@@ -462,6 +466,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   align-items: flex-start;
   gap: $spacing-05;
   margin-block-end: $spacing-03;
+
+  &--no-content-below {
+    margin-block-end: 0;
+  }
 
   svg {
     flex-shrink: 0;
@@ -620,13 +628,8 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 
 .#{$block-class__next}__footer {
   overflow: hidden;
-  block-size: $spacing-11;
   border-block-start: 1px solid $border-subtle-01;
   grid-area: footer;
-
-  @include breakpoint-down(md) {
-    block-size: $spacing-10;
-  }
 
   // Footer overflow handling for many actions (> 3 buttons)
   &.#{$block-class__next}__footer--three-actions {
@@ -727,8 +730,5 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     &:not(.#{$block-class__next}__flush) {
       padding-inline: $spacing-05;
     }
-  }
-  .#{$block-class__next}__footer {
-    block-size: $spacing-10;
   }
 }

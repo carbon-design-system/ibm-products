@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -20,7 +21,6 @@ import {
 
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
-import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 const componentName = 'TagOverflowModal';
 const blockClass = `${pkg.prefix}--tag-overflow-modal`;
@@ -40,12 +40,22 @@ type AllTags = (TagType & Omit<React.ComponentProps<typeof Tag>, 'filter'>)[];
 interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;
+  /**
+   * Disable the portal and render the modal inline. Useful for tests and
+   * contexts where you need to inherit React context from parent components.
+   *
+   * @default false
+   */
+  disablePortal?: boolean;
   modalAriaLabel?: string;
   onClose?: () => void;
   onTagClose?: (params: { label: string; id: any }) => void;
   open?: boolean;
   overflowType?: 'default' | 'tag';
-  portalTarget?: ReactNode;
+  /**
+   * DOM element to portal the modal into. Defaults to `document.body`.
+   */
+  portalTarget?: HTMLElement | null;
   searchLabel?: string;
   searchPlaceholder?: string;
   title?: string;
@@ -56,6 +66,7 @@ export const TagOverflowModal = ({
 
   allTags,
   className,
+  disablePortal = false,
   title,
   modalAriaLabel = defaults.modalAriaLabel,
   onClose,
@@ -70,7 +81,7 @@ export const TagOverflowModal = ({
   ...rest
 }: TagOverflowModalProps) => {
   const [search, setSearch] = useState('');
-  const renderPortalUse = usePortalTarget(portalTargetIn);
+  const mountNode = disablePortal ? null : (portalTargetIn ?? document.body);
 
   const getFilteredItems = (): AllTags => {
     if (open && search && allTags) {
@@ -85,7 +96,7 @@ export const TagOverflowModal = ({
     setSearch(evt.target.value || '');
   };
 
-  return renderPortalUse(
+  const modal = (
     <ComposedModal
       {
         // Pass through any other property values as HTML attributes.
@@ -135,6 +146,8 @@ export const TagOverflowModal = ({
       </ModalBody>
     </ComposedModal>
   );
+
+  return mountNode ? createPortal(modal, mountNode) : modal;
 };
 
 TagOverflowModal.propTypes = {
@@ -145,11 +158,23 @@ TagOverflowModal.propTypes = {
     })
   ),
   className: PropTypes.string,
+  /**
+   * Disable the portal and render the modal inline. Useful for tests and
+   * contexts where you need to inherit React context from parent components.
+   */
+  disablePortal: PropTypes.bool,
   onClose: PropTypes.func,
   onTagClose: PropTypes.func,
   open: PropTypes.bool,
   overflowType: PropTypes.oneOf(['default', 'tag']),
-  portalTarget: PropTypes.node,
+  /**
+   * DOM element to portal the modal into. Defaults to `document.body`.
+   */
+  portalTarget:
+    typeof HTMLElement === 'undefined'
+      ? PropTypes.object
+      : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
+        PropTypes.instanceOf(HTMLElement),
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string,

@@ -674,7 +674,9 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 
 .#{$block-class__next}__main-content {
   position: relative;
+  background-color: $background;
 }
+
 .#{$block-class__next}__side-panel {
   position: absolute;
   z-index: 9999;

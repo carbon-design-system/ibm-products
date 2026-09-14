@@ -84,10 +84,10 @@ const renderComponent = ({ ...rest } = {}) =>
       {...rest}
     >
       <CreateFullPageStep title="Title 1" subtitle="Subtitle 1">
-        <p>1</p>
+        {stepFormField}
       </CreateFullPageStep>
       <CreateFullPageStep title="Title 2" description="2">
-        <p>2</p>
+        {stepFormField}
       </CreateFullPageStep>
     </CreateFullPage>
   );
@@ -689,5 +689,40 @@ describe(componentName, () => {
         `${carbon.prefix}--progress-step--current`
       )
     ).toBe(true);
+  });
+
+  it('moves focus to the first input of the visible step after clicking Next (issue #9864)', async () => {
+    const { click } = userEvent;
+    const { container } = renderCreateFullPage(defaultFullPageProps);
+
+    // Step 1 is visible on mount; its input should not be focused before Next.
+    const firstStepInput = container.querySelector(
+      `.${blockClass}__step__step--visible-step input`
+    );
+    expect(firstStepInput).toBeTruthy();
+
+    // Advance to step 2.
+    await act(() => click(screen.getByText(nextButtonText)));
+    await waitFor(() => expect(onNextStepFn).toHaveBeenCalled());
+
+    // The visible step is now step 2.
+    const visibleStep = container.querySelector(
+      `.${blockClass}__step__step--visible-step`
+    );
+    expect(visibleStep).toBeTruthy();
+
+    // The hook awaits a 10ms timeout before focusing; wait for focus to land.
+    await waitFor(() => {
+      const focusedInput = container.querySelector(
+        `.${blockClass}__step__step--visible-step input`
+      );
+      expect(focusedInput).toBeTruthy();
+      expect(document.activeElement).toBe(focusedInput);
+    });
+
+    // Focus must NOT be on the "Skip to main content" button or the body.
+    const skipLink = container.querySelector('a');
+    expect(document.activeElement).not.toBe(skipLink);
+    expect(document.activeElement).not.toBe(document.body);
   });
 });

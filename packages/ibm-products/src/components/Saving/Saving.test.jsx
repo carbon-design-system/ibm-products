@@ -28,6 +28,9 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('should render', async () => {
     render(<Saving {...defaultProps} />);
   });

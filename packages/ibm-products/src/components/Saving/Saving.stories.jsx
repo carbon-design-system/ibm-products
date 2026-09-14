@@ -12,9 +12,10 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
 import mdx from './Saving.mdx';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Saving',
+  title: 'Deprecated/Prebuilt patterns/Saving',
   component: Saving,
   tags: ['autodocs'],
   parameters: {
@@ -30,6 +31,27 @@ export default {
       },
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in next major
+              version. Please migrate to{' '}
+              <a href="https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-saving--overview">
+                Saving
+              </a>{' '}
+              example pattern.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
 };
 
 const defaultProps = {

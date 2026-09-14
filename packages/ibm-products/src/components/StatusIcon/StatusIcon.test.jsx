@@ -54,6 +54,9 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component StatusIcon', async () => {
     const { container } = renderComponent();
     expect(container).toBeInTheDocument();

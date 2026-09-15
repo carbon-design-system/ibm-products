@@ -88,6 +88,7 @@ collect:
         - disableColumnSwapping
         - disabled
         - disabledCell
+        - disablePortal
         - disableSubmit
         - displayMetalPanel
         - downloadLinkLabel
@@ -216,6 +217,7 @@ collect:
         - metadata
         - metaIconDescription
         - metaPanelTitle
+        - modalAriaLabel
         - modifiers
         - multi
         - multiline
@@ -327,6 +329,7 @@ collect:
         - scoreThresholds
         - scrollBarSize
         - scroller
+        - searchLabel
         - searchPlaceholder
         - searchProps
         - searchResultsTitle
@@ -375,6 +378,7 @@ collect:
         - slug
         - small
         - sortByLabel
+        - startActive
         - startConditionLabel
         - state
         - statementConfigCustom
@@ -432,7 +436,6 @@ collect:
         - content
         - copyrightText
         - logo
-        - modalAriaLabel
         - version
         # ActionBar
         - overflowItems
@@ -462,7 +465,6 @@ collect:
         - header
         - onNavigate
         - onSelectAll
-        - searchLabel
         - selectAllCheckboxProps
         - setPath
         - showSelectAll
@@ -1036,9 +1038,11 @@ collect:
         - width
         # TagOverflow
         - tagComponent
+        # TagOverflowModal
+        - allTags
+        - onTagClose
         # Tearsheet
         - containerClassName
-        - disablePortal
         - keepMounted
         - summaryContentWidth
         - verticalGap

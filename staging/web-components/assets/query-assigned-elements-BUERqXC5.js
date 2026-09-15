@@ -1,0 +1,1 @@
+import{a as l}from"./class-map-Cs7v0TfJ.js";function u(e){return(n,s)=>{const{slot:t,selector:r}=e??{},c="slot"+(t?`[name=${t}]`:":not([name])");return l(n,s,{get(){const a=this.renderRoot?.querySelector(c),o=a?.assignedElements(e)??[];return r===void 0?o:o.filter((i=>i.matches(r)))}})}}export{u as o};

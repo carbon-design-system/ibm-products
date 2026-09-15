@@ -136,19 +136,32 @@ export default class CDSPageHeaderTagsSet extends LitElement {
     }
   };
 
+  private _tagId(index: number) {
+    return `${prefix}--page-header-tag-${index}`;
+  }
+
   private handleDismiss = (e: CustomEvent, tag: TagType) => {
     e.stopPropagation();
     e.preventDefault();
 
-    this.tagsData = this.tagsData.filter((t) => t.text !== tag.text);
+    const dismissedIndex = this.tagsData.findIndex((t) => t === tag);
+    this.tagsData = this.tagsData.filter((t) => t !== tag);
     this.shadowRoot
       ?.querySelectorAll('[data-hidden]:not([data-offset])')
       .forEach((el) => el.removeAttribute('data-hidden'));
 
-    const remaining = this.hiddenTags.filter((t) => t.text !== tag.text);
+    const remaining = this.hiddenTags.filter((t) => t !== tag);
     if (this.hiddenTags.length === 2 && remaining[0]) {
+      // Find the original index of the remaining tag before the dismissed item shifted indices
+      const originalIndex = this.tagsData.findIndex((t) => t === remaining[0]);
+      const adjustedIndex =
+        originalIndex >= 0
+          ? originalIndex
+          : dismissedIndex > 0
+            ? dismissedIndex - 1
+            : 0;
       this.shadowRoot
-        ?.querySelector(`#${remaining[0].text}`)
+        ?.querySelector(`#${this._tagId(adjustedIndex)}`)
         ?.removeAttribute('data-hidden');
     }
   };
@@ -156,8 +169,8 @@ export default class CDSPageHeaderTagsSet extends LitElement {
   render() {
     return html` <div class=${blockClass}>
         ${this.tagsData.map(
-          (tag) => html`
-            <span id=${tag?.text}>
+          (tag, index) => html`
+            <span id=${this._tagId(index)}>
               ${tag?.onClose
                 ? html`<cds-dismissible-tag
                     @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>

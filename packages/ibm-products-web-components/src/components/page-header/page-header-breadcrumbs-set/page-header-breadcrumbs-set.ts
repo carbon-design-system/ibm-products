@@ -9,7 +9,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -51,6 +51,12 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
   title = '';
 
   /**
+   * Whether custom breadcrumb-content slot content is present.
+   */
+  @state()
+  private _hasBreadcrumbContent = false;
+
+  /**
    * Aria label for the breadcrumb navigation.
    */
   @property({ type: String, attribute: 'breadcrumb-aria-label', reflect: true })
@@ -69,6 +75,14 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
   private container!: HTMLElement;
 
   private overflowHandler: { disconnect: () => void } | undefined;
+
+  /**
+   * Handles slotchange for the breadcrumb-content slot.
+   */
+  protected _handleBreadcrumbContentSlotChange({ target }: Event) {
+    this._hasBreadcrumbContent =
+      (target as HTMLSlotElement).assignedNodes({ flatten: true }).length > 0;
+  }
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -175,11 +189,17 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
         )}
         <c4p-page-header-title-breadcrumb data-fixed>
           <cds-breadcrumb-link is-currentpage="">
-            <c4p-truncated-text
-              value="${this.title}"
-              lines="1"
-              autoalign
-            ></c4p-truncated-text>
+            <slot
+              name="breadcrumb-content"
+              @slotchange=${this._handleBreadcrumbContentSlotChange}
+            ></slot>
+            ${!this._hasBreadcrumbContent
+              ? html`<c4p-truncated-text
+                  value="${this.title}"
+                  lines="1"
+                  autoalign
+                ></c4p-truncated-text>`
+              : null}
           </cds-breadcrumb-link>
         </c4p-page-header-title-breadcrumb>
       </cds-breadcrumb>

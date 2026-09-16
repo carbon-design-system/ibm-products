@@ -173,7 +173,7 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-content) {
-  padding-block-start: $spacing-06;
+  padding-block-start: $spacing-09;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__content;
@@ -221,7 +221,7 @@ $carbon-prefix: 'cds';
 
   .#{$prefix}--page-header__content__page-actions {
     display: flex;
-    justify-content: right;
+    justify-self: right;
     /* stylelint-disable-next-line carbon/motion-easing-use */
     transition: opacity motion(standard, productive) $duration-moderate-02;
 
@@ -499,6 +499,8 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb)
   .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+  overflow: hidden;
+  min-inline-size: 0;
   opacity: 0;
   visibility: hidden;
   &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {

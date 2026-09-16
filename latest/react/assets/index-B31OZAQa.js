@@ -1,0 +1,2 @@
+var i=Object.defineProperty;var t=(c,a)=>i(c,"name",{value:a,configurable:!0});const S=16,n=t(c=>`${c/16}rem`,"rem"),$=t(c=>`${c}px`,"px"),f={sm:{width:n(320)},md:{width:n(672)},lg:{width:n(1056)}},s=t(c=>n(8*c),"miniUnits"),o=s(.25),p=s(.5),e=s(1),g=s(1.5),r=s(2),m=s(3),d=s(4),l=s(5),z=s(6),u=s(8),b=s(10),h=s(12),w=s(20),k=[o,p,e,g,r,m,d,l,z,u,b,h,w],F=n(24),L=n(32),M=n(40),U=n(48);export{S as a,f as b,L as c,U as d,M as e,F as f,$ as p,n as r,k as s};
+//# sourceMappingURL=index-B31OZAQa.js.map

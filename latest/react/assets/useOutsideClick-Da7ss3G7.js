@@ -1,0 +1,2 @@
+var u=Object.defineProperty;var c=(r,t)=>u(r,"name",{value:t,configurable:!0});import{r as o,k as i}from"./iframe-i4lJGu2h.js";import{c as a}from"./environment-DRRHKtsv.js";const p=c((r,t)=>{const e=o.useRef(t);o.useEffect(()=>{e.current=t},[t]),i("click",s=>{if(!a)return;const{target:n}=s;n instanceof Node&&r.current&&!r.current.contains(n)&&e.current(s)})},"useOutsideClick");export{p as u};
+//# sourceMappingURL=useOutsideClick-Da7ss3G7.js.map

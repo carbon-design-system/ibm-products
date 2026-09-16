@@ -1,3 +1,14 @@
+## `@carbon/ibm-products-styles@2.95.0-rc.0`
+### Features :rocket:
+- feat(Tearsheet, PageHeader): support ReactNode for header title with default string truncation (#9832)
+
+### Bug fixes :bug:
+- fix(Tearsheet next): correct Carbon layer hierarchy — body elevated instead of header (#9869)
+- fix(PageHeader): code quality fixes and fullWidthGrid/narrowGrid support (#9833)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9849)
+
 ## `@carbon/ibm-products-styles@2.93.0`
 ### Bug fixes :bug:
 - fix(tearsheet): horizontal scroll not working (#9778)

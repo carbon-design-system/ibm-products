@@ -12,6 +12,7 @@ import * as stories from './CreateFullPage.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
+      deprecationNotice="This component is deprecated and will be removed in the next major version."
       altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#full-page"
       blocks={[
         {

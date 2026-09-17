@@ -191,6 +191,10 @@ interface Step {
   title?: string;
 }
 
+/**
+ * Use CreateTearsheet when you need a multi-step creation flow with an influencer sidebar.
+ * @deprecated This component is deprecated.
+ */
 export const CreateTearsheet = forwardRef(
   (
     {

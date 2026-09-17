@@ -12,6 +12,7 @@ import { CreateFullPageStep } from './CreateFullPageStep';
 import { pkg } from '../../settings';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const storyClass = 'create-full-page-stories';
 const blockClass = `${pkg.prefix}--create-full-page`;
@@ -47,7 +48,7 @@ const breadcrumbs = {
 };
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Create flows/CreateFullPage',
+  title: 'Deprecated/Prebuilt patterns/Create flows/CreateFullPage',
   component: CreateFullPage,
   tags: ['autodocs'],
   parameters: {
@@ -59,6 +60,19 @@ export default {
 
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
   ],
   argTypes: {
     breadcrumbs: {

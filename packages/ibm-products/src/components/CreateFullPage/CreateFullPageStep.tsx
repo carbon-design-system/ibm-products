@@ -126,6 +126,9 @@ type CreateFullPageStepFieldsetProps =
 export type CreateFullPageStepProps = CreateFullPageStepBaseProps &
   CreateFullPageStepFieldsetProps;
 
+/**
+ * @deprecated This component is deprecated.
+ */
 export const CreateFullPageStep = forwardRef(
   (
     {

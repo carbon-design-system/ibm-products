@@ -25,9 +25,10 @@ import {
   slugArgTypes,
   decoratorArgTypes,
 } from '../../global/js/story-parts/decorator';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Create flows/CreateTearsheetNarrow',
+  title: 'Deprecated/Prebuilt patterns/Create flows/CreateTearsheetNarrow',
   component: CreateTearsheetNarrow,
   tags: ['autodocs'],
   argTypes: {
@@ -71,10 +72,28 @@ export default {
     styles,
     docs: {
       page: () => (
-        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#narrow-tearsheet" />
+        <StoryDocsPage
+          deprecationNotice="This component is deprecated and will be removed in the next major version."
+          altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#narrow-tearsheet"
+        />
       ),
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const createTearsheetNarrowBlockClass = `${pkg.prefix}--create-tearsheet-narrow--story`;

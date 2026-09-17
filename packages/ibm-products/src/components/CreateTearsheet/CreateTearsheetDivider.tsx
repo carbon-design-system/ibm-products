@@ -18,6 +18,9 @@ interface CreateTearsheetDividerProps {
   className?: string;
 }
 
+/**
+ * @deprecated This component is deprecated.
+ */
 export const CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
   forwardRef(
     (

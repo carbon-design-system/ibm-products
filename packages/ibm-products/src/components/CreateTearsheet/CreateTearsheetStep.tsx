@@ -171,6 +171,9 @@ export type ExperimentalSecondarySubmit = {
   onClick?: () => void;
 };
 
+/**
+ * @deprecated This component is deprecated.
+ */
 export const CreateTearsheetStep = forwardRef(
   (
     {

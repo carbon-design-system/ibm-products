@@ -224,6 +224,7 @@ on the Carbon's grid system
 [here](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). You can
 include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
 component to get the desired affect.
+ * @deprecated This component is deprecated.
  */
 export const CreateFullPage = React.forwardRef(
   (

@@ -112,6 +112,7 @@ export interface CreateTearsheetNarrowProps extends PropsWithChildren {
 /**
  * Use a narrow tearsheet as an alternative to a modal when there is scrolling.
  * Use when the form fields can be broken down into sections using section headers.
+ * @deprecated This component is deprecated.
  */
 export const CreateTearsheetNarrow = React.forwardRef(
   (

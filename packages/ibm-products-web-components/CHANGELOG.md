@@ -1,3 +1,10 @@
+## `@carbon/ibm-products-web-components@0.48.0-rc.0`
+### Bug fixes :bug:
+- fix: bignumber and notificationpanel parity after v12 migration (#9856)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9849)
+
 ## `@carbon/ibm-products-web-components@0.47.0`
 ### Features :rocket:
 - feat(addselect): single select patterns (#9776)

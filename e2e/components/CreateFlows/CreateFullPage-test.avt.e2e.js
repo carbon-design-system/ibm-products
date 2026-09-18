@@ -1,7 +1,7 @@
 // cspell:words createfullpage
 
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,7 @@ test.describe('CreateFullPage @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateFullPage',
-      id: 'patterns-prebuilt-patterns-create-flows-createfullpage--create-full-page',
+      id: 'deprecated-prebuilt-patterns-create-flows-createfullpage--create-full-page',
       globals: {
         carbonTheme: 'white',
       },
@@ -31,7 +31,7 @@ test.describe('CreateFullPage @avt', () => {
   test('@avt-error-disabled-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateFullPage',
-      id: 'patterns-prebuilt-patterns-create-flows-createfullpage--create-full-page',
+      id: 'deprecated-prebuilt-patterns-create-flows-createfullpage--create-full-page',
       globals: {
         carbonTheme: 'white',
       },

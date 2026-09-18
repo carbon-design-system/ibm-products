@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,9 +25,10 @@ import {
   slugArgTypes,
   decoratorArgTypes,
 } from '../../global/js/story-parts/decorator';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Create flows/CreateTearsheetNarrow',
+  title: 'Deprecated/Prebuilt patterns/Create flows/CreateTearsheetNarrow',
   component: CreateTearsheetNarrow,
   tags: ['autodocs'],
   argTypes: {
@@ -71,10 +72,32 @@ export default {
     styles,
     docs: {
       page: () => (
-        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#narrow-tearsheet" />
+        <StoryDocsPage
+          deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Tearsheet Narrow](https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateTearsheetNarrow) pattern."
+          altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#narrow-tearsheet"
+        />
       ),
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to{' '}
+            <a href="https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateTearsheetNarrow">
+              Create Tearsheet Narrow
+            </a>{' '}
+            pattern.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const createTearsheetNarrowBlockClass = `${pkg.prefix}--create-tearsheet-narrow--story`;

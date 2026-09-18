@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,9 +17,10 @@ import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import { MultiStepWithStepInErrorState } from './preview-components/MultiStepWithStepInErrorState';
 import { TruncatedText } from '../TruncatedText';
+import { Annotation } from '../../../.storybook/Annotation';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Create flows/CreateTearsheet',
+  title: 'Deprecated/Prebuilt patterns/Create flows/CreateTearsheet',
   component: CreateTearsheet,
   tags: ['autodocs'],
   argTypes: {
@@ -72,6 +73,25 @@ export default {
     styles,
     docs: { page: DocsPage },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to{' '}
+            <a href="https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateTearsheet">
+              Create Tearsheet
+            </a>{' '}
+            pattern.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const createTearsheetProps = {

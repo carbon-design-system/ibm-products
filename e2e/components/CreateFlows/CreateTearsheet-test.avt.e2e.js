@@ -47,8 +47,8 @@ test.describe('CreateTearsheet @avt', () => {
     const step1Input1 = page.locator(
       '#tearsheet-multi-step-story-text-input-multi-step-1'
     );
-    const nextButton = page.getByText('Next');
-    const backButton = page.getByText('Back');
+    const nextButton = page.getByRole('button', { name: 'Next' });
+    const backButton = page.getByRole('button', { name: 'Back' });
 
     // Focus learn more link
     await page.keyboard.press('Shift+Tab');
@@ -187,7 +187,7 @@ test.describe('CreateTearsheet @avt', () => {
     const step1Input1 = page.locator(
       '#tearsheet-multi-step-story-text-input-multi-step-1'
     );
-    const nextButton = page.getByText('Next');
+    const nextButton = page.getByRole('button', { name: 'Next' });
     const errorToggle = page.locator('#simulated-error-toggle');
 
     // Expect the input box to be focused

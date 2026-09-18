@@ -103,7 +103,7 @@ export default {
             <div>
               This component is deprecated and will be removed in next major
               version. Please migrate to{' '}
-              <a href="https://react.carbondesignsystem.com/?path=/docs/preview-statusindicators-preview-iconindicator--overview">
+              <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/patterns-webterminal--overview">
                 Web Terminal
               </a>{' '}
               pattern.

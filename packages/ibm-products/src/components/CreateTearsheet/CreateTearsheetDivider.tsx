@@ -35,6 +35,14 @@ export const CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
     }
   );
 
+CreateTearsheetDivider.displayName = componentName;
+
+/**@ts-ignore*/
+CreateTearsheetDivider.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Tearsheet pattern`,
+};
+
 CreateTearsheetDivider.propTypes = {
   /**
    * Sets an optional className to be added to the tearsheet divider

@@ -467,6 +467,12 @@ export const CreateFullPage = React.forwardRef(
 // is used in preference to relying on function.name.
 CreateFullPage.displayName = componentName;
 
+/**@ts-ignore*/
+CreateFullPage.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Full Page pattern`,
+};
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.

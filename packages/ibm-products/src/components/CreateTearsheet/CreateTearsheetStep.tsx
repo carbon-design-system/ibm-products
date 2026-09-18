@@ -339,6 +339,14 @@ export const CreateTearsheetStep = forwardRef(
   }
 );
 
+CreateTearsheetStep.displayName = componentName;
+
+/**@ts-ignore*/
+CreateTearsheetStep.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Tearsheet pattern`,
+};
+
 CreateTearsheetStep.propTypes = {
   /**
    * Content that shows in the tearsheet step

@@ -385,6 +385,12 @@ export const CreateTearsheet = forwardRef(
 // is used in preference to relying on function.name.
 CreateTearsheet.displayName = componentName;
 
+/**@ts-ignore*/
+CreateTearsheet.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Tearsheet pattern`,
+};
+
 const deprecatedProps = {
   /**
    *  @deprecated Property replaced by `decorator`

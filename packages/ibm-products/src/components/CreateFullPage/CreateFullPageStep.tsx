@@ -267,6 +267,14 @@ export const CreateFullPageStep = forwardRef(
   }
 );
 
+CreateFullPageStep.displayName = componentName;
+
+/**@ts-ignore*/
+CreateFullPageStep.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Full Page pattern`,
+};
+
 CreateFullPageStep.propTypes = {
   /**
    * Content that shows in the CreateFullPage step

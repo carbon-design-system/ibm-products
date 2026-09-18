@@ -202,6 +202,12 @@ export const CreateTearsheetNarrow = React.forwardRef(
 // is used in preference to relying on function.name.
 CreateTearsheetNarrow.displayName = componentName;
 
+/**@ts-ignore*/
+CreateTearsheetNarrow.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Tearsheet Narrow pattern`,
+};
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.

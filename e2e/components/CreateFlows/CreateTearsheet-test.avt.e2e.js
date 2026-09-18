@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'deprecated-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -32,7 +32,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-focus-move-properly-across-steps', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'deprecated-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -173,7 +173,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-simulate-error-and-focus', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'deprecated-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },

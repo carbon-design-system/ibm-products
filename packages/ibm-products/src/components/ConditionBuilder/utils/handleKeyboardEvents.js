@@ -164,10 +164,9 @@ const handleKeyPressForPopover = (
 
       case ' ':
         if (isMultiSelect === 'true') {
-          if (document.activeElement.type !== 'button') {
-            //for button, space is click which is already handled by framework, for other elements trigger click
-            document.activeElement?.click();
-          }
+          // Trigger click for all focusable elements (including buttons) since
+          // evt.preventDefault() below suppresses the native button activation.
+          document.activeElement?.click();
           evt.preventDefault();
         }
 
@@ -176,9 +175,7 @@ const handleKeyPressForPopover = (
         if (isMultiSelect === 'true') {
           // In a multi-select listbox, Enter toggles the focused option (same as Space)
           // and keeps the popover open — matching ARIA APG listbox pattern.
-          if (document.activeElement.type !== 'button') {
-            document.activeElement?.click();
-          }
+          document.activeElement?.click();
           evt.preventDefault();
         } else {
           // Single-select: Enter selects the item. focusThisField moves focus back to the

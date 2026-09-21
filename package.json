@@ -140,6 +140,8 @@
   "//resolutions:@babel/core": "CVE-2026-49356 (arbitrary file read via sourceMappingURL) fixed in 7.29.6",
   "//resolutions:postcss-selector-parser": "CVE-2026-9358 (DoS via uncontrolled recursion) - low risk per vendor",
   "//resolutions:form-data": "CVE-2026-12143 (CRLF injection) fixed in 4.0.6",
+  "//resolutions:browserslist": "CVE-2026-73089 (unbounded cache DoS) and CVE-2026-73088 (prototype pollution via normalizeStats) fixed in 4.28.7",
+  "//resolutions:qs": "CVE-2026-82417 (TypeError via crafted constructor.isBuffer input) and CVE-2026-82562 (arrayLimit bypass via []= key form) fixed in 6.16.0",
   "resolutions": {
     "form-data": "4.0.6",
     "micromatch": "4.0.8",
@@ -152,11 +154,11 @@
     "brace-expansion@^5.0.0": "^5.0.8",
     "@isaacs/brace-expansion": "^5.0.8",
     "axios": "^1.18.0",
-    "uuid": "14.0.0",
-    "uuid@^8.0.0": "14.0.0",
-    "uuid@^9.0.0": "14.0.0",
+    "uuid": "14.0.2",
+    "uuid@^8.0.0": "14.0.2",
+    "uuid@^9.0.0": "14.0.2",
     "basic-ftp": "^6.0.0",
-    "tar": "^7.5.19",
+    "tar": "^7.5.21",
     "lodash": "^4.18.0",
     "lodash-amd": "^4.18.0",
     "lodash-es": "^4.18.0",
@@ -175,7 +177,7 @@
     "immutable": "^5.1.8",
     "yauzl": "^3.2.1",
     "js-yaml": "^4.3.0",
-    "js-yaml@^3.0.0": "^3.15.0",
+    "js-yaml@^3.0.0": "^5.0.0",
     "js-yaml@^4.0.0": "^4.3.0",
     "flatted": "^3.4.2",
     "picomatch": "^4.0.4",
@@ -187,7 +189,9 @@
     "ip-address": "^10.3.1",
     "unzipper": "^0.12.5",
     "@babel/plugin-transform-modules-systemjs": "^7.29.4",
-    "@babel/core": "^7.29.6"
+    "@babel/core": "^7.29.6",
+    "browserslist": "^4.28.7",
+    "qs": "^6.16.0"
   },
   "lint-staged": {
     "*": [

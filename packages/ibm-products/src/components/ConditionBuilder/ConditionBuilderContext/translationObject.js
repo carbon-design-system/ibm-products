@@ -50,6 +50,7 @@ export const translationsObject = {
   invalidText: 'Incomplete',
   invalidNumberWarnText: 'Invalid number, must be 0 or greater',
   conditionBuilderText: 'Condition Builder',
+  conditionBuilderGroupText: 'Condition Group',
   actionSectionText: 'Action Section',
   conditionHeadingText: 'Condition',
   addPropertyText: 'Add property',

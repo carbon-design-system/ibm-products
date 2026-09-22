@@ -520,6 +520,12 @@ $carbon-prefix: 'cds';
     /* stylelint-disable-next-line */
     transform motion(standard, productive) $duration-moderate-01,
     opacity motion(standard, productive) $duration-moderate-01;
+
+  #{$carbon-prefix}-breadcrumb-item {
+    &::after {
+      display: none;
+    }
+  }
 }
 
 :host(

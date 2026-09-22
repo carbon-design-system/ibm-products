@@ -148,6 +148,7 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
         class=${classMap({
           [`${blockClass}`]: true,
         })}
+        ?no-trailing-slash="${!this.title}"
       >
         <cds-breadcrumb-item
           data-fixed

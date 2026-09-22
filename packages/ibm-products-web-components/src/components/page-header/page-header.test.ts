@@ -633,6 +633,473 @@ describe('c4p-page-header', function () {
     });
   });
 
+  describe('IntersectionObserver context updates', () => {
+    it('should update fullyCollapsed context when content leaves viewport', async () => {
+      // Capture the observer callbacks registered by c4p-page-header
+      const observerCallbacks: IntersectionObserverCallback[] = [];
+      IntersectionObserverMock.mockImplementation(
+        (cb: IntersectionObserverCallback) => {
+          observerCallbacks.push(cb);
+          return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() };
+        }
+      );
+
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      // contentObserver is registered first (index 0)
+      const contentObserverCb = observerCallbacks[0];
+      expect(contentObserverCb).toBeDefined();
+
+      // Simulate content leaving viewport → fullyCollapsed: true
+      contentObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+      expect((pageHeader as any).context.fullyCollapsed).toBe(true);
+
+      // Simulate content re-entering → fullyCollapsed: false
+      contentObserverCb(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+      expect((pageHeader as any).context.fullyCollapsed).toBe(false);
+    });
+
+    it('should update titleClipped context when title leaves viewport', async () => {
+      const observerCallbacks: IntersectionObserverCallback[] = [];
+      IntersectionObserverMock.mockImplementation(
+        (cb: IntersectionObserverCallback) => {
+          observerCallbacks.push(cb);
+          return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() };
+        }
+      );
+
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      // titleObserver is registered second (index 1)
+      const titleObserverCb = observerCallbacks[1];
+      expect(titleObserverCb).toBeDefined();
+
+      titleObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+      expect((pageHeader as any).context.titleClipped).toBe(true);
+
+      titleObserverCb(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+      expect((pageHeader as any).context.titleClipped).toBe(false);
+    });
+
+    it('should update contentActionsClipped context when actions leave viewport', async () => {
+      const observerCallbacks: IntersectionObserverCallback[] = [];
+      IntersectionObserverMock.mockImplementation(
+        (cb: IntersectionObserverCallback) => {
+          observerCallbacks.push(cb);
+          return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() };
+        }
+      );
+
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      // actionsObserver is registered third (index 2)
+      const actionsObserverCb = observerCallbacks[2];
+      expect(actionsObserverCb).toBeDefined();
+
+      actionsObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+      expect((pageHeader as any).context.contentActionsClipped).toBe(true);
+
+      actionsObserverCb(
+        [{ isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+      expect((pageHeader as any).context.contentActionsClipped).toBe(false);
+    });
+  });
+
+  describe('c4p-page-header-tabs disableStickyTabBar', () => {
+    it('should add disable class to page-header when disable-sticky-tab-bar is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-tabs disable-sticky-tab-bar>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      expect(
+        pageHeader.classList.contains(
+          `${prefix}--page-header--disable-sticky-tab-bar`
+        )
+      ).toBe(true);
+    });
+
+    it('should remove disable class from page-header when disable-sticky-tab-bar is toggled off', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-tabs disable-sticky-tab-bar>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const tabsEl = pageHeader.querySelector(
+        'c4p-page-header-tabs'
+      ) as HTMLElement & { disableStickyTabBar: boolean };
+      tabsEl.removeAttribute('disable-sticky-tab-bar');
+      await (tabsEl as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      expect(
+        pageHeader.classList.contains(
+          `${prefix}--page-header--disable-sticky-tab-bar`
+        )
+      ).toBe(false);
+    });
+  });
+
+  describe('c4p-page-header-scroller scroll behavior', () => {
+    it('should scroll to content height when not fully collapsed', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+          <c4p-page-header-tabs>
+            <c4p-page-header-scroller
+              slot="scroller"
+            ></c4p-page-header-scroller>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // scrollableAncestorInner falls back to document.scrollingElement in jsdom
+      const scrollSpy = vi.fn();
+      (document.scrollingElement as any).scrollTo = scrollSpy;
+
+      const scroller = pageHeader.querySelector(
+        `${prefix}-page-header-scroller`
+      ) as HTMLElement;
+      const iconBtn = scroller?.shadowRoot?.querySelector(
+        'cds-icon-button'
+      ) as HTMLElement;
+      iconBtn?.click();
+
+      expect(scrollSpy).toHaveBeenCalledWith(
+        expect.objectContaining({ behavior: 'smooth' })
+      );
+    });
+
+    it('should scroll to top when fully collapsed', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+          <c4p-page-header-tabs>
+            <c4p-page-header-scroller
+              slot="scroller"
+            ></c4p-page-header-scroller>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // Force fullyCollapsed: true on the root page header context
+      (pageHeader as any).context = {
+        ...(pageHeader as any).context,
+        fullyCollapsed: true,
+      };
+      await pageHeader.updateComplete;
+
+      const scrollSpy = vi.fn();
+      (document.scrollingElement as any).scrollTo = scrollSpy;
+
+      const scroller = pageHeader.querySelector(
+        `${prefix}-page-header-scroller`
+      ) as HTMLElement;
+      const iconBtn = scroller?.shadowRoot?.querySelector(
+        'cds-icon-button'
+      ) as HTMLElement;
+      iconBtn?.click();
+
+      expect(scrollSpy).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  describe('context propagation to child elements', () => {
+    it('should add show class to content-actions wrapper when contentActionsClipped is true', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            <div slot="content-actions">
+              <button>Action</button>
+            </div>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      // Trigger contentActionsClipped via context
+      (pageHeader as any).context = {
+        ...(pageHeader as any).context,
+        contentActionsClipped: true,
+      };
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const breadcrumb = pageHeader.querySelector(
+        `${prefix}-page-header-breadcrumb`
+      ) as HTMLElement;
+      await (breadcrumb as any).updateComplete;
+
+      const actionsWrapper = breadcrumb.shadowRoot?.querySelector(
+        `.${prefix}--page-header__breadcrumb__content-actions-with-global-actions`
+      );
+      expect(
+        actionsWrapper?.classList.contains(
+          `${prefix}--page-header__breadcrumb__content-actions-with-global-actions--show`
+        )
+      ).toBe(true);
+    });
+
+    it('should remove show class from content-actions wrapper when contentActionsClipped is false', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            <div slot="content-actions">
+              <button>Action</button>
+            </div>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      (pageHeader as any).context = {
+        ...(pageHeader as any).context,
+        contentActionsClipped: false,
+      };
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const breadcrumb = pageHeader.querySelector(
+        `${prefix}-page-header-breadcrumb`
+      ) as HTMLElement;
+      await (breadcrumb as any).updateComplete;
+
+      const actionsWrapper = breadcrumb.shadowRoot?.querySelector(
+        `.${prefix}--page-header__breadcrumb__content-actions-with-global-actions`
+      );
+      expect(
+        actionsWrapper?.classList.contains(
+          `${prefix}--page-header__breadcrumb__content-actions-with-global-actions--show`
+        )
+      ).toBe(false);
+    });
+  });
+
+  describe('c4p-page-header-actions-set overflow', () => {
+    it('should show overflow menu when actions do not fit', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-actions-set
+          style="width: 60px; display: block;"
+          .actionsData="${[
+            { label: 'Edit' },
+            { label: 'Delete' },
+            { label: 'Export' },
+          ]}"
+        >
+          <button style="width: 80px;">Edit</button>
+          <button style="width: 80px;">Delete</button>
+          <button style="width: 80px;">Export</button>
+        </c4p-page-header-actions-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      await (el as any).updateComplete;
+
+      const overflowMenu = el.shadowRoot?.querySelector('cds-overflow-menu');
+      expect(overflowMenu).to.exist;
+    });
+
+    it('should include correct labels in overflow menu body', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-actions-set
+          style="width: 60px; display: block;"
+          .actionsData="${[{ label: 'Edit' }, { label: 'Delete' }]}"
+        >
+          <button style="width: 80px;">Edit</button>
+          <button style="width: 80px;">Delete</button>
+        </c4p-page-header-actions-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      await (el as any).updateComplete;
+
+      const hiddenItems = (el as any).hiddenItems as { label: string }[];
+      expect(hiddenItems.length).toBeGreaterThan(0);
+      const labels = hiddenItems.map((i) => i.label);
+      expect(labels).toContain('Delete');
+    });
+  });
+
+  describe('c4p-page-header-tags-set overflow', () => {
+    it('should show +N operational tag when tags overflow', async () => {
+      const tags = Array.from({ length: 10 }, (_, i) => ({
+        type: 'blue' as any,
+        text: `Tag ${i}`,
+        size: 'sm' as any,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-tags-set
+          style="width: 80px; display: block;"
+          .tagsData="${tags}"
+        ></c4p-page-header-tags-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const hiddenTags = (el as any).hiddenTags as unknown[];
+      expect(hiddenTags.length).toBeGreaterThan(0);
+
+      const overflowSpan = el.shadowRoot?.querySelector('[data-offset]');
+      expect(overflowSpan).to.exist;
+    });
+
+    it('should open popover when +N tag is clicked', async () => {
+      const tags = Array.from({ length: 10 }, (_, i) => ({
+        type: 'blue' as any,
+        text: `Tag ${i}`,
+        size: 'sm' as any,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-tags-set
+          style="width: 80px; display: block;"
+          .tagsData="${tags}"
+        ></c4p-page-header-tags-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const operationalTag = el.shadowRoot?.querySelector(
+        'cds-operational-tag'
+      ) as HTMLElement;
+      operationalTag?.click();
+      await (el as any).updateComplete;
+
+      expect((el as any).isPopoverOpen).toBe(true);
+    });
+  });
+
+  describe('c4p-page-header-breadcrumbs-set overflow', () => {
+    it('should show overflow menu when breadcrumbs do not fit', async () => {
+      const breadcrumbs = Array.from({ length: 5 }, (_, i) => ({
+        text: `Breadcrumb ${i}`,
+        href: `#${i}`,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-breadcrumbs-set
+          style="width: 80px; display: block;"
+          title="Page title"
+          .breadcrumbsData="${breadcrumbs}"
+        ></c4p-page-header-breadcrumbs-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const hiddenItems = (el as any).hiddenItems as unknown[];
+      expect(hiddenItems.length).toBeGreaterThan(0);
+    });
+
+    it('should include correct items in breadcrumb overflow menu', async () => {
+      const breadcrumbs = Array.from({ length: 5 }, (_, i) => ({
+        text: `Breadcrumb ${i}`,
+        href: `#${i}`,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-breadcrumbs-set
+          style="width: 80px; display: block;"
+          title="Page title"
+          .breadcrumbsData="${breadcrumbs}"
+        ></c4p-page-header-breadcrumbs-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const overflowMenu = el.shadowRoot?.querySelector('cds-overflow-menu');
+      expect(overflowMenu).to.exist;
+
+      const hiddenItems = (el as any).hiddenItems as { text: string }[];
+      if (hiddenItems.length > 0) {
+        expect(hiddenItems[0].text).toMatch(/Breadcrumb/);
+      }
+    });
+  });
+
   describe('c4p-page-header-tabs', () => {
     it('should render tabs', async () => {
       const el: CDSPageHeaderTabs = await fixture(

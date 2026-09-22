@@ -26,7 +26,7 @@ import Activity16 from '@carbon/icons/es/activity/16.js';
 import AiGenerate16 from '@carbon/icons/es/ai-generate/16.js';
 import CloudFoundry16 from '@carbon/icons/es/cloud-foundry--1/16.js';
 import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';
-import { generateTags } from './page-header-tags-set/utils';
+import { generateTags } from './_story-assets/tags-data';
 
 const args = {
   border: true,

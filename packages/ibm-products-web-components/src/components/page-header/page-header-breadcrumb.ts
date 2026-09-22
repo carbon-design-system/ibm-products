@@ -80,9 +80,11 @@ class CDSPageHeaderBreadcrumb extends LitElement {
 
   render() {
     const { withinGrid, context } = this;
-    const { contentActionsClipped } = context ?? {};
+    const { contentActionsClipped, fullWidthGrid, narrowGrid } = context ?? {};
     const gridClasses = classMap({
       [`${carbonPrefix}--css-grid`]: !withinGrid,
+      [`${carbonPrefix}--css-grid--full-width`]: !withinGrid && !!fullWidthGrid,
+      [`${carbonPrefix}--css-grid--narrow`]: !withinGrid && !!narrowGrid,
       [`${carbonPrefix}--subgrid ${carbonPrefix}--subgrid--wide`]: withinGrid,
     });
 

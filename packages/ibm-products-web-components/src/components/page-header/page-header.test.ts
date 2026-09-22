@@ -1154,4 +1154,164 @@ describe('c4p-page-header', function () {
       expect(tags[1].textContent).to.include('Tag 2');
     });
   });
+
+  describe('full-width-grid and narrow-grid attributes', () => {
+    it('should set fullWidthGrid on the context when full-width-grid attribute is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header full-width-grid>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      expect((pageHeader as any).context.fullWidthGrid).toBe(true);
+      expect((pageHeader as any).context.narrowGrid).toBe(false);
+    });
+
+    it('should set narrowGrid on the context when narrow-grid attribute is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header narrow-grid>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      expect((pageHeader as any).context.narrowGrid).toBe(true);
+      expect((pageHeader as any).context.fullWidthGrid).toBe(false);
+    });
+
+    it('should apply cds--css-grid--full-width class to breadcrumb grid when full-width-grid is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header full-width-grid>
+          <c4p-page-header-breadcrumb>
+            <cds-breadcrumb>
+              <cds-breadcrumb-item href="#">Breadcrumb 1</cds-breadcrumb-item>
+            </cds-breadcrumb>
+          </c4p-page-header-breadcrumb>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const breadcrumb = pageHeader.querySelector(
+        `${prefix}-page-header-breadcrumb`
+      ) as HTMLElement;
+      await (breadcrumb as any).updateComplete;
+
+      const grid = breadcrumb.shadowRoot?.querySelector(
+        `.${carbonPrefix}--css-grid`
+      );
+      expect(
+        grid?.classList.contains(`${carbonPrefix}--css-grid--full-width`)
+      ).toBe(true);
+    });
+
+    it('should apply cds--css-grid--narrow class to breadcrumb grid when narrow-grid is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header narrow-grid>
+          <c4p-page-header-breadcrumb>
+            <cds-breadcrumb>
+              <cds-breadcrumb-item href="#">Breadcrumb 1</cds-breadcrumb-item>
+            </cds-breadcrumb>
+          </c4p-page-header-breadcrumb>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const breadcrumb = pageHeader.querySelector(
+        `${prefix}-page-header-breadcrumb`
+      ) as HTMLElement;
+      await (breadcrumb as any).updateComplete;
+
+      const grid = breadcrumb.shadowRoot?.querySelector(
+        `.${carbonPrefix}--css-grid`
+      );
+      expect(
+        grid?.classList.contains(`${carbonPrefix}--css-grid--narrow`)
+      ).toBe(true);
+    });
+
+    it('should apply cds--css-grid--full-width class to content grid when full-width-grid is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header full-width-grid>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const content = pageHeader.querySelector(
+        `${prefix}-page-header-content`
+      ) as HTMLElement;
+      await (content as any).updateComplete;
+
+      const grid = content.shadowRoot?.querySelector(
+        `.${carbonPrefix}--css-grid`
+      );
+      expect(
+        grid?.classList.contains(`${carbonPrefix}--css-grid--full-width`)
+      ).toBe(true);
+    });
+
+    it('should apply cds--css-grid--full-width class to tabs grid when full-width-grid is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header full-width-grid>
+          <c4p-page-header-tabs>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const tabs = pageHeader.querySelector(
+        `${prefix}-page-header-tabs`
+      ) as HTMLElement;
+      await (tabs as any).updateComplete;
+
+      const grid = tabs.shadowRoot?.querySelector(`.${carbonPrefix}--css-grid`);
+      expect(
+        grid?.classList.contains(`${carbonPrefix}--css-grid--full-width`)
+      ).toBe(true);
+    });
+
+    it('should not apply modifier classes when neither attribute is set', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            <cds-breadcrumb>
+              <cds-breadcrumb-item href="#">Breadcrumb 1</cds-breadcrumb-item>
+            </cds-breadcrumb>
+          </c4p-page-header-breadcrumb>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const breadcrumb = pageHeader.querySelector(
+        `${prefix}-page-header-breadcrumb`
+      ) as HTMLElement;
+      await (breadcrumb as any).updateComplete;
+
+      const grid = breadcrumb.shadowRoot?.querySelector(
+        `.${carbonPrefix}--css-grid`
+      );
+      expect(
+        grid?.classList.contains(`${carbonPrefix}--css-grid--full-width`)
+      ).toBe(false);
+      expect(
+        grid?.classList.contains(`${carbonPrefix}--css-grid--narrow`)
+      ).toBe(false);
+    });
+  });
 });

@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { provide } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
@@ -26,6 +26,8 @@ export interface pageHeaderContextType {
   root?: CDSPageHeader | null;
   withContent?: boolean;
   disableStickyTabBar?: boolean;
+  fullWidthGrid?: boolean;
+  narrowGrid?: boolean;
 }
 
 /**
@@ -34,9 +36,25 @@ export interface pageHeaderContextType {
  */
 @customElement(`${prefix}-page-header`)
 class CDSPageHeader extends LitElement {
+  /**
+   * Set to `true` to use a full-width Carbon CSS grid (no max-width cap).
+   */
+  @property({ attribute: 'full-width-grid', type: Boolean, reflect: true })
+  fullWidthGrid = false;
+
+  /**
+   * Set to `true` to use the Carbon narrow grid mode (content aligns to
+   * the gutter edge).
+   */
+  @property({ attribute: 'narrow-grid', type: Boolean, reflect: true })
+  narrowGrid = false;
+
   @state()
   @provide({ context: pageHeaderContext })
-  context: pageHeaderContextType = {};
+  context: pageHeaderContextType = {
+    fullWidthGrid: this.fullWidthGrid,
+    narrowGrid: this.narrowGrid,
+  };
 
   private resizeObserver: ResizeObserver | undefined;
   private contentObserver: IntersectionObserver | undefined;
@@ -52,6 +70,16 @@ class CDSPageHeader extends LitElement {
       } else {
         this.classList.remove(`${prefix}--page-header--disable-sticky-tab-bar`);
       }
+    }
+    if (
+      changedProperties.has('fullWidthGrid') ||
+      changedProperties.has('narrowGrid')
+    ) {
+      this.context = {
+        ...this.context,
+        fullWidthGrid: this.fullWidthGrid,
+        narrowGrid: this.narrowGrid,
+      };
     }
   }
 

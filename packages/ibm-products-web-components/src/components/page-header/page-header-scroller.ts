@@ -146,9 +146,7 @@ export class PageHeaderScroller extends CDSButton {
       size=${size}
       ?autoalign=${autoalign}
       class=${iconClasses}
-      aria-label=${context?.fullyCollapsed
-        ? this.expandText
-        : this.collapseText}
+      label=${context?.fullyCollapsed ? this.expandText : this.collapseText}
       @click=${this._handleScroller}
     >
       ${context?.fullyCollapsed

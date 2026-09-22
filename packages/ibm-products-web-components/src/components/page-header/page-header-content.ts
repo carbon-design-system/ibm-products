@@ -138,11 +138,11 @@ class CDSPageHeaderContent extends LitElement {
               ${!hasTitleSlotContent
                 ? hasEllipsisApplied
                   ? html`
-                      <cds-definition-tooltip>
+                      <cds-definition-tooltip term="${title}">
                         <span slot="definition">${title}</span>
                         ${staticHtml`<${titleTag} class="${prefix}--page-header__content__title">
-                          ${title}
-                        </${titleTag}>`}
+                              ${title}
+                            </${titleTag}>`}
                       </cds-definition-tooltip>
                     `
                   : staticHtml`

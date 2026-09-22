@@ -212,12 +212,16 @@ export default class CDSPageHeaderActionsSet extends LitElement {
 
   render() {
     return html`
-      <ul class="${blockClass}">
-        <li class="${blockClass}__items">
+      <div
+        class="${blockClass}"
+        role="toolbar"
+        aria-label="${this.overflowAriaLabel}"
+      >
+        <div class="${blockClass}__items">
           <slot></slot>
-        </li>
+        </div>
 
-        <li data-offset ?data-hidden=${this.hiddenItems.length === 0}>
+        <div data-offset ?data-hidden=${this.hiddenItems.length === 0}>
           <cds-overflow-menu
             size="md"
             close-on-activation
@@ -246,8 +250,8 @@ export default class CDSPageHeaderActionsSet extends LitElement {
               )}
             </cds-overflow-menu-body>
           </cds-overflow-menu>
-        </li>
-      </ul>
+        </div>
+      </div>
     `;
   }
   static styles = styles;

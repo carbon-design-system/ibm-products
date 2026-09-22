@@ -11,7 +11,7 @@ import { LitElement, html, nothing } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/tag/index.js';
-import '@carbon/web-components/es/components/link/index.js';
+import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/search/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
@@ -176,7 +176,7 @@ export default class CDSPageHeaderTagsSet extends LitElement {
                     @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
                       this.handleDismiss(e, tag)}
                     text=${tag?.text}
-                    tag-title="Provide a custom title to the tag"
+                    tag-title=${tag?.text}
                     type=${tag.type}
                     size=${tag.size}
                   ></cds-dismissible-tag>`
@@ -196,6 +196,7 @@ export default class CDSPageHeaderTagsSet extends LitElement {
               size=${this.tagsData[0]?.size}
               title="+${this.hiddenTags.length}"
               text="+${this.hiddenTags.length}"
+              aria-label="${this.hiddenTags.length} more tags"
               @click=${this.handleTogglePopover}
               @keydown=${this.handleTogglePopover}
             ></cds-operational-tag>
@@ -211,30 +212,30 @@ export default class CDSPageHeaderTagsSet extends LitElement {
                                   e: CustomEvent
                                 ) => this.handleDismiss(e, tag)}
                                 text=${tag?.text}
-                                tag-title="Provide a custom title to the tag"
+                                tag-title=${tag?.text}
                                 type=${tag.type}
                                 size=${tag.size}
                               ></cds-dismissible-tag>
                             </div>
                           `
-                        : html`<p class="${blockClass}__popover-tag">
-                            ${tag?.text}
-                          </p>`
+                        : html`<cds-tag
+                            class="${blockClass}__popover-tag"
+                            type=${tag.type}
+                            size=${tag.size}
+                            >${tag?.text}</cds-tag
+                          >`
                     )
                   : nothing}
                 ${this.hiddenTags.length > 10
                   ? html`
-                      <cds-link
+                      <cds-button
                         class="${blockClass}__view-all"
+                        kind="ghost"
+                        size="sm"
                         @click=${() => (this.modalOpen = true)}
-                        @keydown=${(e: KeyboardEvent) => {
-                          if (e.key === ' ') {
-                            this.modalOpen = true;
-                          }
-                        }}
                       >
                         View all tags
-                      </cds-link>
+                      </cds-button>
                     `
                   : nothing}
               </div>
@@ -277,7 +278,7 @@ export default class CDSPageHeaderTagsSet extends LitElement {
                           @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
                             this.handleDismiss(e, tag)}
                           text=${tag?.text}
-                          tag-title="Provide a custom title to the tag"
+                          tag-title=${tag?.text}
                           type=${tag.type}
                           size=${tag.size}
                         ></cds-dismissible-tag>`

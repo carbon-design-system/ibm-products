@@ -163,7 +163,7 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
             ${iconLoader(OverflowMenuHorizontal16, {
               slot: 'icon',
             })}
-            <span slot="tooltip-content"> Breadcrumbs </span>
+            <span slot="tooltip-content">${this.overflowAriaLabel}</span>
             <cds-overflow-menu-body size="sm">
               ${repeat(
                 this.hiddenItems ?? [],

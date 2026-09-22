@@ -111,6 +111,7 @@ export const Default = {
             ></c4p-page-header-breadcrumbs-set>
             <c4p-page-header-actions-set
               slot="content-actions"
+              overflow-aria-label="More breadcrumb content actions"
               .actionsData="${[
                 { label: 'action 1' },
                 { label: 'action 2' },
@@ -142,6 +143,7 @@ export const Default = {
             </c4p-page-header-actions-set>
             <c4p-page-header-actions-set
               slot="page-actions"
+              overflow-aria-label="More breadcrumb page actions"
               .actionsData="${[
                 { label: 'action 1' },
                 { label: 'action 2' },
@@ -175,6 +177,7 @@ export const Default = {
             </c4p-page-header-content-text>
             <c4p-page-header-actions-set
               slot="page-actions"
+              overflow-aria-label="More content page actions"
               .actionsData="${[
                 { label: 'action 1' },
                 { label: 'action 2' },
@@ -207,25 +210,53 @@ export const Default = {
           </c4p-page-header-content>
           <c4p-page-header-tabs>
             <cds-tabs value="tab-1">
-              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+              <cds-tab
+                id="tab-1"
+                target="tab-panel-1"
+                value="tab-1"
+                role="presentation"
                 >Tab 1</cds-tab
               >
-              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+              <cds-tab
+                id="tab-2"
+                target="tab-panel-2"
+                value="tab-2"
+                role="presentation"
                 >Tab 2</cds-tab
               >
-              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+              <cds-tab
+                id="tab-3"
+                target="tab-panel-3"
+                value="tab-3"
+                role="presentation"
                 >Tab 3</cds-tab
               >
-              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+              <cds-tab
+                id="tab-4"
+                target="tab-panel-4"
+                value="tab-4"
+                role="presentation"
                 >Tab 4</cds-tab
               >
-              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+              <cds-tab
+                id="tab-5"
+                target="tab-panel-5"
+                value="tab-5"
+                role="presentation"
                 >Tab 5</cds-tab
               >
-              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+              <cds-tab
+                id="tab-6"
+                target="tab-panel-6"
+                value="tab-6"
+                role="presentation"
                 >Tab 6</cds-tab
               >
-              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+              <cds-tab
+                id="tab-7"
+                target="tab-panel-7"
+                value="tab-7"
+                role="presentation"
                 >Tab 7</cds-tab
               >
             </cds-tabs>
@@ -557,6 +588,7 @@ export const TabBarWithTabsAndTags = {
           ></c4p-page-header-breadcrumbs-set>
           <c4p-page-header-actions-set
             slot="page-actions"
+            overflow-aria-label="More breadcrumb page actions"
             .actionsData="${[
               { label: 'action 1' },
               { label: 'action 2' },
@@ -591,25 +623,53 @@ export const TabBarWithTabsAndTags = {
         </c4p-page-header-content>
         <c4p-page-header-tabs>
           <cds-tabs value="tab-1">
-            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+            <cds-tab
+              id="tab-1"
+              target="tab-panel-1"
+              value="tab-1"
+              role="presentation"
               >Tab 1</cds-tab
             >
-            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+            <cds-tab
+              id="tab-2"
+              target="tab-panel-2"
+              value="tab-2"
+              role="presentation"
               >Tab 2</cds-tab
             >
-            <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+            <cds-tab
+              id="tab-3"
+              target="tab-panel-3"
+              value="tab-3"
+              role="presentation"
               >Tab 3</cds-tab
             >
-            <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+            <cds-tab
+              id="tab-4"
+              target="tab-panel-4"
+              value="tab-4"
+              role="presentation"
               >Tab 4</cds-tab
             >
-            <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+            <cds-tab
+              id="tab-5"
+              target="tab-panel-5"
+              value="tab-5"
+              role="presentation"
               >Tab 5</cds-tab
             >
-            <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+            <cds-tab
+              id="tab-6"
+              target="tab-panel-6"
+              value="tab-6"
+              role="presentation"
               >Tab 6</cds-tab
             >
-            <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+            <cds-tab
+              id="tab-7"
+              target="tab-panel-7"
+              value="tab-7"
+              role="presentation"
               >Tab 7</cds-tab
             >
           </cds-tabs>
@@ -700,6 +760,7 @@ export const Compact = {
             ></c4p-page-header-breadcrumbs-set>
             <c4p-page-header-actions-set
               slot="page-actions"
+              overflow-aria-label="More breadcrumb page actions"
               .actionsData="${[
                 { label: 'action 1' },
                 { label: 'action 2' },
@@ -722,25 +783,53 @@ export const Compact = {
           </c4p-page-header-breadcrumb>
           <c4p-page-header-tabs>
             <cds-tabs value="tab-1">
-              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+              <cds-tab
+                id="tab-1"
+                target="tab-panel-1"
+                value="tab-1"
+                role="presentation"
                 >Tab 1</cds-tab
               >
-              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+              <cds-tab
+                id="tab-2"
+                target="tab-panel-2"
+                value="tab-2"
+                role="presentation"
                 >Tab 2</cds-tab
               >
-              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+              <cds-tab
+                id="tab-3"
+                target="tab-panel-3"
+                value="tab-3"
+                role="presentation"
                 >Tab 3</cds-tab
               >
-              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+              <cds-tab
+                id="tab-4"
+                target="tab-panel-4"
+                value="tab-4"
+                role="presentation"
                 >Tab 4</cds-tab
               >
-              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+              <cds-tab
+                id="tab-5"
+                target="tab-panel-5"
+                value="tab-5"
+                role="presentation"
                 >Tab 5</cds-tab
               >
-              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+              <cds-tab
+                id="tab-6"
+                target="tab-panel-6"
+                value="tab-6"
+                role="presentation"
                 >Tab 6</cds-tab
               >
-              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+              <cds-tab
+                id="tab-7"
+                target="tab-panel-7"
+                value="tab-7"
+                role="presentation"
                 >Tab 7</cds-tab
               >
             </cds-tabs>
@@ -854,6 +943,7 @@ export const CustomRenderWithCallbacks = {
             </div>
             <c4p-page-header-actions-set
               slot="page-actions"
+              overflow-aria-label="More breadcrumb page actions"
               .actionsData="${[
                 { label: 'action 1' },
                 { label: 'action 2' },
@@ -896,25 +986,53 @@ export const CustomRenderWithCallbacks = {
             <c4p-page-header-scroller slot="scroller">
             </c4p-page-header-scroller>
             <cds-tabs value="tab-1">
-              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+              <cds-tab
+                id="tab-1"
+                target="tab-panel-1"
+                value="tab-1"
+                role="presentation"
                 >Tab 1</cds-tab
               >
-              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+              <cds-tab
+                id="tab-2"
+                target="tab-panel-2"
+                value="tab-2"
+                role="presentation"
                 >Tab 2</cds-tab
               >
-              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+              <cds-tab
+                id="tab-3"
+                target="tab-panel-3"
+                value="tab-3"
+                role="presentation"
                 >Tab 3</cds-tab
               >
-              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+              <cds-tab
+                id="tab-4"
+                target="tab-panel-4"
+                value="tab-4"
+                role="presentation"
                 >Tab 4</cds-tab
               >
-              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+              <cds-tab
+                id="tab-5"
+                target="tab-panel-5"
+                value="tab-5"
+                role="presentation"
                 >Tab 5</cds-tab
               >
-              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+              <cds-tab
+                id="tab-6"
+                target="tab-panel-6"
+                value="tab-6"
+                role="presentation"
                 >Tab 6</cds-tab
               >
-              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+              <cds-tab
+                id="tab-7"
+                target="tab-panel-7"
+                value="tab-7"
+                role="presentation"
                 >Tab 7</cds-tab
               >
             </cds-tabs>
@@ -1001,6 +1119,7 @@ export const WithDisabledStickyTabBar = {
             </div>
             <c4p-page-header-actions-set
               slot="page-actions"
+              overflow-aria-label="More breadcrumb page actions"
               .actionsData="${[
                 { label: 'action 1' },
                 { label: 'action 2' },
@@ -1038,25 +1157,53 @@ export const WithDisabledStickyTabBar = {
           </c4p-page-header-content>
           <c4p-page-header-tabs disable-sticky-tab-bar>
             <cds-tabs value="tab-1">
-              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+              <cds-tab
+                id="tab-1"
+                target="tab-panel-1"
+                value="tab-1"
+                role="presentation"
                 >Tab 1</cds-tab
               >
-              <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+              <cds-tab
+                id="tab-2"
+                target="tab-panel-2"
+                value="tab-2"
+                role="presentation"
                 >Tab 2</cds-tab
               >
-              <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+              <cds-tab
+                id="tab-3"
+                target="tab-panel-3"
+                value="tab-3"
+                role="presentation"
                 >Tab 3</cds-tab
               >
-              <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+              <cds-tab
+                id="tab-4"
+                target="tab-panel-4"
+                value="tab-4"
+                role="presentation"
                 >Tab 4</cds-tab
               >
-              <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+              <cds-tab
+                id="tab-5"
+                target="tab-panel-5"
+                value="tab-5"
+                role="presentation"
                 >Tab 5</cds-tab
               >
-              <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+              <cds-tab
+                id="tab-6"
+                target="tab-panel-6"
+                value="tab-6"
+                role="presentation"
                 >Tab 6</cds-tab
               >
-              <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+              <cds-tab
+                id="tab-7"
+                target="tab-panel-7"
+                value="tab-7"
+                role="presentation"
                 >Tab 7</cds-tab
               >
             </cds-tabs>

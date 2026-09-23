@@ -112,30 +112,8 @@ export const Default = {
             <c4p-page-header-actions-set
               slot="content-actions"
               overflow-aria-label="More breadcrumb content actions"
-              .actionsData="${[
-                { label: 'action 1' },
-                { label: 'action 2' },
-                { label: 'action 3' },
-                { label: 'action 4' },
-                { label: 'Add Primary action' },
-              ]}"
+              .actionsData="${[{ label: 'Add Primary action' }]}"
             >
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(AiGenerate16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 1</span>
-              </cds-icon-button>
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(Activity16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 2</span>
-              </cds-icon-button>
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(Activity16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 3</span>
-              </cds-icon-button>
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(Activity16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 4</span>
-              </cds-icon-button>
               <cds-button size="md" aria-label="Add Primary action"
                 >Primary action
                 ${iconLoader(Add16, { slot: 'icon' })}</cds-button
@@ -178,30 +156,8 @@ export const Default = {
             <c4p-page-header-actions-set
               slot="page-actions"
               overflow-aria-label="More content page actions"
-              .actionsData="${[
-                { label: 'action 1' },
-                { label: 'action 2' },
-                { label: 'action 3' },
-                { label: 'action 4' },
-                { label: 'Add Primary action' },
-              ]}"
+              .actionsData="${[{ label: 'Add Primary action' }]}"
             >
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(AiGenerate16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 1</span>
-              </cds-icon-button>
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(Activity16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 2</span>
-              </cds-icon-button>
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(Activity16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 3</span>
-              </cds-icon-button>
-              <cds-icon-button kind="ghost" size="md" align="bottom">
-                ${iconLoader(Activity16, { slot: 'icon' })}
-                <span slot="tooltip-content">action 4</span>
-              </cds-icon-button>
               <cds-button size="md" aria-label="Add Primary action"
                 >Primary action
                 ${iconLoader(Add16, { slot: 'icon' })}</cds-button

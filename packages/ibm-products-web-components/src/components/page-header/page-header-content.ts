@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
-import { property, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
 import { prefix, carbonPrefix } from '../../globals/settings';
@@ -84,6 +84,24 @@ class CDSPageHeaderContent extends LitElement {
 
   @consume({ context: pageHeaderContext, subscribe: true })
   context;
+
+  /**
+   * The page-actions wrapper element. Observed by the root for contentActionsClipped.
+   */
+  @query(`.${prefix}--page-header__content__page-actions`)
+  private _pageActionsEl!: HTMLElement;
+
+  firstUpdated() {
+    // Notify the root page-header of the page-actions container element so it
+    // can observe it with IntersectionObserver instead of the full content element.
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-page-header-content-actions-registered`, {
+        bubbles: true,
+        composed: true,
+        detail: { actionsEl: this._pageActionsEl },
+      })
+    );
+  }
 
   updated() {
     const textContainer = this.shadowRoot?.querySelector(

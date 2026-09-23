@@ -85,6 +85,23 @@ class CDSPageHeader extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback();
+    // Listen for the page-actions container registration from page-header-content
+    this.addEventListener(
+      `${prefix}-page-header-content-actions-registered`,
+      (e: Event) => {
+        const { actionsEl } = (e as CustomEvent).detail as {
+          actionsEl: HTMLElement;
+        };
+        if (!actionsEl) {
+          return;
+        }
+        // Re-wire the actionsObserver to the specific page-actions element
+        this.actionsObserver?.disconnect();
+        this.actionsObserver = this._createActionsObserver();
+        this.actionsObserver.observe(actionsEl);
+      }
+    );
+
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
     this.resizeObserver = new ResizeObserver((entries) => {
@@ -169,7 +186,19 @@ class CDSPageHeader extends LitElement {
       }
     );
 
-    this.actionsObserver = new IntersectionObserver(
+    this.actionsObserver = this._createActionsObserver();
+    if (contentElement) {
+      this.contentObserver.observe(contentElement);
+      this.titleObserver.observe(contentElement);
+      // actionsObserver starts on contentElement; once page-header-content fires
+      // its registration event, it is rewired to the specific page-actions element.
+      this.actionsObserver.observe(contentElement);
+    }
+  }
+
+  private _createActionsObserver(): IntersectionObserver {
+    const totalHeaderOffset = getHeaderOffset(this);
+    return new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const contentActionsClipped = !entry.isIntersecting;
@@ -187,17 +216,12 @@ class CDSPageHeader extends LitElement {
       },
       {
         root: null,
-        // 48 -> breadcrumb bar
+        // 48 -> breadcrumb bar height
         // 18 -> content padding
         rootMargin: `${(totalHeaderOffset + 48 + 18) * -1}px 0px 0px 0px`,
         threshold: 0.95,
       }
     );
-    if (contentElement) {
-      this.contentObserver.observe(contentElement);
-      this.titleObserver.observe(contentElement);
-      this.actionsObserver.observe(contentElement);
-    }
   }
 
   disconnectedCallback() {

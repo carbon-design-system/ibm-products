@@ -195,21 +195,16 @@ $carbon-prefix: 'cds';
   }
 
   .#{$prefix}--page-header__content__title-wrapper {
-    // TODO: remove this section
-    @include breakpoint-down(md) {
-      display: flex;
-      flex-direction: column;
-      grid-gap: $spacing-05;
-    }
-
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: $spacing-05;
-    ///////////////////////////////
-
-    // overriding until the responsive behavior is implemented
-    grid-template-columns: auto minmax(auto, auto);
     margin-block-end: $spacing-05;
     min-block-size: convert.to-rem(40px);
+
+    @include breakpoint('md') {
+      display: grid;
+      grid-template-columns: auto minmax(auto, auto);
+    }
   }
 
   // TODO: remove this section
@@ -510,6 +505,11 @@ $carbon-prefix: 'cds';
     /* stylelint-disable-next-line */ opacity
       motion(standard, productive) $duration-moderate-01;
     visibility: visible;
+
+    @include breakpoint-down('md') {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 }
 

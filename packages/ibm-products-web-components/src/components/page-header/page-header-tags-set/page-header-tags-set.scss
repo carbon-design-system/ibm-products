@@ -34,16 +34,15 @@ $block-class: #{$prefix}--page-header-tags-set;
     white-space: nowrap;
 
     &__popover-container {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-02;
       padding: $spacing-05;
 
       .#{$block-class}__popover-tag {
         @include type.type-style('label-02');
 
         margin: 0;
-      }
-
-      cds-dismissible-tag {
-        margin: $spacing-01 0;
       }
     }
 

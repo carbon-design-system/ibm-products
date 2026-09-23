@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -112,6 +112,7 @@ export interface CreateTearsheetNarrowProps extends PropsWithChildren {
 /**
  * Use a narrow tearsheet as an alternative to a modal when there is scrolling.
  * Use when the form fields can be broken down into sections using section headers.
+ * @deprecated This component is deprecated.
  */
 export const CreateTearsheetNarrow = React.forwardRef(
   (
@@ -200,6 +201,12 @@ export const CreateTearsheetNarrow = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 CreateTearsheetNarrow.displayName = componentName;
+
+/**@ts-ignore*/
+CreateTearsheetNarrow.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Tearsheet Narrow pattern`,
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

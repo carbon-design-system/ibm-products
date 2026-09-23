@@ -15,7 +15,7 @@ test.describe('CreateTearsheetNarrow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheetNarrow',
-      id: 'patterns-prebuilt-patterns-create-flows-createtearsheetnarrow--create-tearsheet-narrow',
+      id: 'deprecated-prebuilt-patterns-create-flows-createtearsheetnarrow--create-tearsheet-narrow',
       globals: {
         carbonTheme: 'white',
       },

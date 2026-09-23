@@ -81,7 +81,7 @@ export default {
           <div>
             This component is deprecated and will be removed in the next major
             version. Please migrate to{' '}
-            <a href="https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateTearsheet">
+            <a href="https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-create-flows-createtearsheet">
               Create Tearsheet
             </a>{' '}
             pattern.

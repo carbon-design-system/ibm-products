@@ -12,7 +12,7 @@ import * as stories from './CreateTearsheet.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
-      deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Tearsheet](https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateTearsheet) pattern."
+      deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Tearsheet](https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-create-flows-createtearsheet) pattern."
       altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#wide-tearsheet"
       blocks={[
         {

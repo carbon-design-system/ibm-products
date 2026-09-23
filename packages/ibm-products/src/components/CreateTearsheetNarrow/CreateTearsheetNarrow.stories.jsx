@@ -73,7 +73,7 @@ export default {
     docs: {
       page: () => (
         <StoryDocsPage
-          deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Tearsheet Narrow](https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateTearsheetNarrow) pattern."
+          deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Tearsheet Narrow](https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-create-flows-createtearsheetnarrow) pattern."
           altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#narrow-tearsheet"
         />
       ),
@@ -87,7 +87,7 @@ export default {
           <div>
             This component is deprecated and will be removed in the next major
             version. Please migrate to{' '}
-            <a href="https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateTearsheetNarrow">
+            <a href="https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-create-flows-createtearsheetnarrow">
               Create Tearsheet Narrow
             </a>{' '}
             pattern.

@@ -12,7 +12,7 @@ import * as stories from './CreateFullPage.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
-      deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Full Page](https://github.com/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CreateFullPage) pattern."
+      deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Full Page](https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-create-flows-create-full-page) pattern."
       altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#full-page"
       blocks={[
         {

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.95.0-rc.0`
+## `@carbon/ibm-products-styles@2.95.0`
 ### Features :rocket:
 - feat(Tearsheet, PageHeader): support ReactNode for header title with default string truncation (#9832)
 

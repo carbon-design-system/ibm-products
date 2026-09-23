@@ -98,7 +98,7 @@ export const Default = {
       <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
-            border=${border}
+            .border=${border}
             ?page-actions-flush="${pageActionsFlush}"
             ?content-actions-flush="${contentActionsFlush}"
           >
@@ -268,7 +268,7 @@ export const ContentWithIcon = {
       <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
-            border=${border}
+            .border=${border}
             ?page-actions-flush="${pageActionsFlush}"
             ?content-actions-flush="${contentActionsFlush}"
           >
@@ -344,7 +344,7 @@ export const ContentWithContextualActions = {
       <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
-            border=${border}
+            .border=${border}
             ?page-actions-flush="${pageActionsFlush}"
             ?content-actions-flush="${contentActionsFlush}"
           >
@@ -426,7 +426,7 @@ export const ContentWithHeroImage = {
               class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column"
             >
               <c4p-page-header-breadcrumb
-                ?border=${border}
+                .border=${border}
                 ?page-actions-flush="${pageActionsFlush}"
                 ?content-actions-flush="${contentActionsFlush}"
                 within-grid
@@ -505,7 +505,7 @@ export const ContentWithContextualActionsAndPageActions = {
       <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
-            border=${border}
+            .border=${border}
             ?page-actions-flush="${pageActionsFlush}"
             ?content-actions-flush="${contentActionsFlush}"
           >
@@ -773,7 +773,7 @@ export const Compact = {
       <main class="page-header-story__wrapper" aria-label="Header">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
-            border=${border}
+            .border=${border}
             ?page-actions-flush="${pageActionsFlush}"
             ?content-actions-flush="${contentActionsFlush}"
           >
@@ -950,7 +950,7 @@ export const CustomRenderWithCallbacks = {
             )}
         >
           <c4p-page-header-breadcrumb
-            border=${border}
+            .border=${border}
             ?content-actions-flush="${contentActionsFlush}"
           >
             ${renderBreadcrumbIcon
@@ -1124,7 +1124,7 @@ export const WithDisabledStickyTabBar = {
       <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
           <c4p-page-header-breadcrumb
-            border=${border}
+            .border=${border}
             ?page-actions-flush="${pageActionsFlush}"
             ?content-actions-flush="${contentActionsFlush}"
           >

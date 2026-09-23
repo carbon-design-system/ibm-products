@@ -246,117 +246,139 @@ export const Default = {
   },
 };
 export const ContentWithIcon = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <main aria-label="Header" class="page-header-story__wrapper">
-      <c4p-page-header>
-        <c4p-page-header-breadcrumb>
-          ${iconLoader(Bee16, { slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          </cds-breadcrumb>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(Activity16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 1</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(AiGenerate16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 2</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 3</span>
-          </cds-icon-button>
-        </c4p-page-header-breadcrumb>
-        <c4p-page-header-content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          title-level="h1"
-        >
-          ${iconLoader(Bee32, { slot: 'icon' })}
-          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </c4p-page-header-content-text>
-        </c4p-page-header-content>
-      </c4p-page-header>
-    </main>
-  `,
-};
-
-export const ContentWithContextualActions = {
-  render: () =>
-    html` <style>
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      border,
+      pageActionsFlush,
+      contentActionsFlush,
+      title,
+      renderBreadcrumbIcon,
+    } = args ?? {};
+    const sampleBreadcrumbsDefault = [
+      { text: 'Breadcrumb 1', href: '#' },
+      { text: 'Breadcrumb 2', href: '#' },
+      { text: 'Breadcrumb 3', href: '#' },
+    ];
+    return html`
+      <style>
         ${styles}
       </style>
       <main aria-label="Header" class="page-header-story__wrapper">
         <c4p-page-header>
-          <c4p-page-header-breadcrumb>
-            ${iconLoader(Bee16, { slot: 'icon' })}
-            <cds-breadcrumb>
-              <cds-breadcrumb-item>
-                <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-              </cds-breadcrumb-item>
-              <cds-breadcrumb-item>
-                <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-              </cds-breadcrumb-item>
-            </cds-breadcrumb>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(Activity16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 1</span>
-            </cds-icon-button>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(AiGenerate16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 2</span>
-            </cds-icon-button>
-            <cds-icon-button
-              slot="page-actions"
-              kind="ghost"
-              size="md"
-              align="bottom"
-            >
-              ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-              <span slot="tooltip-content">action 3</span>
-            </cds-icon-button>
-          </c4p-page-header-breadcrumb>
-          <c4p-page-header-content
-            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-            title-level="h1"
+          <c4p-page-header-breadcrumb
+            border=${border}
+            ?page-actions-flush="${pageActionsFlush}"
+            ?content-actions-flush="${contentActionsFlush}"
           >
+            ${renderBreadcrumbIcon
+              ? iconLoader(Bee16, { slot: 'icon' })
+              : undefined}
+            <c4p-page-header-breadcrumbs-set
+              .breadcrumbsData="${sampleBreadcrumbsDefault}"
+              title="${title}"
+            ></c4p-page-header-breadcrumbs-set>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              overflow-aria-label="More breadcrumb page actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+            </c4p-page-header-actions-set>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="${title}" title-level="h1">
+            ${iconLoader(Bee32, { slot: 'icon' })}
+            <c4p-page-header-content-text
+              subtitle="Subtitle"
+              subtitle-level="h2"
+            >
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </c4p-page-header-content-text>
+          </c4p-page-header-content>
+        </c4p-page-header>
+      </main>
+    `;
+  },
+};
+
+export const ContentWithContextualActions = {
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      border,
+      pageActionsFlush,
+      contentActionsFlush,
+      title,
+      renderBreadcrumbIcon,
+    } = args ?? {};
+    const sampleBreadcrumbsDefault = [
+      { text: 'Breadcrumb 1', href: '#' },
+      { text: 'Breadcrumb 2', href: '#' },
+      { text: 'Breadcrumb 3', href: '#' },
+    ];
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <main aria-label="Header" class="page-header-story__wrapper">
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb
+            border=${border}
+            ?page-actions-flush="${pageActionsFlush}"
+            ?content-actions-flush="${contentActionsFlush}"
+          >
+            ${renderBreadcrumbIcon
+              ? iconLoader(Bee16, { slot: 'icon' })
+              : undefined}
+            <c4p-page-header-breadcrumbs-set
+              .breadcrumbsData="${sampleBreadcrumbsDefault}"
+              title="${title}"
+            ></c4p-page-header-breadcrumbs-set>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              overflow-aria-label="More breadcrumb page actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+              ]}"
+            >
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+            </c4p-page-header-actions-set>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="${title}" title-level="h1">
             <div slot="contextual-actions">
               <cds-tag type="blue" size="lg">Tag</cds-tag>
             </div>
@@ -370,135 +392,182 @@ export const ContentWithContextualActions = {
               ship faster, scale efficiently, and stay in control every step of
               the way.
             </c4p-page-header-content-text>
-          </c4p-page-header-content> </c4p-page-header
-        >,
-      </main>`,
+          </c4p-page-header-content>
+        </c4p-page-header>
+      </main>
+    `;
+  },
 };
 
 export const ContentWithHeroImage = {
-  render: () =>
-    html`
-    <style>
+  args: { ...args, border: false },
+  argTypes,
+  render: (args) => {
+    const {
+      border,
+      pageActionsFlush,
+      contentActionsFlush,
+      title,
+      renderBreadcrumbIcon,
+    } = args ?? {};
+    const sampleBreadcrumbsDefault = [
+      { text: 'Breadcrumb 1', href: '#' },
+      { text: 'Breadcrumb 2', href: '#' },
+      { text: 'Breadcrumb 3', href: '#' },
+    ];
+    return html`
+      <style>
         ${styles}
       </style>
       <main aria-label="Header" class="page-header-story__wrapper">
-<c4p-page-header>
-      <div class="cds--css-grid">
-        <div class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-breadcrumb .border=${false} within-grid>
-        ${iconLoader(Bee16, { slot: 'icon' })}
-        <cds-breadcrumb>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-          <cds-breadcrumb-item>
-            <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-          </cds-breadcrumb-item>
-        </cds-breadcrumb>
-      </c4p-page-header-breadcrumb>
-          <c4p-page-header-content
-            within-grid
-            title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-            title-level="h1"
+        <c4p-page-header>
+          <div class="cds--css-grid">
+            <div
+              class="cds--sm:col-span-4 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column"
             >
-            <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
-             Built for modern teams, our technology platform simplifies complexity with powerful APIs, real-time collaboration tools, and seamless integration. From deployment to monitoring, we help you ship faster, scale efficiently, and stay in control every step of the way.
-            </c4p-page-header-content-text>
-          </c4p-page-header-content>
-        </div>
-        <div class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column">
-          <c4p-page-header-hero-image object-fit="cover">
-            <picture>
-              <source
-                srcset="${image1}"
-                media=${`(min-width: ${breakpoints.lg.width})`}
-              ></source>
-              <source
-                srcset="${image2}"
-                media=${`(max-width: ${breakpoints.lg.width})`}
-              ></source>
-              <img
-                src="${image1}"
-                alt="a default image"
-              />
-            </picture>
-          </c4p-page-header-hero-image>
-        </div>
-      </div>
-      </div>
-    </c4p-page-header>
+              <c4p-page-header-breadcrumb
+                ?border=${border}
+                ?page-actions-flush="${pageActionsFlush}"
+                ?content-actions-flush="${contentActionsFlush}"
+                within-grid
+              >
+                ${
+                  renderBreadcrumbIcon
+                    ? iconLoader(Bee16, { slot: 'icon' })
+                    : undefined
+                }
+                <c4p-page-header-breadcrumbs-set
+                  .breadcrumbsData="${sampleBreadcrumbsDefault}"
+                  title="${title}"
+                ></c4p-page-header-breadcrumbs-set>
+              </c4p-page-header-breadcrumb>
+              <c4p-page-header-content
+                within-grid
+                title="${title}"
+                title-level="h1"
+              >
+                <c4p-page-header-content-text
+                  subtitle="Subtitle"
+                  subtitle-level="h2"
+                >
+                  Built for modern teams, our technology platform simplifies
+                  complexity with powerful APIs, real-time collaboration tools,
+                  and seamless integration. From deployment to monitoring, we
+                  help you ship faster, scale efficiently, and stay in control
+                  every step of the way.
+                </c4p-page-header-content-text>
+              </c4p-page-header-content>
+            </div>
+            <div
+              class="cds--sm:col-span-0 cds--md:col-span-4 cds--lg:col-span-8 cds--css-grid-column"
+            >
+              <c4p-page-header-hero-image object-fit="cover">
+                <picture>
+                  <source
+                    srcset="${image1}"
+                    media=${`(min-width: ${breakpoints.lg.width})`}
+                  ></source>
+                  <source
+                    srcset="${image2}"
+                    media=${`(max-width: ${breakpoints.lg.width})`}
+                  ></source>
+                  <img src="${image1}" alt="a default image" />
+                </picture>
+              </c4p-page-header-hero-image>
+            </div>
+          </div>
+        </c4p-page-header>
       </main>
-    `,
+    `;
+  },
 };
 
 export const ContentWithContextualActionsAndPageActions = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <main aria-label="Header" class="page-header-story__wrapper">
-      <c4p-page-header>
-        <c4p-page-header-breadcrumb>
-          ${iconLoader(Bee16, { slot: 'icon' })}
-          <cds-breadcrumb>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          </cds-breadcrumb>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
+  args,
+  argTypes,
+  render: (args) => {
+    const {
+      border,
+      pageActionsFlush,
+      contentActionsFlush,
+      title,
+      renderBreadcrumbIcon,
+    } = args ?? {};
+    const sampleBreadcrumbsDefault = [
+      { text: 'Breadcrumb 1', href: '#' },
+      { text: 'Breadcrumb 2', href: '#' },
+      { text: 'Breadcrumb 3', href: '#' },
+    ];
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <main aria-label="Header" class="page-header-story__wrapper">
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb
+            border=${border}
+            ?page-actions-flush="${pageActionsFlush}"
+            ?content-actions-flush="${contentActionsFlush}"
           >
-            ${iconLoader(Activity16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 1</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(AiGenerate16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 2</span>
-          </cds-icon-button>
-          <cds-icon-button
-            slot="page-actions"
-            kind="ghost"
-            size="md"
-            align="bottom"
-          >
-            ${iconLoader(CloudFoundry16, { slot: 'icon' })}
-            <span slot="tooltip-content">action 3</span>
-          </cds-icon-button>
-        </c4p-page-header-breadcrumb>
-        <c4p-page-header-content
-          title="Virtual-Machine-DAL-really-long-title-example-that-goes-at-least-2-lines-long"
-          title-level="h1"
-        >
-          <div slot="contextual-actions">
-            <cds-tag type="blue" size="lg">Tag</cds-tag>
-          </div>
-          <div slot="page-actions">
-            <cds-button size="md" aria-label="Add Primary action"
-              >Primary action ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+            ${renderBreadcrumbIcon
+              ? iconLoader(Bee16, { slot: 'icon' })
+              : undefined}
+            <c4p-page-header-breadcrumbs-set
+              .breadcrumbsData="${sampleBreadcrumbsDefault}"
+              title="${title}"
+            ></c4p-page-header-breadcrumbs-set>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              overflow-aria-label="More breadcrumb page actions"
+              .actionsData="${[
+                { label: 'action 1' },
+                { label: 'action 2' },
+                { label: 'action 3' },
+              ]}"
             >
-          </div>
-          <c4p-page-header-content-text subtitle="Subtitle" subtitle-level="h2">
-            Built for modern teams, our technology platform simplifies
-            complexity with powerful APIs, real-time collaboration tools, and
-            seamless integration. From deployment to monitoring, we help you
-            ship faster, scale efficiently, and stay in control every step of
-            the way.
-          </c4p-page-header-content-text>
-        </c4p-page-header-content>
-      </c4p-page-header>
-    </main>
-  `,
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(Activity16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 1</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(AiGenerate16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 2</span>
+              </cds-icon-button>
+              <cds-icon-button kind="ghost" size="md" align="bottom">
+                ${iconLoader(CloudFoundry16, { slot: 'icon' })}
+                <span slot="tooltip-content">action 3</span>
+              </cds-icon-button>
+            </c4p-page-header-actions-set>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="${title}" title-level="h1">
+            <div slot="contextual-actions">
+              <cds-tag type="blue" size="lg">Tag</cds-tag>
+            </div>
+            <c4p-page-header-actions-set
+              slot="page-actions"
+              overflow-aria-label="More content page actions"
+              .actionsData="${[{ label: 'Add Primary action' }]}"
+            >
+              <cds-button size="md" aria-label="Add Primary action"
+                >Primary action
+                ${iconLoader(Add16, { slot: 'icon' })}</cds-button
+              >
+            </c4p-page-header-actions-set>
+            <c4p-page-header-content-text
+              subtitle="Subtitle"
+              subtitle-level="h2"
+            >
+              Built for modern teams, our technology platform simplifies
+              complexity with powerful APIs, real-time collaboration tools, and
+              seamless integration. From deployment to monitoring, we help you
+              ship faster, scale efficiently, and stay in control every step of
+              the way.
+            </c4p-page-header-content-text>
+          </c4p-page-header-content>
+        </c4p-page-header>
+      </main>
+    `;
+  },
 };
 
 const sampleBreadcrumbs = [

@@ -157,8 +157,10 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb:not([content-actions-flush]))
   ::slotted([slot='content-actions']) {
-  //stylelint-disable declaration-no-important
-  margin-inline-end: $spacing-04 !important;
+  @include breakpoint(md) {
+    //stylelint-disable declaration-no-important
+    margin-inline-end: $spacing-04 !important;
+  }
 }
 
 :host(#{$prefix}-page-header-breadcrumb[page-actions-flush]) {
@@ -498,6 +500,11 @@ $carbon-prefix: 'cds';
   min-inline-size: 0;
   opacity: 0;
   visibility: hidden;
+
+  @include breakpoint-down('md') {
+    display: none;
+  }
+
   &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
     opacity: 1;
     transform: translateY(0);
@@ -507,8 +514,7 @@ $carbon-prefix: 'cds';
     visibility: visible;
 
     @include breakpoint-down('md') {
-      opacity: 0;
-      visibility: hidden;
+      display: none;
     }
   }
 }

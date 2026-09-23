@@ -1314,4 +1314,677 @@ describe('c4p-page-header', function () {
       ).toBe(false);
     });
   });
+
+  describe('c4p-page-header-breadcrumb attributes', () => {
+    it('should reflect the border attribute as a boolean', async () => {
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
+        <c4p-page-header-breadcrumb border></c4p-page-header-breadcrumb>
+      `);
+      expect(el.hasAttribute('border')).toBe(true);
+    });
+
+    it('should not have border attribute when border is false', async () => {
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
+        <c4p-page-header-breadcrumb
+          .border=${false}
+        ></c4p-page-header-breadcrumb>
+      `);
+      await el.updateComplete;
+      expect(el.hasAttribute('border')).toBe(false);
+    });
+
+    it('should apply actions aria-label to the toolbar', async () => {
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
+        <c4p-page-header-breadcrumb
+          actions-aria-label="Custom actions label"
+        ></c4p-page-header-breadcrumb>
+      `);
+      await el.updateComplete;
+
+      const toolbar = el.shadowRoot?.querySelector('[role="toolbar"]');
+      expect(toolbar?.getAttribute('aria-label')).toBe('Custom actions label');
+    });
+
+    it('should use the default actions aria-label when none is provided', async () => {
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
+        <c4p-page-header-breadcrumb></c4p-page-header-breadcrumb>
+      `);
+      await el.updateComplete;
+
+      const toolbar = el.shadowRoot?.querySelector('[role="toolbar"]');
+      expect(toolbar?.getAttribute('aria-label')).toBe('Page header actions');
+    });
+
+    it('should apply fixed class when disableStickyTabBar context is true', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb></c4p-page-header-breadcrumb>
+          <c4p-page-header-tabs disable-sticky-tab-bar>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const breadcrumb = pageHeader.querySelector(
+        `${prefix}-page-header-breadcrumb`
+      ) as HTMLElement;
+      expect(
+        breadcrumb.classList.contains(
+          `${prefix}--page-header-breadcrumb--fixed`
+        )
+      ).toBe(true);
+    });
+
+    it('should apply subgrid class when within-grid is set', async () => {
+      const el: CDSPageHeaderBreadcrumb = await fixture(html`
+        <c4p-page-header-breadcrumb within-grid></c4p-page-header-breadcrumb>
+      `);
+      await el.updateComplete;
+
+      const subgrid = el.shadowRoot?.querySelector(`.${carbonPrefix}--subgrid`);
+      expect(subgrid).to.exist;
+    });
+  });
+
+  describe('c4p-page-header-title-breadcrumb visibility', () => {
+    it('should be inert by default when there is no context', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-title-breadcrumb>
+          My Page
+        </c4p-page-header-title-breadcrumb>
+      `);
+      await (el as any).updateComplete;
+      expect(el.hasAttribute('inert')).toBe(true);
+    });
+
+    it('should become interactive when titleClipped is true', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            <cds-breadcrumb>
+              <c4p-page-header-title-breadcrumb class="title-bc">
+                My Page
+              </c4p-page-header-title-breadcrumb>
+            </cds-breadcrumb>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="My Page" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      (pageHeader as any).context = {
+        ...(pageHeader as any).context,
+        titleClipped: true,
+        withContent: true,
+      };
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const titleBc = pageHeader.querySelector(
+        'c4p-page-header-title-breadcrumb'
+      ) as HTMLElement;
+      expect(titleBc.hasAttribute('inert')).toBe(false);
+    });
+
+    it('should become inert again when titleClipped returns to false', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            <cds-breadcrumb>
+              <c4p-page-header-title-breadcrumb>
+                My Page
+              </c4p-page-header-title-breadcrumb>
+            </cds-breadcrumb>
+          </c4p-page-header-breadcrumb>
+          <c4p-page-header-content title="My Page" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      // First clip it
+      (pageHeader as any).context = {
+        ...(pageHeader as any).context,
+        titleClipped: true,
+        withContent: true,
+      };
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // Then un-clip it
+      (pageHeader as any).context = {
+        ...(pageHeader as any).context,
+        titleClipped: false,
+        withContent: true,
+      };
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const titleBc = pageHeader.querySelector(
+        'c4p-page-header-title-breadcrumb'
+      ) as HTMLElement;
+      expect(titleBc.hasAttribute('inert')).toBe(true);
+    });
+
+    it('should be visible by default when there is no page-header-content (withContent false)', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-breadcrumb>
+            <cds-breadcrumb>
+              <c4p-page-header-title-breadcrumb>
+                My Page
+              </c4p-page-header-title-breadcrumb>
+            </cds-breadcrumb>
+          </c4p-page-header-breadcrumb>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const titleBc = pageHeader.querySelector(
+        'c4p-page-header-title-breadcrumb'
+      ) as HTMLElement;
+      // When withContent is false the title breadcrumb is always visible
+      expect(titleBc.hasAttribute('inert')).toBe(false);
+    });
+  });
+
+  describe('c4p-page-header-hero-image', () => {
+    it('should render with default cover object-fit', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-hero-image>
+          <img src="${image1}" alt="Hero" />
+        </c4p-page-header-hero-image>
+      `);
+      await (el as any).updateComplete;
+
+      expect(el.getAttribute('object-fit')).toBe('cover');
+      const container = (el as any).shadowRoot?.querySelector(
+        `.${prefix}--page-header__hero-image`
+      );
+      expect(
+        container?.classList.contains(
+          `${prefix}--page-header__hero-image--object-fit-cover`
+        )
+      ).toBe(true);
+    });
+
+    it('should apply contain class when object-fit="contain"', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-hero-image object-fit="contain">
+          <img src="${image1}" alt="Hero" />
+        </c4p-page-header-hero-image>
+      `);
+      await (el as any).updateComplete;
+
+      const container = (el as any).shadowRoot?.querySelector(
+        `.${prefix}--page-header__hero-image`
+      );
+      expect(
+        container?.classList.contains(
+          `${prefix}--page-header__hero-image--object-fit-contain`
+        )
+      ).toBe(true);
+    });
+  });
+
+  describe('c4p-page-header-content withinGrid', () => {
+    it('should apply subgrid class when within-grid is set', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content
+          title="Title"
+          title-level="h1"
+          within-grid
+        ></c4p-page-header-content>
+      `);
+      await (el as any).updateComplete;
+
+      const subgrid = (el as any).shadowRoot?.querySelector(
+        `.${carbonPrefix}--subgrid`
+      );
+      expect(subgrid).to.exist;
+    });
+
+    it('should apply css-grid class when within-grid is not set', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content
+          title="Title"
+          title-level="h1"
+        ></c4p-page-header-content>
+      `);
+      await (el as any).updateComplete;
+
+      const grid = (el as any).shadowRoot?.querySelector(
+        `.${carbonPrefix}--css-grid`
+      );
+      expect(grid).to.exist;
+    });
+  });
+
+  describe('c4p-page-header-content-text subtitle heading level', () => {
+    it('should render the subtitle as an h3 when subtitle-level is h3', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content-text
+          subtitle="My subtitle"
+          subtitle-level="h3"
+        ></c4p-page-header-content-text>
+      `);
+      await (el as any).updateComplete;
+
+      const heading = (el as any).shadowRoot?.querySelector('h3');
+      expect(heading).to.exist;
+      expect(heading?.textContent?.trim()).toBe('My subtitle');
+    });
+
+    it('should render the subtitle as an h2 by default', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-content-text
+          subtitle="Default level"
+        ></c4p-page-header-content-text>
+      `);
+      await (el as any).updateComplete;
+
+      const heading = (el as any).shadowRoot?.querySelector('h2');
+      expect(heading).to.exist;
+    });
+  });
+
+  describe('c4p-page-header-actions-set aria labels', () => {
+    it('should apply toolbar-aria-label to role="toolbar"', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-actions-set
+          toolbar-aria-label="Custom toolbar label"
+        ></c4p-page-header-actions-set>
+      `);
+      await (el as any).updateComplete;
+
+      const toolbar = (el as any).shadowRoot?.querySelector('[role="toolbar"]');
+      expect(toolbar?.getAttribute('aria-label')).toBe('Custom toolbar label');
+    });
+
+    it('should use the default toolbar aria-label "Page actions"', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-actions-set></c4p-page-header-actions-set>
+      `);
+      await (el as any).updateComplete;
+
+      const toolbar = (el as any).shadowRoot?.querySelector('[role="toolbar"]');
+      expect(toolbar?.getAttribute('aria-label')).toBe('Page actions');
+    });
+
+    it('should apply overflow-aria-label to the overflow menu', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-actions-set
+          overflow-aria-label="Custom overflow label"
+          .actionsData="${[{ label: 'Edit' }]}"
+        >
+          <button>Edit</button>
+        </c4p-page-header-actions-set>
+      `);
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      await (el as any).updateComplete;
+
+      const overflowMenu = (el as any).shadowRoot?.querySelector(
+        'cds-overflow-menu'
+      );
+      expect(overflowMenu?.getAttribute('aria-label')).toBe(
+        'Custom overflow label'
+      );
+    });
+
+    it('toolbar and overflow labels should be independent', async () => {
+      const el = await fixture(html`
+        <c4p-page-header-actions-set
+          toolbar-aria-label="Toolbar label"
+          overflow-aria-label="Overflow label"
+        ></c4p-page-header-actions-set>
+      `);
+      await (el as any).updateComplete;
+
+      const toolbar = (el as any).shadowRoot?.querySelector('[role="toolbar"]');
+      const overflowMenu = (el as any).shadowRoot?.querySelector(
+        'cds-overflow-menu'
+      );
+      expect(toolbar?.getAttribute('aria-label')).toBe('Toolbar label');
+      expect(overflowMenu?.getAttribute('aria-label')).toBe('Overflow label');
+    });
+  });
+
+  describe('c4p-page-header-tags-set a11y attributes', () => {
+    it('should have aria-expanded="false" on the operational tag when popover is closed', async () => {
+      const tags = Array.from({ length: 10 }, (_, i) => ({
+        type: 'blue' as any,
+        text: `Tag ${i}`,
+        size: 'sm' as any,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-tags-set
+          style="width: 80px; display: block;"
+          .tagsData="${tags}"
+        ></c4p-page-header-tags-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const operationalTag = (el as any).shadowRoot?.querySelector(
+        'cds-operational-tag'
+      );
+      expect(operationalTag?.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    it('should have aria-expanded="true" on the operational tag when popover is open', async () => {
+      const tags = Array.from({ length: 10 }, (_, i) => ({
+        type: 'blue' as any,
+        text: `Tag ${i}`,
+        size: 'sm' as any,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-tags-set
+          style="width: 80px; display: block;"
+          .tagsData="${tags}"
+        ></c4p-page-header-tags-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const operationalTag = (el as any).shadowRoot?.querySelector(
+        'cds-operational-tag'
+      ) as HTMLElement;
+      operationalTag?.click();
+      await (el as any).updateComplete;
+
+      expect(operationalTag?.getAttribute('aria-expanded')).toBe('true');
+    });
+
+    it('should have aria-haspopup="true" on the operational tag', async () => {
+      const tags = Array.from({ length: 10 }, (_, i) => ({
+        type: 'blue' as any,
+        text: `Tag ${i}`,
+        size: 'sm' as any,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-tags-set
+          style="width: 80px; display: block;"
+          .tagsData="${tags}"
+        ></c4p-page-header-tags-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const operationalTag = (el as any).shadowRoot?.querySelector(
+        'cds-operational-tag'
+      );
+      expect(operationalTag?.getAttribute('aria-haspopup')).toBe('true');
+    });
+
+    it('should render the visually-hidden aria-live region', async () => {
+      const tags = Array.from({ length: 10 }, (_, i) => ({
+        type: 'blue' as any,
+        text: `Tag ${i}`,
+        size: 'sm' as any,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-tags-set
+          style="width: 80px; display: block;"
+          .tagsData="${tags}"
+        ></c4p-page-header-tags-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const liveRegion = (el as any).shadowRoot?.querySelector(
+        '[role="status"][aria-live="polite"]'
+      );
+      expect(liveRegion).to.exist;
+    });
+
+    it('should populate the aria-live region text when tags overflow', async () => {
+      const tags = Array.from({ length: 10 }, (_, i) => ({
+        type: 'blue' as any,
+        text: `Tag ${i}`,
+        size: 'sm' as any,
+      }));
+
+      const el = await fixture(html`
+        <c4p-page-header-tags-set
+          style="width: 80px; display: block;"
+          .tagsData="${tags}"
+        ></c4p-page-header-tags-set>
+      `);
+
+      await (el as any).updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      await (el as any).updateComplete;
+
+      const hiddenCount = ((el as any).hiddenTags as unknown[]).length;
+      const liveRegion = (el as any).shadowRoot?.querySelector(
+        '[role="status"][aria-live="polite"]'
+      );
+      expect(liveRegion?.textContent?.trim()).toBe(`${hiddenCount} more tags`);
+    });
+  });
+
+  describe('c4p-page-header custom events', () => {
+    it('should dispatch c4p-page-header-fully-collapsed when fullyCollapsed changes', async () => {
+      const observerCallbacks: IntersectionObserverCallback[] = [];
+      IntersectionObserverMock.mockImplementation(
+        (cb: IntersectionObserverCallback) => {
+          observerCallbacks.push(cb);
+          return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() };
+        }
+      );
+
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      const events: CustomEvent[] = [];
+      pageHeader.addEventListener(
+        `${prefix}-page-header-fully-collapsed`,
+        (e) => events.push(e as CustomEvent)
+      );
+
+      const contentObserverCb = observerCallbacks[0];
+      contentObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+
+      expect(events.length).toBe(1);
+      expect(events[0].detail.fullyCollapsed).toBe(true);
+    });
+
+    it('should dispatch c4p-page-header-title-clipped when titleClipped changes', async () => {
+      const observerCallbacks: IntersectionObserverCallback[] = [];
+      IntersectionObserverMock.mockImplementation(
+        (cb: IntersectionObserverCallback) => {
+          observerCallbacks.push(cb);
+          return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() };
+        }
+      );
+
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      const events: CustomEvent[] = [];
+      pageHeader.addEventListener(`${prefix}-page-header-title-clipped`, (e) =>
+        events.push(e as CustomEvent)
+      );
+
+      const titleObserverCb = observerCallbacks[1];
+      titleObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+
+      expect(events.length).toBe(1);
+      expect(events[0].detail.titleClipped).toBe(true);
+    });
+
+    it('should dispatch c4p-page-header-content-actions-clipped when contentActionsClipped changes', async () => {
+      const observerCallbacks: IntersectionObserverCallback[] = [];
+      IntersectionObserverMock.mockImplementation(
+        (cb: IntersectionObserverCallback) => {
+          observerCallbacks.push(cb);
+          return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() };
+        }
+      );
+
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      const events: CustomEvent[] = [];
+      pageHeader.addEventListener(
+        `${prefix}-page-header-content-actions-clipped`,
+        (e) => events.push(e as CustomEvent)
+      );
+
+      const actionsObserverCb = observerCallbacks[2];
+      actionsObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+
+      expect(events.length).toBe(1);
+      expect(events[0].detail.contentActionsClipped).toBe(true);
+    });
+
+    it('should not dispatch duplicate events when the same state is set again', async () => {
+      const observerCallbacks: IntersectionObserverCallback[] = [];
+      IntersectionObserverMock.mockImplementation(
+        (cb: IntersectionObserverCallback) => {
+          observerCallbacks.push(cb);
+          return { disconnect: vi.fn(), observe: vi.fn(), unobserve: vi.fn() };
+        }
+      );
+
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      const events: CustomEvent[] = [];
+      pageHeader.addEventListener(
+        `${prefix}-page-header-fully-collapsed`,
+        (e) => events.push(e as CustomEvent)
+      );
+
+      const contentObserverCb = observerCallbacks[0];
+      // Fire the same isIntersecting: false value twice
+      contentObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+      contentObserverCb(
+        [{ isIntersecting: false } as IntersectionObserverEntry],
+        {} as IntersectionObserver
+      );
+
+      // Should only fire once since the state did not change the second time
+      expect(events.length).toBe(1);
+    });
+  });
+
+  describe('c4p-page-header-scroller label text', () => {
+    it('should show collapseText when not fully collapsed', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+          <c4p-page-header-tabs>
+            <c4p-page-header-scroller
+              slot="scroller"
+              .collapseText=${'Hide header'}
+              .expandText=${'Show header'}
+            ></c4p-page-header-scroller>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const scroller = pageHeader.querySelector(
+        `${prefix}-page-header-scroller`
+      ) as HTMLElement;
+      const iconBtn = scroller?.shadowRoot?.querySelector('cds-icon-button');
+      expect(iconBtn?.getAttribute('label')).toBe('Hide header');
+    });
+
+    it('should show expandText when fully collapsed', async () => {
+      const pageHeader: CDSPageHeader = await fixture(html`
+        <c4p-page-header>
+          <c4p-page-header-content title="Title" title-level="h1">
+          </c4p-page-header-content>
+          <c4p-page-header-tabs>
+            <c4p-page-header-scroller
+              slot="scroller"
+              .collapseText=${'Hide header'}
+              .expandText=${'Show header'}
+            ></c4p-page-header-scroller>
+            <cds-tabs value="tab-1">
+              <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+                >Tab 1</cds-tab
+              >
+            </cds-tabs>
+          </c4p-page-header-tabs>
+        </c4p-page-header>
+      `);
+      await pageHeader.updateComplete;
+
+      (pageHeader as any).context = {
+        ...(pageHeader as any).context,
+        fullyCollapsed: true,
+      };
+      await pageHeader.updateComplete;
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      const scroller = pageHeader.querySelector(
+        `${prefix}-page-header-scroller`
+      ) as HTMLElement;
+      const iconBtn = scroller?.shadowRoot?.querySelector('cds-icon-button');
+      expect(iconBtn?.getAttribute('label')).toBe('Show header');
+    });
+  });
 });

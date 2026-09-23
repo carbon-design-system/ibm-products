@@ -647,6 +647,7 @@ export const TabBarWithTabsAndTags = {
           </c4p-page-header-content-text>
         </c4p-page-header-content>
         <c4p-page-header-tabs>
+          <c4p-page-header-scroller slot="scroller"></c4p-page-header-scroller>
           <cds-tabs value="tab-1">
             <cds-tab
               id="tab-1"

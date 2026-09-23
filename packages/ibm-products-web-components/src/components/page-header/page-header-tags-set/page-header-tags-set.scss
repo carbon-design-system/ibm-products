@@ -24,6 +24,19 @@ $block-class: #{$prefix}--page-header-tags-set;
 
 :host {
   inline-size: 100%;
+
+  // Visually-hidden live region for announcing overflow count changes to
+  // assistive technology — must remain in the accessibility tree.
+  .#{$block-class}__hidden-count-announcement {
+    position: absolute;
+    overflow: hidden;
+    inline-size: 1px;
+    block-size: 1px;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .#{$block-class} {
     display: flex;
     // Spacing between tags.

@@ -66,7 +66,7 @@ class CDSPageHeaderTabs extends LitElement {
       [`${carbonPrefix}--css-grid--narrow`]: !!narrowGrid,
     });
     return html`
-      <div class="${gridClasses}" condensed="">
+      <div class="${gridClasses}">
         <div
           class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
         >

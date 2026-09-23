@@ -38,6 +38,12 @@ export default class CDSPageHeaderActionsSet extends LitElement {
   actionsData: PageAction[] = [];
 
   /**
+   * Aria label for the toolbar container (`role="toolbar"`).
+   */
+  @property({ type: String, attribute: 'toolbar-aria-label', reflect: true })
+  toolbarAriaLabel = 'Page actions';
+
+  /**
    * Aria label for the overflow menu button.
    */
   @property({ type: String, attribute: 'overflow-aria-label', reflect: true })
@@ -226,7 +232,7 @@ export default class CDSPageHeaderActionsSet extends LitElement {
       <div
         class="${blockClass}"
         role="toolbar"
-        aria-label="${this.overflowAriaLabel}"
+        aria-label="${this.toolbarAriaLabel}"
       >
         <div class="${blockClass}__items">
           <slot></slot>

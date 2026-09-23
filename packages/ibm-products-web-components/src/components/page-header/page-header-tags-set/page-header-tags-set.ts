@@ -187,6 +187,16 @@ export default class CDSPageHeaderTagsSet extends LitElement {
           `
         )}
         <span data-offset ?data-hidden=${this.hiddenTags.length === 0}>
+          <span
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            class="${blockClass}__hidden-count-announcement"
+          >
+            ${this.hiddenTags.length > 0
+              ? `${this.hiddenTags.length} more tags`
+              : ''}
+          </span>
           <cds-popover
             ?open=${this.isPopoverOpen}
             ?highContrast=${true}
@@ -197,6 +207,8 @@ export default class CDSPageHeaderTagsSet extends LitElement {
               title="+${this.hiddenTags.length}"
               text="+${this.hiddenTags.length}"
               aria-label="${this.hiddenTags.length} more tags"
+              aria-expanded=${this.isPopoverOpen ? 'true' : 'false'}
+              aria-haspopup="true"
               @click=${this.handleTogglePopover}
               @keydown=${this.handleTogglePopover}
             ></cds-operational-tag>

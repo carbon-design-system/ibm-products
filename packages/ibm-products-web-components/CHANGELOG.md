@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.48.0-rc.0`
+## `@carbon/ibm-products-web-components@0.48.0`
 ### Bug fixes :bug:
 - fix: bignumber and notificationpanel parity after v12 migration (#9856)
 

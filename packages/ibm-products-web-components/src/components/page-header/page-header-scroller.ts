@@ -9,7 +9,7 @@
 
 import { html } from 'lit';
 import styles from './page-header.scss?lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import Chevron20 from '@carbon/icons/es/chevron--up/20';
@@ -83,6 +83,7 @@ export class PageHeaderScroller extends CDSButton {
   size = 'md';
 
   @consume({ context: pageHeaderContext, subscribe: true })
+  @state()
   context;
 
   protected _renderTooltipContent() {

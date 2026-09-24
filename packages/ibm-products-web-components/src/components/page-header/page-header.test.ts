@@ -1065,10 +1065,14 @@ describe('c4p-page-header', function () {
       `);
 
       await (el as any).updateComplete;
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      // Flush the two nested requestAnimationFrame calls used by
+      // firstUpdated (breadcrumb ol style) and createOverflowHandler.
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
       await (el as any).updateComplete;
 
-      const hiddenItems = (el as any).hiddenItems as unknown[];
+      // The private state field is _hiddenItems (not hiddenItems)
+      const hiddenItems = (el as any)._hiddenItems as unknown[];
       expect(hiddenItems.length).toBeGreaterThan(0);
     });
 
@@ -1087,13 +1091,17 @@ describe('c4p-page-header', function () {
       `);
 
       await (el as any).updateComplete;
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      // Flush the two nested requestAnimationFrame calls used by
+      // firstUpdated (breadcrumb ol style) and createOverflowHandler.
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
       await (el as any).updateComplete;
 
       const overflowMenu = el.shadowRoot?.querySelector('cds-overflow-menu');
       expect(overflowMenu).to.exist;
 
-      const hiddenItems = (el as any).hiddenItems as { text: string }[];
+      // The private state field is _hiddenItems (not hiddenItems)
+      const hiddenItems = (el as any)._hiddenItems as { text: string }[];
       if (hiddenItems.length > 0) {
         expect(hiddenItems[0].text).toMatch(/Breadcrumb/);
       }

@@ -2035,7 +2035,9 @@ describe(componentName, () => {
       const sortableColumnHeaderButton = within(colHeader).getByRole('button');
       // aria-pressed made screen readers announce the header as a toggle
       // button; sort direction is conveyed by aria-sort on the columnheader.
-      expect(sortableColumnHeaderButton.getAttribute('aria-pressed')).toBeNull();
+      expect(
+        sortableColumnHeaderButton.getAttribute('aria-pressed')
+      ).toBeNull();
     });
   });
   it('Customizing Columns disable save button when un-select all columns', async () => {

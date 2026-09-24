@@ -388,7 +388,34 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
             </div>
           </details>
         ) : (
-          <div className={`${blockClass}__static-content`}>{renderTitle()}</div>
+          <div
+            className={cx(`${blockClass}__static-content`, {
+              [`${blockClass}__header--has-toggle`]: enabled !== undefined,
+            })}
+          >
+            {enabled !== undefined && (
+              // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+              <div
+                className={`${blockClass}__toggle-container`}
+                data-testid="options-tile-toggle-container"
+                onMouseDown={(evt) => {
+                  evt.preventDefault();
+                }}
+              >
+                <Toggle
+                  id={`${titleId}-toggle`}
+                  className={`${blockClass}__toggle`}
+                  toggled={enabled}
+                  aria-labelledby={titleId}
+                  hideLabel
+                  onToggle={onToggle}
+                  size="sm"
+                  disabled={isLocked}
+                />
+              </div>
+            )}
+            {renderTitle()}
+          </div>
         )}
       </Section>
     );

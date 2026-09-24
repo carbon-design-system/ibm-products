@@ -122,6 +122,12 @@ describe(componentName, () => {
     expect(container.querySelector('details')).toBeFalsy();
   });
 
+  it('renders a toggle in the static variant when props.enabled is set', async () => {
+    render(<OptionsTile title="Static with toggle" enabled />);
+
+    expect(screen.getByRole('switch')).toHaveAttribute('aria-checked', 'true');
+  });
+
   it('renders invalid state when passed', async () => {
     const invalidText = 'invalid explanation';
 

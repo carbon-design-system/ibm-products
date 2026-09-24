@@ -116,9 +116,27 @@ const Template = (args) => {
 };
 
 const TemplateStatic = (args) => {
+  const { enabled: enabledControl, ...rest } = args;
+  const [toggleChecked, setToggleChecked] = useState(
+    enabledControl !== undefined ? !!enabledControl : undefined
+  );
+
+  // Sync with Storybook controls panel changes to the enabled arg
+  useEffect(() => {
+    setToggleChecked(
+      enabledControl !== undefined ? !!enabledControl : undefined
+    );
+  }, [enabledControl]);
+
   return (
     <main>
-      <OptionsTile {...args} />
+      <OptionsTile
+        {...rest}
+        enabled={toggleChecked}
+        onToggle={(checked) => {
+          setToggleChecked(checked);
+        }}
+      />
     </main>
   );
 };

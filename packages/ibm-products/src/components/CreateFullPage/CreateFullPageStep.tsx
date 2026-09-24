@@ -126,6 +126,9 @@ type CreateFullPageStepFieldsetProps =
 export type CreateFullPageStepProps = CreateFullPageStepBaseProps &
   CreateFullPageStepFieldsetProps;
 
+/**
+ * @deprecated This component is deprecated.
+ */
 export const CreateFullPageStep = forwardRef(
   (
     {
@@ -263,6 +266,14 @@ export const CreateFullPageStep = forwardRef(
     );
   }
 );
+
+CreateFullPageStep.displayName = componentName;
+
+/**@ts-ignore*/
+CreateFullPageStep.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Full Page pattern`,
+};
 
 CreateFullPageStep.propTypes = {
   /**

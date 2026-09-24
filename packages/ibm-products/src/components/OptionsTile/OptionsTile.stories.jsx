@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown, Toggle } from '@carbon/react';
 import { OptionsTile } from '.';
 import styles from './_storybook-styles.scss?inline';
@@ -65,13 +65,26 @@ const Template = (args) => {
     { label: 'Turkish', id: 'tr' },
   ];
 
-  const { titleId: id, enabled: enabledControl, ...rest } = args;
+  const {
+    titleId: id,
+    enabled: enabledControl,
+    open: openControl,
+    ...rest
+  } = args;
   const [toggleChecked, setToggleChecked] = useState(true);
+  const [open, setOpen] = useState(openControl ?? false);
+
+  // Sync with Storybook controls panel changes
+  useEffect(() => {
+    setOpen(openControl ?? false);
+  }, [openControl]);
 
   return (
     <main>
       <OptionsTile
         {...rest}
+        open={open}
+        onChange={setOpen}
         enabled={enabledControl ? toggleChecked : undefined}
         onToggle={(checked) => {
           setToggleChecked(checked);

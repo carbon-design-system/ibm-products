@@ -275,13 +275,22 @@ export const OptionsTile = React.forwardRef<HTMLDivElement, OptionsTileProps>(
         text = warnText;
       } else if (locked) {
         Icon = Locked;
-        if (!text) {
+        // In the static variant (no children) lockedText always replaces the
+        // summary, matching the web component behavior. In the expandable
+        // variant the summary is kept so the user can still read it; lockedText
+        // is shown in the expanded content area instead.
+        if (!isExpandable) {
+          text = lockedText;
+        } else if (!text) {
           text = lockedText;
         }
       }
 
       const hasValidationState = invalid || warn || locked;
-      const summaryHidden = !hasValidationState && enabled === false;
+      // Summary is hidden when the tile is expanded (open), unless there is a
+      // validation state (invalid/warn/locked) which should always be visible.
+      // This matches the web component behavior where `.--open .summary { display: none }`.
+      const summaryHidden = !hasValidationState && open;
       const summaryClasses = cx(`${blockClass}__summary`, {
         [`${blockClass}__summary--closing`]: closing,
         [`${blockClass}__summary--open`]: open,

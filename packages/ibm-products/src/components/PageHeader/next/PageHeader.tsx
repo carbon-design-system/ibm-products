@@ -76,6 +76,16 @@ export interface PageHeaderProps {
    * Callback fired when the content actions become clipped
    */
   onContentActionsClipped?: (clipped: boolean) => void;
+  /**
+   * Applies Carbon's full-width grid mode to all internal sub-component grids.
+   * Pass `true` for full width or `'xl'` for full width with the xl padding
+   * override (matching the deprecated PageHeader `fullWidthGrid` behavior).
+   */
+  fullWidthGrid?: boolean | 'xl';
+  /**
+   * Applies Carbon's narrow grid mode to all internal sub-component grids.
+   */
+  narrowGrid?: boolean;
 }
 
 const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
@@ -86,6 +96,8 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
       onContentFullyCollapsed,
       onTitleClipped,
       onContentActionsClipped,
+      fullWidthGrid,
+      narrowGrid,
       ...other
     }: PageHeaderProps,
     ref
@@ -101,6 +113,7 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
         [`${blockClass}`]: true,
         [`${blockClass}__next`]: true,
         [`${blockClass}--disable-sticky-tab-bar`]: disableStickyTabBar,
+        [`${blockClass}--width--xl`]: fullWidthGrid === 'xl',
       },
       className
     );
@@ -249,6 +262,8 @@ const PageHeader = React.forwardRef<HTMLDivElement, PageHeaderProps>(
           observerState,
           disableStickyTabBar,
           setDisableStickyTabBar,
+          fullWidthGrid,
+          narrowGrid,
         }}
       >
         <div className={classNames} ref={componentRef} {...other}>

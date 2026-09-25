@@ -18,6 +18,11 @@ $prefix: config.$pkg-prefix;
 $carbon-prefix: config.$carbon-prefix;
 $block-class__next: #{$prefix}--tearsheet__next;
 $motion-duration: $duration-moderate-02;
+
+.#{$block-class__next}__header-title {
+  margin-block-start: 0;
+}
+
 // Narrow variant styles
 :host-context(#{$c4p-prefix}-preview-tearsheet[variant='narrow']) {
   display: flex;
@@ -189,6 +194,10 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__header-content {
     align-self: center;
     margin-block-end: 0;
+
+    @include breakpoint-down(md) {
+      align-self: stretch;
+    }
   }
 
   // Hide header actions on small screens when collapsed

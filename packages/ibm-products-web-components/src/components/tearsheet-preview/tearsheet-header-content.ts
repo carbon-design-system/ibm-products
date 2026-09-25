@@ -9,6 +9,7 @@
 
 import { html, LitElement, PropertyValues } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '@carbon/web-components/es/globals/mixins/host-listener.js';
 import '@carbon/web-components/es/components/modal/index.js';
@@ -71,6 +72,18 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
   @query('slot[name="decorator"]')
   private _decoratorSlot?: HTMLSlotElement;
 
+  @query('slot[name="label"]')
+  private _labelSlot?: HTMLSlotElement;
+
+  @query('slot[name="description"]')
+  private _descriptionSlot?: HTMLSlotElement;
+
+  @query('slot[name="header-actions"]')
+  private _headerActionsSlot?: HTMLSlotElement;
+
+  @query('slot:not([name])')
+  private _defaultSlot?: HTMLSlotElement;
+
   @state()
   private _hasTitleStart = false;
 
@@ -82,6 +95,18 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
 
   @state()
   private _hasAILabel = false;
+
+  @state()
+  private _hasLabel = false;
+
+  @state()
+  private _hasDescription = false;
+
+  @state()
+  private _hasHeaderActions = false;
+
+  @state()
+  private _hasExtraContent = false;
 
   @state()
   private _isMobileOrNarrow = false;
@@ -217,6 +242,22 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
       const assignedNodes = this._titleEndSlot.assignedElements();
       this._hasTitleEnd = assignedNodes.length > 0;
     }
+    if (this._labelSlot) {
+      const assignedNodes = this._labelSlot.assignedElements();
+      this._hasLabel = assignedNodes.length > 0;
+    }
+    if (this._descriptionSlot) {
+      const assignedNodes = this._descriptionSlot.assignedElements();
+      this._hasDescription = assignedNodes.length > 0;
+    }
+    if (this._headerActionsSlot) {
+      const assignedNodes = this._headerActionsSlot.assignedElements();
+      this._hasHeaderActions = assignedNodes.length > 0;
+    }
+    if (this._defaultSlot) {
+      const assignedNodes = this._defaultSlot.assignedElements();
+      this._hasExtraContent = assignedNodes.length > 0;
+    }
   }
 
   private _handleSlotChange() {
@@ -334,21 +375,45 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         `
       : html``;
 
-    const headerActionsTemplate = html`
-      <div class="${blockClass}__header-actions">
-        <slot name="header-actions"></slot>
-      </div>
-    `;
+    const headerActionsTemplate = this._hasHeaderActions
+      ? html`
+          <div class="${blockClass}__header-actions">
+            <slot
+              name="header-actions"
+              @slotchange="${this._handleSlotChange}"
+            ></slot>
+          </div>
+        `
+      : html`<slot
+          name="header-actions"
+          @slotchange="${this._handleSlotChange}"
+        ></slot>`;
+
+    const titleClasses = classMap({
+      [`${blockClass}__header-title`]: true,
+      [`${blockClass}__header-title--no-content-below`]:
+        !this._hasDescription && !this._hasExtraContent,
+    });
 
     const headerContentTemplate = html`
       <div class="${blockClass}__header-content">
         <!-- Label -->
-        <div class="${blockClass}__header-label">
-          <slot name="label"></slot>
-        </div>
+        ${this._hasLabel
+          ? html`
+              <div class="${blockClass}__header-label">
+                <slot
+                  name="label"
+                  @slotchange="${this._handleSlotChange}"
+                ></slot>
+              </div>
+            `
+          : html`<slot
+              name="label"
+              @slotchange="${this._handleSlotChange}"
+            ></slot>`}
 
         <div class="${blockClass}__content__title-wrapper">
-          <h2 class="${blockClass}__header-title" id="${this._titleId}">
+          <h2 class="${titleClasses}" id="${this._titleId}">
             <!-- Title Start -->
             ${this._hasTitleStart
               ? html`
@@ -391,14 +456,28 @@ class CDSTearsheetHeaderContent extends SignalWatcher(
         </div>
 
         <!-- Description -->
-        <div class="${blockClass}__header-description">
-          <slot name="description"></slot>
-        </div>
+        ${this._hasDescription
+          ? html`
+              <div class="${blockClass}__header-description">
+                <slot
+                  name="description"
+                  @slotchange="${this._handleSlotChange}"
+                ></slot>
+              </div>
+            `
+          : html`<slot
+              name="description"
+              @slotchange="${this._handleSlotChange}"
+            ></slot>`}
 
         <!-- Extra children -->
-        <div class="${blockClass}__header-content--extra">
-          <slot></slot>
-        </div>
+        ${this._hasExtraContent
+          ? html`
+              <div class="${blockClass}__header-content--extra">
+                <slot @slotchange="${this._handleSlotChange}"></slot>
+              </div>
+            `
+          : html`<slot @slotchange="${this._handleSlotChange}"></slot>`}
       </div>
     `;
 

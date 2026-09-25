@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2025
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -191,6 +191,10 @@ interface Step {
   title?: string;
 }
 
+/**
+ * Use CreateTearsheet when you need a multi-step creation flow with an influencer sidebar.
+ * @deprecated This component is deprecated.
+ */
 export const CreateTearsheet = forwardRef(
   (
     {
@@ -380,6 +384,12 @@ export const CreateTearsheet = forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 CreateTearsheet.displayName = componentName;
+
+/**@ts-ignore*/
+CreateTearsheet.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Tearsheet pattern`,
+};
 
 const deprecatedProps = {
   /**

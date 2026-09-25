@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,9 @@ interface CreateTearsheetDividerProps {
   className?: string;
 }
 
+/**
+ * @deprecated This component is deprecated.
+ */
 export const CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
   forwardRef(
     (
@@ -31,6 +34,14 @@ export const CreateTearsheetDivider: React.FC<CreateTearsheetDividerProps> =
       return <span {...rest} ref={ref} className={cx(blockClass, className)} />;
     }
   );
+
+CreateTearsheetDivider.displayName = componentName;
+
+/**@ts-ignore*/
+CreateTearsheetDivider.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Tearsheet pattern`,
+};
 
 CreateTearsheetDivider.propTypes = {
   /**

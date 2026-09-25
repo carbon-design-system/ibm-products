@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.99.0-rc.0`
+## `@carbon/ibm-products@2.99.0`
 ### Features :rocket:
 - feat(ConditionBuilder): composability review — value/onChange API and bug fixes (#9817)
 - feat(Tearsheet, PageHeader): support ReactNode for header title with default string truncation (#9832)

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -94,6 +94,8 @@ interface HTMLElementStyled extends HTMLDivElement {
 
 /**
  * The `WebTerminal` is prompted by the user and is persistent until dismissed. The purpose of a web terminal is to provide users with the ability to type commands manually instead of using the GUI.
+ *
+ * @deprecated This component is deprecated.
  */
 export const WebTerminal = React.forwardRef(
   (
@@ -232,6 +234,12 @@ export const WebTerminal = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 WebTerminal.displayName = componentName;
+
+/**@ts-ignore*/
+WebTerminal.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Web Terminal pattern`,
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

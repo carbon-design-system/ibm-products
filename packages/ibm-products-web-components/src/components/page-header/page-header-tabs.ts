@@ -8,11 +8,14 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { property, state } from 'lit/decorators.js';
+import { consume } from '@lit/context';
 import { prefix, carbonPrefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import CDSPageHeader from './page-header';
+import { pageHeaderContext } from './context';
 
 /**
  * Page header Tabs Bar.
@@ -25,6 +28,10 @@ class CDSPageHeaderTabs extends LitElement {
    */
   @property({ type: Boolean, attribute: 'disable-sticky-tab-bar' })
   disableStickyTabBar = false;
+
+  @consume({ context: pageHeaderContext, subscribe: true })
+  @state()
+  context;
 
   connectedCallback() {
     super.connectedCallback();
@@ -52,17 +59,25 @@ class CDSPageHeaderTabs extends LitElement {
   }
 
   render() {
-    return html` <div class="${carbonPrefix}--css-grid" condensed="">
-      <div
-        class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
-      >
-        <div class="${prefix}--page-header__tab-bar--tablist">
-          <slot></slot>
-          <slot name="tags"></slot>
+    const { fullWidthGrid, narrowGrid } = this.context ?? {};
+    const gridClasses = classMap({
+      [`${carbonPrefix}--css-grid`]: true,
+      [`${carbonPrefix}--css-grid--full-width`]: !!fullWidthGrid,
+      [`${carbonPrefix}--css-grid--narrow`]: !!narrowGrid,
+    });
+    return html`
+      <div class="${gridClasses}">
+        <div
+          class="${carbonPrefix}--sm:col-span-4 ${carbonPrefix}--md:col-span-8 ${carbonPrefix}--lg:col-span-16 ${carbonPrefix}--css-grid-column"
+        >
+          <div class="${prefix}--page-header__tab-bar--tablist">
+            <slot></slot>
+            <slot name="tags"></slot>
+          </div>
         </div>
+        <slot name="scroller"></slot>
       </div>
-      <slot name="scroller"></slot>
-    </div>`;
+    `;
   }
 
   static styles = styles;

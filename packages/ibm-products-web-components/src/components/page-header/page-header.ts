@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { provide } from '@lit/context';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
@@ -26,6 +26,8 @@ export interface pageHeaderContextType {
   root?: CDSPageHeader | null;
   withContent?: boolean;
   disableStickyTabBar?: boolean;
+  fullWidthGrid?: boolean;
+  narrowGrid?: boolean;
 }
 
 /**
@@ -34,11 +36,30 @@ export interface pageHeaderContextType {
  */
 @customElement(`${prefix}-page-header`)
 class CDSPageHeader extends LitElement {
+  /**
+   * Set to `true` to use a full-width Carbon CSS grid (no max-width cap).
+   */
+  @property({ attribute: 'full-width-grid', type: Boolean, reflect: true })
+  fullWidthGrid = false;
+
+  /**
+   * Set to `true` to use the Carbon narrow grid mode (content aligns to
+   * the gutter edge).
+   */
+  @property({ attribute: 'narrow-grid', type: Boolean, reflect: true })
+  narrowGrid = false;
+
   @state()
   @provide({ context: pageHeaderContext })
-  context: pageHeaderContextType = {};
+  context: pageHeaderContextType = {
+    fullWidthGrid: this.fullWidthGrid,
+    narrowGrid: this.narrowGrid,
+  };
 
   private resizeObserver: ResizeObserver | undefined;
+  private contentObserver: IntersectionObserver | undefined;
+  private titleObserver: IntersectionObserver | undefined;
+  private actionsObserver: IntersectionObserver | undefined;
 
   updated(changedProperties: Map<string, any>) {
     super.updated(changedProperties);
@@ -50,10 +71,37 @@ class CDSPageHeader extends LitElement {
         this.classList.remove(`${prefix}--page-header--disable-sticky-tab-bar`);
       }
     }
+    if (
+      changedProperties.has('fullWidthGrid') ||
+      changedProperties.has('narrowGrid')
+    ) {
+      this.context = {
+        ...this.context,
+        fullWidthGrid: this.fullWidthGrid,
+        narrowGrid: this.narrowGrid,
+      };
+    }
   }
 
   connectedCallback(): void {
     super.connectedCallback();
+    // Listen for the page-actions container registration from page-header-content
+    this.addEventListener(
+      `${prefix}-page-header-content-actions-registered`,
+      (e: Event) => {
+        const { actionsEl } = (e as CustomEvent).detail as {
+          actionsEl: HTMLElement;
+        };
+        if (!actionsEl) {
+          return;
+        }
+        // Re-wire the actionsObserver to the specific page-actions element
+        this.actionsObserver?.disconnect();
+        this.actionsObserver = this._createActionsObserver();
+        this.actionsObserver.observe(actionsEl);
+      }
+    );
+
     const contentElement = this.querySelector(`${prefix}-page-header-content`);
 
     this.resizeObserver = new ResizeObserver((entries) => {
@@ -92,19 +140,19 @@ class CDSPageHeader extends LitElement {
 
     const predefinedContentPadding = 24;
     const totalHeaderOffset = getHeaderOffset(this);
-    const contentObserver = new IntersectionObserver(
+    this.contentObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            this.context = {
-              ...this.context,
-              fullyCollapsed: true,
-            };
-          } else {
-            this.context = {
-              ...this.context,
-              fullyCollapsed: false,
-            };
+          const fullyCollapsed = !entry.isIntersecting;
+          if (this.context.fullyCollapsed !== fullyCollapsed) {
+            this.context = { ...this.context, fullyCollapsed };
+            this.dispatchEvent(
+              new CustomEvent(`${prefix}-page-header-fully-collapsed`, {
+                bubbles: true,
+                composed: true,
+                detail: { fullyCollapsed },
+              })
+            );
           }
         });
       },
@@ -115,19 +163,19 @@ class CDSPageHeader extends LitElement {
       }
     );
 
-    const titleObserver = new IntersectionObserver(
+    this.titleObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            this.context = {
-              ...this.context,
-              titleClipped: true,
-            };
-          } else {
-            this.context = {
-              ...this.context,
-              titleClipped: false,
-            };
+          const titleClipped = !entry.isIntersecting;
+          if (this.context.titleClipped !== titleClipped) {
+            this.context = { ...this.context, titleClipped };
+            this.dispatchEvent(
+              new CustomEvent(`${prefix}-page-header-title-clipped`, {
+                bubbles: true,
+                composed: true,
+                detail: { titleClipped },
+              })
+            );
           }
         });
       },
@@ -138,39 +186,49 @@ class CDSPageHeader extends LitElement {
       }
     );
 
-    const actionsObserver = new IntersectionObserver(
+    this.actionsObserver = this._createActionsObserver();
+    if (contentElement) {
+      this.contentObserver.observe(contentElement);
+      this.titleObserver.observe(contentElement);
+      // actionsObserver starts on contentElement; once page-header-content fires
+      // its registration event, it is rewired to the specific page-actions element.
+      this.actionsObserver.observe(contentElement);
+    }
+  }
+
+  private _createActionsObserver(): IntersectionObserver {
+    const totalHeaderOffset = getHeaderOffset(this);
+    return new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            this.context = {
-              ...this.context,
-              contentActionsClipped: true,
-            };
-          } else {
-            this.context = {
-              ...this.context,
-              contentActionsClipped: false,
-            };
+          const contentActionsClipped = !entry.isIntersecting;
+          if (this.context.contentActionsClipped !== contentActionsClipped) {
+            this.context = { ...this.context, contentActionsClipped };
+            this.dispatchEvent(
+              new CustomEvent(`${prefix}-page-header-content-actions-clipped`, {
+                bubbles: true,
+                composed: true,
+                detail: { contentActionsClipped },
+              })
+            );
           }
         });
       },
       {
         root: null,
-        // 48 -> breadcrumb bar
+        // 48 -> breadcrumb bar height
         // 18 -> content padding
         rootMargin: `${(totalHeaderOffset + 48 + 18) * -1}px 0px 0px 0px`,
         threshold: 0.95,
       }
     );
-    if (contentElement) {
-      contentObserver.observe(contentElement);
-      titleObserver.observe(contentElement);
-      actionsObserver.observe(contentElement);
-    }
   }
 
   disconnectedCallback() {
-    this.resizeObserver?.disconnect(); // Clean up
+    this.resizeObserver?.disconnect();
+    this.contentObserver?.disconnect();
+    this.titleObserver?.disconnect();
+    this.actionsObserver?.disconnect();
     super.disconnectedCallback();
   }
 

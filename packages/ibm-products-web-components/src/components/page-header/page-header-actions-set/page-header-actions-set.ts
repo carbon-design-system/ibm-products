@@ -38,6 +38,12 @@ export default class CDSPageHeaderActionsSet extends LitElement {
   actionsData: PageAction[] = [];
 
   /**
+   * Aria label for the toolbar container (`role="toolbar"`).
+   */
+  @property({ type: String, attribute: 'toolbar-aria-label', reflect: true })
+  toolbarAriaLabel = 'Page actions';
+
+  /**
    * Aria label for the overflow menu button.
    */
   @property({ type: String, attribute: 'overflow-aria-label', reflect: true })
@@ -111,8 +117,7 @@ export default class CDSPageHeaderActionsSet extends LitElement {
       }
 
       // Use the host element's width as it reflects the actual available space
-      const containerWidth =
-        this.offsetWidth || this.itemsContainer.clientWidth;
+      const containerWidth = this.offsetWidth;
       const overflowMenuWidth = 48; // Approximate width of overflow menu button
 
       // If container has no width yet, skip check
@@ -126,6 +131,9 @@ export default class CDSPageHeaderActionsSet extends LitElement {
       }
       this.lastContainerWidth = containerWidth;
 
+      // First, make all items temporarily visible to measure their natural widths
+      slottedElements.forEach((el) => el.removeAttribute('data-hidden'));
+
       // First, check if all items fit without overflow menu
       let totalWidth = 0;
       for (let i = 0; i < slottedElements.length; i++) {
@@ -134,10 +142,10 @@ export default class CDSPageHeaderActionsSet extends LitElement {
 
       // If all items fit, show all and hide overflow menu
       if (totalWidth <= containerWidth) {
-        slottedElements.forEach((el) => {
-          el.removeAttribute('data-hidden');
-        });
-        this.hiddenItems = [];
+        const newHiddenItems: PageAction[] = [];
+        if (this.hiddenItems.length !== 0) {
+          this.hiddenItems = newHiddenItems;
+        }
         return;
       }
 
@@ -166,14 +174,24 @@ export default class CDSPageHeaderActionsSet extends LitElement {
         }
       });
 
-      // Update hidden items for overflow menu
-      this.hiddenItems = this.actionsData?.slice(visibleCount) || [];
+      // Update hidden items only if the set actually changed to avoid a
+      // state-change → re-render → ResizeObserver → loop cycle.
+      const newHiddenItems = this.actionsData?.slice(visibleCount) || [];
+      if (
+        newHiddenItems.length !== this.hiddenItems.length ||
+        newHiddenItems.some((item, i) => item !== this.hiddenItems[i])
+      ) {
+        this.hiddenItems = newHiddenItems;
+      }
     };
 
     // Initial check
     checkOverflow();
 
-    // Observe both the host element and items container for size changes with debouncing
+    // Observe only the host element for external size changes.
+    // Do NOT observe itemsContainer — its size changes are caused by our own
+    // state updates (overflow menu appearing/disappearing) which would create
+    // a ResizeObserver → setState → re-render → ResizeObserver loop.
     this.resizeObserver = new ResizeObserver(() => {
       // Clear existing timeout
       if (this.resizeTimeout) {
@@ -187,7 +205,6 @@ export default class CDSPageHeaderActionsSet extends LitElement {
     });
 
     this.resizeObserver.observe(this);
-    this.resizeObserver.observe(this.itemsContainer);
   }
 
   disconnectedCallback() {
@@ -212,12 +229,16 @@ export default class CDSPageHeaderActionsSet extends LitElement {
 
   render() {
     return html`
-      <ul class="${blockClass}">
-        <li class="${blockClass}__items">
+      <div
+        class="${blockClass}"
+        role="toolbar"
+        aria-label="${this.toolbarAriaLabel}"
+      >
+        <div class="${blockClass}__items">
           <slot></slot>
-        </li>
+        </div>
 
-        <li data-offset ?data-hidden=${this.hiddenItems.length === 0}>
+        <div data-offset ?data-hidden=${this.hiddenItems.length === 0}>
           <cds-overflow-menu
             size="md"
             close-on-activation
@@ -246,8 +267,8 @@ export default class CDSPageHeaderActionsSet extends LitElement {
               )}
             </cds-overflow-menu-body>
           </cds-overflow-menu>
-        </li>
-      </ul>
+        </div>
+      </div>
     `;
   }
   static styles = styles;

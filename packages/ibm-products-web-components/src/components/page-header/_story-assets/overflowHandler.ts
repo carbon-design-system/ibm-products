@@ -31,17 +31,15 @@ export function getSize(
   }
   let size = el.getBoundingClientRect()[dimension];
   el.style.display = originalDisplay;
+  // getBoundingClientRect already includes padding, so only add margins
+  // (which are outside the bounding box). Adding padding here would double-count it.
   const computedStyles = getComputedStyle(el);
   size =
     dimension === 'width'
       ? size +
-        parseInt(computedStyles.paddingLeft) +
-        parseInt(computedStyles.paddingRight) +
         parseInt(computedStyles.marginLeft) +
         parseInt(computedStyles.marginRight)
       : size +
-        parseInt(computedStyles.paddingTop) +
-        parseInt(computedStyles.paddingBottom) +
         parseInt(computedStyles.marginTop) +
         parseInt(computedStyles.marginBottom);
   return size;

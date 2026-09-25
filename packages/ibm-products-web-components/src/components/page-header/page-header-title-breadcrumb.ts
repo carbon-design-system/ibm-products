@@ -27,8 +27,11 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
 
   constructor() {
     super();
-    // Set initial aria-hidden since the element starts with opacity: 0
-    this.setAttribute('aria-hidden', 'true');
+    // Use inert (not aria-hidden) to hide the element from both focus and
+    // the accessibility tree when it is visually hidden (opacity: 0).
+    // aria-hidden was removed: it causes a violation when focusable
+    // descendants exist inside shadow DOM (inert alone is sufficient).
+    this.setAttribute('inert', '');
     new ContextConsumer(this, {
       context: pageHeaderContext,
       subscribe: true,
@@ -39,12 +42,12 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
           this.classList.add(
             `${prefix}--page-header-title-breadcrumb-show__fallback`
           );
-          this.setAttribute('aria-hidden', 'false');
+          this.removeAttribute('inert');
         } else {
           this.classList.remove(
             `${prefix}--page-header-title-breadcrumb-show__fallback`
           );
-          this.setAttribute('aria-hidden', 'true');
+          this.setAttribute('inert', '');
         }
         if ((state as pageHeaderContextType).withContent) {
           this.classList.add(
@@ -60,15 +63,18 @@ class CDSPageHeaderTitleBreadcrumb extends CDSBreadcrumbItem {
           this.classList.add(
             `${prefix}--page-header-title-breadcrumb-show__by-default`
           );
-          // When showing by default, it should be visible to screen readers
-          this.setAttribute('aria-hidden', 'false');
+          // When showing by default it is always visible — remove inert
+          this.removeAttribute('inert');
         }
       },
     });
   }
   render() {
     return html`
-      <cds-breadcrumb-item class="${prefix}--page-header-title-breadcrumb">
+      <cds-breadcrumb-item
+        class="${prefix}--page-header-title-breadcrumb"
+        role="presentation"
+      >
         <slot></slot>
       </cds-breadcrumb-item>
     `;

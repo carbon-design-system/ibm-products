@@ -8,7 +8,8 @@
  */
 
 import { html } from 'lit';
-import { property } from 'lit/decorators.js';
+import styles from './page-header.scss?lit';
+import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import Chevron20 from '@carbon/icons/es/chevron--up/20';
@@ -82,6 +83,7 @@ export class PageHeaderScroller extends CDSButton {
   size = 'md';
 
   @consume({ context: pageHeaderContext, subscribe: true })
+  @state()
   context;
 
   protected _renderTooltipContent() {
@@ -145,9 +147,7 @@ export class PageHeaderScroller extends CDSButton {
       size=${size}
       ?autoalign=${autoalign}
       class=${iconClasses}
-      aria-label=${context?.fullyCollapsed
-        ? this.expandText
-        : this.collapseText}
+      label=${context?.fullyCollapsed ? this.expandText : this.collapseText}
       @click=${this._handleScroller}
     >
       ${context?.fullyCollapsed
@@ -158,4 +158,5 @@ export class PageHeaderScroller extends CDSButton {
       </span>
     </cds-icon-button>`;
   }
+  static styles = styles;
 }

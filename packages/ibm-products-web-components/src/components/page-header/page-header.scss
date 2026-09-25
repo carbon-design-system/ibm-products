@@ -54,7 +54,7 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb) {
   position: sticky;
-  z-index: 1;
+  z-index: 2;
   overflow: visible;
   background-color: $layer-01;
   block-size: convert.to-rem(40px);
@@ -157,8 +157,10 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb:not([content-actions-flush]))
   ::slotted([slot='content-actions']) {
-  //stylelint-disable declaration-no-important
-  margin-inline-end: $spacing-04 !important;
+  @include breakpoint(md) {
+    //stylelint-disable declaration-no-important
+    margin-inline-end: $spacing-04 !important;
+  }
 }
 
 :host(#{$prefix}-page-header-breadcrumb[page-actions-flush]) {
@@ -173,7 +175,7 @@ $carbon-prefix: 'cds';
 }
 
 :host(#{$prefix}-page-header-content) {
-  padding-block-start: $spacing-06;
+  padding-block-start: $spacing-09;
   // TODO: remove above styles when styles from React have been migrated
   // and use the extend below
   // @extend .#{$prefix}--page-header__content;
@@ -195,21 +197,16 @@ $carbon-prefix: 'cds';
   }
 
   .#{$prefix}--page-header__content__title-wrapper {
-    // TODO: remove this section
-    @include breakpoint-down(md) {
-      display: flex;
-      flex-direction: column;
-      grid-gap: $spacing-05;
-    }
-
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: $spacing-05;
-    ///////////////////////////////
-
-    // overriding until the responsive behavior is implemented
-    grid-template-columns: auto minmax(auto, auto);
     margin-block-end: $spacing-05;
     min-block-size: convert.to-rem(40px);
+
+    @include breakpoint('md') {
+      display: grid;
+      grid-template-columns: auto minmax(auto, auto);
+    }
   }
 
   // TODO: remove this section
@@ -221,7 +218,7 @@ $carbon-prefix: 'cds';
 
   .#{$prefix}--page-header__content__page-actions {
     display: flex;
-    justify-content: right;
+    justify-self: right;
     /* stylelint-disable-next-line carbon/motion-easing-use */
     transition: opacity motion(standard, productive) $duration-moderate-02;
 
@@ -499,8 +496,15 @@ $carbon-prefix: 'cds';
 
 :host(#{$prefix}-page-header-breadcrumb)
   .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+  overflow: hidden;
+  min-inline-size: 0;
   opacity: 0;
   visibility: hidden;
+
+  @include breakpoint-down('md') {
+    display: none;
+  }
+
   &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
     opacity: 1;
     transform: translateY(0);
@@ -508,6 +512,10 @@ $carbon-prefix: 'cds';
     /* stylelint-disable-next-line */ opacity
       motion(standard, productive) $duration-moderate-01;
     visibility: visible;
+
+    @include breakpoint-down('md') {
+      display: none;
+    }
   }
 }
 
@@ -518,6 +526,12 @@ $carbon-prefix: 'cds';
     /* stylelint-disable-next-line */
     transform motion(standard, productive) $duration-moderate-01,
     opacity motion(standard, productive) $duration-moderate-01;
+
+  #{$carbon-prefix}-breadcrumb-item {
+    &::after {
+      display: none;
+    }
+  }
 }
 
 :host(

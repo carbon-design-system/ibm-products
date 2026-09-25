@@ -6,7 +6,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Dropdown, Toggle } from '@carbon/react';
+import { Dropdown } from '@carbon/react';
 import { OptionsTile } from '.';
 import styles from './_storybook-styles.scss?inline';
 import mdx from './OptionsTile.mdx';
@@ -19,6 +19,14 @@ export default {
     styles,
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    // undefined → toggle not rendered; true/false → toggle on/off
+    enabled: {
+      control: 'select',
+      options: [undefined, true, false],
+      mapping: { undefined: undefined, true: true, false: false },
     },
   },
 };
@@ -71,7 +79,11 @@ const Template = (args) => {
     open: openControl,
     ...rest
   } = args;
-  const [toggleChecked, setToggleChecked] = useState(true);
+  // When enabledControl is undefined the toggle is not rendered.
+  // When it is a boolean it seeds the toggle's initial on/off state.
+  const [toggleChecked, setToggleChecked] = useState(
+    enabledControl !== undefined ? !!enabledControl : undefined
+  );
   const [open, setOpen] = useState(openControl ?? false);
 
   // Sync with Storybook controls panel changes
@@ -79,13 +91,19 @@ const Template = (args) => {
     setOpen(openControl ?? false);
   }, [openControl]);
 
+  useEffect(() => {
+    setToggleChecked(
+      enabledControl !== undefined ? !!enabledControl : undefined
+    );
+  }, [enabledControl]);
+
   return (
     <main>
       <OptionsTile
         {...rest}
         open={open}
         onChange={setOpen}
-        enabled={enabledControl ? toggleChecked : undefined}
+        enabled={toggleChecked}
         onToggle={(checked) => {
           setToggleChecked(checked);
           console.log('Toggle changed:', checked);
@@ -135,6 +153,7 @@ const TemplateStatic = (args) => {
         enabled={toggleChecked}
         onToggle={(checked) => {
           setToggleChecked(checked);
+          console.log('Toggle changed:', checked);
         }}
       />
     </main>

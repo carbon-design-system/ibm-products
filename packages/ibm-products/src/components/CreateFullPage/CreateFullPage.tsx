@@ -224,6 +224,7 @@ on the Carbon's grid system
 [here](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). You can
 include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
 component to get the desired affect.
+ * @deprecated This component is deprecated.
  */
 export const CreateFullPage = React.forwardRef(
   (
@@ -465,6 +466,12 @@ export const CreateFullPage = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 CreateFullPage.displayName = componentName;
+
+/**@ts-ignore*/
+CreateFullPage.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Create Full Page pattern`,
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

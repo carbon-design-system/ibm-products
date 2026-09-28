@@ -16,6 +16,9 @@ import { carbonElement as customElement } from '@carbon/web-components/es/global
 /**
  * Page header Hero Image.
  * @element c4p-page-header-hero-image
+ * @slot - Slotted content (typically an `<img>`). Slotted images must include
+ *   a descriptive `alt` attribute for informative images, or `alt=""` for
+ *   decorative images, to meet WCAG 2.2 SC 1.1.1 (Non-text Content).
  */
 @customElement(`${prefix}-page-header-hero-image`)
 class CDSPageHeaderHeroImage extends LitElement {

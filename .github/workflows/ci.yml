@@ -392,7 +392,9 @@ jobs:
           workingDir: packages/ibm-products
           buildScriptName: storybook:build
           zip: true # Compress build output for faster uploads
-          autoAcceptChanges: 'main' # Auto-accept changes on main branch
+          # Merge-queue builds are the only builds of merged commits (no push
+          # trigger), so accept them too or later builds can't be bypassed
+          autoAcceptChanges: '{main,gh-readonly-queue/main/**}'
           onlyChanged: true # Enable TurboSnap to only test changed stories
           # Files TurboSnap can't trace; a change to any of these captures all
           # stories. Component source is already traced through the
@@ -483,7 +485,9 @@ jobs:
           workingDir: packages/ibm-products-web-components
           buildScriptName: build:storybook
           zip: true # Compress build output for faster uploads
-          autoAcceptChanges: 'main' # Auto-accept changes on main branch
+          # Merge-queue builds are the only builds of merged commits (no push
+          # trigger), so accept them too or later builds can't be bypassed
+          autoAcceptChanges: '{main,gh-readonly-queue/main/**}'
           onlyChanged: true # Enable TurboSnap to only test changed stories
           # Files TurboSnap can't trace; a change to any of them captures all
           # stories. Component `.scss?lit` imports are traced, so only list

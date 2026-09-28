@@ -95,7 +95,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "rimraf": "^6.0.1",
-    "sass": "^1.93.2",
+    "sass": "^1.105.0",
     "storybook": "^10.3.5",
     "storybook-addon-accessibility-checker": ">=9.2.0-git0",
     "tsdown": "^0.21.0",

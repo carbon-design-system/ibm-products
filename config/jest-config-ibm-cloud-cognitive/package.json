@@ -30,12 +30,12 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@testing-library/jest-dom": "^6.6.3",
-    "accessibility-checker": "^4.0.12",
+    "accessibility-checker": "^4.0.34",
     "axe-core": "^4.10.3",
     "babel-jest": "^30.0.5",
     "babel-preset-ibm-cloud-cognitive": "^0.57.0",
     "identity-obj-proxy": "^3.0.0",
     "jest-watch-typeahead": "^3.0.0",
-    "sass": "^1.93.2"
+    "sass": "^1.105.0"
   }
 }

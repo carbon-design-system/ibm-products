@@ -209,8 +209,12 @@ collect:
         - titleId
         - warn
         - warnText
+        # c4p-page-header
+        - full-width-grid
+        - narrow-grid
         # c4p-page-header-actions-set
         - actions-data
+        - toolbar-aria-label
         # c4p-page-header-breadcrumb
         - actions-aria-label
         - border
@@ -219,7 +223,6 @@ collect:
         # c4p-page-header-breadcrumbs-set
         - breadcrumb-aria-label
         - breadcrumbs-data
-        - hiddenItems
         # c4p-page-header-content
         - title-level
         # c4p-page-header-content-text

@@ -142,6 +142,7 @@
   "//resolutions:form-data": "CVE-2026-12143 (CRLF injection) fixed in 4.0.6",
   "//resolutions:browserslist": "CVE-2026-73089 (unbounded cache DoS) and CVE-2026-73088 (prototype pollution via normalizeStats) fixed in 4.28.7",
   "//resolutions:qs": "CVE-2026-82417 (TypeError via crafted constructor.isBuffer input) and CVE-2026-82562 (arrayLimit bypass via []= key form) fixed in 6.16.0",
+  "//resolutions:source-map-js": "CVE-2026-93749 (event loop blocking via malformed indexed source maps) - no fixed version available yet; pinned to latest",
   "resolutions": {
     "form-data": "4.0.6",
     "micromatch": "4.0.8",
@@ -191,7 +192,8 @@
     "@babel/plugin-transform-modules-systemjs": "^7.29.4",
     "@babel/core": "^7.29.6",
     "browserslist": "^4.28.7",
-    "qs": "^6.16.0"
+    "qs": "^6.16.0",
+    "source-map-js": "^1.2.1"
   },
   "lint-staged": {
     "*": [

@@ -45,6 +45,12 @@
       "last 1 safari version"
     ]
   },
+  "overrides": {
+    "source-map-js": "^1.2.1"
+  },
+  "resolutions": {
+    "source-map-js": "^1.2.1"
+  },
   "eslintConfig": {
     "extends": [
       "react-app"

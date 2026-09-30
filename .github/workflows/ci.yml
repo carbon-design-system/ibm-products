@@ -392,12 +392,20 @@ jobs:
           workingDir: packages/ibm-products
           buildScriptName: storybook:build
           zip: true # Compress build output for faster uploads
-          autoAcceptChanges: 'main' # Auto-accept changes on main branch
+          # Merge-queue builds are the only builds of merged commits (no push
+          # trigger), so accept them too or later builds can't be bypassed
+          autoAcceptChanges: '{main,gh-readonly-queue/main/**}'
           onlyChanged: true # Enable TurboSnap to only test changed stories
-          # Track changes in source files and styles
+          # Files TurboSnap can't trace; a change to any of these captures all
+          # stories. Component source is already traced through the
+          # `@carbon/ibm-products` alias, so only list Sass reached solely via
+          # `@use`: the styles package and story partials that `@use` each other
           externals: |
-            packages/ibm-products/src/**
-            packages/ibm-products-styles/**
+            packages/ibm-products-styles/src/**/*.scss
+            packages/ibm-products/.storybook/Annotation/_annotation.scss
+            packages/ibm-products/src/components/Card/_storybook-styles.scss
+            packages/ibm-products/src/global/js/utils/StepFlow/story-assets/**/*.scss
+            packages/ibm-products/src/patterns/{CoachmarkFixed,CoachmarkOverlayElements,CoachmarkStacked,CreateFullPage}/example/index.scss
           # Ignore theme.js changes to reduce false positives
           untraced: |
             packages/ibm-products/.storybook/theme.js
@@ -477,11 +485,17 @@ jobs:
           workingDir: packages/ibm-products-web-components
           buildScriptName: build:storybook
           zip: true # Compress build output for faster uploads
-          autoAcceptChanges: 'main' # Auto-accept changes on main branch
+          # Merge-queue builds are the only builds of merged commits (no push
+          # trigger), so accept them too or later builds can't be bypassed
+          autoAcceptChanges: '{main,gh-readonly-queue/main/**}'
           onlyChanged: true # Enable TurboSnap to only test changed stories
-          # Track changes in web components source files
+          # Files TurboSnap can't trace; a change to any of them captures all
+          # stories. Component `.scss?lit` imports are traced, so only list
+          # styles Sass reached via `@use`, and step-flow-signal, which the
+          # tearsheet stories import from the built `es/` output, not `src`
           externals: |
-            packages/ibm-products-web-components/src/**
+            packages/ibm-products-styles/src/**/*.scss
+            packages/ibm-products-web-components/src/utilities/step-flow/step-flow-signal.ts
         env:
           # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
           CHROMATIC_BRANCH:

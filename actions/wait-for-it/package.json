@@ -20,5 +20,8 @@
   "dependencies": {
     "@actions/core": "^2.0.0",
     "got": "^14.0.0"
+  },
+  "resolutions": {
+    "http-cache-semantics": "^4.2.0"
   }
 }

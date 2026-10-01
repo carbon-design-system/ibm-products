@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RefObject, useRef, useState } from 'react';
+import { RefObject, useRef, useState, useLayoutEffect } from 'react';
 import { useResizeObserver } from '../useResizeObserver';
 
 type Item = {
@@ -126,24 +126,36 @@ export function useOverflowItems<T extends Item>(
 
   const visibleItems = getVisibleItems();
   const hiddenItems = items.slice(visibleItems?.length);
-  // only call the change handler when the number of visible items has changed
-  if (
-    visibleItems?.length !== visibleItemCount.current ||
-    remainingWidth !== minWidthRef.current ||
-    requiredWidth !== requiredWidthRef.current
-  ) {
-    visibleItemCount.current = visibleItems?.length;
-    minWidthRef.current = remainingWidth;
-    requiredWidthRef.current = requiredWidth;
-    const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
-    const firstItemWidth = getMap()?.get(firstItemKey) || 0;
 
-    onChange?.({
-      hiddenItems,
-      minWidth: remainingWidth,
-      maxWidth: requiredWidth + firstItemWidth,
-    });
-  }
+  // Store onChange in a ref so the layout effect always has the latest version
+  // without needing it as a dependency (avoids stale closure, avoids extra runs).
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+
+  // React 19: calling onChange() during render triggers "Cannot update a component
+  // while rendering a different component" when onChange sets state on a parent
+  // (e.g. setActionBarMaxWidth in PageHeader). Move the call into useLayoutEffect
+  // so it runs after the commit phase but before paint, preserving the original
+  // layout-synchronous timing.
+  useLayoutEffect(() => {
+    if (
+      visibleItems?.length !== visibleItemCount.current ||
+      remainingWidth !== minWidthRef.current ||
+      requiredWidth !== requiredWidthRef.current
+    ) {
+      visibleItemCount.current = visibleItems?.length;
+      minWidthRef.current = remainingWidth;
+      requiredWidthRef.current = requiredWidth;
+      const firstItemKey: string = getMap()?.keys()?.next()?.value || '';
+      const firstItemWidth = getMap()?.get(firstItemKey) || 0;
+
+      onChangeRef.current?.({
+        hiddenItems,
+        minWidth: remainingWidth,
+        maxWidth: requiredWidth + firstItemWidth,
+      });
+    }
+  }); // no dep array — runs after every render, matching original render-time semantics
 
   return {
     visibleItems,

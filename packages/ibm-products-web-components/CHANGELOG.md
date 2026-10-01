@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.49.0-rc.0`
+## `@carbon/ibm-products-web-components@0.49.0`
 ### Bug fixes :bug:
 - fix(Tearsheet next): suppress all animations and transitions under prefers-reduced-motion (#9913)
 - fix(c4p-page-header): bug fixes and React parity gaps (#9877)

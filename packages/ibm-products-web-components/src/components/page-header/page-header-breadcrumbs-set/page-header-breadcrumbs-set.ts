@@ -9,7 +9,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
@@ -33,10 +33,11 @@ interface Breadcrumb {
 @customElement(`${prefix}-page-header-breadcrumbs-set`)
 export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
   /**
-   * Hidden items that will be rendered in the overflow menu.
+   * Data items currently collapsed into the overflow menu.
+   * Derived from the DOM nodes the overflow handler marks as hidden.
    */
-  @property({ type: Array })
-  hiddenItems: Breadcrumb[] = [];
+  @state()
+  private _hiddenItems: Breadcrumb[] = [];
 
   /**
    * The list of breadcrumbs.
@@ -49,6 +50,12 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
    */
   @property({ type: String })
   title = '';
+
+  /**
+   * Whether custom breadcrumb-content slot content is present.
+   */
+  @state()
+  private _hasBreadcrumbContent = false;
 
   /**
    * Aria label for the breadcrumb navigation.
@@ -69,6 +76,14 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
   private container!: HTMLElement;
 
   private overflowHandler: { disconnect: () => void } | undefined;
+
+  /**
+   * Handles slotchange for the breadcrumb-content slot.
+   */
+  protected _handleBreadcrumbContentSlotChange({ target }: Event) {
+    this._hasBreadcrumbContent =
+      (target as HTMLSlotElement).assignedNodes({ flatten: true }).length > 0;
+  }
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -103,11 +118,28 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
         this.overflowHandler = createOverflowHandler({
           offsetValue: 14,
           container: this.container,
-          onChange: (visibleItems: HTMLElement[], _) => {
-            const totalItems = (this.breadcrumbsData?.length ?? 1) - 1; // Exclude last item
-            const hiddenCount = totalItems - visibleItems.length;
-            this.hiddenItems =
-              this.breadcrumbsData?.slice(0, hiddenCount) ?? [];
+          onChange: (
+            _visibleItems: HTMLElement[],
+            hiddenItems: HTMLElement[]
+          ) => {
+            // All breadcrumb items stay in the DOM at all times — the overflow
+            // handler hides them via the data-hidden attribute (caught by CSS).
+            // Here we only need to know *which* data items are hidden so the
+            // overflow menu can list them. Map each hidden DOM node back to its
+            // breadcrumbsData entry by position among the non-fixed, non-offset
+            // children, matching the React approach where hidden DOM nodes are
+            // passed directly to the overflow menu render prop.
+            const navigableItems = Array.from(this.container.children).filter(
+              (el) =>
+                !el.hasAttribute('data-fixed') &&
+                !el.hasAttribute('data-offset')
+            ) as HTMLElement[];
+            this._hiddenItems = hiddenItems
+              .map((el) => {
+                const idx = navigableItems.indexOf(el);
+                return idx !== -1 ? this.breadcrumbsData?.[idx] : undefined;
+              })
+              .filter((item): item is Breadcrumb => item !== undefined);
           },
         });
       });
@@ -134,11 +166,23 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
         class=${classMap({
           [`${blockClass}`]: true,
         })}
+        ?no-trailing-slash="${!this.title}"
       >
+        ${repeat(
+          this.breadcrumbsData ?? [],
+          (item) => item.href ?? item.text,
+          (item) => html`
+            <cds-breadcrumb-item>
+              <cds-breadcrumb-link href="${item.href}">
+                ${item.text}
+              </cds-breadcrumb-link>
+            </cds-breadcrumb-item>
+          `
+        )}
         <cds-breadcrumb-item
           data-fixed
           data-offset
-          style="display: ${this.hiddenItems?.length >= 1 ? 'flex' : 'none'}"
+          style="display: ${this._hiddenItems?.length >= 1 ? 'flex' : 'none'}"
         >
           <cds-overflow-menu
             breadcrumb=""
@@ -148,10 +192,10 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
             ${iconLoader(OverflowMenuHorizontal16, {
               slot: 'icon',
             })}
-            <span slot="tooltip-content"> Breadcrumbs </span>
+            <span slot="tooltip-content">${this.overflowAriaLabel}</span>
             <cds-overflow-menu-body size="sm">
               ${repeat(
-                this.hiddenItems ?? [],
+                this._hiddenItems ?? [],
                 (item) => item.href ?? item.text,
                 (item) => html`
                   <cds-overflow-menu-item href=${item.href}>
@@ -162,24 +206,19 @@ export default class CDSPageHeaderBreadcrumbsSet extends LitElement {
             </cds-overflow-menu-body>
           </cds-overflow-menu>
         </cds-breadcrumb-item>
-        ${repeat(
-          this.breadcrumbsData?.slice(this.hiddenItems?.length ?? 0, -1) ?? [],
-          (item) => item.href ?? item.text,
-          (item) => html`
-            <cds-breadcrumb-item>
-              <cds-breadcrumb-link href="${item.href}">
-                ${item.text}
-              </cds-breadcrumb-link>
-            </cds-breadcrumb-item>
-          `
-        )}
         <c4p-page-header-title-breadcrumb data-fixed>
           <cds-breadcrumb-link is-currentpage="">
-            <c4p-truncated-text
-              value="${this.title}"
-              lines="1"
-              autoalign
-            ></c4p-truncated-text>
+            <slot
+              name="breadcrumb-content"
+              @slotchange=${this._handleBreadcrumbContentSlotChange}
+            ></slot>
+            ${!this._hasBreadcrumbContent
+              ? html`<c4p-truncated-text
+                  value="${this.title}"
+                  lines="1"
+                  autoalign
+                ></c4p-truncated-text>`
+              : null}
           </cds-breadcrumb-link>
         </c4p-page-header-title-breadcrumb>
       </cds-breadcrumb>

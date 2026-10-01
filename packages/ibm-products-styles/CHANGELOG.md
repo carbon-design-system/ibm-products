@@ -1,3 +1,8 @@
+## `@carbon/ibm-products-styles@2.96.0`
+### Bug fixes :bug:
+- fix(Tearsheet next): suppress all animations and transitions under prefers-reduced-motion (#9913)
+- fix(options-tile): toggle is not available when OptionsTile has no children (#9911)
+
 ## `@carbon/ibm-products-styles@2.95.0`
 ### Features :rocket:
 - feat(Tearsheet, PageHeader): support ReactNode for header title with default string truncation (#9832)

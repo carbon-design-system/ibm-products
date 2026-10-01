@@ -47,7 +47,13 @@ export const useWindowResize = (effect, deps, throttleInterval = 0) => {
     };
 
     window.addEventListener('resize', handleResize);
-    doGetWindowSize();
+    // React 19: doGetWindowSize() calls the caller's effect (e.g. setMetrics) which
+    // is a setState call made during the useLayoutEffect commit phase. In React 19
+    // this increments nestedUpdateCount and throws "Maximum update depth exceeded"
+    // when many components mount simultaneously. Deferring past the commit boundary
+    // via queueMicrotask makes it a new root update — imperceptible to the user and
+    // well within one animation frame.
+    queueMicrotask(doGetWindowSize);
 
     return () => window.removeEventListener('resize', handleResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -7,7 +7,7 @@
  */
 import React, { useState } from 'react';
 import { useWindowResize } from '../useWindowResize';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 
 const TestComponent = (props) => {
   const { throttleInterval } = props;
@@ -24,15 +24,19 @@ const TestComponent = (props) => {
 };
 
 describe('useWindowsResize', () => {
-  it('works by default', () => {
+  it('works by default', async () => {
     render(<TestComponent />);
+    // queueMicrotask defers the initial measurement past the commit phase (React 19
+    // fix). Flush microtasks via act before asserting the rendered value.
+    await act(async () => {});
     window.innerWidth = 500;
     fireEvent(window, new Event('resize'));
     screen.getByText('768');
   });
 
-  it('works with throttle', () => {
+  it('works with throttle', async () => {
     render(<TestComponent throttleInterval={10} />);
+    await act(async () => {});
     window.innerWidth = 500;
     fireEvent(window, new Event('resize'));
     window.innerWidth = 505;

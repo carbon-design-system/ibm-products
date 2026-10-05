@@ -69,6 +69,13 @@ export default {
     // to work in CommonJS until Jest lands support for ESM in stable
     // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
     '^uuid$': 'uuid',
+    // temporal-polyfill exports only an ESM entry for the `./global` subpath.
+    // Redirect to the self-contained CJS bundle so Jest (CommonJS mode) can
+    // require it without needing to transform the full ESM graph.
+    '^temporal-polyfill/global$': resolve(
+      __dirname,
+      '../../node_modules/temporal-polyfill/global.js'
+    ),
     // Mock Storybook actions for Jest tests (Storybook 10 is ESM-only)
     '^storybook/actions$': resolve(
       __dirname,
@@ -123,7 +130,7 @@ export default {
     '<rootDir>/es/',
     '<rootDir>/lib/',
     '<rootDir>/umd/',
-    'node_modules/(?!@carbon-labs|uuid)',
+    'node_modules/(?!@carbon-labs|uuid|temporal-polyfill)',
     'ace-node\\.js',
     'ace-node-([a-zA-Z0-9_-]+).(js|ts)$',
   ],

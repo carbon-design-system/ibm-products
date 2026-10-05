@@ -35,6 +35,10 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
   }
 }
 
+.deprecation-notice {
+  margin-top: $spacing-09;
+}
+
 $story-anchor: 'web-terminal';
 
 #storybook-docs {

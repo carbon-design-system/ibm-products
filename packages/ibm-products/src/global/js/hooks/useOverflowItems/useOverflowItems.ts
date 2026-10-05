@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RefObject, useRef, useState, useLayoutEffect } from 'react';
+import { RefObject, useRef, useState } from 'react';
+import { useIsomorphicEffect } from '../useIsomorphicEffect';
 import { useResizeObserver } from '../useResizeObserver';
 
 type Item = {
@@ -137,7 +138,7 @@ export function useOverflowItems<T extends Item>(
   // (e.g. setActionBarMaxWidth in PageHeader). Move the call into useLayoutEffect
   // so it runs after the commit phase but before paint, preserving the original
   // layout-synchronous timing.
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (
       visibleItems?.length !== visibleItemCount.current ||
       remainingWidth !== minWidthRef.current ||

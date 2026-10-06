@@ -1,3 +1,8 @@
+## `@carbon/ibm-products-web-components@0.49.0`
+### Bug fixes :bug:
+- fix(Tearsheet next): suppress all animations and transitions under prefers-reduced-motion (#9913)
+- fix(c4p-page-header): bug fixes and React parity gaps (#9877)
+
 ## `@carbon/ibm-products-web-components@0.48.0`
 ### Bug fixes :bug:
 - fix: bignumber and notificationpanel parity after v12 migration (#9856)

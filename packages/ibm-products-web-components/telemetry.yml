@@ -61,6 +61,7 @@ collect:
         - global-search-label
         - global-search-placeholder
         - items-label
+        - layout
         - onc4p-add-select-body-breadcrumb-click
         - onc4p-add-select-body-search
         - path
@@ -208,8 +209,12 @@ collect:
         - titleId
         - warn
         - warnText
+        # c4p-page-header
+        - full-width-grid
+        - narrow-grid
         # c4p-page-header-actions-set
         - actions-data
+        - toolbar-aria-label
         # c4p-page-header-breadcrumb
         - actions-aria-label
         - border
@@ -218,7 +223,6 @@ collect:
         # c4p-page-header-breadcrumbs-set
         - breadcrumb-aria-label
         - breadcrumbs-data
-        - hiddenItems
         # c4p-page-header-content
         - title-level
         # c4p-page-header-content-text
@@ -320,6 +324,9 @@ collect:
         - success
         - tooltip
         - warning
+        # c4p-add-select-body - layout
+        - horizontal
+        - vertical
         # c4p-edit-in-place - toggletip-alignment
         - bottom
         - bottom-left

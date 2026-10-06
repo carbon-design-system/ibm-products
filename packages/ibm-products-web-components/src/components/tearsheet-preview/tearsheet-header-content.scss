@@ -89,6 +89,10 @@ $motion-duration: $duration-moderate-02;
   // Transition on base state so it animates in both directions (expand + collapse)
   transition: inset-block-start $motion-duration motion(entrance, expressive);
 
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
   // When header is collapsed, shift slightly down — matches React
   :host-context(#{$c4p-prefix}-tearsheet-header[collapsed]) & {
     inset-block-start: $spacing-03;
@@ -107,6 +111,10 @@ $motion-duration: $duration-moderate-02;
   // Animate size change (lg → md on collapse) — matches React
   .#{$carbon-prefix}--modal-close {
     transition: all $motion-duration ease;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 }
 
@@ -140,6 +148,10 @@ $motion-duration: $duration-moderate-02;
     transition:
       all $motion-duration motion(entrance, expressive),
       opacity $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 }
 
@@ -178,6 +190,10 @@ $motion-duration: $duration-moderate-02;
     margin-block-start: $spacing-02;
     transition: all $motion-duration motion(entrance, expressive);
 
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     > span {
       display: flex;
       align-items: center;
@@ -198,6 +214,10 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__header-title {
     margin-block: 0;
     transition: margin-block $motion-duration ease;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   @include breakpoint-down(md) {
@@ -212,6 +232,10 @@ $motion-duration: $duration-moderate-02;
       align-items: center;
       margin-block: 0;
       transition: margin-block $motion-duration ease;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
   // Header actions adjustment — removed negative offset that caused misalignment
@@ -227,14 +251,12 @@ $motion-duration: $duration-moderate-02;
   }
 }
 .#{$block-class__next}__title-start {
-  @media screen and (prefers-reduced-motion: reduce) {
-    ::slotted(*) {
-      transition: none;
-    }
-  }
-
   ::slotted(*) {
     transition: all $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 }
 
@@ -245,5 +267,9 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class__next}__header-content * {
     opacity: 0;
     transition: opacity 0.1s ease-out;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 }

@@ -1,3 +1,36 @@
+## `@carbon/ibm-products@2.100.0`
+### Bug fixes :bug:
+- fix(options-tile): toggle is not available when OptionsTile has no children (#9911)
+
+### Housekeeping :house:
+- chore: deprecate CreateTearsheet, CreateTearsheetNarrow and CreateFullPage prebuilt patterns (#9900)
+- chore: deprecate webterminal prebuilt pattern (#9890)
+- chore: deprecate saving prebuilt pattern (#9888)
+
+## `@carbon/ibm-products@2.99.0`
+### Features :rocket:
+- feat(ConditionBuilder): composability review — value/onChange API and bug fixes (#9817)
+- feat(Tearsheet, PageHeader): support ReactNode for header title with default string truncation (#9832)
+
+### Bug fixes :bug:
+- fix(CreateFullPage): focus first element of visible step on step change (#9878)
+- fix(Tearsheet next): correct Carbon layer hierarchy — body elevated instead of header (#9869)
+- fix(PageHeader): code quality fixes and fullWidthGrid/narrowGrid support (#9833)
+- fix(tagOverflow): remove usePortalTarget hook (#9831)
+
+### Housekeeping :house:
+- chore(deps): update dependency vite [security] (#9844)
+- chore: deprecate status Icon (#9884)
+- build(deps): update to Carbon 11 compatible versions to latest (#9849)
+
+## `@carbon/ibm-products@2.98.0`
+### Bug fixes :bug:
+- fix(pageheader): accessibility fixes (#9819)
+- fix(ConditionBuilder): WCAG 2.1 accessibility audit fixes (JAWS/Firefox, v2.44.0-rc.1) (#9812)
+
+### Housekeeping :house:
+- test(pageheader): unit tests added (#9820)
+
 ## `@carbon/ibm-products@2.97.0`
 ### Features :rocket:
 - feat(webTerminal): implemented as react pattern (#9723)

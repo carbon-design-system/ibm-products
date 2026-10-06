@@ -12,6 +12,7 @@ import { MenuItem, MenuItemProps, MenuButton } from '@carbon/react';
 import { blockClass } from '../PageHeaderUtils';
 import { createOverflowHandler } from '@carbon/utilities';
 import { usePageHeader } from './context';
+import { pkg } from '../../../settings';
 
 /**
  * ----------------
@@ -83,10 +84,15 @@ export const PageHeaderContentPageActions = ({
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
   useIsomorphicEffect(() => {
-    if (menuButtonVisibility && offsetRef.current) {
+    if (menuButtonVisibility && offsetRef.current && containerRef.current) {
       const width = offsetRef.current.offsetWidth;
-      document.documentElement.style.setProperty(
-        '--page-header-title-grid-width',
+      // Walk up to find the PageHeader root element to scope the variable there
+      const pageHeaderRoot = containerRef.current.closest(
+        `.${blockClass}__next`
+      ) as HTMLElement | null;
+      const target = pageHeaderRoot ?? containerRef.current;
+      target.style.setProperty(
+        `--${pkg.prefix}-page-header-title-grid-width`,
         `${width}px`
       );
     }

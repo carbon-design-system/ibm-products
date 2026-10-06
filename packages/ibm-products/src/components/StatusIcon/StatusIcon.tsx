@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2021, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import {
   CheckmarkFilled,
   CheckmarkOutline,
@@ -11,19 +18,12 @@ import {
   WarningAltFilled,
   WarningAltInvertedFilled,
 } from '@carbon/react/icons';
-/**
- * Copyright IBM Corp. 2021, 2022
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
 import React, {
   PropsWithChildren,
   ReactSVGElement,
   Ref,
   forwardRef,
 } from 'react';
-
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -31,16 +31,6 @@ import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--status-icon`;
 const componentName = 'StatusIcon';
-
-/**
-The `StatusIcon` component follows the Carbon guidelines for status icons with
-some added specifications around illustration usage. For additional usage
-guidelines and documentation please refer to the links above.
-
-_Status icons_ are an important method of communicating severity level
-information to users. The shapes and colors, communicate severity that enable
-users to quickly assess and identify status and respond accordingly.
- */
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Theme = 'light' | 'dark';
@@ -78,6 +68,18 @@ export interface StatusIconProps extends PropsWithChildren {
    */
   theme: Theme;
 }
+
+/**
+ * The `StatusIcon` component follows the Carbon guidelines for status icons with
+ * some added specifications around illustration usage. For additional usage
+ * guidelines and documentation please refer to the links above.
+ *
+ * _Status icons_ are an important method of communicating severity level
+ * information to users. The shapes and colors, communicate severity that enable
+ * users to quickly assess and identify status and respond accordingly.
+ *
+ * @deprecated This component is deprecated.
+ */
 export const StatusIcon = forwardRef<ReactSVGElement | null, StatusIconProps>(
   (
     { kind, theme, size, className, iconDescription, ...rest }: StatusIconProps,
@@ -266,6 +268,12 @@ export const StatusIcon = forwardRef<ReactSVGElement | null, StatusIconProps>(
 );
 
 StatusIcon.displayName = componentName;
+
+/**@ts-ignore*/
+StatusIcon.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Icon Indicator from Carbon`,
+};
 
 StatusIcon.propTypes = {
   /**

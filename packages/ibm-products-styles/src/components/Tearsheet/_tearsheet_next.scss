@@ -31,6 +31,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       motion(entrance, expressive);
     opacity: 1;
 
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+
     // extra specificity to ensure this transition overrides the carbon default
     &.#{$block-class__next}.#{$block-class__next}
       .#{$block-class__next}__container {
@@ -50,6 +54,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     &[data-tearsheet-exiting] {
       animation: #{$block-class__next}--presence-tearsheet__exit
         $motion-duration motion(exit, expressive) forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
 
       &.#{$block-class__next}.#{$block-class__next}
         .#{$block-class__next}__container {
@@ -261,6 +269,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
         opacity $motion-duration motion(entrance, expressive),
         margin $motion-duration motion(entrance, expressive),
         padding $motion-duration motion(entrance, expressive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     .#{$block-class__next}__header-actions,
@@ -274,17 +286,29 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       transition:
         all $motion-duration motion(entrance, expressive),
         opacity $motion-duration motion(entrance, expressive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 
   .#{$carbon-prefix}--modal-close {
     transition: all $motion-duration ease;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   // COLLAPSED STATE
   .#{$block-class__next}__header-collapsed {
     padding-block-start: 0;
     transition: padding $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     // Collapse everything except core elements
     > *:not(
@@ -318,8 +342,16 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       max-block-size: 0;
       opacity: 0;
       pointer-events: none;
-      transition: all $motion-duration motion(entrance, expressive);
+      transition:
+        opacity $motion-duration motion(entrance, expressive),
+        max-block-size $motion-duration motion(entrance, expressive),
+        padding $motion-duration motion(entrance, expressive),
+        margin $motion-duration motion(entrance, expressive);
       visibility: hidden;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     // Header title
@@ -330,6 +362,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       gap: $spacing-03;
       margin-block-start: $spacing-02;
       transition: all $motion-duration motion(entrance, expressive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
 
       > span {
         display: flex;
@@ -347,12 +383,20 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     .#{$block-class__next}__header-content {
       align-self: center;
       margin-block-end: 0;
+
+      @include breakpoint-down(md) {
+        align-self: stretch;
+      }
     }
 
     .#{$carbon-prefix}--modal-close {
       block-size: $spacing-08;
       inline-size: $spacing-08;
       transition: all $motion-duration ease;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
     .#{$block-class__next}__decorator {
       inset-block-start: $spacing-03;
@@ -365,6 +409,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
       block-size: $spacing-06;
       margin-block-start: $spacing-03;
       transition: all $motion-duration ease;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     // Hide header actions on small screens
@@ -382,6 +430,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     .#{$block-class__next}__header-title {
       margin-block: 0;
       transition: margin-block $motion-duration ease;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     .#{$block-class__next}__header-content-wrapper {
@@ -462,6 +514,10 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   align-items: flex-start;
   gap: $spacing-05;
   margin-block-end: $spacing-03;
+
+  &--no-content-below {
+    margin-block-end: 0;
+  }
 
   svg {
     flex-shrink: 0;
@@ -620,13 +676,8 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 
 .#{$block-class__next}__footer {
   overflow: hidden;
-  block-size: $spacing-11;
   border-block-start: 1px solid $border-subtle-01;
   grid-area: footer;
-
-  @include breakpoint-down(md) {
-    block-size: $spacing-10;
-  }
 
   // Footer overflow handling for many actions (> 3 buttons)
   &.#{$block-class__next}__footer--three-actions {
@@ -671,7 +722,9 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
 
 .#{$block-class__next}__main-content {
   position: relative;
+  background-color: $background;
 }
+
 .#{$block-class__next}__side-panel {
   position: absolute;
   z-index: 9999;
@@ -727,8 +780,5 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
     &:not(.#{$block-class__next}__flush) {
       padding-inline: $spacing-05;
     }
-  }
-  .#{$block-class__next}__footer {
-    block-size: $spacing-10;
   }
 }

@@ -24,9 +24,10 @@ describe('useResizeObserver', () => {
   let savedObserverCb;
 
   beforeEach(() => {
+    jest.useFakeTimers();
+
     // Run requestAnimationFrame callbacks synchronously so that the
-    // ResizeObserver → rAF → queueMicrotask → setState chain completes
-    // inside act() without leaking updates (React 19 fix).
+    // ResizeObserver → rAF → setState chain completes inside act().
     jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
       cb(0);
       return 0;
@@ -43,11 +44,13 @@ describe('useResizeObserver', () => {
   });
 
   afterEach(() => {
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
     jest.clearAllMocks();
     jest.restoreAllMocks();
   });
 
-  // Triggers resize and flushes the rAF + microtask chain inside act
+  // Triggers resize and flushes the rAF → setState chain inside act
   const triggerResize = async (
     element,
     width = defaultSize,
@@ -59,15 +62,19 @@ describe('useResizeObserver', () => {
 
   it('returns the initial size of the component', async () => {
     render(<ResizeTest />);
-    // queueMicrotask defers the initial setWidth/setHeight calls past React's
-    // passive-effects flush (React 19 fix). Flush microtasks before asserting.
-    await act(async () => {});
+    // setTimeout defers the initial setWidth/setHeight calls (React 19 fix).
+    // Flush the timer inside act so the state update is processed.
+    await act(async () => {
+      jest.runAllTimers();
+    });
     screen.getByText('width: 0, height: 0');
   });
 
   it('returns the updated sizes from hook upon resizing', async () => {
     render(<ResizeTest />);
-    await act(async () => {});
+    await act(async () => {
+      jest.runAllTimers();
+    });
     const element = screen.getByTestId('observed-element');
     screen.getByText('width: 0, height: 0');
 
@@ -81,9 +88,10 @@ describe('useResizeObserver', () => {
   it('calls the provided onResize function', async () => {
     const resizeFn = jest.fn();
     render(<ResizeTest onResize={resizeFn} />);
-    // Flush the initial queueMicrotask from getInitialSize before triggering
-    // resize events, so the initial state settles to 0,0 first.
-    await act(async () => {});
+    // Flush the initial setTimeout before triggering resize events.
+    await act(async () => {
+      jest.runAllTimers();
+    });
     const element = screen.getByTestId('observed-element');
 
     await triggerResize(element, defaultSize * 2, defaultSize * 3);

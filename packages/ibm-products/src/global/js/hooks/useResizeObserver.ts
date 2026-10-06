@@ -24,45 +24,43 @@ export const useResizeObserver = (
   }, [onResize]);
 
   useEffect(() => {
-    const getInitialSize = () => {
-      if (ref.current) {
-        const refComputedStyle = window.getComputedStyle(ref.current);
-
-        const initialWidth =
-          (ref.current?.offsetWidth ?? 0) -
-          (typeof refComputedStyle?.paddingLeft === 'string' &&
-          refComputedStyle?.paddingLeft.length
-            ? parseFloat(refComputedStyle?.paddingLeft)
-            : 0) -
-          (typeof refComputedStyle?.paddingRight === 'string' &&
-          refComputedStyle?.paddingRight.length
-            ? parseFloat(refComputedStyle?.paddingRight)
-            : 0);
-
-        const initialHeight =
-          (ref.current?.offsetHeight ?? 0) -
-          (typeof refComputedStyle?.paddingTop === 'string' &&
-          refComputedStyle?.paddingTop.length
-            ? parseFloat(refComputedStyle?.paddingTop)
-            : 0) -
-          (typeof refComputedStyle?.paddingBottom === 'string' &&
-          refComputedStyle?.paddingBottom.length
-            ? parseFloat(refComputedStyle?.paddingBottom)
-            : 0);
-
-        // React 19: calling setState synchronously inside a useEffect that fires
-        // during React's passive-effects flush can increment nestedUpdateCount and
-        // trigger "Maximum update depth exceeded". Defer the setters past the flush.
-        queueMicrotask(() => {
-          setWidth(initialWidth);
-          setHeight(initialHeight);
-        });
-      }
-    };
     if (!ref?.current || (width >= 0 && height >= 0)) {
       return;
     }
-    getInitialSize();
+
+    const refComputedStyle = window.getComputedStyle(ref.current);
+
+    const initialWidth =
+      (ref.current?.offsetWidth ?? 0) -
+      (typeof refComputedStyle?.paddingLeft === 'string' &&
+      refComputedStyle?.paddingLeft.length
+        ? parseFloat(refComputedStyle?.paddingLeft)
+        : 0) -
+      (typeof refComputedStyle?.paddingRight === 'string' &&
+      refComputedStyle?.paddingRight.length
+        ? parseFloat(refComputedStyle?.paddingRight)
+        : 0);
+
+    const initialHeight =
+      (ref.current?.offsetHeight ?? 0) -
+      (typeof refComputedStyle?.paddingTop === 'string' &&
+      refComputedStyle?.paddingTop.length
+        ? parseFloat(refComputedStyle?.paddingTop)
+        : 0) -
+      (typeof refComputedStyle?.paddingBottom === 'string' &&
+      refComputedStyle?.paddingBottom.length
+        ? parseFloat(refComputedStyle?.paddingBottom)
+        : 0);
+
+    // React 19: defer setState out of the passive-effects flush to avoid
+    // incrementing nestedUpdateCount. Use setTimeout with cleanup so the
+    // update is cancelled if the component unmounts before it fires.
+    const id = setTimeout(() => {
+      setWidth(initialWidth);
+      setHeight(initialHeight);
+    }, 0);
+
+    return () => clearTimeout(id);
     // Ignoring exhaustive-deps as we do NOT want to include the ref in dep array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height]);

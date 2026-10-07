@@ -17,6 +17,10 @@ import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
 - [PageHeader.TabsBar](#pageheadertabsbar)
   - [PageHeader.TabsBar with Tags](#pageheadertabsbar-with-tags)
 - [Migration guidance from deprecated PageHeader to preview_PageHeader](#migration-guidance-from-deprecated-pageheader-to-preview_pageheader)
+  - [Codemod](#codemod)
+  - [Prop-to-component mapping](#prop-to-component-mapping)
+  - [Side-by-side example](#side-by-side-example)
+  - [AI-assisted migration](#ai-assisted-migration)
 
 ## Overview
 
@@ -801,12 +805,21 @@ available to automate the migration to `preview__PageHeader`. Run the following
 command at the root of your project:
 
 ```sh
-npx @carbon/upgrade migrate ibm-products-update-page-header-composable
+npx @carbon/upgrade migrate ibm-products-update-page-header-composable --write
 ```
 
 The codemod will rewrite your existing `<PageHeader>` usages to the new
 composable structure. After running the codemod, review the diff and manually
 correct any changes that the codemod could not handle automatically.
+
+It **cannot** handle automatically (leaves `TODO` comments):
+
+- `collapseHeader` — no direct equivalent; scroll programmatically if needed
+- `withoutBackground` — no direct equivalent; use CSS custom properties
+- `title` with complex object shapes (e.g. `editableLabel`, `onSave`) — review
+  manually
+- `allTagsModal*` props — pass directly to your custom
+  `<PageHeader.TagOverflow>` trigger
 
 ### Overview
 
@@ -1001,6 +1014,90 @@ import {
     <TabPanel>Settings content</TabPanel>
   </TabPanels>
 </Tabs>;
+```
+
+---
+
+### AI-assisted migration
+
+Copy the prompt below into Bob, or any AI assistant, then paste your component
+source after the final line.
+
+```
+You are migrating a React component from the deprecated @carbon/ibm-products
+PageHeader API to the new composable preview__PageHeader API.
+
+IMPORT CHANGES:
+- PageHeader → preview__PageHeader as PageHeader (same package)
+
+SUB-COMPONENT NAMESPACE:
+PageHeader.Root         — outermost wrapper (replaces <PageHeader>)
+PageHeader.BreadcrumbBar — breadcrumb zone + action bar icons
+PageHeader.BreadcrumbPageActions — icon action buttons in the breadcrumb bar
+PageHeader.BreadcrumbOverflow — overflow breadcrumb items
+PageHeader.TitleBreadcrumb — title shown as last breadcrumb item
+PageHeader.Content      — title + subtitle + page-action buttons zone
+PageHeader.ContentText  — subtitle / description inside Content
+PageHeader.ContentPageActions — primary CTA buttons inside Content
+PageHeader.TabBar       — tabs + tags + scroll button zone
+PageHeader.TagOverflow  — tag overflow inside TabBar
+PageHeader.ScrollButton — collapse/expand toggle inside TabBar
+PageHeader.HeroImage    — optional hero image inside Content
+
+PROP MAPPING (old prop → new location):
+- title (string)               → title prop on <PageHeader.Content>
+- title.icon / renderIcon      → renderIcon prop on <PageHeader.Content>
+- title.loading                → render <SkeletonText> inside <PageHeader.Content>
+- subtitle                     → <PageHeader.ContentText subtitle="..." />
+- breadcrumbs                  → <Breadcrumb><BreadcrumbItem> children of <PageHeader.BreadcrumbBar>
+- breadcrumbOverflowAriaLabel  → handled natively by Carbon <Breadcrumb>
+- actionBarItems               → actions prop on <PageHeader.BreadcrumbPageActions> passed to <PageHeader.BreadcrumbBar pageActions={...}>
+- actionBarOverflowAriaLabel   → overflowMenuLabel prop on <PageHeader.BreadcrumbPageActions>
+- pageActions (button array)   → actions prop on <PageHeader.ContentPageActions> passed to <PageHeader.Content pageActions={...}>
+- pageActionsOverflowLabel     → menuButtonLabel prop on <PageHeader.ContentPageActions>
+- navigation (Tabs)            → <PageHeader.TabBar> wrapping Carbon <TabList>; wrap entire PageHeader.Root in <Tabs>
+- tags                         → tags prop on <PageHeader.TabBar> with <PageHeader.TagOverflow> as value
+- hasCollapseHeaderToggle      → <PageHeader.ScrollButton> passed to <PageHeader.TabBar scroller={...}>
+- collapseHeaderIconDescription → collapseText prop on <PageHeader.ScrollButton>
+- expandHeaderIconDescription  → expandText prop on <PageHeader.ScrollButton>
+- fullWidthGrid / narrowGrid   → same props on <PageHeader.Root>
+- collapseHeader               → REMOVE — no direct equivalent; scroll programmatically if needed
+- collapseTitle                → REMOVE — title collapses automatically
+- withoutBackground            → REMOVE — use CSS custom properties instead
+- enableBreadcrumbScroll       → REMOVE — breadcrumb bar is always sticky
+- allTagsModal* props          → pass to your custom <PageHeader.TagOverflow> trigger
+
+STRUCTURAL TEMPLATE:
+<Tabs>                         {/* only if navigation/tabs are used */}
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      pageActions={<PageHeader.BreadcrumbPageActions actions={[...]} />}
+    >
+      <Breadcrumb>
+        <BreadcrumbItem href="/">...</BreadcrumbItem>
+        <PageHeader.TitleBreadcrumb>Page Title</PageHeader.TitleBreadcrumb>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+
+    <PageHeader.Content
+      title="Page Title"
+      renderIcon={MyIcon}
+      pageActions={<PageHeader.ContentPageActions actions={[...]} />}
+    >
+      <PageHeader.ContentText subtitle="..." />
+    </PageHeader.Content>
+
+    <PageHeader.TabBar
+      tags={<PageHeader.TagOverflow>...</PageHeader.TagOverflow>}
+      scroller={<PageHeader.ScrollButton collapseText="..." expandText="..." />}
+    >
+      <TabList>...</TabList>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+  <TabPanels>...</TabPanels>   {/* only if navigation/tabs are used */}
+</Tabs>
+
+Now migrate the following component:
 ```
 
 ---

@@ -1,5 +1,39 @@
 # TearsheetShell
 
+## Deprecation notice
+
+`Tearsheet` and `TearsheetNarrow` are deprecated and will be removed in a future
+major version. The composable replacement (`preview__Tearsheet`) will be
+promoted to **stable** in `@carbon/react` at **v12** — migrate now to stay ahead
+of the breaking change.
+
+Please migrate to
+[preview\_\_Tearsheet](?path=/docs/preview-tearsheet--docs#migration-from-legacy-tearsheet).
+The migration guide in those docs covers the full prop mapping, before/after
+patterns, codemod, and an AI-assisted migration prompt.
+
+### What replaces what
+
+| Deprecated        | Replacement                                    |
+| ----------------- | ---------------------------------------------- |
+| `Tearsheet`       | `preview__Tearsheet` (wide variant)            |
+| `TearsheetNarrow` | `preview__Tearsheet` (narrow variant via prop) |
+
+### New import (v12+)
+
+```jsx
+// Before
+import { Tearsheet } from '@carbon/ibm-products';
+
+// After (v12+)
+import { Tearsheet } from '@carbon/react';
+```
+
+The `preview__Tearsheet` export uses a fully composable sub-component
+architecture (`TearsheetHeader`, `TearsheetHeaderContent`,
+`TearsheetHeaderActions`, `TearsheetBody`, `TearsheetFooter`). Migration guides
+and codemods will be published alongside the v12 release.
+
 ## Overview
 
 The TearsheetShell component is a base component for Tearsheet and

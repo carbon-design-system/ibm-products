@@ -64,6 +64,11 @@ type</p> <p className="bold">Foundation model</p> </div> </AILabelContent>
 ## Table of Contents
 
 - [Overview](#overview)
+- [Migration from Legacy Tearsheet](#migration-from-legacy-tearsheet)
+  - [Why migrate?](#why-migrate)
+  - [Before / after — common patterns](#before--after--common-patterns)
+  - [Codemod](#codemod)
+  - [AI-assisted migration](#ai-assisted-migration)
 - [Usage](#usage)
 - [Examples](#examples)
 - [Component API](#component-api)
@@ -92,66 +97,160 @@ mounted in the DOM when closed (preserving state), use the `keepMounted` prop:
 
 ## Migration from Legacy Tearsheet
 
-### Benefits of the New Tearsheet
+### Why migrate?
 
-- **Scalable & Composable**: Built with compound components that can be easily
-  extended and customized for any use case
-- **Improved Performance**: Presence-based rendering with automatic cleanup and
-  optimized animations
-- **Collapsible Header**: Smart header that automatically collapses on scroll to
-  maximize content space (can be disabled via `disableHeaderCollapse` prop)
-- **Better Developer Experience**: Intuitive API with clear component boundaries
-  and self-documenting structure
-- **Type Safety**: Full TypeScript support with better type inference and
-  autocomplete
+- **Scalable & Composable** — built with compound components that can be easily
+  extended and customized for any use case.
+- **Improved Performance** — presence-based rendering with automatic cleanup and
+  optimized animations.
+- **Collapsible Header** — smart header that automatically collapses on scroll
+  to maximize content space (opt out with `disableHeaderCollapse`).
+- **Better Developer Experience** — intuitive API with clear component
+  boundaries and self-documenting structure.
+- **Type Safety** — full TypeScript support with better type inference and
+  autocomplete.
+- **Responsive panels** — `Influencer` and `SummaryContent` automatically become
+  slide-in side panels on small screens.
 
-### Migration Guide
+---
 
-**Old Tearsheet
-(packages/ibm-products/src/components/Tearsheet/Tearsheet.tsx):**
+### Before / after — common patterns
+
+**Minimal tearsheet**
 
 ```jsx
-<Tearsheet
-  open={open}
-  title="Title"
-  description="Description"
-  actions={[
-    { label: 'Cancel', kind: 'secondary', onClick: handleCancel },
-    { label: 'Submit', kind: 'primary', onClick: handleSubmit },
-  ]}
-  influencer={<div>Influencer content</div>}
-  onClose={handleClose}
->
-  <div>Main content</div>
+// Before
+<Tearsheet open={open} onClose={onClose} title="Title" actions={actions}>
+  <div>Content</div>
+</Tearsheet>
+
+// After
+<Tearsheet open={open} onClose={onClose}>
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent title="Title" />
+  </Tearsheet.Header>
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      <div>Content</div>
+    </Tearsheet.MainContent>
+  </Tearsheet.Body>
+  <Tearsheet.Footer actions={actions} />
 </Tearsheet>
 ```
 
-**New Tearsheet (packages/ibm-products/src/components/Tearsheet/next):**
+**With influencer**
 
 ```jsx
-<Tearsheet open={open} onClose={handleClose}>
+// Before
+<Tearsheet open={open} onClose={onClose} influencer={<Nav />} influencerWidth="narrow">
+  <div>Content</div>
+</Tearsheet>
+
+// After
+<Tearsheet open={open} onClose={onClose} influencerWidth="256px">
   <Tearsheet.Header>
-    <Tearsheet.HeaderContent title="Title" description="Description" />
+    <Tearsheet.HeaderContent title="Title" />
   </Tearsheet.Header>
-
   <Tearsheet.Influencer>
-    <div>Influencer content</div>
+    <Nav />
   </Tearsheet.Influencer>
-
   <Tearsheet.Body>
     <Tearsheet.MainContent>
-      <div>Main content</div>
+      <div>Content</div>
     </Tearsheet.MainContent>
   </Tearsheet.Body>
+  <Tearsheet.Footer actions={actions} />
+</Tearsheet>
+```
 
-  <Tearsheet.Footer>
-    <Button kind="secondary" onClick={handleCancel}>
-      Cancel
-    </Button>
-    <Button kind="primary" onClick={handleSubmit}>
-      Submit
-    </Button>
-  </Tearsheet.Footer>
+**With navigation (tabs)**
+
+```jsx
+// Before
+<Tearsheet open={open} onClose={onClose} navigation={<Tabs><TabList>...</TabList></Tabs>}>
+  <TabPanels>...</TabPanels>
+</Tearsheet>
+
+// After — wrap the entire Tearsheet in <Tabs> so TabList and TabPanels share state
+<Tabs>
+  <Tearsheet open={open} onClose={onClose}>
+    <Tearsheet.Header>
+      <Tearsheet.HeaderContent title="Title" />
+      <Tearsheet.NavigationBar>
+        <TabList aria-label="Tearsheet tabs">...</TabList>
+      </Tearsheet.NavigationBar>
+    </Tearsheet.Header>
+    <Tearsheet.Body>
+      <Tearsheet.MainContent>
+        <TabPanels>...</TabPanels>
+      </Tearsheet.MainContent>
+    </Tearsheet.Body>
+    <Tearsheet.Footer actions={actions} />
+  </Tearsheet>
+</Tabs>
+```
+
+**TearsheetNarrow → `variant="narrow"`**
+
+```jsx
+// Before
+import { TearsheetNarrow } from '@carbon/ibm-products';
+<TearsheetNarrow open={open} onClose={onClose} title="Title" actions={actions}>
+  <div>Content</div>
+</TearsheetNarrow>;
+
+// After
+import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products';
+<Tearsheet open={open} onClose={onClose} variant="narrow">
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent title="Title" />
+  </Tearsheet.Header>
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      <div>Content</div>
+    </Tearsheet.MainContent>
+  </Tearsheet.Body>
+  <Tearsheet.Footer actions={actions} />
+</Tearsheet>;
+```
+
+**Stacking (TearsheetPresence → StackProvider)**
+
+```jsx
+// Before
+import { TearsheetPresence } from '@carbon/ibm-products';
+<TearsheetPresence open={open1 || open2}>
+  <Tearsheet open={open1} onClose={() => setOpen1(false)}>
+    ...
+  </Tearsheet>
+  <Tearsheet open={open2} onClose={() => setOpen2(false)}>
+    ...
+  </Tearsheet>
+</TearsheetPresence>;
+
+// After
+import {
+  StackProvider,
+  preview__Tearsheet as Tearsheet,
+} from '@carbon/ibm-products';
+<StackProvider stackStepSize="lg">
+  <Tearsheet open={open1} onClose={() => setOpen1(false)}>
+    ...
+  </Tearsheet>
+  <Tearsheet open={open2} onClose={() => setOpen2(false)}>
+    ...
+  </Tearsheet>
+</StackProvider>;
+```
+
+**Preserve state across open/close (keepMounted)**
+
+The old Tearsheet never unmounted, so state was always preserved. The new one
+unmounts by default. Add `keepMounted` to opt back in:
+
+```jsx
+<Tearsheet open={open} onClose={onClose} keepMounted>
+  ...
 </Tearsheet>
 ```
 
@@ -161,6 +260,82 @@ default. They can be accessed via side panels using
 `influencerPanelOpen`/`onInfluencerPanelClose` and
 `summaryPanelOpen`/`onSummaryPanelClose` props, triggered by user actions (e.g.,
 button clicks).
+
+---
+
+### Codemod
+
+Run the codemod to automate the mechanical parts of the migration:
+
+```sh
+npx @carbon/upgrade migrate ibm-products-update-tearsheet --write
+```
+
+The codemod handles: import rewrites, moving flat props (`title`, `description`,
+`label`, `actions`, `influencer`, `navigation`, `headerActions`,
+`closeIconDescription`, `hasCloseIcon`) into their sub-components, and replacing
+`TearsheetPresence` / `withTearsheetPresence` with `StackProvider`.
+
+It **cannot** handle automatically (leaves `TODO` comments):
+
+- `influencerPosition="right"` → replace manually with
+  `<Tearsheet.SummaryContent>`
+- `launcherButtonRef` → remove (focus is automatic)
+- `hasCloseIcon` with dynamic expressions → review manually
+
+---
+
+### AI-assisted migration
+
+Copy the prompt below into Bob or any AI assistant, then paste your component
+source after the final line.
+
+```
+You are migrating a React component from the deprecated @carbon/ibm-products
+Tearsheet API to the new composable preview__Tearsheet API.
+
+IMPORT CHANGES:
+- Tearsheet          → preview__Tearsheet as Tearsheet (same package)
+- TearsheetNarrow    → preview__Tearsheet as Tearsheet + variant="narrow" on root
+- TearsheetPresence / withTearsheetPresence → StackProvider
+
+PROP MAPPING (old prop → new location):
+- title                → <Tearsheet.HeaderContent title="..." />
+- label                → <Tearsheet.HeaderContent label="..." />
+- description          → <Tearsheet.HeaderContent description="..." />
+- closeIconDescription → <Tearsheet.Header closeIconDescription="..." />
+- hasCloseIcon={false} → <Tearsheet.Header hideCloseButton={true} />
+- actions={arr}        → <Tearsheet.Footer actions={arr} />
+- headerActions={node} → <Tearsheet.HeaderContent headerActions={<Tearsheet.HeaderActions>...</Tearsheet.HeaderActions>} />
+- influencer={node}    → <Tearsheet.Influencer>{node}</Tearsheet.Influencer>
+- influencerWidth="narrow" → influencerWidth="256px" on root <Tearsheet>
+- influencerWidth="wide"   → influencerWidth="320px" on root <Tearsheet>
+- influencerPosition   → REMOVE (Influencer is always left; use SummaryContent for right)
+- navigation={node}    → <Tearsheet.NavigationBar>{node}</Tearsheet.NavigationBar> inside <Tearsheet.Header>
+- children             → <Tearsheet.MainContent>{children}</Tearsheet.MainContent> inside <Tearsheet.Body>
+- launcherButtonRef    → REMOVE (focus management is automatic)
+- verticalPosition     → REMOVE (was already deprecated)
+- open, onClose, className, ariaLabel, portalTarget,
+  selectorPrimaryFocus, selectorsFloatingMenus, decorator → unchanged on root
+
+STRUCTURAL TEMPLATE:
+<Tearsheet open={open} onClose={onClose}>
+  <Tearsheet.Header closeIconDescription="Close">
+    <Tearsheet.HeaderContent title="..." label="..." description="..." />
+    {/* optional NavigationBar for tabs/tags */}
+  </Tearsheet.Header>
+  {/* optional Influencer for left panel */}
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      {/* main content */}
+    </Tearsheet.MainContent>
+    {/* optional SummaryContent for right panel */}
+  </Tearsheet.Body>
+  <Tearsheet.Footer actions={actions} />
+</Tearsheet>
+
+Now migrate the following component:
+```
 
 ### Accessibility
 

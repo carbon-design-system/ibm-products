@@ -1,0 +1,216 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Overview/Migration to Carbon (v12)" />
+
+# Migration to Carbon — what's changing in v12
+
+> **Who this is for:** teams consuming `@carbon/ibm-products` today who want to
+> understand where components are going, what will break, and how to prepare.
+
+## Table of Contents
+
+- [Summary](#summary)
+- [Why is this happening?](#why-is-this-happening)
+- [What happens to this package?](#what-happens-to-this-package)
+- [Where is each component going?](#where-is-each-component-going)
+  - [Migrating to `@carbon/react`](#migrating-to-carbonreact)
+  - [Moving to Carbon Labs](#moving-to-carbon-labs)
+  - [Deprecated](#deprecated--no-migration-path)
+  - [Patterns and examples](#patterns-and-examples)
+- [What do I need to change?](#what-do-i-need-to-change)
+  - [Import path change](#import-path-change)
+  - [Non-composable components — two-step migration](#non-composable-components--two-step-migration)
+  - [Codemods](#codemods)
+
+---
+
+## Summary
+
+Starting with **Carbon v12**, the high-value components from
+`@carbon/ibm-products` are being selectively migrated into the Carbon core
+packages (`@carbon/react` and `@carbon/web-components`). This means:
+
+- You will eventually install **one package** instead of two.
+- Migrated components become first-class Carbon APIs, gaining v12 features
+  (updated motion, rounded corners, new tokens) immediately.
+- `@carbon/ibm-products` stays available but enters **minimal maintenance mode**
+  after v12 ships — no new features or components will be developed there.
+- A **one-time import-path change** is required for components that migrate.
+  Codemods will be provided to automate this.
+- Migrated components will be available in both **`@carbon/react`** and
+  **`@carbon/web-components`**. Web Components ports are delivered as follow-up
+  work per component and may not land simultaneously with the React
+  implementation at v12.
+
+---
+
+## Why is this happening?
+
+`carbon-for-ibm-products` was built upon the foundational components of Carbon
+Core, extended with additional components, styling, and guidance crafted
+specifically for software product use cases, it is not a replacement for Core,
+but a specialized layer on top of it. That separation was useful early on, but
+it now creates friction:
+
+- **Two packages to install.** Adopters must manage both `@carbon/react` and
+  `@carbon/ibm-products` to get the full component set.
+- **Duplicated infrastructure.** Two CI pipelines, two Storybooks, two release
+  workflows — maintenance overhead with no consumer benefit.
+- **Slower v12 adoption.** Components in a separate repo cannot easily consume
+  in-flight monorepo changes, lengthening the feedback loop.
+- **Visibility across squads.** PRs and issues from different teams cannot
+  cross-reference when work is split across two repos.
+
+---
+
+## What happens to this package?
+
+| Phase         | What it means for you                                                                                                                                                                                                                                      |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Now → v12** | Everything continues to work. Components are being migrated internally but not yet exported from `@carbon/react`. No changes required on your side. Migrated components will be published from release branch (alpha releases) early on with v12 features. |
+| **At v12**    | Migrated components are officially exported from `@carbon/react`. Update your import paths. Codemods are available to automate this.                                                                                                                       |
+| **Post-v12**  | `@carbon/ibm-products` enters minimal maintenance mode. Critical bug fixes only — no new features, no new components.                                                                                                                                      |
+
+Every component in this Storybook will be labelled with one of these outcomes:
+
+- **Migrated to `@carbon/react`** — links to the new location and import-path
+  change.
+- **Deprecated** — Not moving forward due to minimal or no adoption, an existing
+  replacement, or because the capability has already been delivered as a
+  standard pattern.
+- **Moved to Carbon Labs** — available in the community-maintained
+  [Carbon Labs](https://github.com/carbon-design-system/carbon-labs) repo.
+
+---
+
+## Where is each component going?
+
+### Migrating to `@carbon/react`
+
+These components have sufficient adoption, standalone utility, or architectural
+fit to justify first-class status in `@carbon/react` and
+`@carbon/web-components`. They are exported as part of the public API starting
+at v12.
+
+| Component           | Current export(s) in `@carbon/ibm-products` | v12 status in `@carbon/react` | Notes                                                                                                                                                         |
+| ------------------- | ------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Add and select      | `MultiAddSelect`, `SingleAddSelect`         | Preview → Stable              | The monolithic pattern is deprecated; replaced by a composable component system. `AddSelectData` manages hierarchical selection state separately from the UI. |
+| Big number          | `BigNumber`                                 | Preview                       | Lightweight component with strong potential. Enters core as a preview; may move to Labs if adoption does not grow post-v12.                                   |
+| Coachmark           | `Coachmark`                                 | Stable                        | Old monolithic version deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                            |
+| Composable card     | `Card`                                      | Preview → Stable              | Replaces `ExpressiveCard` / `ProductiveCard`. Available in `@carbon/react` as a preview **before v12**, promoted to stable at v12.                            |
+| Condition builder   | `ConditionBuilder`                          | Preview → Stable              | Accessibility and composability reviews complete. Moves to core as **stable**. Web Components port is a follow-up.                                            |
+| Full-page error     | `FullPageError`                             | Stable                        | High adoption. Composable design. Migrates to core as **stable**.                                                                                             |
+| Guide banner        | `GuideBanner`                               | Preview                       | Moves to core as **preview**. Composable API can be explored post-v12.                                                                                        |
+| Inline edit         | `EditInPlace`                               | Stable                        | Moves to core as **stable**.                                                                                                                                  |
+| Interstitial screen | `InterstitialScreen`                        | Stable                        | Already re-implemented as a stable composable component. Migrates to core as **stable**.                                                                      |
+| Notifications panel | `NotificationsPanel`                        | Stable                        | Moves to core as **stable** (non-composable). A composable redesign will follow post-v12 as a preview.                                                        |
+| Options tile        | `OptionsTile`                               | Stable                        | Good adoption. Migrates to core as **stable**.                                                                                                                |
+| Page header         | `PageHeader`                                | Preview → Stable              | Old `PageHeader` deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                                  |
+| Scroll gradient     | `ScrollGradient`                            | Stable                        | Migrates as a utility component.                                                                                                                              |
+| Side panel          | `SidePanel`                                 | Stable                        | Moves to core **as-is** (non-composable). Composable redesign delivered post-v12 as preview, then promoted to stable.                                         |
+| Tag overflow        | `TagOverflow`                               | Stable                        | Moves to core as **stable**. Replaces `TagSet`.                                                                                                               |
+| Tearsheet           | `Tearsheet`                                 | Preview → Stable              | Old monolithic `Tearsheet` deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                        |
+| Truncated text      | `TruncatedText`                             | Stable                        | Lightweight utility used internally across components. Exporting lets adopters reuse the same overflow behavior.                                              |
+| User avatar         | `UserAvatar`                                | Stable                        | Migrates to core as **stable**.                                                                                                                               |
+
+### Moving to Carbon Labs
+
+[Carbon Labs](https://github.com/carbon-design-system/carbon-labs) is
+community-maintained. These components have low adoption, but retain enough
+value to remain available for teams who want to use and contribute to them. The
+Carbon core team does not own or gate releases in Labs.
+
+| Component         | Current export(s)  | Notes                                                              |
+| ----------------- | ------------------ | ------------------------------------------------------------------ |
+| Cascade           | `Cascade`          | Low adoption;                                                      |
+| Checklist         | `Checklist`        | Low adoption; useful for onboarding and time-to-value flows.       |
+| Inline tip        | `InlineTip`        | No production adoption. Community can use and maintain it in Labs. |
+| Nonlinear reading | `NonLinearReading` | 0–1 product adoptions.                                             |
+| Truncated list    | `TruncatedList`    |                                                                    |
+
+### Deprecated
+
+These components will be deprecated in `@carbon/ibm-products` and will not
+migrate to Carbon core. They have either zero or near-zero adoption, have been
+replaced by a newly delivered component, or are better served as a documented
+pattern rather than an exported component.
+
+| Component        | Current export(s) | Reason                                                                                                      |
+| ---------------- | ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| About modal      | `AboutModal`      | A simple modal with structured content. Deprecated; shared as an example pattern instead.                   |
+| Action bar       | `ActionBar`       | No adoption; used only internally by the old `PageHeader`. Not needed with the new composable `PageHeader`. |
+| Decorator        | `Decorator`       | No adoption.                                                                                                |
+| Expressive card  | `ExpressiveCard`  | Replaced by the new composable `Card` component.                                                            |
+| Get started card | `GetStartedCard`  | Will be delivered as a pattern built on top of the new composable `Card` component.                         |
+| Productive card  | `ProductiveCard`  | Replaced by the new composable `Card` component.                                                            |
+| Search bar       | `SearchBar`       | No adoption.                                                                                                |
+| Tag set          | `TagSet`          | Deprecated in favour of `TagOverflow`, which provides the same capability with greater flexibility.         |
+| Toolbar          | `Toolbar`         | No adoption.                                                                                                |
+
+### Patterns and examples
+
+These are usage patterns and example flows built on top of Carbon and
+`@carbon/ibm-products` components. They are **not exported as standalone
+components** but will be documented under an `Examples/` section in the Carbon
+core Storybook. The composed components (e.g. `Tearsheet`, `SidePanel`) are what
+gets migrated and exported — the patterns show you how to compose them. The
+standalone components patterns(pre-built patterns) are already deprecated in
+products repo.
+
+| Pattern                 | Current export(s)                                                                              | Notes                                                                                                 |
+| ----------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Add and select patterns | `AddSelect` composable sub-components                                                          | Pattern examples built on top of the new composable `AddSelect` system.                               |
+| Coachmark patterns      | `CoachmarkFixed`, `CoachmarkOverlayElements`, `CoachmarkStacked`                               | Pattern variants built on top of the composable `Coachmark` component.                                |
+| Create flows            | `CreateFullPage`, `CreateModal`, `CreateSidePanel`, `CreateTearsheet`, `CreateTearsheetNarrow` | Full-page and modal creation patterns composed from `Tearsheet`, `SidePanel`, and related components. |
+| Delete and remove       | `RemoveModal`                                                                                  | Pattern for destructive confirmation flows.                                                           |
+| Export                  | `ExportModal`                                                                                  | Pattern for export confirmation flows.                                                                |
+| Generate an API key     | `APIKeyModal`                                                                                  | Pattern for API key generation flows.                                                                 |
+| Import and upload       | `ImportModal`                                                                                  | Pattern for import and file upload flows.                                                             |
+| Saving                  | `Saving`                                                                                       | Pattern for Saving.                                                                                   |
+| Web terminal            | `WebTerminal`                                                                                  | Pattern for Web terminal.                                                                             |
+
+---
+
+## What do I need to change?
+
+### Import path change
+
+For every component that migrates to `@carbon/react`, the **only required change
+at v12** is the import path:
+
+```jsx
+// Before (Carbon v11 / current)
+import { SidePanel } from '@carbon/ibm-products';
+
+// After (Carbon v12+)
+import { SidePanel } from '@carbon/react';
+```
+
+You do **not** need to change how you use the component at v12. The component
+API is preserved on migration.
+
+### Preview → Stable components — one-step API migration
+
+Some components were already rewritten as composable previews inside
+`@carbon/ibm-products`. Those preview versions are what migrate to
+`@carbon/react` and ship as **stable** at v12. For these components, both the
+import path **and** the component API change — the old monolithic export is
+deprecated.
+
+| Component          | Change required at v12                                                                              |
+| ------------------ | --------------------------------------------------------------------------------------------------- |
+| `Tearsheet`        | New import path + migrate to composable API                                                         |
+| `PageHeader`       | New import path + migrate to composable API                                                         |
+| `ConditionBuilder` | New import path only — API is unchanged                                                             |
+| Add and Select     | New import path + migrate to composable system; `MultiAddSelect` / `SingleAddSelect` are deprecated |
+
+Migration guides and codemods for each of these will be published alongside the
+v12 release.
+
+### Codemods
+
+Codemods will be published as part of the v12 release to automate import-path
+changes. Details will be shared later.
+
+---

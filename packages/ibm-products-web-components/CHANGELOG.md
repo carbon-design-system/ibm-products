@@ -1,3 +1,19 @@
+## `@carbon/ibm-products-web-components@0.49.0`
+### Bug fixes :bug:
+- fix(Tearsheet next): suppress all animations and transitions under prefers-reduced-motion (#9913)
+- fix(c4p-page-header): bug fixes and React parity gaps (#9877)
+
+## `@carbon/ibm-products-web-components@0.48.0`
+### Bug fixes :bug:
+- fix: bignumber and notificationpanel parity after v12 migration (#9856)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9849)
+
+## `@carbon/ibm-products-web-components@0.47.0`
+### Features :rocket:
+- feat(addselect): single select patterns (#9776)
+
 ## `@carbon/ibm-products-web-components@0.46.0`
 ### Features :rocket:
 - feat(preview-tearsheet): implement open in stackblitz in web component (#9760)

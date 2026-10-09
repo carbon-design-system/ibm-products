@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@ import * as stories from './WebTerminal.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Web Terminal](https://ibm-products.carbondesignsystem.com/?path=/docs/patterns-webterminal--overview) pattern."
     altGuidelinesHref={[
       {
         href: 'https://pages.github.ibm.com/carbon/ibm-products/patterns/web-terminal/usage/',

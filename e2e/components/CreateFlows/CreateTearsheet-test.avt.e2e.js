@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'deprecated-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -32,7 +32,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-focus-move-properly-across-steps', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'deprecated-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -47,8 +47,8 @@ test.describe('CreateTearsheet @avt', () => {
     const step1Input1 = page.locator(
       '#tearsheet-multi-step-story-text-input-multi-step-1'
     );
-    const nextButton = page.getByText('Next');
-    const backButton = page.getByText('Back');
+    const nextButton = page.getByRole('button', { name: 'Next' });
+    const backButton = page.getByRole('button', { name: 'Back' });
 
     // Focus learn more link
     await page.keyboard.press('Shift+Tab');
@@ -173,7 +173,7 @@ test.describe('CreateTearsheet @avt', () => {
   test('@avt-simulate-error-and-focus', async ({ page }) => {
     await visitStory(page, {
       component: 'CreateTearsheet',
-      id: 'patterns-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
+      id: 'deprecated-prebuilt-patterns-create-flows-createtearsheet--multi-step-tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -187,7 +187,7 @@ test.describe('CreateTearsheet @avt', () => {
     const step1Input1 = page.locator(
       '#tearsheet-multi-step-story-text-input-multi-step-1'
     );
-    const nextButton = page.getByText('Next');
+    const nextButton = page.getByRole('button', { name: 'Next' });
     const errorToggle = page.locator('#simulated-error-toggle');
 
     // Expect the input box to be focused

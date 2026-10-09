@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2025
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -180,6 +180,7 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 
 describe(CreateTearsheet.displayName, () => {
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     jest.useFakeTimers();
     pkg.feature['default-portal-target-body'] = false;
   });

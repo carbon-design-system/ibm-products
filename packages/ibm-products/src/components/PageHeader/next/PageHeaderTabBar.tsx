@@ -41,7 +41,7 @@ export const PageHeaderTabBar = React.forwardRef<
   }: PageHeaderTabBarProps,
   ref
 ) {
-  const { setDisableStickyTabBar } = usePageHeader();
+  const { setDisableStickyTabBar, fullWidthGrid, narrowGrid } = usePageHeader();
 
   useEffect(() => {
     setDisableStickyTabBar?.(disableStickyTabBar);
@@ -65,7 +65,7 @@ export const PageHeaderTabBar = React.forwardRef<
   if (!tags) {
     return (
       <div className={classNames} ref={ref} {...other}>
-        <Grid condensed>
+        <Grid condensed fullWidth={!!fullWidthGrid} narrow={narrowGrid}>
           <Column lg={16} md={8} sm={4}>
             {children}
           </Column>
@@ -77,7 +77,7 @@ export const PageHeaderTabBar = React.forwardRef<
 
   return (
     <div className={classNames} ref={ref} {...other}>
-      <Grid condensed>
+      <Grid condensed fullWidth={!!fullWidthGrid} narrow={narrowGrid}>
         <Column lg={16} md={8} sm={4}>
           <div
             className={classnames(`${blockClass}__tab-bar--tablist`, {

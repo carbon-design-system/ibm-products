@@ -7,12 +7,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-  FeatureFlags,
-} from '@carbon/react';
+import { Button, OverflowMenu, MenuItem, FeatureFlags } from '@carbon/react';
 import { createOverflowHandler } from '@carbon/utilities';
 import { blockClass } from '../PageHeaderUtils';
 
@@ -104,17 +99,7 @@ export const PageHeaderBreadcrumbPageActions = ({
   }, [actions]);
 
   return (
-    <ul
-      ref={containerRef}
-      className={classNames}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        inlineSize: '50%',
-      }}
-      {...other}
-    >
+    <ul ref={containerRef} className={classNames} {...other}>
       {actions.map((item) => (
         <li key={item.id} data-id={item.id}>
           <Button
@@ -131,16 +116,14 @@ export const PageHeaderBreadcrumbPageActions = ({
         data-offset
         data-hidden
         data-floating-menu-container
-        style={{
-          position: 'relative',
-        }}
+        className={`${blockClass}__breadcrumb-page-actions__overflow-item`}
       >
         <FeatureFlags enableV12Overflowmenu>
           <OverflowMenu size={buttonSize} aria-label={overflowMenuLabel}>
             {hiddenItems.map((item) => (
-              <OverflowMenuItem
+              <MenuItem
                 key={item.id}
-                itemText={item.label}
+                label={item.label}
                 onClick={item.onClick}
               />
             ))}

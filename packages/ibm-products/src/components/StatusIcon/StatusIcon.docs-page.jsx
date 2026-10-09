@@ -11,12 +11,16 @@ import * as stories from './StatusIcon.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Icon Indicator](https://react.carbondesignsystem.com/?path=/docs/preview-statusindicators-preview-iconindicator--overview) from Carbon."
     altGuidelinesHref={[
       {
         href: 'https://carbondesignsystem.com/patterns/status-indicator-pattern/',
         label: 'Carbon status indicator patterns',
       },
     ]}
+    altDescription={`Status icons are an important method of communicating severity level
+information to users. The shapes and colors, communicate severity that enable
+users to quickly assess and identify status and respond accordingly.`}
     blocks={[
       {
         story: stories.Default,

@@ -48,16 +48,11 @@ export const getNewSortOrder = (currentOrder?: boolean | string) => {
   return order;
 };
 
-const getAriaPressedValue = (col) => {
-  if (!col) {
-    return;
-  }
-  const { isSorted } = col;
-  if (isSorted) {
-    return 'true';
-  }
-  return 'false';
-};
+// NOTE (fix for carbon-design-system/ibm-products#9839): the sortable
+// header button no longer sets aria-pressed - it made VoiceOver announce
+// the header as a toggle button without conveying sort direction. Sort
+// state is conveyed by aria-sort on the columnheader element instead
+// (see getAriaSortValue in DatagridHeaderRow).
 
 const useSortableColumns = (hooks: Hooks) => {
   const carbonPrefix = usePrefix();
@@ -118,7 +113,6 @@ const useSortableColumns = (hooks: Hooks) => {
           )
         ) : (
           <Button
-            aria-pressed={getAriaPressedValue(headerProp?.column)}
             onClick={(event) => onSortClick(event, headerProp?.column)}
             kind="ghost"
             renderIcon={(props) => {

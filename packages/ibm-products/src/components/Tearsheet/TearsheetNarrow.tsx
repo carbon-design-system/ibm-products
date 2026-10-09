@@ -142,6 +142,22 @@ const defaults = {
 };
 
 /**
+ * ## Deprecation Notice
+ *
+ * @deprecated
+ * This component is deprecated and will be removed in a future major version.
+ * The composable replacement (`preview__Tearsheet`) will be promoted to stable
+ * in `@carbon/react` at v12 — migrate now to stay ahead of the breaking change.
+ * The narrow variant is handled via props on `preview__Tearsheet`.
+ *
+ * **Migration:** replace `TearsheetNarrow` with `preview__Tearsheet` using the
+ * narrow variant prop, and adopt the composable sub-component API.
+ *
+ * @see Full migration guide (prop mapping, before/after patterns, codemod,
+ * AI prompt): Preview → Tearsheet in Storybook, or `./MIGRATION.md`.
+ *
+ * ---
+ *
  * A narrow tearsheet is a slimmer variant of the tearsheet, providing a dialog
  * that keeps users in-context and focused by bringing actionable content front
  * and center while revealing more of the UI behind it.
@@ -175,6 +191,12 @@ export const TearsheetNarrow = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 TearsheetNarrow.displayName = componentName;
+
+/**@ts-ignore*/
+TearsheetNarrow.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with preview__Tearsheet`,
+};
 
 export const deprecatedProps = {
   /**

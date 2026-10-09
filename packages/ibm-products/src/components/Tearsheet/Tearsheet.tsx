@@ -176,6 +176,22 @@ export interface TearsheetProps extends PropsWithChildren {
 }
 
 /**
+ * ## Deprecation Notice
+ *
+ * @deprecated
+ * This component is deprecated and will be removed in a future major version.
+ * The composable replacement (`preview__Tearsheet`) will be promoted to stable
+ * in `@carbon/react` at v12 — migrate now to stay ahead of the breaking change.
+ *
+ * **Migration:** replace `Tearsheet` with `preview__Tearsheet` and adopt the
+ * composable sub-component API (`TearsheetHeader`, `TearsheetBody`,
+ * `TearsheetFooter`, etc.).
+ *
+ * @see Full migration guide (prop mapping, before/after patterns, codemod,
+ * AI prompt): Preview → Tearsheet in Storybook, or `./MIGRATION.md`.
+ *
+ * ---
+ *
  * A tearsheet is a mostly full-screen type of dialog that keeps users
  * in-context and focused by bringing actionable content front and center while
  * revealing parts of the UI behind it. There is also a narrow variant of the
@@ -217,6 +233,12 @@ export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Tearsheet.displayName = componentName;
+
+/**@ts-ignore*/
+Tearsheet.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with preview__Tearsheet`,
+};
 
 export const deprecatedProps = {
   /**

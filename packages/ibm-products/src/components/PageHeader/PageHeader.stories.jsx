@@ -378,7 +378,10 @@ export default {
           <div>
             This component is deprecated and will be removed in the next major
             version. Please migrate to {/* cspell:disable-next-line */}
-            <a href="/?path=/docs/preview-pageheader">preview_PageHeader</a>.
+            <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/preview-pageheader--overview#migration-guidance-from-deprecated-pageheader-to-preview_pageheader">
+              preview__PageHeader
+            </a>
+            .
           </div>
         }
       >

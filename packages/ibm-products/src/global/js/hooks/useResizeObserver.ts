@@ -52,15 +52,8 @@ export const useResizeObserver = (
         ? parseFloat(refComputedStyle?.paddingBottom)
         : 0);
 
-    // React 19: defer setState out of the passive-effects flush to avoid
-    // incrementing nestedUpdateCount. Use setTimeout with cleanup so the
-    // update is cancelled if the component unmounts before it fires.
-    const id = setTimeout(() => {
-      setWidth(initialWidth);
-      setHeight(initialHeight);
-    }, 0);
-
-    return () => clearTimeout(id);
+    setWidth(initialWidth);
+    setHeight(initialHeight);
     // Ignoring exhaustive-deps as we do NOT want to include the ref in dep array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height]);

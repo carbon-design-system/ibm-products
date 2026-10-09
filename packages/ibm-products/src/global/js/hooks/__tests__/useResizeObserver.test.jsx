@@ -24,8 +24,6 @@ describe('useResizeObserver', () => {
   let savedObserverCb;
 
   beforeEach(() => {
-    jest.useFakeTimers();
-
     // Run requestAnimationFrame callbacks synchronously so that the
     // ResizeObserver → rAF → setState chain completes inside act().
     jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
@@ -44,8 +42,6 @@ describe('useResizeObserver', () => {
   });
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
     jest.clearAllMocks();
     jest.restoreAllMocks();
   });
@@ -60,21 +56,13 @@ describe('useResizeObserver', () => {
       savedObserverCb([{ target: element, contentRect: { width, height } }]);
     });
 
-  it('returns the initial size of the component', async () => {
+  it('returns the initial size of the component', () => {
     render(<ResizeTest />);
-    // setTimeout defers the initial setWidth/setHeight calls (React 19 fix).
-    // Flush the timer inside act so the state update is processed.
-    await act(async () => {
-      jest.runAllTimers();
-    });
     screen.getByText('width: 0, height: 0');
   });
 
   it('returns the updated sizes from hook upon resizing', async () => {
     render(<ResizeTest />);
-    await act(async () => {
-      jest.runAllTimers();
-    });
     const element = screen.getByTestId('observed-element');
     screen.getByText('width: 0, height: 0');
 
@@ -88,10 +76,6 @@ describe('useResizeObserver', () => {
   it('calls the provided onResize function', async () => {
     const resizeFn = jest.fn();
     render(<ResizeTest onResize={resizeFn} />);
-    // Flush the initial setTimeout before triggering resize events.
-    await act(async () => {
-      jest.runAllTimers();
-    });
     const element = screen.getByTestId('observed-element');
 
     await triggerResize(element, defaultSize * 2, defaultSize * 3);

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2023
+// Copyright IBM Corp. 2020, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -211,6 +211,46 @@ describe(TagSet.displayName, () => {
 
     expect(document.activeElement.tagName).toBe('BUTTON');
   });
+
+  it.each([
+    {},
+    {
+      allTagsModalCloseLabel: 'Close tags',
+      allTagsModalSearchClearLabel: 'Clear tag search',
+    },
+  ])(
+    'uses modal button labels %j without changing their actions',
+    async (labels) => {
+      window.innerWidth = tagWidth * 6 + 1;
+      render(<TagSet {...overflowAndModalStrings} {...labels} tags={tags} />);
+
+      await act(() => userEvent.click(screen.getByText('+15')));
+      await act(() => userEvent.click(screen.getByText('View all tags')));
+
+      const modal = screen.getByRole('presentation');
+      const search = screen.getByRole('searchbox');
+      await act(() => userEvent.type(search, 'Tag 2'));
+      expect(search).toHaveValue('Tag 2');
+
+      await act(() =>
+        userEvent.click(
+          screen.getByRole('button', {
+            name: labels.allTagsModalSearchClearLabel ?? 'Clear search input',
+          })
+        )
+      );
+      expect(search).toHaveValue('');
+
+      await act(() =>
+        userEvent.click(
+          screen.getByRole('button', {
+            name: labels.allTagsModalCloseLabel ?? 'Close',
+          })
+        )
+      );
+      expect(modal).not.toHaveClass('is-visible');
+    }
+  );
 
   it('Tags set overflow trigger can be overridden, and does not show TagSetModal or overflow popup', async () => {
     const visibleTags = 5;

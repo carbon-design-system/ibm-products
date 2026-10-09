@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2025
+// Copyright IBM Corp. 2020, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -74,6 +74,14 @@ export interface TagSetProps extends PropsWithChildren {
    * aria label for all tags modal with hasScrollingContent
    */
   allTagsModalAriaLabel?: string;
+  /**
+   * Accessible label for the all tags modal close button. Defaults to 'Close'.
+   */
+  allTagsModalCloseLabel?: string;
+  /**
+   * Accessible label for clearing the all tags search. Defaults to 'Clear search input'.
+   */
+  allTagsModalSearchClearLabel?: string;
   /**
    * label text for the show all search.
    */
@@ -166,6 +174,8 @@ export const TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
       overflowClassName,
       overflowType = 'default',
       allTagsModalAriaLabel,
+      allTagsModalCloseLabel,
+      allTagsModalSearchClearLabel,
       allTagsModalTitle = 'All tags',
       allTagsModalSearchLabel = 'Search all tags',
       allTagsModalSearchPlaceholderText = 'Search all tags',
@@ -459,6 +469,8 @@ export const TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
             title={allTagsModalTitle}
             onClose={handleModalClose}
             modalAriaLabel={allTagsModalAriaLabel}
+            closeLabel={allTagsModalCloseLabel}
+            searchClearLabel={allTagsModalSearchClearLabel}
             searchLabel={allTagsModalSearchLabel}
             searchPlaceholder={allTagsModalSearchPlaceholderText}
             portalTarget={allTagsModalTarget}
@@ -499,6 +511,14 @@ TagSet.propTypes = {
    * aria label for all tags modal with hasScrollingContent
    */
   allTagsModalAriaLabel: PropTypes.string,
+  /**
+   * Accessible label for the all tags modal close button. Defaults to 'Close'.
+   */
+  allTagsModalCloseLabel: PropTypes.string,
+  /**
+   * Accessible label for clearing the all tags search. Defaults to 'Clear search input'.
+   */
+  allTagsModalSearchClearLabel: PropTypes.string,
   /**
    * label text for the show all search.
    */

@@ -8,7 +8,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { unsafeStatic, html as staticHtml } from 'lit/static-html.js';
 import { prefix } from '../../globals/settings';
 import styles from './page-header.scss?lit';
@@ -32,15 +32,44 @@ class CDSPageHeaderContentText extends LitElement {
   @property({ type: String, attribute: 'subtitle-level' })
   subtitleLevel: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
 
+  /**
+   * Whether the `subtitle-content` slot has content assigned to it.
+   */
+  @state()
+  private _hasSubtitleSlotContent = false;
+
+  /**
+   * Handles `slotchange` for the subtitle-content slot.
+   */
+  protected _handleSubtitleSlotChange({ target }: Event) {
+    this._hasSubtitleSlotContent =
+      (target as HTMLSlotElement).assignedNodes({ flatten: true }).length > 0;
+  }
+
   render() {
-    const { subtitle, subtitleLevel } = this;
+    const {
+      subtitle,
+      subtitleLevel,
+      _hasSubtitleSlotContent: hasSubtitleSlotContent,
+    } = this;
     const subtitleTag = unsafeStatic(subtitleLevel);
 
+    const showSubtitle = subtitle || hasSubtitleSlotContent;
+
     return html`
-      ${subtitle &&
-      staticHtml`<${subtitleTag} class="${prefix}--page-header__content__subtitle">
-        ${subtitle}
-      </${subtitleTag}>`}
+      ${showSubtitle
+        ? staticHtml`<${subtitleTag} class="${prefix}--page-header__content__subtitle">
+            <slot
+              name="subtitle-content"
+              @slotchange=${this._handleSubtitleSlotChange}
+            ></slot>
+            ${!hasSubtitleSlotContent && subtitle ? subtitle : null}
+          </${subtitleTag}>`
+        : html`<slot
+            name="subtitle-content"
+            @slotchange=${this._handleSubtitleSlotChange}
+            style="display:none"
+          ></slot>`}
       <slot></slot>
     `;
   }

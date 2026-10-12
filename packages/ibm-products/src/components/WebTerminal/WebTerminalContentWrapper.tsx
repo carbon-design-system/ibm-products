@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,6 +54,12 @@ export const WebTerminalContentWrapper = React.forwardRef<
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 WebTerminalContentWrapper.displayName = componentName;
+
+/**@ts-ignore*/
+WebTerminalContentWrapper.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Web Terminal pattern`,
+};
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

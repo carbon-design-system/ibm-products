@@ -77,6 +77,56 @@ integration of action buttons aligned with the content section.
 </c4p-page-header>
 ```
 
+### Custom title content (`title` slot)
+
+The `title` attribute on `c4p-page-header-content` accepts a plain string. When
+you need arbitrary content in the title position — for example a status badge
+alongside the heading text — use the `title` named slot instead. When the
+`title` slot is populated, the `title` attribute is ignored.
+
+```html
+<c4p-page-header-content>
+  <span slot="title">
+    <strong>My page</strong>
+    <cds-tag type="green" size="sm">Live</cds-tag>
+  </span>
+</c4p-page-header-content>
+```
+
+### Custom breadcrumb title content (`breadcrumb-content` slot)
+
+When the page header uses `c4p-page-header-breadcrumbs-set`, the collapsed
+breadcrumb bar shows the page title as a truncated text link. Use the
+`breadcrumb-content` slot to replace that truncated text with custom content —
+useful when the collapsed title should match a rich `title` slot rather than a
+plain string.
+
+```html
+<c4p-page-header-breadcrumbs-set title="My page" breadcrumbs-data="...">
+  <span slot="breadcrumb-content">
+    <strong>My page</strong>
+    <cds-tag type="green" size="sm">Live</cds-tag>
+  </span>
+</c4p-page-header-breadcrumbs-set>
+```
+
+### Rich subtitle content (`subtitle-content` slot)
+
+The `subtitle` attribute on `c4p-page-header-content-text` accepts a plain
+string. For rich subtitle content — links, badges, or status indicators — use
+the `subtitle-content` named slot. When the slot is populated it is rendered
+inside the subtitle heading element in place of the `subtitle` attribute value.
+
+```html
+<c4p-page-header-content-text>
+  <span slot="subtitle-content">
+    Version 2.4
+    <cds-link href="/changelog">View changelog</cds-link>
+  </span>
+  Body text goes here.
+</c4p-page-header-content-text>
+```
+
 ### Content With Hero Image
 
 <Canvas
@@ -190,6 +240,24 @@ The `c4p-page-header-tabs` component has a `tags` slot for tag components.
     </div>
   </c4p-page-header-tabs>
 </c4p-page-header>
+```
+
+## Custom events
+
+`c4p-page-header` dispatches the following custom events when scroll state changes. All events bubble and are composed.
+
+| Event | Detail | Description |
+|---|---|---|
+| `c4p-page-header-fully-collapsed` | `{ fullyCollapsed: boolean }` | Fired when the page header content scrolls fully out of view (`true`) or back into view (`false`). Equivalent to the React `onContentFullyCollapsed` prop. |
+| `c4p-page-header-title-clipped` | `{ titleClipped: boolean }` | Fired when the page header title is clipped by the viewport (`true`) or becomes visible again (`false`). Equivalent to the React `onTitleClipped` prop. |
+| `c4p-page-header-content-actions-clipped` | `{ contentActionsClipped: boolean }` | Fired when the page actions area is clipped by the breadcrumb bar (`true`) or becomes visible again (`false`). Equivalent to the React `onContentActionsClipped` prop. |
+
+```javascript
+document
+  .querySelector('c4p-page-header')
+  .addEventListener('c4p-page-header-fully-collapsed', (event) => {
+    console.log('fully collapsed:', event.detail.fullyCollapsed);
+  });
 ```
 
 ## Component API

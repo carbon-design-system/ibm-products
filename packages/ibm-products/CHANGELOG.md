@@ -1,4 +1,13 @@
-## `@carbon/ibm-products@2.99.0-rc.0`
+## `@carbon/ibm-products@2.100.0`
+### Bug fixes :bug:
+- fix(options-tile): toggle is not available when OptionsTile has no children (#9911)
+
+### Housekeeping :house:
+- chore: deprecate CreateTearsheet, CreateTearsheetNarrow and CreateFullPage prebuilt patterns (#9900)
+- chore: deprecate webterminal prebuilt pattern (#9890)
+- chore: deprecate saving prebuilt pattern (#9888)
+
+## `@carbon/ibm-products@2.99.0`
 ### Features :rocket:
 - feat(ConditionBuilder): composability review — value/onChange API and bug fixes (#9817)
 - feat(Tearsheet, PageHeader): support ReactNode for header title with default string truncation (#9832)

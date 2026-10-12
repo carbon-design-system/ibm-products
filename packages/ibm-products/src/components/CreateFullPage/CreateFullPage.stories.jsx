@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2024
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import { CreateFullPageStep } from './CreateFullPageStep';
 import { pkg } from '../../settings';
 
 import styles from './_storybook-styles.scss?inline';
+import { Annotation } from '../../../.storybook/Annotation';
 
 const storyClass = 'create-full-page-stories';
 const blockClass = `${pkg.prefix}--create-full-page`;
@@ -47,7 +48,7 @@ const breadcrumbs = {
 };
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Create flows/CreateFullPage',
+  title: 'Deprecated/Prebuilt patterns/Create flows/CreateFullPage',
   component: CreateFullPage,
   tags: ['autodocs'],
   parameters: {
@@ -59,6 +60,23 @@ export default {
 
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in the next major
+            version. Please migrate to{' '}
+            <a href="https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-create-flows-create-full-page">
+              Create Full Page
+            </a>{' '}
+            pattern.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
   ],
   argTypes: {
     breadcrumbs: {

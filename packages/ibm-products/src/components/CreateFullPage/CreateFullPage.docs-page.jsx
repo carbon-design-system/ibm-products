@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import * as stories from './CreateFullPage.stories';
 const DocsPage = () => {
   return (
     <StoryDocsPage
+      deprecationNotice="This component is deprecated and will be removed in the next major version. Please migrate to [Create Full Page](https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-create-flows-create-full-page) pattern."
       altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#full-page"
       blocks={[
         {

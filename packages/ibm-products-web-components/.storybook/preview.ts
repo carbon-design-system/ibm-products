@@ -108,6 +108,10 @@ export const globalTypes = {
 
 export const parameters = {
   a11y: {
+    // Scope the scan to the story content only, excluding Storybook's own
+    // infrastructure elements (e.g. sb-preparing-docs) that can produce
+    // false-positive violations unrelated to the components under test.
+    element: '#storybook-root',
     // Can specify engine as "axe" or "accessibility-checker" (axe default)
     engine: 'accessibility-checker',
     config: {

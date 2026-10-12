@@ -11,7 +11,7 @@ import { LitElement, html, nothing } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { carbonElement as customElement } from '@carbon/web-components/es/globals/decorators/carbon-element.js';
 import '@carbon/web-components/es/components/tag/index.js';
-import '@carbon/web-components/es/components/link/index.js';
+import '@carbon/web-components/es/components/button/index.js';
 import '@carbon/web-components/es/components/modal/index.js';
 import '@carbon/web-components/es/components/search/index.js';
 import { createOverflowHandler } from '@carbon/utilities';
@@ -136,19 +136,32 @@ export default class CDSPageHeaderTagsSet extends LitElement {
     }
   };
 
+  private _tagId(index: number) {
+    return `${prefix}--page-header-tag-${index}`;
+  }
+
   private handleDismiss = (e: CustomEvent, tag: TagType) => {
     e.stopPropagation();
     e.preventDefault();
 
-    this.tagsData = this.tagsData.filter((t) => t.text !== tag.text);
+    const dismissedIndex = this.tagsData.findIndex((t) => t === tag);
+    this.tagsData = this.tagsData.filter((t) => t !== tag);
     this.shadowRoot
       ?.querySelectorAll('[data-hidden]:not([data-offset])')
       .forEach((el) => el.removeAttribute('data-hidden'));
 
-    const remaining = this.hiddenTags.filter((t) => t.text !== tag.text);
+    const remaining = this.hiddenTags.filter((t) => t !== tag);
     if (this.hiddenTags.length === 2 && remaining[0]) {
+      // Find the original index of the remaining tag before the dismissed item shifted indices
+      const originalIndex = this.tagsData.findIndex((t) => t === remaining[0]);
+      const adjustedIndex =
+        originalIndex >= 0
+          ? originalIndex
+          : dismissedIndex > 0
+            ? dismissedIndex - 1
+            : 0;
       this.shadowRoot
-        ?.querySelector(`#${remaining[0].text}`)
+        ?.querySelector(`#${this._tagId(adjustedIndex)}`)
         ?.removeAttribute('data-hidden');
     }
   };
@@ -156,14 +169,14 @@ export default class CDSPageHeaderTagsSet extends LitElement {
   render() {
     return html` <div class=${blockClass}>
         ${this.tagsData.map(
-          (tag) => html`
-            <span id=${tag?.text}>
+          (tag, index) => html`
+            <span id=${this._tagId(index)}>
               ${tag?.onClose
                 ? html`<cds-dismissible-tag
                     @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
                       this.handleDismiss(e, tag)}
                     text=${tag?.text}
-                    tag-title="Provide a custom title to the tag"
+                    tag-title=${tag?.text}
                     type=${tag.type}
                     size=${tag.size}
                   ></cds-dismissible-tag>`
@@ -174,6 +187,16 @@ export default class CDSPageHeaderTagsSet extends LitElement {
           `
         )}
         <span data-offset ?data-hidden=${this.hiddenTags.length === 0}>
+          <span
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            class="${blockClass}__hidden-count-announcement"
+          >
+            ${this.hiddenTags.length > 0
+              ? `${this.hiddenTags.length} more tags`
+              : ''}
+          </span>
           <cds-popover
             ?open=${this.isPopoverOpen}
             ?highContrast=${true}
@@ -183,6 +206,9 @@ export default class CDSPageHeaderTagsSet extends LitElement {
               size=${this.tagsData[0]?.size}
               title="+${this.hiddenTags.length}"
               text="+${this.hiddenTags.length}"
+              aria-label="${this.hiddenTags.length} more tags"
+              aria-expanded=${this.isPopoverOpen ? 'true' : 'false'}
+              aria-haspopup="true"
               @click=${this.handleTogglePopover}
               @keydown=${this.handleTogglePopover}
             ></cds-operational-tag>
@@ -198,30 +224,30 @@ export default class CDSPageHeaderTagsSet extends LitElement {
                                   e: CustomEvent
                                 ) => this.handleDismiss(e, tag)}
                                 text=${tag?.text}
-                                tag-title="Provide a custom title to the tag"
+                                tag-title=${tag?.text}
                                 type=${tag.type}
                                 size=${tag.size}
                               ></cds-dismissible-tag>
                             </div>
                           `
-                        : html`<p class="${blockClass}__popover-tag">
-                            ${tag?.text}
-                          </p>`
+                        : html`<cds-tag
+                            class="${blockClass}__popover-tag"
+                            type=${tag.type}
+                            size=${tag.size}
+                            >${tag?.text}</cds-tag
+                          >`
                     )
                   : nothing}
                 ${this.hiddenTags.length > 10
                   ? html`
-                      <cds-link
+                      <cds-button
                         class="${blockClass}__view-all"
+                        kind="ghost"
+                        size="sm"
                         @click=${() => (this.modalOpen = true)}
-                        @keydown=${(e: KeyboardEvent) => {
-                          if (e.key === ' ') {
-                            this.modalOpen = true;
-                          }
-                        }}
                       >
                         View all tags
-                      </cds-link>
+                      </cds-button>
                     `
                   : nothing}
               </div>
@@ -264,7 +290,7 @@ export default class CDSPageHeaderTagsSet extends LitElement {
                           @cds-dismissible-tag-beingclosed=${(e: CustomEvent) =>
                             this.handleDismiss(e, tag)}
                           text=${tag?.text}
-                          tag-title="Provide a custom title to the tag"
+                          tag-title=${tag?.text}
                           type=${tag.type}
                           size=${tag.size}
                         ></cds-dismissible-tag>`

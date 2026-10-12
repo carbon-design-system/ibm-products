@@ -1,3 +1,12 @@
+## `@carbon/ibm-products@2.101.0-rc.0`
+### Bug fixes :bug:
+- fix(useWindowResize): use queueMicrotask for React 19 compat (#9845)
+- fix(useOverflowItems): move onChange to useLayoutEffect for React 19 (#9847)
+- fix(Datagrid): stop announcing sortable headers as toggle buttons (#9879)
+
+### Housekeeping :house:
+- docs: Add migration to Carbon (v12) overview story to Storybook (#9938)
+
 ## `@carbon/ibm-products@2.100.0`
 ### Bug fixes :bug:
 - fix(options-tile): toggle is not available when OptionsTile has no children (#9911)

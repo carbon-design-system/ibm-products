@@ -218,6 +218,12 @@ export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
 // is used in preference to relying on function.name.
 Tearsheet.displayName = componentName;
 
+/**@ts-ignore*/
+Tearsheet.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with preview__Tearsheet`,
+};
+
 export const deprecatedProps = {
   /**
    * **Deprecated**

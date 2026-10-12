@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.100.0-rc.0`
+## `@carbon/ibm-products@2.100.0`
 ### Bug fixes :bug:
 - fix(options-tile): toggle is not available when OptionsTile has no children (#9911)
 

@@ -93,26 +93,27 @@ fit to justify first-class status in `@carbon/react` and
 `@carbon/web-components`. They are exported as part of the public API starting
 at v12.
 
-| Component           | Current export(s) in `@carbon/ibm-products` | v12 status in `@carbon/react` | Notes                                                                                                                                                         |
-| ------------------- | ------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Add and select      | `AddSelect`         | Preview → Stable              | The monolithic pattern is deprecated; replaced by a composable component system. `AddSelectData` utility manages hierarchical selection state separately from the UI. |
-| Big number          | `BigNumber`                                 | Preview                       | Lightweight component with strong potential. Enters core as a preview; may move to Labs if adoption does not grow post-v12.                                   |
-| Coachmark           | `Coachmark`                                 | Stable                        | Old monolithic version deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                            |
-| Composable card     | `Card`                                      | Preview → Stable              | Replaces `ExpressiveCard` / `ProductiveCard`. Available in `@carbon/react` as a preview **before v12**, promoted to stable at v12.                            |
-| Condition builder   | `ConditionBuilder`                          | Preview → Stable              | Accessibility and composability reviews complete. Moves to core as **stable**. Web Components port is a follow-up.                                            |
-| Full-page error     | `FullPageError`                             | Stable                        | High adoption. Composable design. Migrates to core as **stable**.                                                                                             |
-| Guide banner        | `GuideBanner`                               | Preview                       | Moves to core as **preview**. Composable API can be explored post-v12.                                                                                        |
-| Inline edit         | `EditInPlace`                               | Stable                        | Moves to core as **stable**.                                                                                                                                  |
-| Interstitial screen | `InterstitialScreen`                        | Stable                        | Already re-implemented as a stable composable component. Migrates to core as **stable**.                                                                      |
-| Notifications panel | `NotificationsPanel`                        | Stable                        | Moves to core as **stable** (non-composable). A composable redesign will follow post-v12 as a preview.                                                        |
-| Options tile        | `OptionsTile`                               | Stable                        | Good adoption. Migrates to core as **stable**.                                                                                                                |
-| Page header         | `PageHeader`                                | Preview → Stable              | Old `PageHeader` deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                                  |
-| Scroll gradient     | `ScrollGradient`                            | Stable                        | Migrates as a utility component.                                                                                                                              |
-| Side panel          | `SidePanel`                                 | Stable                        | Moves to core **as-is** (non-composable). Composable redesign delivered post-v12 as preview, then promoted to stable.                                         |
-| Tag overflow        | `TagOverflow`                               | Stable                        | Moves to core as **stable**. Replaces `TagSet`.                                                                                                               |
-| Tearsheet           | `Tearsheet`                                 | Preview → Stable              | Old monolithic `Tearsheet` deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                        |
-| Truncated text      | `TruncatedText`                             | Stable                        | Lightweight utility used internally across components. Exporting lets adopters reuse the same overflow behavior.                                              |
-| User avatar         | `UserAvatar`                                | Stable                        | Migrates to core as **stable**.                                                                                                                               |
+| Component           | v12 status in `@carbon/react` | Notes                                                                                                                                                         |
+| ------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Add and select      | Preview → Stable              | The monolithic pattern is deprecated; replaced by a composable component system. `AddSelectData` manages hierarchical selection state separately from the UI. |
+| Big number          | Preview                       | Lightweight component with strong potential. Enters core as a preview; may move to Labs if adoption does not grow post-v12.                                   |
+| Coachmark           | Preview → Stable              | Old monolithic version deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                            |
+| Composable card     | Preview → Stable              | Replaces `ExpressiveCard` / `ProductiveCard`. Available in `@carbon/react` as a preview **before v12**, promoted to stable at v12.                            |
+| Condition builder   | Preview → Stable              | Accessibility and composability reviews complete. Moves to core as **stable**. Web Components port is a follow-up.                                            |
+| Full-page error     | Stable                        | High adoption. Composable design. Migrates to core as **stable**.                                                                                             |
+| Guide banner        | Preview                       | Moves to core as **preview**. Composable API can be explored post-v12.                                                                                        |
+| Inline edit         | Stable                        | Moves to core as **stable**.                                                                                                                                  |
+| Interstitial screen | Stable                        | Already re-implemented as a stable composable component. Migrates to core as **stable**.                                                                      |
+| Notifications panel | Stable                        | Moves to core as **stable** (non-composable). A composable redesign will follow post-v12 as a preview.                                                        |
+| Options tile        | Stable                        | Good adoption. Migrates to core as **stable**.                                                                                                                |
+| Page header         | Preview → Stable              | Old `PageHeader` deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                                  |
+| Resizer             | Stable                        | Migrates to core as a utility component from Carbon Labs.                                                                                                     |
+| Scroll gradient     | Stable                        | Migrates as a utility component.                                                                                                                              |
+| Side panel          | Stable                        | Moves to core **as-is** (non-composable). Will deliver a composable redesign post-v12.                                                                        |
+| Tag overflow        | Stable                        | Moves to core as **stable**. Replaces `TagSet`.                                                                                                               |
+| Tearsheet           | Preview → Stable              | Old monolithic `Tearsheet` deprecated. New composable version (already a preview in c4ip) moves to core as **stable**.                                        |
+| Truncated text      | Stable                        | Lightweight utility used internally across components. Exporting lets adopters reuse the same overflow behavior.                                              |
+| User avatar         | Stable                        | Migrates to core as **stable**.                                                                                                                               |
 
 ### Moving to Carbon Labs
 
@@ -121,13 +122,13 @@ community-maintained. These components have low adoption, but retain enough
 value to remain available for teams who want to use and contribute to them. The
 Carbon core team does not own or gate releases in Labs.
 
-| Component         | Current export(s)  | Notes                                                              |
-| ----------------- | ------------------ | ------------------------------------------------------------------ |
-| Cascade           | `Cascade`          | Low adoption;                                                      |
-| Checklist         | `Checklist`        | Low adoption; useful for onboarding and time-to-value flows.       |
-| Inline tip        | `InlineTip`        | No production adoption. Community can use and maintain it in Labs. |
-| Nonlinear reading | `NonLinearReading` | 0–1 product adoptions.                                             |
-| Truncated list    | `TruncatedList`    |                                                                    |
+| Component         | Notes                                                              |
+| ----------------- | ------------------------------------------------------------------ |
+| Cascade           | Low adoption;                                                      |
+| Checklist         | Low adoption; useful for onboarding and time-to-value flows.       |
+| Inline tip        | No production adoption. Community can use and maintain it in Labs. |
+| Nonlinear reading | Low adoption.                                                      |
+| Truncated list    |                                                                    |
 
 ### Deprecated
 
@@ -136,17 +137,17 @@ migrate to Carbon core. They have either zero or near-zero adoption, have been
 replaced by a newly delivered component, or are better served as a documented
 pattern rather than an exported component.
 
-| Component        | Current export(s) | Reason                                                                                                      |
-| ---------------- | ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| About modal      | `AboutModal`      | A simple modal with structured content. Deprecated; shared as an example pattern instead.                   |
-| Action bar       | `ActionBar`       | No adoption; used only internally by the old `PageHeader`. Not needed with the new composable `PageHeader`. |
-| Decorator        | `Decorator`       | No adoption.                                                                                                |
-| Expressive card  | `ExpressiveCard`  | Replaced by the new composable `Card` component.                                                            |
-| Get started card | `GetStartedCard`  | Will be delivered as a pattern built on top of the new composable `Card` component.                         |
-| Productive card  | `ProductiveCard`  | Replaced by the new composable `Card` component.                                                            |
-| Search bar       | `SearchBar`       | No adoption.                                                                                                |
-| Tag set          | `TagSet`          | Deprecated in favour of `TagOverflow`, which provides the same capability with greater flexibility.         |
-| Toolbar          | `Toolbar`         | No adoption.                                                                                                |
+| Component        | Reason                                                                                                      |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| About modal      | A simple modal with structured content. Deprecated; shared as an example pattern instead.                   |
+| Action bar       | No adoption; used only internally by the old `PageHeader`. Not needed with the new composable `PageHeader`. |
+| Decorator        | No adoption.                                                                                                |
+| Expressive card  | Replaced by the new composable `Card` component.                                                            |
+| Get started card | Will be delivered as a pattern built on top of the new composable `Card` component.                         |
+| Productive card  | Replaced by the new composable `Card` component.                                                            |
+| Search bar       | No adoption.                                                                                                |
+| Tag set          | Deprecated in favour of `TagOverflow`, which provides the same capability with greater flexibility.         |
+| Toolbar          | No adoption.                                                                                                |
 
 ### Patterns and examples
 
@@ -158,17 +159,17 @@ gets migrated and exported — the patterns show you how to compose them. The
 standalone components patterns(pre-built patterns) are already deprecated in
 products repo.
 
-| Pattern                 | Current export(s)                                                                              | Notes                                                                                                 |
-| ----------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Add and select patterns | `AddSelect` composable sub-components                                                          | Pattern examples built on top of the new composable `AddSelect` system.                               |
-| Coachmark patterns      | `CoachmarkFixed`, `CoachmarkOverlayElements`, `CoachmarkStacked`                               | Pattern variants built on top of the composable `Coachmark` component.                                |
-| Create flows            | `CreateFullPage`, `CreateModal`, `CreateSidePanel`, `CreateTearsheet`, `CreateTearsheetNarrow` | Full-page and modal creation patterns composed from `Tearsheet`, `SidePanel`, and related components. |
-| Delete and remove       | `RemoveModal`                                                                                  | Pattern for destructive confirmation flows.                                                           |
-| Export                  | `ExportModal`                                                                                  | Pattern for export confirmation flows.                                                                |
-| Generate an API key     | `APIKeyModal`                                                                                  | Pattern for API key generation flows.                                                                 |
-| Import and upload       | `ImportModal`                                                                                  | Pattern for import and file upload flows.                                                             |
-| Saving                  | `Saving`                                                                                       | Pattern for Saving.                                                                                   |
-| Web terminal            | `WebTerminal`                                                                                  | Pattern for Web terminal.                                                                             |
+| Pattern                 | Notes                                                                                                               |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Add and select patterns | Pattern examples built on top of the new composable `AddSelect` system.                                             |
+| Coachmark patterns      | Pattern variants built on top of the composable `Coachmark` component.                                              |
+| Create flows            | Full-page and modal creation patterns composed from `Tearsheet`, `SidePanel`,`Step Utility` and related components. |
+| Delete and remove       | Pattern for destructive confirmation flows.                                                                         |
+| Export                  | Pattern for export confirmation flows.                                                                              |
+| Generate an API key     | Pattern for API key generation flows.                                                                               |
+| Import and upload       | Pattern for import and file upload flows.                                                                           |
+| Saving                  | Pattern for Saving.                                                                                                 |
+| Web terminal            | Pattern for Web terminal.                                                                                           |
 
 ---
 
@@ -197,13 +198,6 @@ Some components were already rewritten as composable previews inside
 `@carbon/react` and ship as **stable** at v12. For these components, both the
 import path **and** the component API change — the old monolithic export is
 deprecated.
-
-| Component          | Change required at v12                                                                              |
-| ------------------ | --------------------------------------------------------------------------------------------------- |
-| `Tearsheet`        | New import path + migrate to composable API                                                         |
-| `PageHeader`       | New import path + migrate to composable API                                                         |
-| `ConditionBuilder` | New import path only — API is unchanged                                                             |
-| Add and Select     | New import path + migrate to composable system; `MultiAddSelect` / `SingleAddSelect` are deprecated |
 
 Migration guides and codemods for each of these will be published alongside the
 v12 release.

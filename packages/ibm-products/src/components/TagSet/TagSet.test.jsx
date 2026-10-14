@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { fireEvent, render, screen, act } from '@testing-library/react';
+import { fireEvent, render, screen, act, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
@@ -229,8 +229,10 @@ describe(TagSet.displayName, () => {
 
       const modal = screen.getByRole('presentation');
       const search = screen.getByRole('searchbox');
+      expect(within(modal).getAllByText(/^Tag \d+$/)).toHaveLength(tags.length);
       await act(() => userEvent.type(search, 'Tag 2'));
       expect(search).toHaveValue('Tag 2');
+      expect(within(modal).getAllByText(/^Tag \d+$/)).toHaveLength(2);
 
       await act(() =>
         userEvent.click(
@@ -240,6 +242,7 @@ describe(TagSet.displayName, () => {
         )
       );
       expect(search).toHaveValue('');
+      expect(within(modal).getAllByText(/^Tag \d+$/)).toHaveLength(tags.length);
 
       await act(() =>
         userEvent.click(

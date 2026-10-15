@@ -81,6 +81,8 @@ export default {
       __dirname,
       './setup/storybookActionsMock.js'
     ),
+    // Mock puppeteer for Jest unit tests (puppeteer v25 is ESM-only and not used for in-memory JSDOM accessibility scans)
+    '^puppeteer$': resolve(__dirname, './setup/puppeteerMock.js'),
     // This mapping is added to resolve the alias that is set in our webpack config
     // otherwise the webpack alias does not work in the jest environment
     '\\.(css|scss)$': 'identity-obj-proxy',

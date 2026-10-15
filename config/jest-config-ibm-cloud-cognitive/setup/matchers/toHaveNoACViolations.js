@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-let aChecker = null;
+import * as aChecker from 'accessibility-checker';
+
+let initialized = false;
 
 async function toHaveNoACViolations(node, label) {
-  if (aChecker === null) {
-    aChecker = (await import('accessibility-checker')).default;
-
+  if (!initialized) {
     const denylist = new Set([
       'html_lang_exists',
       'page_title_exists',
@@ -31,6 +31,7 @@ async function toHaveNoACViolations(node, label) {
     });
 
     aChecker.addRuleset(customRuleset);
+    initialized = true;
   }
 
   const results = await aChecker.getCompliance(node, label);

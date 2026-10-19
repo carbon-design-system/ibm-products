@@ -17,7 +17,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'components-tearsheet--tearsheet',
+      id: 'deprecated-tearsheet--tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -29,7 +29,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-open-and-close', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'components-tearsheet--tearsheet',
+      id: 'deprecated-tearsheet--tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -50,7 +50,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-default-state-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'components-tearsheet--tearsheet',
+      id: 'deprecated-tearsheet--tearsheet',
       globals: {
         carbonTheme: 'white',
       },
@@ -110,7 +110,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-first-element-disabled-focus-behaviour', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'components-tearsheet--first-element-disabled',
+      id: 'deprecated-tearsheet--first-element-disabled',
       globals: {
         carbonTheme: 'white',
       },
@@ -138,7 +138,7 @@ test.describe('Tearsheet @avt', () => {
   test('@avt-focus-return-to-launcher-button', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'components-tearsheet--return-focus-to-open-button',
+      id: 'deprecated-tearsheet--return-focus-to-open-button',
       globals: {
         carbonTheme: 'white',
       },
@@ -189,7 +189,7 @@ test.describe('Tearsheet @avt', () => {
   test.skip('@avt-stacking', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'components-tearsheet--stacked',
+      id: 'deprecated-tearsheet--stacked',
       globals: {
         carbonTheme: 'white',
       },
@@ -295,7 +295,7 @@ test.describe('Tearsheet @avt', () => {
   test.skip('@avt-stacking-different-sizes', async ({ page }) => {
     await visitStory(page, {
       component: 'Tearsheet',
-      id: 'components-tearsheet--stacked-mixed-sizes',
+      id: 'deprecated-tearsheet--stacked-mixed-sizes',
       globals: {
         carbonTheme: 'white',
       },

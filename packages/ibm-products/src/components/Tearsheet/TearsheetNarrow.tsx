@@ -152,7 +152,7 @@ const defaults = {
  * main content area, and a set of action buttons.
  */
 
-export const TearsheetNarrow = React.forwardRef(
+export let TearsheetNarrow = React.forwardRef(
   (
     {
       verticalPosition = defaults.verticalPosition,
@@ -183,6 +183,10 @@ TearsheetNarrow.deprecated = {
   level: 'warn',
   details: `Please replace ${componentName} with preview__Tearsheet`,
 };
+
+// The component enable should log the deprecation
+/**@ts-ignore*/
+TearsheetNarrow = pkg.checkComponentEnabled(TearsheetNarrow, componentName);
 
 export const deprecatedProps = {
   /**

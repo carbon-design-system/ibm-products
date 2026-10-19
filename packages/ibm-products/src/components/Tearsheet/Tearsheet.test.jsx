@@ -521,13 +521,13 @@ describe(componentName, () => {
     expect(decoratorIndex).toBeLessThan(closeButtonIndex);
   });
 
-  it('emits a deprecation warning when rendered', async () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    render(<Tearsheet />);
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining(`Component "${componentName}" is deprecated`)
+  it('emits a deprecation warning when rendered', () => {
+    expectWarn(
+      `Carbon for IBM Products (WARNING): Component "${componentName}" is deprecated. Please replace ${componentName} with preview__Tearsheet`,
+      () => {
+        render(<Tearsheet />);
+      }
     );
-    warnSpy.mockRestore();
   });
 });
 
@@ -538,15 +538,13 @@ describe(componentNameNarrow, () => {
 
   commonTests(TearsheetNarrow, componentNameNarrow, {}, true);
 
-  it('emits a deprecation warning when rendered', async () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    render(<TearsheetNarrow />);
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        `Component "${componentNameNarrow}" is deprecated`
-      )
+  it('emits a deprecation warning when rendered', () => {
+    expectWarn(
+      `Carbon for IBM Products (WARNING): Component "${componentNameNarrow}" is deprecated. Please replace ${componentNameNarrow} with preview__Tearsheet`,
+      () => {
+        render(<TearsheetNarrow />);
+      }
     );
-    warnSpy.mockRestore();
   });
 });
 

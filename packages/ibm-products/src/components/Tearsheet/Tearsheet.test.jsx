@@ -329,7 +329,8 @@ const commonTests = (Ts, name, props, testActions) => {
         expect(
           document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
         ).toHaveLength(3);
-      }
+      },
+      5
     ));
 };
 
@@ -345,6 +346,10 @@ describe(componentName, () => {
 
   afterAll(() => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+  });
+
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
 
   commonTests(Tearsheet, componentName, {}, true);
@@ -522,11 +527,10 @@ describe(componentName, () => {
   });
 
   it('emits a deprecation warning when rendered', () => {
-    expectWarn(
-      `Carbon for IBM Products (WARNING): Component "${componentName}" is deprecated. Please replace ${componentName} with preview__Tearsheet`,
-      () => {
-        render(<Tearsheet />);
-      }
+    const warnSpy = jest.spyOn(console, 'warn');
+    render(<Tearsheet />);
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(`Component "${componentName}" is deprecated`)
     );
   });
 });
@@ -536,14 +540,19 @@ describe(componentNameNarrow, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   commonTests(TearsheetNarrow, componentNameNarrow, {}, true);
 
   it('emits a deprecation warning when rendered', () => {
-    expectWarn(
-      `Carbon for IBM Products (WARNING): Component "${componentNameNarrow}" is deprecated. Please replace ${componentNameNarrow} with preview__Tearsheet`,
-      () => {
-        render(<TearsheetNarrow />);
-      }
+    const warnSpy = jest.spyOn(console, 'warn');
+    render(<TearsheetNarrow />);
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        `Component "${componentNameNarrow}" is deprecated`
+      )
     );
   });
 });

@@ -7,7 +7,7 @@
  */
 import React, { useState } from 'react';
 import { useWindowResize } from '../useWindowResize';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 
 const TestComponent = (props) => {
   const { throttleInterval } = props;
@@ -24,19 +24,35 @@ const TestComponent = (props) => {
 };
 
 describe('useWindowsResize', () => {
-  it('works by default', () => {
+  it('works by default', async () => {
+    jest.useFakeTimers();
     render(<TestComponent />);
+    // setTimeout(doGetWindowSize, 0) defers the initial measurement past the
+    // commit phase (React 19 fix). Flush timers inside act before asserting.
+    await act(async () => {
+      jest.runAllTimers();
+    });
     window.innerWidth = 500;
     fireEvent(window, new Event('resize'));
+    jest.useRealTimers();
     screen.getByText('768');
   });
 
-  it('works with throttle', () => {
+  it('works with throttle', async () => {
+    jest.useFakeTimers();
     render(<TestComponent throttleInterval={10} />);
+    // Flush the initial setTimeout(doGetWindowSize, 0) and the throttle timer
+    await act(async () => {
+      jest.runAllTimers();
+    });
     window.innerWidth = 500;
     fireEvent(window, new Event('resize'));
     window.innerWidth = 505;
     fireEvent(window, new Event('resize'));
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    jest.useRealTimers();
     screen.getByText('768');
   });
 });

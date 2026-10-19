@@ -24,6 +24,7 @@ const storyGlobs = [
   './ComponentPlayground/**/*.stories.*',
   './Welcome/**/*.stories.*',
   './PrebuiltPatterns/**/*.mdx',
+  './MigrationToCarbon/**/*.mdx',
   '../../../examples/carbon-for-ibm-products/example-gallery/src/example-gallery.stories.*',
 ];
 

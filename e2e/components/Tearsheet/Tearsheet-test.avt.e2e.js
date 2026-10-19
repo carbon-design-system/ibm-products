@@ -61,7 +61,7 @@ test.describe('Tearsheet @avt', () => {
     const input2 = page.locator('#tss-ft2');
     const cancelButton = page.getByText('Cancel');
     const backButton = page.getByText('Back');
-    const replaceButton = page.getByText('Replace');
+    const replaceButton = page.getByRole('button', { name: 'Replace' });
 
     // Initially the focus is on first input box in the Tearsheet body
     await expect(input1).toBeFocused();
@@ -159,7 +159,7 @@ test.describe('Tearsheet @avt', () => {
     // Pressing 'Tab' key to switch focus to 'Replace' button
     await page.keyboard.press('Tab');
     // Now focus is on the 'Replace' button, and it is the last focusable item
-    await expect(page.getByText('Replace')).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Replace' })).toBeFocused();
     // Again pressing 'Tab' key trap the focus and
     // return it in to the first Input field #tss-ft1
     await page.keyboard.press('Tab');

@@ -32,6 +32,13 @@ export interface TearsheetPresenceProps {
   _presenceId?: string;
 }
 
+/**
+ * ## Deprecation Notice
+ *
+ * @deprecated
+ * This component is deprecated and will be removed in a future major version.
+ * This functionality is a default behavior in `preview__Tearsheet`.
+ */
 export const TearsheetPresence = ({
   open,
   _presenceId: presenceId,
@@ -78,6 +85,17 @@ export const useExclusiveTearsheetPresenceContext = (id: string) => {
 type WithModalPresenceProps = Pick<TearsheetPresenceProps, 'open'>;
 
 /**
+ * ## Deprecation Notice
+ *
+ * @deprecated
+ * This higher-order component is deprecated and will be removed in a future major version.
+ * At v12 this functionality is superseded by `StackProvider` exported from
+ * `@carbon/react` alongside the stable `preview__Tearsheet`.
+ *
+ * **Migration:** replace `withTearsheetPresence` with `StackProvider`.
+ *
+ * ---
+ *
  * Higher-order function that wraps a component with ModalPresence
  */
 export const withTearsheetPresence = <TProps extends object>(

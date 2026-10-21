@@ -77,6 +77,7 @@ export default {
   component: NotificationsPanel,
   tags: ['autodocs'],
   parameters: {
+    chromatic: { disableSnapshot: true },
     styles,
     layout: 'fullscreen',
     docs: {

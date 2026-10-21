@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
-          java-version: '17' # Required to run the Mend Unified Agent .jar
+          java-version: '25' # Required to run the Mend Unified Agent .jar
 
       - name: Run Mend Scan
         env:

@@ -142,6 +142,8 @@ const defaults = {
 };
 
 /**
+
+ *
  * A narrow tearsheet is a slimmer variant of the tearsheet, providing a dialog
  * that keeps users in-context and focused by bringing actionable content front
  * and center while revealing more of the UI behind it.
@@ -150,7 +152,7 @@ const defaults = {
  * main content area, and a set of action buttons.
  */
 
-export const TearsheetNarrow = React.forwardRef(
+export let TearsheetNarrow = React.forwardRef(
   (
     {
       verticalPosition = defaults.verticalPosition,
@@ -175,6 +177,16 @@ export const TearsheetNarrow = React.forwardRef(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 TearsheetNarrow.displayName = componentName;
+
+/**@ts-ignore*/
+TearsheetNarrow.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with preview__Tearsheet`,
+};
+
+// The component enable should log the deprecation
+/**@ts-ignore*/
+TearsheetNarrow = pkg.checkComponentEnabled(TearsheetNarrow, componentName);
 
 export const deprecatedProps = {
   /**

@@ -39,6 +39,10 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   it('renders', async () => {
     render(<SingleAddSelect {...defaultProps} />);
   });

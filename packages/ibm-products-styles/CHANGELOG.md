@@ -1,3 +1,7 @@
+## `@carbon/ibm-products-styles@2.97.0`
+### Bug fixes :bug:
+- fix: tearsheet webcomponent fixes (#9902)
+
 ## `@carbon/ibm-products-styles@2.96.0`
 ### Bug fixes :bug:
 - fix(Tearsheet next): suppress all animations and transitions under prefers-reduced-motion (#9913)

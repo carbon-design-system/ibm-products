@@ -195,7 +195,7 @@ jobs:
 
   test-c4p-wc:
     needs: setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -235,7 +235,7 @@ jobs:
       matrix:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -473,7 +473,7 @@ jobs:
         run: yarn install --immutable
       - name: Build web components and dependencies
         run:
-          lerna run build --scope @carbon/ibm-products-web-components
+          yarn lerna run build --scope @carbon/ibm-products-web-components
           --include-dependencies --stream
       - id: chromatic
         name: Run Chromatic

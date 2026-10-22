@@ -12,6 +12,7 @@ import * as stories from './Tearsheet.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
+    deprecationNotice="This component is deprecated and will be removed in a future major version. The composable replacement (`preview__Tearsheet`) will be promoted to stable in `@carbon/react` at v12. Please migrate to [preview__Tearsheet](https://ibm-products.carbondesignsystem.com/?path=/docs/preview-tearsheet--overview#migration-from-legacy-tearsheet)."
     blocks={[
       {
         story: stories.tearsheet,

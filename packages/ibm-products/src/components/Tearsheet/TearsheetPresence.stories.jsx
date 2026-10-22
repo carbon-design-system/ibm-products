@@ -6,6 +6,7 @@
  */
 
 import React, { cloneElement, useEffect, useRef, useState } from 'react';
+import { Annotation } from '../../../.storybook/Annotation';
 import { action } from 'storybook/actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
@@ -40,7 +41,7 @@ import { TearsheetPresence } from './TearsheetPresence';
 import DocsPage from './TearsheetPresence.docs-page';
 
 export default {
-  title: 'Components/Tearsheet/Feature Flags/Presence',
+  title: 'Deprecated/Tearsheet/Feature Flags/Presence',
   component: Tearsheet,
   tags: ['autodocs'],
   parameters: {
@@ -50,6 +51,27 @@ export default {
       page: DocsPage,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in a future major
+            version. The composable replacement (<code>preview__Tearsheet</code>
+            ) will be promoted to stable in <code>@carbon/react</code> at v12.
+            Please migrate to{' '}
+            <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/preview-tearsheet--overview#migration-from-legacy-tearsheet">
+              preview__Tearsheet
+            </a>
+            .
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {

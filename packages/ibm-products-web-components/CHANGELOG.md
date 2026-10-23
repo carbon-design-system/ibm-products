@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.50.0-rc.0`
+## `@carbon/ibm-products-web-components@0.50.0`
 ### Bug fixes :bug:
 - fix: webcomponents tests (#9947)
 - fix: tearsheet webcomponent fixes (#9902)

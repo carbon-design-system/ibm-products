@@ -187,7 +187,7 @@ export interface TearsheetProps extends PropsWithChildren {
  * panel on either the left or right side, the main content area, and a set of
  * action buttons.
  */
-export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
+export let Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
   (props, ref) => {
     const {
       influencerPosition = 'left',
@@ -217,6 +217,16 @@ export const Tearsheet = React.forwardRef<HTMLDivElement, TearsheetProps>(
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Tearsheet.displayName = componentName;
+
+/**@ts-ignore*/
+Tearsheet.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with preview__Tearsheet`,
+};
+
+// The component enable should log the deprecation
+/**@ts-ignore*/
+Tearsheet = pkg.checkComponentEnabled(Tearsheet, componentName);
 
 export const deprecatedProps = {
   /**

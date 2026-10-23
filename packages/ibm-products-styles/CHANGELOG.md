@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.97.0-rc.0`
+## `@carbon/ibm-products-styles@2.97.0`
 ### Bug fixes :bug:
 - fix: tearsheet webcomponent fixes (#9902)
 

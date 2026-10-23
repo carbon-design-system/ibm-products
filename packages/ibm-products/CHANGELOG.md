@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.101.0-rc.0`
+## `@carbon/ibm-products@2.101.0`
 ### Bug fixes :bug:
 - fix(useWindowResize): use queueMicrotask for React 19 compat (#9845)
 - fix(useOverflowItems): move onChange to useLayoutEffect for React 19 (#9847)

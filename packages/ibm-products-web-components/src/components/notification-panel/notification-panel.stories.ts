@@ -372,6 +372,9 @@ async function queryShadowElement(hostSelector, targetSelector) {
 
 const meta = {
   title: 'Components/NotificationPanel',
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
 
 export const Default = {

@@ -2251,7 +2251,7 @@ __metadata:
     "@carbon/layout": "npm:^11.61.0"
     "@carbon/motion": "npm:^11.54.0"
     "@carbon/styles": "npm:^1.117.0"
-    "@carbon/utilities": "npm:^0.27.0"
+    "@carbon/utilities": "npm:0.25.0"
     "@carbon/web-components": "npm:2.65.0"
     "@figma/code-connect": "npm:^1.4.0"
     "@ibm/telemetry-js": "npm:^1.10.2"
@@ -2314,7 +2314,7 @@ __metadata:
     "@carbon/ibm-products-utilities": "workspace:*"
     "@carbon/styles": "npm:^1.117.0"
     "@carbon/telemetry": "npm:^0.1.0"
-    "@carbon/utilities": "npm:^0.27.0"
+    "@carbon/utilities": "npm:0.25.0"
     "@carbon/utilities-react": "npm:0.30.0"
     "@dnd-kit/core": "npm:^6.3.1"
     "@dnd-kit/modifiers": "npm:^9.0.0"
@@ -2718,6 +2718,17 @@ __metadata:
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
   checksum: 10/238f4a7edf05368eac1e1e043d8576793f351b24c9b7b313ba9a5803380861f975491598bc0a35d5f1509a2f8c7385471b02ee86affcfa99d754ac5b6e1255cc
+  languageName: node
+  linkType: hard
+
+"@carbon/utilities@npm:0.25.0":
+  version: 0.25.0
+  resolution: "@carbon/utilities@npm:0.25.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+    "@internationalized/number": "npm:^3.6.1"
+    temporal-polyfill: "npm:^1.0.4"
+  checksum: 10/f08a95f8486a74f925a96a630957ae451342fe90d55fe2972f54c90449ea359563fed890a4dedab9c6ca7917c4d47060282e5ed4e24648960b63675f3cbd0515
   languageName: node
   linkType: hard
 

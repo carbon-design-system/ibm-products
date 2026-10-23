@@ -593,6 +593,11 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   inline-size: 100%;
   margin-block-start: -14px;
 
+  /* Hide items marked by createOverflowHandler (Carbon no longer does this) */
+  > [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
   > *.#{$block-class__next}__header-action-item:not([data-hidden='true']) {
     margin-inline-end: $spacing-03; /* space between visible items */
   }

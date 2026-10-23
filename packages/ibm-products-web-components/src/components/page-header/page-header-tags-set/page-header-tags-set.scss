@@ -46,6 +46,13 @@ $block-class: #{$prefix}--page-header-tags-set;
     inline-size: 100%;
     white-space: nowrap;
 
+    // createOverflowHandler marks tags that do not fit (and the unused `+N`
+    // offset) with data-hidden. Carbon scopes its own rule for this to its
+    // legacy page header, so it does not apply inside this shadow root.
+    [data-hidden]:not([data-fixed]) {
+      display: none;
+    }
+
     &__popover-container {
       display: flex;
       flex-direction: column;

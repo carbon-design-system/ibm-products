@@ -46,6 +46,7 @@ const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
 
 describe(componentName, () => {
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
     pkg.feature['default-portal-target-body'] = false;
   });
 

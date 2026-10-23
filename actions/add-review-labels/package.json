@@ -21,7 +21,7 @@
   "resolutions": {
     "@octokit/plugin-paginate-rest": "^16.0.0",
     "@octokit/request": "^10.0.0",
-    "undici": "^7.11.0"
+    "undici": "^7.30.1"
   },
   "dependencies": {
     "@actions/core": "^2.0.0",

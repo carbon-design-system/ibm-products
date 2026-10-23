@@ -593,7 +593,7 @@ $transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
   inline-size: 100%;
   margin-block-start: -14px;
 
-  /* Hide items marked by createOverflowHandler (Carbon no longer does this) */
+  /* Hide items marked by createOverflowHandler */
   > [data-hidden]:not([data-fixed]) {
     display: none;
   }

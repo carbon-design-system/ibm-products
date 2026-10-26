@@ -78,9 +78,6 @@ export interface AddSelectBodyProps {
 type CommonTearsheetProps = TearsheetNarrowProps &
   TearsheetProps & { ref: ForwardedRef<HTMLDivElement> };
 
-/**
- * @deprecated This component is deprecated. Use the composable `preview__AddSelect` component instead.
- */
 export const AddSelectBody = forwardRef(
   (
     {

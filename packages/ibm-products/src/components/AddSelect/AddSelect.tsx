@@ -182,9 +182,3 @@ AddSelect.propTypes = {
 };
 
 AddSelect.displayName = componentName;
-
-/**@ts-ignore*/
-AddSelect.deprecated = {
-  level: 'warn',
-  details: `Please replace ${componentName} with the composable preview__AddSelect component`,
-};

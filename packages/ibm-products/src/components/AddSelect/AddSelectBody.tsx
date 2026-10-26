@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -78,6 +78,9 @@ export interface AddSelectBodyProps {
 type CommonTearsheetProps = TearsheetNarrowProps &
   TearsheetProps & { ref: ForwardedRef<HTMLDivElement> };
 
+/**
+ * @deprecated This component is deprecated. Use the composable `preview__AddSelect` component instead.
+ */
 export const AddSelectBody = forwardRef(
   (
     {

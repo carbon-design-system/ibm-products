@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -88,6 +88,8 @@ export interface SingleAddSelectProps {
 }
 
 /**
+ * @deprecated This component is deprecated. Use the SingleAddSelect pattern instead.
+ *
  * Used to add or select one or more items from larger lists or hierarchies.
  */
 export const SingleAddSelect = forwardRef(
@@ -198,3 +200,9 @@ SingleAddSelect.propTypes = {
 };
 
 SingleAddSelect.displayName = componentName;
+
+/**@ts-ignore*/
+SingleAddSelect.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with SingleAddSelect pattern`,
+};

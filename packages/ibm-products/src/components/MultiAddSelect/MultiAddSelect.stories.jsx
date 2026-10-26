@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,11 +13,12 @@ import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
 import { Group, Document } from '@carbon/react/icons';
 
 import { pkg } from '../../settings';
+import { Annotation } from '../../../.storybook/Annotation';
 import DocsPage from './MultiAddSelect.docs-page';
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Add and select/MultiAddSelect',
+  title: 'Deprecated/Prebuilt patterns/Add and select/MultiAddSelect',
   component: MultiAddSelect,
   tags: ['autodocs'],
   parameters: {
@@ -26,6 +27,27 @@ export default {
       page: DocsPage,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/patterns-add-and-select-multiaddselect--overview">
+                MultiAddSelect
+              </a>{' '}
+              example pattern.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
   argTypes: {
     items: {
       control: {

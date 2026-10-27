@@ -11,10 +11,42 @@ import * as stories from './TagSet.stories';
 |
 [Carbon tag documentation](https://react.carbondesignsystem.com/?path=/docs/components-tag--overview)
 
+## Deprecation notice
+
+`TagSet` is deprecated and will be removed in a future major version.
+[`TagOverflow`](?path=/docs/components-tagoverflow--docs) is now the recommended
+replacement — it is promoted to a **stable** component in `@carbon/ibm-products`
+and will move to `@carbon/react` as part of Carbon v12.
+
+Migrate to [`TagOverflow`](?path=/docs/components-tagoverflow--docs) at your
+earliest convenience. The [migration guide below](#migration-guide) covers the
+full prop mapping, a before/after example, and an AI-assisted migration prompt.
+
+| Deprecated | Replacement                               |
+| ---------- | ----------------------------------------- |
+| `TagSet`   | `TagOverflow` from `@carbon/ibm-products` |
+
+### New import
+
+```jsx
+// Before
+import { TagSet } from '@carbon/ibm-products';
+
+// After
+import { TagOverflow } from '@carbon/ibm-products';
+```
+
+---
+
 ## Table of Contents
 
 - [Overview](#overview)
 - [Example usage](#example-usage)
+- [Migration guide](#migration-guide)
+  - [Prop mapping](#prop-mapping)
+  - [Item object shape](#item-object-shape)
+  - [Before / after example](#before--after-example)
+  - [AI-assisted migration](#ai-assisted-migration)
 - [Component API](#component-api)
 
 ## Overview
@@ -47,6 +79,184 @@ display all tags.
 ## Code sample
 
 <CodesandboxLink exampleDirectory="TagSet" />
+
+## Migration guide
+
+### Prop mapping
+
+| `TagSet` prop          | `TagOverflow` equivalent | Notes                                                            |
+| ---------------------- | ------------------------ | ---------------------------------------------------------------- |
+| `tags`                 | `items`                  | Rename the prop                                                  |
+| `overflowAutoAlign`    | `autoAlign`              | Rename the prop                                                  |
+| `onOverflowClick`      | _(removed)_              | No direct equivalent — see note below                            |
+| `containingElementRef` | `containingElementRef`   | Still accepted but deprecated; prefer the forwarded ref          |
+| `measurementOffset`    | `measurementOffset`      | Still accepted but deprecated; now auto-calculated               |
+| `multiline`            | `multiline`              | Still accepted but deprecated                                    |
+| All other props        | Unchanged                | `align`, `maxVisible`, `allTagsModal*`, `showAllTagsLabel`, etc. |
+
+**`onOverflowClick` note:** `TagSet`'s `onOverflowClick` prop (a custom handler
+that suppresses the default "show all" modal) has no direct equivalent in
+`TagOverflow`. Remove the prop and handle overflow display manually if needed.
+
+### Item object shape
+
+Each entry in the `tags` / `items` array has these field differences:
+
+| `TagSet` item field | `TagOverflow` item field | Notes                                         |
+| ------------------- | ------------------------ | --------------------------------------------- |
+| `type`              | `tagType`                | Rename every occurrence                       |
+| _(none)_            | `id`                     | **Required** — generate from `label` or index |
+| `label`             | `label`                  | Unchanged                                     |
+| All other fields    | Unchanged                | Pass through unchanged                        |
+
+**Generating `id`:** Each item must have a unique `id`. A reliable strategy is
+to derive it from `label` as a kebab-case slug and append the array index to
+guarantee uniqueness:
+
+```js
+items={tags.map((tag, i) => ({
+  ...tag,
+  id: tag.label.toLowerCase().replace(/\s+/g, '-') + '-' + i,
+  tagType: tag.type,
+}))}
+```
+
+### Before / after example
+
+```jsx
+// Before — TagSet
+import { TagSet } from '@carbon/ibm-products';
+
+<TagSet
+  tags={[
+    { type: 'blue', label: 'Tag 1' },
+    { type: 'cyan', label: 'Tag 2' },
+    { type: 'red', label: 'Tag 3' },
+  ]}
+  overflowAutoAlign
+  onOverflowClick={(overflowTags) => console.log(overflowTags)}
+  maxVisible={2}
+  allTagsModalTitle="All tags"
+  allTagsModalSearchLabel="Search all tags"
+  allTagsModalSearchPlaceholderText="Search all tags"
+  showAllTagsLabel="View all tags"
+/>;
+
+// After — TagOverflow
+import { TagOverflow } from '@carbon/ibm-products';
+
+{
+  /*
+  TODO: TagSet → TagOverflow migration: onOverflowClick has no direct
+  equivalent in TagOverflow. Handle overflow manually or remove this prop.
+*/
+}
+<TagOverflow
+  items={[
+    { id: 'tag-1-0', tagType: 'blue', label: 'Tag 1' },
+    { id: 'tag-2-1', tagType: 'cyan', label: 'Tag 2' },
+    { id: 'tag-3-2', tagType: 'red', label: 'Tag 3' },
+  ]}
+  autoAlign
+  maxVisible={2}
+  allTagsModalTitle="All tags"
+  allTagsModalSearchLabel="Search all tags"
+  allTagsModalSearchPlaceholderText="Search all tags"
+  showAllTagsLabel="View all tags"
+/>;
+```
+
+---
+
+### AI-assisted migration
+
+Copy the prompt below into Bob or any AI assistant, then paste your component
+source after the final line.
+
+```
+You are migrating a React component from the deprecated @carbon/ibm-products
+TagSet API to the TagOverflow API.
+
+IMPORT CHANGES:
+- TagSet → TagOverflow (same package: @carbon/ibm-products)
+
+PROP RENAME TABLE (TagSet prop → TagOverflow equivalent):
+- tags                → items
+- overflowAutoAlign   → autoAlign
+- onOverflowClick     → REMOVE — no direct equivalent (see note below)
+- containingElementRef → containingElementRef (deprecated; prefer forwarded ref)
+- measurementOffset   → measurementOffset (deprecated; now auto-calculated)
+- multiline           → multiline (deprecated)
+
+ITEM OBJECT SHAPE (each entry in the tags / items array):
+| TagSet item field | TagOverflow item field | Notes                                       |
+|-------------------|------------------------|---------------------------------------------|
+| type              | tagType                | Rename every occurrence                     |
+| (none)            | id                     | Required — generate from label slug + index |
+| label             | label                  | Unchanged                                   |
+| All other fields  |                        | Pass through unchanged                      |
+
+GENERATING THE REQUIRED `id` FIELD:
+Each item must have a unique `id`. Recommended strategy — derive from `label`
+as a kebab-case slug, then append the array index to guarantee uniqueness:
+  id: label.toLowerCase().replace(/\s+/g, '-') + '-' + index
+
+`onOverflowClick` NOTE:
+TagSet's `onOverflowClick` prop has no direct equivalent in TagOverflow.
+Insert a TODO comment where it appeared:
+  // TODO: TagSet → TagOverflow migration: onOverflowClick has no direct
+  // equivalent in TagOverflow. Handle overflow manually or remove this prop.
+
+DEPRECATED-BUT-PRESENT PROPS:
+Leave `containingElementRef`, `measurementOffset`, and `multiline` in place
+if they exist and add an inline `// @deprecated` comment so teams can clean up
+at their own pace.
+
+BEFORE / AFTER EXAMPLE:
+
+// Before (TagSet)
+import { TagSet } from '@carbon/ibm-products';
+
+<TagSet
+  tags={[
+    { type: 'blue', label: 'Tag 1' },
+    { type: 'cyan', label: 'Tag 2' },
+    { type: 'red',  label: 'Tag 3' },
+  ]}
+  overflowAutoAlign
+  onOverflowClick={(overflowTags) => console.log(overflowTags)}
+  maxVisible={2}
+  allTagsModalTitle="All tags"
+  allTagsModalSearchLabel="Search all tags"
+  allTagsModalSearchPlaceholderText="Search all tags"
+  showAllTagsLabel="View all tags"
+/>
+
+// After (TagOverflow)
+import { TagOverflow } from '@carbon/ibm-products';
+
+{/*
+  TODO: TagSet → TagOverflow migration: onOverflowClick has no direct
+  equivalent in TagOverflow. Handle overflow manually or remove this prop.
+*/}
+<TagOverflow
+  items={[
+    { id: 'tag-1-0', tagType: 'blue', label: 'Tag 1' },
+    { id: 'tag-2-1', tagType: 'cyan', label: 'Tag 2' },
+    { id: 'tag-3-2', tagType: 'red',  label: 'Tag 3' },
+  ]}
+  autoAlign
+  maxVisible={2}
+  allTagsModalTitle="All tags"
+  allTagsModalSearchLabel="Search all tags"
+  allTagsModalSearchPlaceholderText="Search all tags"
+  showAllTagsLabel="View all tags"
+/>
+
+Now migrate the following component:
+```
+
+---
 
 ## Component API
 

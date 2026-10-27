@@ -151,7 +151,11 @@ export interface TagSetProps extends PropsWithChildren {
   tags?: TagType[];
 }
 
-export const TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
+/**
+ * @deprecated TagSet is deprecated and will be removed in a future major release.
+ * Use `TagOverflow` from `@carbon/ibm-products` instead.
+ */
+export let TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
   (
     {
       // The component props, in alphabetical order (for consistency).
@@ -468,6 +472,16 @@ export const TagSet = React.forwardRef<HTMLDivElement, TagSetProps>(
     );
   }
 );
+
+// The component enable should log the deprecation
+/**@ts-ignore*/
+TagSet.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with TagOverflow from @carbon/ibm-products`,
+};
+
+/**@ts-ignore*/
+TagSet = pkg.checkComponentEnabled(TagSet, componentName);
 
 // Return a placeholder if not released and not enabled by feature flag
 

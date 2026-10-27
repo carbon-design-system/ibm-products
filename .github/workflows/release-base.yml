@@ -31,8 +31,6 @@ permissions:
 jobs:
   # Run all CI checks (build, test, lint, etc.) by calling the optimized CI workflow
   ci-checks:
-    # Skipped for `publish missing`: the code was already checked in the original release run
-    if: inputs.type != 'publish missing'
     uses: ./.github/workflows/ci.yml
     with:
       skip-for-release: true # Skip Chromatic visual tests during releases
@@ -112,10 +110,6 @@ jobs:
   # Merge the sharded blob reports and produce the JSON report on disk, then publish.
   release:
     needs: avt-runner
-    # avt-runner is intentionally skipped for `publish missing`. For all other release types it must succeed.
-    if:
-      ${{ !cancelled() && (needs.avt-runner.result == 'success' || (inputs.type
-      == 'publish missing' && needs.avt-runner.result == 'skipped')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -160,7 +154,6 @@ jobs:
       # runs in the same workflow (same run_id), download-artifact finds the blobs
       # without needing a cross-workflow token or run-id lookup.
       - name: Download blob reports
-        if: inputs.type != 'publish missing'
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           path: all-blob-reports
@@ -168,7 +161,6 @@ jobs:
           merge-multiple: true
 
       - name: Generate AVT JSON report
-        if: inputs.type != 'publish missing'
         run: |
           mkdir -p packages/ibm-products/.playwright
           npx playwright merge-reports --reporter json ./all-blob-reports > packages/ibm-products/.playwright/INTERNAL_AVT_REPORT_DO_NOT_USE.json
@@ -232,14 +224,6 @@ jobs:
           github.event.inputs.type == 'subsequent rc'
         run: |
           yarn lerna publish --conventional-prerelease --preid rc --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
-
-      # Publishes only packages whose current version is not yet on npm (no version bump, commit or tag).
-      # Use to recover from a partially failed publish.
-      - name: Publish missing packages
-        if: |
-          github.event.inputs.type == 'publish missing'
-        run: |
-          yarn lerna publish from-package --pre-dist-tag next $(echo "${{ env.PUBLISH }}")
 
       # After successfully publishing a release candidate, trigger the staging storybook environment deployment workflow.
       # Pass in the release branch name to the storybook deployment job so it build off the release branch

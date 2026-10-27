@@ -1,0 +1,2 @@
+var m=Object.defineProperty;var t=(e,s)=>m(e,"name",{value:s,configurable:!0});import{a as p,c as i,R as l,P as a}from"./iframe-CaYiXxeb.js";const x=t(({className:e,children:s,tagName:n="main",...r})=>{const c=p(),o=i(`${c}--content`,e);return l.createElement(n,{...r,className:o},s)},"Content");x.propTypes={children:a.node,className:a.string,tagName:a.string};export{x as C};
+//# sourceMappingURL=Content-6mn0jGTl.js.map

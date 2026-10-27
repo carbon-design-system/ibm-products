@@ -1,0 +1,2 @@
+var n=Object.defineProperty;var o=(e,a)=>n(e,"name",{value:a,configurable:!0});import{n as s,w as l}from"./iframe-CaYiXxeb.js";const h=o((e,a)=>{const r=s("enable-v12-release"),t=`${a}. Render interactive content as a sibling of the label or use the \`decorator\` prop when available`;l(e,t,{shouldThrow:r})},"useNoInteractiveChildrenForLabel");export{h as u};
+//# sourceMappingURL=useNoInteractiveChildrenForLabel-1_tyUqLF.js.map

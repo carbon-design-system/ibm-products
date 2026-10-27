@@ -30,6 +30,11 @@ $block-class: #{$prefix}--set-of-users;
     box-sizing: border-box;
   }
 
+   /* Hide items marked by createOverflowHandler */
+  .#{$block-class} [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
   cds-modal-header {
     padding-inline: $spacing-05;
   }

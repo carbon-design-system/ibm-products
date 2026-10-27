@@ -111,7 +111,7 @@ jobs:
 
   # Merge the sharded blob reports and produce the JSON report on disk, then publish.
   release:
-    needs: avt:wq-runner
+    needs: avt-runner
     # avt-runner is intentionally skipped for `publish missing`. For all other release types it must succeed.
     if:
       ${{ !cancelled() && (needs.avt-runner.result == 'success' || (inputs.type

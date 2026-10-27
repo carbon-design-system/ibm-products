@@ -28,6 +28,11 @@ $block-class: #{$prefix}--set-of-tags;
     // Spacing between tags.
     gap: $spacing-03;
 
+    /* Hide items marked by createOverflowHandler */
+    [data-hidden]:not([data-fixed]) {
+      display: none;
+    }
+
     &__popover-container {
       padding: 0.9rem;
 

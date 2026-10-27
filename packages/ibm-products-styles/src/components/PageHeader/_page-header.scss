@@ -130,6 +130,7 @@ $duration: 1000ms;
     border-block-end: none;
   }
 
+  /* stylelint-disable-next-line nesting-selector-no-missing-scoping-root */
   &::before {
     @include appearingBackground(true);
 
@@ -1118,11 +1119,11 @@ $duration: 1000ms;
     background-color: $layer-01;
 
     &.#{$carbon-prefix}--tab--overflow-nav-button--next::before {
-      background: linear-gradient(to right, rgba(255, 255, 255, 0), $layer-01);
+      background: linear-gradient(to right, rgb(255, 255, 255, 0), $layer-01);
     }
 
     &.#{$carbon-prefix}--tab--overflow-nav-button--previous::before {
-      background: linear-gradient(to left, rgba(255, 255, 255, 0), $layer-01);
+      background: linear-gradient(to left, rgb(255, 255, 255, 0), $layer-01);
     }
   }
 

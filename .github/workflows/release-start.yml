@@ -21,10 +21,12 @@ on:
         # Full release (ie. v2.0.0 -> v2.1.0)
         # First RC (ie. v2.0.0 -> v2.1.0-rc.0)
         # Subsequent RC (ie v2.1.0-rc.0 -> v2.1.0-rc.1)
+        # Publish missing (publish already versioned packages not yet on npm, no version bump)
         options:
           - full release
           - first rc
           - subsequent rc
+          - publish missing
       dry-run:
         # Check dry run to test run lerna and confirm package version bumps
         required: true

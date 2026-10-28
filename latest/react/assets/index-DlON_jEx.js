@@ -1,0 +1,2 @@
+var t=Object.defineProperty;var n=(s,e)=>t(s,"name",{value:e,configurable:!0});const a="0.125rem",o="0.25rem",i="0.5rem",r="0.75rem",m="1rem",p="1.5rem",g="2rem",z="2.5rem",d="3rem",l="4rem",S="5rem",b="6rem",h="10rem",u="1.5rem",w="2rem",x="2.5rem",L="3rem",X=16,c=n(s=>`${s/16}rem`,"rem"),$=n(s=>`${s}px`,"px"),f={sm:{width:c(320)},md:{width:c(672)},lg:{width:c(1056)}},k=[a,o,i,r,m,p,g,z,d,l,S,b,h],F=u,j=w,q=x,v=L;export{X as a,f as b,j as c,v as d,q as e,F as f,$ as p,c as r,k as s};
+//# sourceMappingURL=index-DlON_jEx.js.map

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import { DecoratorBase } from '../DecoratorBase';
@@ -18,8 +18,18 @@ const componentName = 'Decorator';
 
 /**
  * The Decorator groups a key/value pair as a single element. This component is not interactive.
+ *
+ * @deprecated Decorator is deprecated and will be removed in a future major release.
+ * This component has no known production adoption and will not be migrating to Carbon core.
  */
 export let Decorator = React.forwardRef((props, ref) => {
+  useEffect(() => {
+    console.warn(
+      'Decorator is deprecated and will be removed in a future major release. ' +
+        'Reason: This component has no known production adoption and will not be migrating to Carbon core.'
+    );
+  }, []);
+
   const validProps = prepareProps(props, [
     'disabled',
     'kind',

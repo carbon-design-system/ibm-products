@@ -37,6 +37,15 @@ const renderComponent = ({ ...rest } = {}) =>
     />
   );
 
+// Suppress deprecation console.warn for all tests in this file
+beforeEach(() => {
+  jest.spyOn(console, 'warn').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe(componentName, () => {
   it('renders a component Decorator', async () => {
     const { container } = renderComponent();

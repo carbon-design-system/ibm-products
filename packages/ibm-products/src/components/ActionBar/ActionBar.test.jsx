@@ -87,6 +87,15 @@ const testSizes = (el, property) => {
   return base;
 };
 
+// Suppress deprecation console.warn for all tests in this file
+beforeEach(() => {
+  jest.spyOn(console, 'warn').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe(ActionBar.displayName, () => {
   let mockElement;
 

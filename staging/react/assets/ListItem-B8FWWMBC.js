@@ -1,0 +1,2 @@
+var m=Object.defineProperty;var t=(s,e)=>m(s,"name",{value:e,configurable:!0});import{a as p,c,j as n,P as a}from"./iframe-BJ3oD3I6.js";import{T as x}from"./Text-CKFCb-K0.js";function l({className:s,children:e,...r}){const i=p(),o=c(`${i}--list__item`,s);return n.jsx(x,{as:"li",className:o,...r,children:e})}t(l,"ListItem");l.propTypes={children:a.node,className:a.string};export{l as L};
+//# sourceMappingURL=ListItem-B8FWWMBC.js.map

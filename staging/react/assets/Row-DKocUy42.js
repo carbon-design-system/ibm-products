@@ -1,2 +1,0 @@
-var l=Object.defineProperty;var a=(e,o)=>l(e,"name",{value:o,configurable:!0});import{a as d,c as f,j as m,P as s}from"./iframe-CaYiXxeb.js";function x({as:e="div",condensed:o=!1,narrow:n=!1,className:t,children:c,...p}){const r=d(),i=f(t,{[`${r}--row`]:!0,[`${r}--row--condensed`]:o,[`${r}--row--narrow`]:n});return m.jsx(e,{className:i,...p,children:c})}a(x,"Row");x.propTypes={as:s.oneOfType([s.string,s.elementType]),children:s.node,className:s.string,condensed:s.bool,narrow:s.bool};export{x as R};
-//# sourceMappingURL=Row-DKocUy42.js.map

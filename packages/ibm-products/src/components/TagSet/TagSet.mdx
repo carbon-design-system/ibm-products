@@ -46,6 +46,7 @@ import { TagOverflow } from '@carbon/ibm-products';
   - [Prop mapping](#prop-mapping)
   - [Item object shape](#item-object-shape)
   - [Before / after example](#before--after-example)
+  - [Codemod](#codemod)
   - [AI-assisted migration](#ai-assisted-migration)
 - [Component API](#component-api)
 
@@ -165,6 +166,39 @@ import { TagOverflow } from '@carbon/ibm-products';
   showAllTagsLabel="View all tags"
 />;
 ```
+
+---
+
+### Codemod
+
+Run the codemod to automate the mechanical parts of the migration:
+
+```sh
+npx @carbon/upgrade migrate tagset-to-tagoverflow --write
+```
+
+The codemod handles:
+
+- Import specifier rename: `TagSet` → `TagOverflow` (aliased imports like
+  `TagSet as Foo` are rewritten to `TagOverflow as Foo`, leaving the alias
+  unchanged)
+- JSX element rename: `<TagSet>` / `</TagSet>` → `<TagOverflow>` /
+  `</TagOverflow>`
+- Prop renames: `tags` → `items`, `overflowAutoAlign` → `autoAlign`
+- Per-item field transforms on **static inline arrays**: `type` → `tagType`,
+  injects an `id` derived from `label` as a lowercase slug (skipped when an `id`
+  already exists)
+- Removes `onOverflowClick` and inserts a `// TODO` comment in its place
+- Annotates deprecated props (`containingElementRef`, `measurementOffset`,
+  `multiline`) with an inline `// @deprecated` comment
+
+It **cannot** handle automatically (leaves `// TODO` comments):
+
+- `onOverflowClick` → no direct equivalent; remove the prop and handle overflow
+  display manually if needed
+- **Dynamic `tags` reference** (e.g. `tags={myTags}`) → renames the prop to
+  `items` but cannot transform the variable; a `// TODO` comment is added to
+  remind you to rename `type` → `tagType` and add `id` to each item manually
 
 ---
 

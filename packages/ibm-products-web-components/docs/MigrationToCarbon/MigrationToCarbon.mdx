@@ -21,6 +21,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 - [What do I need to change?](#what-do-i-need-to-change)
   - [Import path change](#import-path-change)
   - [Non-composable components — two-step migration](#non-composable-components--two-step-migration)
+  - [Tearsheet, PageHeader and Card — migrate to the composable versions](#tearsheet-pageheader-and-card--migrate-to-the-composable-versions)
   - [Codemods](#codemods)
 
 ---
@@ -191,6 +192,52 @@ export is deprecated.
 | ------------------ | ---------------------------------------------------------------------------------------------------------- |
 | `c4p-tearsheet`    | New import path + migrate to composable API                                                                |
 
+
+### Tearsheet, PageHeader and Card — migrate to the composable versions
+
+`Tearsheet`, `PageHeader` and `Card` are being replaced by new composable
+implementations. This applies to both the **Web Components**
+(`@carbon/ibm-products-web-components`) and **React** (`@carbon/ibm-products`)
+packages.
+
+| Component  | Current (non-composable) status                                  | New composable version                        | Available in v12  |
+| ---------- | ---------------------------------------------------------------- | --------------------------------------------- | ----------------- |
+| Tearsheet  | Stable component now carries a **deprecation notice**.           | **Delivered** — available as a **preview**.   | New version only. |
+| PageHeader | Stable component now carries a **deprecation notice**.           | **Delivered** — available as a **preview**.   | New version only. |
+| Card       | Expressive / productive card will be deprecated **soon**.        | **Coming soon** — will ship as a **preview**. | New version only. |
+
+**In v12, only the new composable components will be available.** The existing
+stable `Tearsheet`, `PageHeader` and `Card` will not be carried forward, so they
+cannot be used after upgrading.
+
+#### What to do now
+
+- **Start migrating to the new composable versions today.** Do not wait for v12 —
+  the composable `Tearsheet` and `PageHeader` are already available as previews
+  and are the versions that will ship as stable in v12.
+- **Treat the deprecation notices as action items.** The old components keep
+  working until v12, but will receive no new features.
+- **Plan for `Card`.** Avoid starting new work on the expressive or productive
+  card. Migrate to the composable `Card` once it is released as a preview.
+- **Expect an API change, not just an import-path change.** The new components
+  are composed from smaller building blocks (for example header, body and footer
+  parts for `Tearsheet`) rather than configured through a single set of
+  attributes and slots.
+
+#### Web Components
+
+The composable Tearsheet is delivered as a separate set of elements. Use
+`<c4p-preview-tearsheet>` together with its companion elements such as
+`<c4p-tearsheet-header>`, `<c4p-tearsheet-body>` and `<c4p-tearsheet-footer>` in
+place of `<c4p-tearsheet>`.
+
+For the composable elements, slots and a migration walkthrough, see the
+component docs:
+
+- [Tearsheet — Migration from Legacy Tearsheet](?path=/docs/preview-tearsheet--docs#migration-from-legacy-tearsheet)
+- [PageHeader](?path=/docs/components-pageheader--docs)
+
+Migration guides and codemods will be published alongside the v12 release.
 
 ### Codemods
 

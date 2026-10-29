@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2024
+// Copyright IBM Corp. 2020, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,7 +11,8 @@ import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
-import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import { Annotation } from '../../../.storybook/Annotation';
+import mdx from './TagSet.mdx';
 import styles from './_storybook-styles.scss?inline';
 
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -129,30 +130,13 @@ const overflowAndModalStrings = {
 };
 
 export default {
-  title: 'Components/TagSet',
+  title: 'Deprecated/TagSet',
   component: TagSet,
   tags: ['autodocs'],
   parameters: {
     styles,
     docs: {
-      page: () => (
-        <StoryDocsPage
-          altGuidelinesHref={[
-            {
-              href: 'https://pages.github.ibm.com/carbon/ibm-products/components/tag-set/usage/',
-              label: 'Usage guidelines',
-            },
-            {
-              href: 'https://carbondesignsystem.com/components/tag/usage/',
-              label: 'Carbon tag usage guidelines',
-            },
-            {
-              href: 'https://react.carbondesignsystem.com/?path=/docs/components-tag--overview',
-              label: 'Carbon tag documentation',
-            },
-          ]}
-        />
-      ),
+      page: mdx,
     },
   },
   argTypes: {
@@ -180,13 +164,27 @@ export default {
   },
   decorators: [
     (story) => (
-      <>
-        <style>
-          {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
-          ;
-        </style>
-        <DisplayBox>{story()}</DisplayBox>
-      </>
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in a future major
+            version. Please migrate to{' '}
+            <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/components-tagoverflow--overview">
+              TagOverflow
+            </a>
+            .
+          </div>
+        }
+      >
+        <>
+          <style>
+            {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
+            ;
+          </style>
+          <DisplayBox>{story()}</DisplayBox>
+        </>
+      </Annotation>
     ),
   ],
 };

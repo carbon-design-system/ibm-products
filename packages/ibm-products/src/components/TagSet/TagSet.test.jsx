@@ -337,4 +337,12 @@ describe(TagSet.displayName, () => {
       screen.getAllByText(/Tag [0-9]+/);
     });
   });
+
+  it('emits a deprecation warning when rendered', () => {
+    const warnSpy = jest.spyOn(console, 'warn');
+    render(<TagSet tags={tags10} />);
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(`Component "${TagSet.displayName}" is deprecated`)
+    );
+  });
 });

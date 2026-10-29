@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.61.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.61.0`
 ### Housekeeping :house:
 - chore(release):  v2.101.0-rc.0 (#9954)
 

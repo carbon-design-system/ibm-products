@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.51.0-rc.0`
+## `@carbon/storybook-addon-theme@2.51.0`
 ### Housekeeping :house:
 - chore(release):  v2.101.0-rc.0 (#9954)
 

@@ -1,9 +1,10 @@
-## `@carbon/ibm-products@2.102.0-rc.0`
+## `@carbon/ibm-products@2.102.0`
 ### Features :rocket:
 - feat(about-modal): implemented as pattern in react (#9958)
 - feat(Tearsheet): deprecate stable Tearsheet, TearsheetNarrow, and TearsheetPresence in favour of preview__Tearsheet (#9942)
 
 ### Bug fixes :bug:
+- fix: include changes from PR 10001 in the release
 - fix: wc chromatic build (#9976)
 
 ### Housekeeping :house:

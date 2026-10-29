@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.51.0-rc.0`
+## `@carbon/ibm-products-web-components@0.51.0`
 ### Features :rocket:
 - feat(aboutmodal): implement as a pattern in web-component (#9967)
 

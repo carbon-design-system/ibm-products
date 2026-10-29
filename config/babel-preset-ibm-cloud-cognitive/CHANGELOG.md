@@ -1,4 +1,4 @@
-## `@babel-preset-ibm-cloud-cognitive@0.60.0-rc.0`
+## `@babel-preset-ibm-cloud-cognitive@0.60.0`
 ### Housekeeping :house:
 - chore(release):  v2.101.0-rc.0 (#9954)
 

@@ -329,7 +329,8 @@ const commonTests = (Ts, name, props, testActions) => {
         expect(
           document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
         ).toHaveLength(3);
-      }
+      },
+      5
     ));
 };
 
@@ -345,6 +346,10 @@ describe(componentName, () => {
 
   afterAll(() => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
+  });
+
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
   });
 
   commonTests(Tearsheet, componentName, {}, true);
@@ -520,6 +525,14 @@ describe(componentName, () => {
 
     expect(decoratorIndex).toBeLessThan(closeButtonIndex);
   });
+
+  it('emits a deprecation warning when rendered', () => {
+    const warnSpy = jest.spyOn(console, 'warn');
+    render(<Tearsheet />);
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(`Component "${componentName}" is deprecated`)
+    );
+  });
 });
 
 describe(componentNameNarrow, () => {
@@ -527,7 +540,21 @@ describe(componentNameNarrow, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
   commonTests(TearsheetNarrow, componentNameNarrow, {}, true);
+
+  it('emits a deprecation warning when rendered', () => {
+    const warnSpy = jest.spyOn(console, 'warn');
+    render(<TearsheetNarrow />);
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        `Component "${componentNameNarrow}" is deprecated`
+      )
+    );
+  });
 });
 
 describe(componentNameCreateNarrow, () => {

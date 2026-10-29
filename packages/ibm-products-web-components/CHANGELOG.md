@@ -1,3 +1,25 @@
+## `@carbon/ibm-products-web-components@0.51.0-rc.0`
+### Features :rocket:
+- feat(aboutmodal): implement as a pattern in web-component (#9967)
+
+### Bug fixes :bug:
+- fix: wc chromatic build (#9976)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9964)
+- chore(deps): update dependency happy-dom to v21 (#9985)
+- chore(deps): update dependency cssnano to v9 (#9956)
+- chore(release):  v2.101.0-rc.0 (#9954)
+
+## `@carbon/ibm-products-web-components@0.50.0`
+### Bug fixes :bug:
+- fix: webcomponents tests (#9947)
+- fix: tearsheet webcomponent fixes (#9902)
+- fix(guidebanner): fix spacing when there is no title (#9923)
+
+### Housekeeping :house:
+- docs: Add migration to Carbon (v12) overview story to Storybook (#9938)
+
 ## `@carbon/ibm-products-web-components@0.49.0`
 ### Bug fixes :bug:
 - fix(Tearsheet next): suppress all animations and transitions under prefers-reduced-motion (#9913)

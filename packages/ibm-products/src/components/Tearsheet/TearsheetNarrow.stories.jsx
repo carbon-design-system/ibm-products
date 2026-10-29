@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+import { Annotation } from '../../../.storybook/Annotation';
 import { action } from 'storybook/actions';
 import { Information } from '@carbon/react/icons';
 import { pkg } from '../../settings';
@@ -37,10 +38,31 @@ import styles from './_storybook-styles.scss?inline';
 // import mdx from './Tearsheet.mdx';
 
 export default {
-  title: 'Components/Tearsheet/TearsheetNarrow',
+  title: 'Deprecated/Tearsheet/TearsheetNarrow',
   component: TearsheetNarrow,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen', styles /* docs: { page: mdx } */ },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            This component is deprecated and will be removed in a future major
+            version. The composable replacement (<code>preview__Tearsheet</code>
+            ) will be promoted to stable in <code>@carbon/react</code> at v12.
+            Please migrate to{' '}
+            <a href="https://ibm-products.carbondesignsystem.com/?path=/docs/preview-tearsheet--overview#migration-from-legacy-tearsheet">
+              preview__Tearsheet
+            </a>
+            .
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {

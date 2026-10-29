@@ -158,6 +158,7 @@ $motion-duration: $duration-moderate-02;
     --#{$block-class}--stacking-scale-factor-double: 0.9;
   }
 
+  /* stylelint-disable-next-line nesting-selector-no-missing-scoping-root */
   &.is-visible {
     z-index: utilities.z('modal');
     align-items: flex-end;

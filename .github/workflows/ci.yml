@@ -473,7 +473,7 @@ jobs:
         run: yarn install --immutable
       - name: Build web components and dependencies
         run:
-          lerna run build --scope @carbon/ibm-products-web-components
+          yarn lerna run build --scope @carbon/ibm-products-web-components
           --include-dependencies --stream
       - id: chromatic
         name: Run Chromatic

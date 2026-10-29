@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2024, 2024
+// Copyright IBM Corp. 2024, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -40,6 +40,7 @@ type AllTags = (TagType & Omit<React.ComponentProps<typeof Tag>, 'filter'>)[];
 interface TagOverflowModalProps {
   allTags?: AllTags;
   className?: string;
+  closeLabel?: string;
   /**
    * Disable the portal and render the modal inline. Useful for tests and
    * contexts where you need to inherit React context from parent components.
@@ -56,6 +57,7 @@ interface TagOverflowModalProps {
    * DOM element to portal the modal into. Defaults to `document.body`.
    */
   portalTarget?: HTMLElement | null;
+  searchClearLabel?: string;
   searchLabel?: string;
   searchPlaceholder?: string;
   title?: string;
@@ -66,6 +68,7 @@ export const TagOverflowModal = ({
 
   allTags,
   className,
+  closeLabel,
   disablePortal = false,
   title,
   modalAriaLabel = defaults.modalAriaLabel,
@@ -74,6 +77,7 @@ export const TagOverflowModal = ({
   open,
   overflowType,
   portalTarget: portalTargetIn,
+  searchClearLabel,
   searchLabel = defaults.searchLabel,
   searchPlaceholder,
 
@@ -111,11 +115,13 @@ export const TagOverflowModal = ({
       <ModalHeader
         className={`${blockClass}__header`}
         closeModal={onClose}
+        iconDescription={closeLabel}
         title={title}
       >
         <Search
           data-modal-primary-focus
           className={`${blockClass}__search`}
+          closeButtonLabelText={searchClearLabel}
           labelText={searchLabel}
           placeholder={searchPlaceholder}
           onChange={handleSearch}
@@ -158,6 +164,7 @@ TagOverflowModal.propTypes = {
     })
   ),
   className: PropTypes.string,
+  closeLabel: PropTypes.string,
   /**
    * Disable the portal and render the modal inline. Useful for tests and
    * contexts where you need to inherit React context from parent components.
@@ -175,6 +182,7 @@ TagOverflowModal.propTypes = {
       ? PropTypes.object
       : // eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
         PropTypes.instanceOf(HTMLElement),
+  searchClearLabel: PropTypes.string,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string,

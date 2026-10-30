@@ -1,3 +1,16 @@
+## `@carbon/ibm-products@2.102.0`
+### Features :rocket:
+- feat(about-modal): implemented as pattern in react (#9958)
+- feat(Tearsheet): deprecate stable Tearsheet, TearsheetNarrow, and TearsheetPresence in favour of preview__Tearsheet (#9942)
+
+### Bug fixes :bug:
+- fix: include changes from PR 10001 in the release
+- fix: wc chromatic build (#9976)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9964)
+- chore(release):  v2.101.0-rc.0 (#9954)
+
 ## `@carbon/ibm-products@2.101.0`
 ### Bug fixes :bug:
 - fix(useWindowResize): use queueMicrotask for React 19 compat (#9845)

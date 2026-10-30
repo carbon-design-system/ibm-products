@@ -269,7 +269,7 @@ export const Default = (
               <Button
                 ref={summaryPanelTriggerRef}
                 kind="ghost"
-                label="Open right panel"
+                iconDescription="Open right panel"
                 onClick={() => setSummaryPanelOpen(true)}
                 renderIcon={() => <RightPanelClose />}
                 aria-expanded={summaryPanelOpen}
@@ -540,7 +540,7 @@ export const WithInfluencer = (
               <Button
                 ref={influencerPanelTriggerRef}
                 kind="ghost"
-                label="Open influencer panel"
+                iconDescription="Open influencer panel"
                 onClick={() => setInfluencerPanelOpen(true)}
                 renderIcon={() => <RightPanelClose />}
                 aria-expanded={influencerPanelOpen}
@@ -760,7 +760,7 @@ export const WithTabs = (
               <div className="summaryPanelTrigger">
                 <Button
                   kind="ghost"
-                  label="Open right panel"
+                  iconDescription="Open right panel"
                   onClick={() => setSummaryPanelOpen(true)}
                   renderIcon={() => <RightPanelClose />}
                   size="md"
@@ -1009,7 +1009,7 @@ export const narrowTearsheet = (
                 <Button
                   ref={influencerPanelTriggerRef}
                   kind="ghost"
-                  label="Open influencer"
+                  iconDescription="Open influencer"
                   onClick={() => setInfluencerPanelOpen(true)}
                   renderIcon={() => <RightPanelClose />}
                   aria-expanded={influencerPanelOpen}
@@ -1021,7 +1021,7 @@ export const narrowTearsheet = (
                 <Button
                   ref={summaryPanelTriggerRef}
                   kind="ghost"
-                  label="Open summary panel"
+                  iconDescription="Open summary panel"
                   onClick={() => setSummaryPanelOpen(true)}
                   renderIcon={() => <RightPanelClose />}
                   aria-expanded={summaryPanelOpen}
@@ -1682,7 +1682,7 @@ export const WithCustomFooterActions = (
             <div className="summaryPanelTrigger">
               <Button
                 kind="ghost"
-                label="Open right panel"
+                iconDescription="Open right panel"
                 onClick={() => setSummaryPanelOpen(true)}
                 renderIcon={() => <RightPanelClose />}
                 size="md"

@@ -14,7 +14,7 @@ test.describe('SearchBar @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SearchBar',
-      id: 'preview-candidate-searchbar--default',
+      id: 'deprecated-searchbar--default',
       globals: {
         carbonTheme: 'white',
       },

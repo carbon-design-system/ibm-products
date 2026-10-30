@@ -38,12 +38,24 @@ interface ToolbarContextType {
 
 const ToolbarContext = createContext<ToolbarContextType>({});
 
-/** Toolbars are a collection of action items that organize a program’s interaction patterns into a series of closely related commands. */
+/**
+ * Toolbars are a collection of action items that organize a program's interaction patterns into a series of closely related commands.
+ *
+ * @deprecated Toolbar is deprecated and will be removed in a future major release.
+ * This component has no known production adoption and will not be migrating to Carbon core.
+ */
 const Toolbar = forwardRef(
   (
     { children, className, vertical, ...rest }: PropsWithChildren<ToolbarProps>,
     r: React.Ref<HTMLDivElement>
   ) => {
+    useEffect(() => {
+      console.warn(
+        'Toolbar is deprecated and will be removed in a future major release. ' +
+          'Reason: This component has no known production adoption and will not be migrating to Carbon core.'
+      );
+    }, []);
+
     const focusableElements = useRef<HTMLElement[] | undefined>(undefined);
 
     const getFocusableElements = useCallback(

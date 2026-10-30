@@ -16745,7 +16745,7 @@ __metadata:
     lerna: "npm:^9.0.6"
     lint-staged: "npm:^17.0.0"
     lottie-web: "npm:^5.13.0"
-    npm-check-updates: "npm:^19.0.0"
+    npm-check-updates: "npm:^23.0.0"
     npm-run-all2: "npm:^8.0.0"
     postcss: "npm:^8.5.3"
     prettier: "npm:^3.5.3"
@@ -21178,13 +21178,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-check-updates@npm:^19.0.0":
-  version: 19.0.0
-  resolution: "npm-check-updates@npm:19.0.0"
+"npm-check-updates@npm:^23.0.0":
+  version: 23.1.1
+  resolution: "npm-check-updates@npm:23.1.1"
   bin:
     ncu: build/cli.js
     npm-check-updates: build/cli.js
-  checksum: 10/563e012d946322c1ae63932e54b3070884103fb8e8a6dbae1940941519f211e92c438ab9a56d57f198ef0941126562ced740b008a0202769ded1f4fcfdd0a359
+  checksum: 10/50d2c1a6dbdac6bb1c312ed433423d7089291e1cef7e58b6905af347065ceb7e7350b16d18dbb776b1f1e8b5b52966f49e53e7eee6ca5e3bfbe70907cb398304
   languageName: node
   linkType: hard
 

@@ -124,6 +124,7 @@ $carbon-prefix: 'cds';
   .#{$prefix}--page-header__breadcrumb-wrapper {
     display: flex;
     flex: 1 1 auto;
+    align-items: inherit;
     min-inline-size: 0;
 
     @include breakpoint-down(md) {

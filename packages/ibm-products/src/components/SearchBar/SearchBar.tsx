@@ -12,6 +12,7 @@ import React, {
   PropsWithChildren,
   ReactNode,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 
@@ -102,6 +103,10 @@ export interface SearchBarProps extends PropsWithChildren {
    */
 }
 
+/**
+ * @deprecated SearchBar is deprecated and will be removed in a future major release.
+ * This component has no known production adoption and will not be migrating to Carbon core.
+ */
 export const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
   (
     {
@@ -126,6 +131,17 @@ export const SearchBar = React.forwardRef<HTMLFormElement, SearchBarProps>(
     }: SearchBarProps,
     ref
   ) => {
+    const hasWarned = useRef(false);
+    useEffect(() => {
+      if (!hasWarned.current) {
+        hasWarned.current = true;
+        console.warn(
+          'SearchBar is deprecated and will be removed in a future major release. ' +
+            'Reason: This component has no known production adoption and will not be migrating to Carbon core.'
+        );
+      }
+    }, []);
+
     const [text, setText] = useState(value || '');
     const [_selectedScopes, setSelectedScopes] = useState(selectedScopes || []);
     const [isInputDirty, setIsInputDirty] = useState(false);

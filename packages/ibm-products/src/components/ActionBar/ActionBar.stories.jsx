@@ -11,6 +11,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 import { Bee, Lightning } from '@carbon/react/icons';
 
+import { Annotation } from '../../../.storybook/Annotation';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionBar } from './ActionBar';
@@ -30,7 +31,7 @@ const getActions = (num) =>
   }));
 
 export default {
-  title: 'Utilities/ActionBar',
+  title: 'Deprecated/ActionBar',
   component: ActionBar,
   tags: ['autodocs'],
   argTypes: {
@@ -49,10 +50,33 @@ export default {
   parameters: {
     styles,
     docs: {
-      page: () => <StoryDocsPage altGuidelinesHref="" />,
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref=""
+          deprecationNotice="This component is deprecated and will be removed in the next major version. ActionBar was only used internally by the legacy PageHeader, which is being replaced by the new composable PageHeader migrating to @carbon/react. Use the composable PageHeader from @carbon/ibm-products instead."
+          altDescription="The ActionBar is used internally by the PageHeader to wrap ActionBarItems."
+        />
+      ),
     },
   },
-  decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            <strong>ActionBar</strong> is deprecated and will be removed in a
+            future major release. ActionBar was only used internally by the
+            legacy PageHeader, which is being replaced by the new composable
+            PageHeader migrating to @carbon/react. Use the composable PageHeader
+            from @carbon/ibm-products instead.
+          </div>
+        }
+      >
+        <DisplayBox>{story()}</DisplayBox>
+      </Annotation>
+    ),
+  ],
 };
 
 const Template = (argsIn) => {

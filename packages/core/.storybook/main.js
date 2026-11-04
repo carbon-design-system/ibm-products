@@ -7,8 +7,16 @@
 
 const { resolve } = require('path');
 const { merge } = require('webpack-merge');
+const {
+  managerAnalyticsHead,
+  previewAnalyticsHead,
+} = require('./ibm-analytics');
 
 module.exports = {
+  // `head` contains manager-head.html/preview-head.html
+  managerHead: (head) => `${head}${managerAnalyticsHead}`,
+  previewHead: (head) => `${head}${previewAnalyticsHead}`,
+
   core: {
     builder: 'webpack5',
   },

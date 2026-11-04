@@ -24,6 +24,13 @@ describe('useResizeObserver', () => {
   let savedObserverCb;
 
   beforeEach(() => {
+    // Run requestAnimationFrame callbacks synchronously so that the
+    // ResizeObserver → rAF → setState chain completes inside act().
+    jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      cb(0);
+      return 0;
+    });
+
     window.ResizeObserver = jest.fn().mockImplementation((cb) => {
       savedObserverCb = cb;
       return {
@@ -36,11 +43,16 @@ describe('useResizeObserver', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
-  // Triggers resize from the saved resize observer callback
-  const triggerResize = (element, width = defaultSize, height = defaultSize) =>
-    act(() => {
+  // Triggers resize and flushes the rAF → setState chain inside act
+  const triggerResize = async (
+    element,
+    width = defaultSize,
+    height = defaultSize
+  ) =>
+    act(async () => {
       savedObserverCb([{ target: element, contentRect: { width, height } }]);
     });
 
@@ -49,32 +61,32 @@ describe('useResizeObserver', () => {
     screen.getByText('width: 0, height: 0');
   });
 
-  it('returns the updated sizes from hook upon resizing', () => {
+  it('returns the updated sizes from hook upon resizing', async () => {
     render(<ResizeTest />);
     const element = screen.getByTestId('observed-element');
     screen.getByText('width: 0, height: 0');
 
-    triggerResize(element);
+    await triggerResize(element);
     screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`);
 
-    triggerResize(element, defaultSize * 2, defaultSize * 3);
+    await triggerResize(element, defaultSize * 2, defaultSize * 3);
     screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`);
   });
 
-  it('calls the provided onResize function', () => {
+  it('calls the provided onResize function', async () => {
     const resizeFn = jest.fn();
     render(<ResizeTest onResize={resizeFn} />);
     const element = screen.getByTestId('observed-element');
 
-    triggerResize(element, defaultSize * 2, defaultSize * 3);
+    await triggerResize(element, defaultSize * 2, defaultSize * 3);
     screen.getByText(`width: ${defaultSize * 2}, height: ${defaultSize * 3}`);
     expect(resizeFn).toHaveBeenCalledTimes(1);
 
-    triggerResize(element, defaultSize * 3, defaultSize * 4);
+    await triggerResize(element, defaultSize * 3, defaultSize * 4);
     screen.getByText(`width: ${defaultSize * 3}, height: ${defaultSize * 4}`);
     expect(resizeFn).toHaveBeenCalledTimes(2);
 
-    triggerResize(element, defaultSize, defaultSize);
+    await triggerResize(element, defaultSize, defaultSize);
     screen.getByText(`width: ${defaultSize}, height: ${defaultSize}`);
     expect(resizeFn).toHaveBeenCalledTimes(3);
   });

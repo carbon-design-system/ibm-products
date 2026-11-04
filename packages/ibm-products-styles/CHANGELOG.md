@@ -1,3 +1,8 @@
+## `@carbon/ibm-products-styles@2.98.0`
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9964)
+- chore(release):  v2.101.0-rc.0 (#9954)
+
 ## `@carbon/ibm-products-styles@2.97.0`
 ### Bug fixes :bug:
 - fix: tearsheet webcomponent fixes (#9902)

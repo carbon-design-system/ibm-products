@@ -226,7 +226,7 @@ export const TearsheetWithSteps = ({
               <Button
                 ref={influencerPanelTriggerRef}
                 kind="ghost"
-                label="Open influencer panel"
+                iconDescription="Open influencer panel"
                 onClick={() => setInfluencerPanelOpen(true)}
                 renderIcon={() => <RightPanelClose />}
                 aria-expanded={influencerPanelOpen}

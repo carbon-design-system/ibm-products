@@ -20,6 +20,11 @@ import { pkg } from '../../../settings';
 export interface PageHeaderTagOverflowProps {
   // Maybe scope this more to only accept tag or operational tag children
   children: React.ReactNode;
+  /**
+   * Accessible name of the list of hidden tags shown in the overflow popover.
+   * Provide a translated string to localize it.
+   */
+  hiddenTagsLabel?: string;
   renderOverflowTag?: (
     hiddenBreadcrumbs: HTMLElement[],
     handleOverflowClick: (event: React.MouseEvent) => void,
@@ -34,7 +39,13 @@ export interface PageHeaderTagOverflowProps {
 export const PageHeaderTagOverflow = React.forwardRef<
   HTMLDivElement,
   PageHeaderTagOverflowProps
->(({ renderOverflowTag, renderPopoverContent, children }, ref) => {
+>((props, ref) => {
+  const {
+    renderOverflowTag,
+    renderPopoverContent,
+    children,
+    hiddenTagsLabel = 'Hidden tags',
+  } = props;
   const [openPopover, setOpenPopover] = useState(false);
   const [hiddenTags, setHiddenTags] = useState<HTMLElement[]>([]);
   const overflowButtonId = `${pkg.prefix}--page-header--tag-overflow-btn`;
@@ -112,7 +123,7 @@ export const PageHeaderTagOverflow = React.forwardRef<
         <PopoverContent>
           <ul
             className={`${blockClass}__tags-popover-list`}
-            aria-label="Hidden tags"
+            aria-label={hiddenTagsLabel}
           >
             {renderPopoverContent?.(hiddenTags)}
           </ul>

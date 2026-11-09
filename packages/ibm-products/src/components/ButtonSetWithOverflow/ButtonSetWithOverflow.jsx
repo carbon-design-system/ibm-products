@@ -25,6 +25,63 @@ const componentName = 'ButtonSetWithOverflow';
 
 const buttonSize = 'md';
 
+// These are defined at module scope on purpose. Defining them inside
+// ButtonSetWithOverflow creates a new component type on every render, which
+// makes React unmount and remount the rendered buttons instead of updating them.
+const AButtonSet = React.forwardRef(
+  ({ isHidden = false, buttons, ...rest }, ref) => {
+    return (
+      <ButtonSet {...rest} ref={ref}>
+        {buttons.map(({ label, key, kind, id, ...other }) => {
+          const kindFix = kind === 'default' ? 'primary' : kind;
+          return (
+            <Button
+              {...other}
+              key={key && `button-set-${key}`}
+              size={buttonSize}
+              type="button"
+              kind={kindFix}
+              id={id ? (isHidden ? `${id}--hidden` : id) : null}
+            >
+              {label}
+            </Button>
+          );
+        })}
+      </ButtonSet>
+    );
+  }
+);
+
+AButtonSet.propTypes = {
+  /**
+   *  isHidden - Used to conditionally change id if one is passed to the `AButtonSet` component
+   *  in order to avoid duplicate ids between the visible and hidden button set buttons
+   */
+  isHidden: PropTypes.bool,
+};
+
+const AButtonMenu = React.forwardRef(
+  ({ buttons, buttonSetOverflowLabel, ...rest }, ref) => {
+    return (
+      <MenuButton {...rest} ref={ref} label={buttonSetOverflowLabel}>
+        {buttons
+          .map(({ key, kind, ...other }) => {
+            // menu items only come in default and danger flavors
+            const kindFix = kind === 'danger' ? 'danger' : 'default';
+            return (
+              <MenuItem
+                {...prepareProps(other, ['iconDescription', 'renderIcon'])}
+                key={key && `button-menu-${key}`}
+                kind={kindFix}
+              />
+            );
+          })
+          .reverse()}
+      </MenuButton>
+    );
+  }
+);
+
 export const ButtonSetWithOverflow = ({
   buttons,
   className,
@@ -93,58 +150,6 @@ export const ButtonSetWithOverflow = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttons]);
 
-  const AButtonSet = React.forwardRef(
-    ({ isHidden = false, buttons, ...rest }, ref) => {
-      return (
-        <ButtonSet {...rest} ref={ref}>
-          {buttons.map(({ label, key, kind, id, ...other }) => {
-            const kindFix = kind === 'default' ? 'primary' : kind;
-            return (
-              <Button
-                {...other}
-                key={key && `button-set-${key}`}
-                size={buttonSize}
-                type="button"
-                kind={kindFix}
-                id={id ? (isHidden ? `${id}--hidden` : id) : null}
-              >
-                {label}
-              </Button>
-            );
-          })}
-        </ButtonSet>
-      );
-    }
-  );
-
-  AButtonSet.propTypes = {
-    /**
-     *  isHidden - Used to conditionally change id if one is passed to the `AButtonSet` component
-     *  in order to avoid duplicate ids between the visible and hidden button set buttons
-     */
-    isHidden: PropTypes.bool,
-  };
-
-  const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
-    return (
-      <MenuButton {...rest} ref={ref} label={buttonSetOverflowLabel}>
-        {buttons
-          .map(({ key, kind, ...other }) => {
-            // menu items only come in default and danger flavors
-            const kindFix = kind === 'danger' ? 'danger' : 'default';
-            return (
-              <MenuItem
-                {...prepareProps(other, ['iconDescription', 'renderIcon'])}
-                key={key && `button-menu-${key}`}
-                kind={kindFix}
-              />
-            );
-          })
-          .reverse()}
-      </MenuButton>
-    );
-  });
-
   useResizeObserver(sizingContainerRefSet, checkFullyVisibleItems);
   useResizeObserver(sizingContainerRefCombo, checkFullyVisibleItems);
   useResizeObserver(spaceAvailableRef, checkFullyVisibleItems);
@@ -179,6 +184,7 @@ export const ButtonSetWithOverflow = ({
           className={menuOptionsClass}
           ref={sizingContainerRefCombo}
           buttons={buttons}
+          buttonSetOverflowLabel={buttonSetOverflowLabel}
           size={buttonSize}
         />
       </div>
@@ -189,6 +195,7 @@ export const ButtonSetWithOverflow = ({
         {showAsOverflow ? (
           <AButtonMenu
             buttons={buttons}
+            buttonSetOverflowLabel={buttonSetOverflowLabel}
             size={buttonSize}
             className={menuOptionsClass}
           />

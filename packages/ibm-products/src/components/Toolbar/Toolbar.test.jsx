@@ -42,6 +42,15 @@ const dataTestId = _instance('dataTestId');
 
 const props = { children };
 
+// Suppress deprecation console.warn for all tests in this file
+beforeEach(() => {
+  jest.spyOn(console, 'warn').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 // Moved up here as it works (order seems to matter)
 toBeAccessible(
   'has no accessibility violations for the vertical variant',
@@ -137,6 +146,7 @@ describe(ToolbarGroup.displayName, () => {
   beforeAll(() => {
     pkg.setAllComponents(true);
   });
+
   componentTest(ToolbarGroup);
 });
 

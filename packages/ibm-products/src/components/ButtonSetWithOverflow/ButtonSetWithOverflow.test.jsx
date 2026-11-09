@@ -114,6 +114,39 @@ describe(ButtonSetWithOverflow.displayName, () => {
     expect(myOnClick).toHaveBeenCalled();
   });
 
+  it('Keeps the same DOM nodes when re-rendered with equivalent buttons', () => {
+    window.innerWidth = buttonWidth * 3.5;
+    const myOnClick = jest.fn();
+
+    const { rerender } = render(
+      <ButtonSetWithOverflow
+        buttons={buttons(myOnClick)}
+        buttonSetOverflowLabel="overflow label"
+      />
+    );
+
+    const visibleSelector = `.${blockClass}__button-container--visible .${carbon.prefix}--btn`;
+    const before = screen.getByText(/Action 1/, {
+      selector: visibleSelector,
+    });
+
+    // New array and new object identities, same content
+    rerender(
+      <ButtonSetWithOverflow
+        buttons={buttons(myOnClick)}
+        buttonSetOverflowLabel="overflow label"
+      />
+    );
+
+    const after = screen.getByText(/Action 1/, {
+      selector: visibleSelector,
+    });
+
+    // A remount (e.g. from components defined inside render) would replace the node
+    expect(after).toBe(before);
+    expect(before.isConnected).toBe(true);
+  });
+
   it('Applies right align class when requested', async () => {
     window.innerWidth = buttonWidth * 3.5;
     const myOnClick = jest.fn();

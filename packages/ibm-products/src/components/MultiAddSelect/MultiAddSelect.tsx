@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -161,6 +161,8 @@ export interface MultiAddSelectProps {
 }
 
 /**
+ * @deprecated This component is deprecated. Use the MultiAddSelect pattern instead.
+ *
  * Used to add or select multiple or more items from larger lists or hierarchies.
  */
 export const MultiAddSelect = forwardRef(
@@ -313,3 +315,9 @@ MultiAddSelect.propTypes = {
 };
 
 MultiAddSelect.displayName = componentName;
+
+/**@ts-ignore*/
+MultiAddSelect.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with MultiAddSelect pattern`,
+};

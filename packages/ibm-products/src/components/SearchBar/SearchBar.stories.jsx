@@ -9,12 +9,13 @@ import React from 'react';
 import { action } from 'storybook/actions';
 
 import { previewCandidate__SearchBar as SearchBar } from '..';
+import { Annotation } from '../../../.storybook/Annotation';
 import mdx from './SearchBar.mdx';
 
 import styles from './_storybook-styles.scss?inline';
 
 export default {
-  title: 'Preview Candidate/SearchBar',
+  title: 'Deprecated/SearchBar',
   component: SearchBar,
   tags: ['autodocs'],
   argTypes: {
@@ -37,6 +38,22 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            <strong>SearchBar</strong> is deprecated and will be removed in a
+            future major release. This component has no known production
+            adoption and will not be migrating to Carbon core.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 const scopes = [

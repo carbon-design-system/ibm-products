@@ -57,6 +57,15 @@ const renderComponent = (props = defaultProps) => {
   return render(<SearchBar {...props} />);
 };
 
+// Suppress deprecation console.warn for all tests in this file
+beforeEach(() => {
+  jest.spyOn(console, 'warn').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe(componentName, () => {
   it('renders with default props', async () => {
     renderComponent();

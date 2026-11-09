@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2024
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,11 +9,12 @@ import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss?inline'; // import index in case more files are added later.
 import { SingleAddSelect } from '.';
 import { Button } from '@carbon/react';
+import { Annotation } from '../../../.storybook/Annotation';
 import DocsPage from './SingleAddSelect.docs-page';
 // import { action } from 'storybook/actions';
 
 export default {
-  title: 'Patterns/Prebuilt patterns/Add and select/SingleAddSelect',
+  title: 'Deprecated/Prebuilt patterns/Add and select/SingleAddSelect',
   component: SingleAddSelect,
   tags: ['autodocs'],
   parameters: {
@@ -22,6 +23,27 @@ export default {
       page: DocsPage,
     },
   },
+  decorators: [
+    (story) => (
+      <div>
+        <Annotation
+          type="deprecation-notice"
+          text={
+            <div>
+              This component is deprecated and will be removed in the next major
+              version. Please migrate to {/* cspell:disable-next-line */}
+              <a href="/?path=/docs/patterns-add-and-select-singleaddselect--overview">
+                SingleAddSelect
+              </a>{' '}
+              example pattern.
+            </div>
+          }
+        >
+          {story()}
+        </Annotation>
+      </div>
+    ),
+  ],
   argTypes: {
     items: {
       control: {

@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { previewCandidate__Decorator as Decorator } from '..';
+import { Annotation } from '../../../.storybook/Annotation';
 import mdx from './Decorator.mdx';
 
 import styles from './_storybook-styles.scss?inline';
@@ -29,7 +30,7 @@ const scoreOptions = {
 };
 
 export default {
-  title: 'Preview Candidate/Decorator',
+  title: 'Deprecated/Decorator',
   component: Decorator,
   tags: ['autodocs'],
   parameters: {
@@ -38,6 +39,22 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            <strong>Decorator</strong> is deprecated and will be removed in a
+            future major release. This component has no known production
+            adoption and will not be migrating to Carbon core.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
   argTypes: {
     // For internal use only.
     kind: { table: { disable: true } },

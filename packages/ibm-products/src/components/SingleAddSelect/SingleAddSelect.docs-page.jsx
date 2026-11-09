@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 const DocsPage = () => {
   return (
     <StoryDocsPage
+      deprecationNotice={`This component is deprecated and will be removed in the next major version. Please migrate to the [SingleAddSelect](https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-add-and-select-singleaddselect--overview) pattern.`}
       altGuidelinesHref="https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage"
       blocks={[
         {

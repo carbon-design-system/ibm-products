@@ -172,7 +172,8 @@ test.describe('TagSet @avt', () => {
     );
     const modalElement = page.locator(`.${carbon.prefix}--modal.is-visible`);
 
-    await simulateKeyPress(page, 'Tab');
+    // +1 for the deprecation notice link in the Annotation banner
+    await simulateKeyPress(page, 'Tab', 2);
 
     await expect(
       page.getByRole('button', { name: 'Dismiss' }).first()

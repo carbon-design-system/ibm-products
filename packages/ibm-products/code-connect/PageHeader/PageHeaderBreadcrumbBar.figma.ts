@@ -20,7 +20,7 @@ function createTemplate() {
   const border = instance.getBoolean('Bottom border');
 
   const renderIcon = hasIcon
-    ? figma.helpers.react.jsxElement('Bee')
+    ? figma.helpers.react.function('() => <Bee size={16} />')
     : undefined;
   const contentActions = hasButtons
     ? figma.helpers.react.jsxElement(

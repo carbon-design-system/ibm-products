@@ -36,7 +36,7 @@ function createTemplate() {
       : undefined;
 
   const renderIcon = hasIcon
-    ? figma.helpers.react.jsxElement('Bee')
+    ? figma.helpers.react.function('() => <Bee size={32} />')
     : undefined;
   const contextualActions = hasTags
     ? figma.helpers.react.jsxElement(`<>

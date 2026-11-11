@@ -1,3 +1,12 @@
+## `@carbon/ibm-products-web-components@0.52.0`
+### Bug fixes :bug:
+- fix(page-header): fix breadcrumb icon alignment (#10013)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#10017)
+- docs: add composable Tearsheet, PageHeader and Card section to v12 migration guides (#10012)
+- docs(changelog): update for v2.102.0-rc.0 (#10003)
+
 ## `@carbon/ibm-products-web-components@0.51.0`
 ### Features :rocket:
 - feat(aboutmodal): implement as a pattern in web-component (#9967)

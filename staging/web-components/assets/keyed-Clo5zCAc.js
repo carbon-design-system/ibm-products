@@ -1,1 +1,0 @@
-import{E as s,m as i}from"./iframe-BjfCSw7l.js";import{a as o,i as n}from"./class-map-De0W_ih8.js";const u=o(class extends n{constructor(){super(...arguments),this.key=s}render(r,e){return this.key=r,e}update(r,[e,t]){return e!==this.key&&(i(r),this.key=e),t}});export{u as i};

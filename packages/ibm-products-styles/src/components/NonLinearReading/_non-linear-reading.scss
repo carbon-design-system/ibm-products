@@ -18,7 +18,7 @@
 @use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
-@keyframes fade {
+@keyframes non-linear-reading-fade {
   0% {
     opacity: 0;
   }
@@ -109,7 +109,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
   margin: $spacing-02 0;
   // Onboarding does not always use Carbon defaults/tokens
   // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
-  animation: fade 600ms;
+  animation: non-linear-reading-fade 600ms;
   border-inline-start: to-rem(1.25px) solid $text-primary;
 
   /* stylelint-disable-next-line max-nesting-depth */

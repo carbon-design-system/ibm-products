@@ -1,4 +1,4 @@
-## `@carbon/storybook-addon-theme@2.52.0-rc.0`
+## `@carbon/storybook-addon-theme@2.52.0`
 ### Housekeeping :house:
 - docs(changelog): update for v2.102.0-rc.0 (#10003)
 

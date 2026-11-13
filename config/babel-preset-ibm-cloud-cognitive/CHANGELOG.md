@@ -1,4 +1,4 @@
-## `@babel-preset-ibm-cloud-cognitive@0.61.0-rc.0`
+## `@babel-preset-ibm-cloud-cognitive@0.61.0`
 ### Housekeeping :house:
 - docs(changelog): update for v2.102.0-rc.0 (#10003)
 

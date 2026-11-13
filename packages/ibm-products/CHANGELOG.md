@@ -1,4 +1,4 @@
-## `@carbon/ibm-products@2.103.0-rc.0`
+## `@carbon/ibm-products@2.103.0`
 ### Features :rocket:
 - feat(TagSet, TagOverflow): add configurable modal close and clear-search labels (#9968)
 

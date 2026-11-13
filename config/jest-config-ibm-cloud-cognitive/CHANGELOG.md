@@ -1,4 +1,4 @@
-## `@jest-config-ibm-cloud-cognitive@1.62.0-rc.0`
+## `@jest-config-ibm-cloud-cognitive@1.62.0`
 ### Housekeeping :house:
 - docs(changelog): update for v2.102.0-rc.0 (#10003)
 

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-styles@2.99.0-rc.0`
+## `@carbon/ibm-products-styles@2.99.0`
 ### Housekeeping :house:
 - build(deps): update Carbon 11 compatible versions to latest (#10017)
 - docs(changelog): update for v2.102.0-rc.0 (#10003)

@@ -1,4 +1,4 @@
-## `@carbon/ibm-products-web-components@0.52.0-rc.0`
+## `@carbon/ibm-products-web-components@0.52.0`
 ### Bug fixes :bug:
 - fix(page-header): fix breadcrumb icon alignment (#10013)
 

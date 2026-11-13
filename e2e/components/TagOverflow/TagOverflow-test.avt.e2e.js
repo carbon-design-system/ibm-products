@@ -15,7 +15,7 @@ test.describe('TagOverflow @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'TagOverflow',
-      id: 'utilities-tagoverflow--tags-with-overflow-count',
+      id: 'components-tagoverflow--tags-with-overflow-count',
       globals: {
         carbonTheme: 'white',
       },

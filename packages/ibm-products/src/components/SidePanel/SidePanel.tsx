@@ -42,7 +42,7 @@ import { SIDE_PANEL_SIZES } from './constants';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { moderate02 } from '@carbon/motion';
+import { durationModerate02 } from '@carbon/motion';
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg } from '../../settings';
 import { getSpecificElement } from '../../global/js/hooks/useFocus';
@@ -751,13 +751,13 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginInlineEnd = '0';
           pageContentElement.style.transition = !shouldReduceMotion
-            ? `margin-inline-end ${moderate02}`
+            ? `margin-inline-end ${durationModerate02}`
             : '';
           pageContentElement.style.marginInlineEnd = SIDE_PANEL_SIZES[size];
         } else if (pageContentElement) {
           pageContentElement.style.marginInlineStart = '0';
           pageContentElement.style.transition = !shouldReduceMotion
-            ? `margin-inline-start ${moderate02}`
+            ? `margin-inline-start ${durationModerate02}`
             : '';
           pageContentElement.style.marginInlineStart = SIDE_PANEL_SIZES[size];
         }

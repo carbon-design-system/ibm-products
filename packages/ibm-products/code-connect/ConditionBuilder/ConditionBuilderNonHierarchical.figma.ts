@@ -19,115 +19,114 @@ function createTemplate() {
       "import { Calendar, Currency, DeliveryTruck, Earth, Hashtag, Tree } from '@carbon/react/icons';",
     ],
     example: figma.code`<>
-  {/* Sample ConditionBuilder code, not directly mapped */}
-  <ConditionBuilder
-    variant="Non-Hierarchical"
-    inputConfig={{
-      properties: [
-        {
-          id: 'continent',
-          label: 'Continent',
-          icon: Earth,
-          type: 'option',
-          description: 'Continent',
-          config: {
-            options: [
-              { label: 'Africa', id: 'Africa' },
-              { label: 'Antarctica', id: 'Antarctica' },
-              { label: 'Asia', id: 'Asia' },
-              { label: 'Australia', id: 'Australia' },
-              { label: 'Europe', id: 'Europe' },
-            ],
-          },
-        },
-
-        {
-          id: 'id',
-          label: 'ID',
-          icon: Hashtag,
-          type: 'text',
-          config: {},
-        },
-        {
-          id: 'id_long',
-          label: 'Id Long',
-          icon: Hashtag,
-          type: 'textarea',
-          config: {},
-        },
-        {
-          id: 'price',
-          label: 'Price',
-          icon: Currency,
-          type: 'number',
-          config: { min: 0, step: 1, unit: 'Dollars' },
-        },
-        {
-          id: 'date',
-          label: 'Date',
-          icon: Calendar,
-          type: 'date',
-          config: { locale: 'en', dateFormat: 'd/m/Y' },
-        },
-        {
-          id: 'time',
-          label: 'Time',
-          icon: Calendar,
-          type: 'time',
-          config: { timeZones: ['IST', 'CET', 'UTC', 'LOCAL'] },
-        },
-        {
-          id: 'delivery',
-          label: 'Delivery',
-          icon: DeliveryTruck,
-          type: 'option',
-          config: {
-            options: [
-              { label: 'Processing', id: 'Processing' },
-              {
-                label: 'Preparing for dispatch',
-                id: 'Preparing for dispatch',
+      {/* Sample ConditionBuilder code, not directly mapped */}
+      <ConditionBuilder
+        variant="Non-Hierarchical"
+        inputConfig={{
+          properties: [
+            {
+              id: 'continent',
+              label: 'Continent',
+              icon: Earth,
+              type: 'option',
+              description: 'Continent',
+              config: {
+                options: [
+                  { label: 'Africa', id: 'Africa' },
+                  { label: 'Antarctica', id: 'Antarctica' },
+                  { label: 'Asia', id: 'Asia' },
+                  { label: 'Australia', id: 'Australia' },
+                  { label: 'Europe', id: 'Europe' },
+                ],
               },
-              { label: 'Dispatched', id: 'Dispatched' },
-              { label: 'In delivery', id: 'In delivery' },
-              { label: 'Delivered', id: 'Delivered' },
-            ],
+            },
+            {
+              id: 'id',
+              label: 'ID',
+              icon: Hashtag,
+              type: 'text',
+              config: {},
+            },
+            {
+              id: 'id_long',
+              label: 'Id Long',
+              icon: Hashtag,
+              type: 'textarea',
+              config: {},
+            },
+            {
+              id: 'price',
+              label: 'Price',
+              icon: Currency,
+              type: 'number',
+              config: { min: 0, step: 1, unit: 'Dollars' },
+            },
+            {
+              id: 'date',
+              label: 'Date',
+              icon: Calendar,
+              type: 'date',
+              config: { locale: 'en', dateFormat: 'd/m/Y' },
+            },
+            {
+              id: 'time',
+              label: 'Time',
+              icon: Calendar,
+              type: 'time',
+              config: { timeZones: ['IST', 'CET', 'UTC', 'LOCAL'] },
+            },
+            {
+              id: 'delivery',
+              label: 'Delivery',
+              icon: DeliveryTruck,
+              type: 'option',
+              config: {
+                options: [
+                  { label: 'Processing', id: 'Processing' },
+                  {
+                    label: 'Preparing for dispatch',
+                    id: 'Preparing for dispatch',
+                  },
+                  { label: 'Dispatched', id: 'Dispatched' },
+                  { label: 'In delivery', id: 'In delivery' },
+                  { label: 'Delivered', id: 'Delivered' },
+                ],
+              },
+            },
+            {
+              id: 'season',
+              label: 'Season',
+              icon: Tree,
+              type: 'option',
+              config: {
+                options: [
+                  { label: 'Winter', id: 'Winter' },
+                  { label: 'Spring', id: 'Spring' },
+                  { label: 'Summer', id: 'Summer' },
+                  { label: 'Fall', id: 'Fall' },
+                ],
+              },
+            },
+          ],
+        }}
+        getConditionState={(rootState) => {
+          console.log(rootState);
+        }}
+        popOverSearchThreshold={4}
+        statementConfigCustom={[
+          {
+            id: 'if',
+            connector: 'and',
+            label: 'if',
           },
-        },
-        {
-          id: 'season',
-          label: 'Season',
-          icon: Tree,
-          type: 'option',
-          config: {
-            options: [
-              { label: 'Winter', id: 'Winter' },
-              { label: 'Spring', id: 'Spring' },
-              { label: 'Summer', id: 'Summer' },
-              { label: 'Fall', id: 'Fall' },
-            ],
+          {
+            id: 'exclIf',
+            connector: 'or',
+            label: 'excl. if',
           },
-        },
-      ],
-    }}
-    getConditionState={(rootState) => {
-      console.log(rootState);
-    }}
-    popOverSearchThreshold={4}
-    statementConfigCustom={[
-      {
-        id: 'if',
-        connector: 'and',
-        label: 'if',
-      },
-      {
-        id: 'exclIf',
-        connector: 'or',
-        label: 'excl. if',
-      },
-    ]}
-  />
-</>`,
+        ]}
+      />
+    </>`,
     metadata: { nestable: false },
   };
 }

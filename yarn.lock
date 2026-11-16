@@ -2080,23 +2080,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/charts-react@npm:^1.27.25":
-  version: 1.27.25
-  resolution: "@carbon/charts-react@npm:1.27.25"
+"@carbon/charts-react@npm:^1.27.27":
+  version: 1.27.27
+  resolution: "@carbon/charts-react@npm:1.27.27"
   dependencies:
-    "@carbon/charts": "npm:1.27.25"
+    "@carbon/charts": "npm:1.27.27"
     "@carbon/icons-react": "npm:^11.64.0"
     "@ibm/telemetry-js": "npm:^1.9.1"
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
-  checksum: 10/a302767f890ee89dd58f8c16306e9b1eceed36e919f0488f3ffb1628bdd5c050e2db63cf1cf59b945e45150924ba5a0e48fb67c9bfce1bdb642150181e9c9fa1
+  checksum: 10/750aedec69e029b1590e7335e7dcda87e60017c1a2ae0eae656d4d13141dc5566b6dc17d2a41753cd0410cf3c270d71c29de54aba91f56a0c95f03a9e9a3caf4
   languageName: node
   linkType: hard
 
-"@carbon/charts@npm:1.27.25":
-  version: 1.27.25
-  resolution: "@carbon/charts@npm:1.27.25"
+"@carbon/charts@npm:1.27.27":
+  version: 1.27.27
+  resolution: "@carbon/charts@npm:1.27.27"
   dependencies:
     "@carbon/colors": "npm:^11.37.0"
     "@carbon/utils-position": "npm:^1.3.0"
@@ -2112,7 +2112,7 @@ __metadata:
     lodash-es: "npm:^4.18.0"
     topojson-client: "npm:^3.1.0"
     tslib: "npm:^2.8.1"
-  checksum: 10/8f8c3aa95324cfab713a6d1f0928c5253d14d8f97872684ea548ac062e4c0197d3a783fea856ff1713f84d58fe823bdaaeaaeeadfe17f6a7fc3ca228ab26af93
+  checksum: 10/c456946253da8ad204c4c44be6c5e433d62de5a0ef12059edd1d4a0a9c2368058096acffe5466eb049370345024670ede6edd94414e80cbb1a0be73bfae77b61
   languageName: node
   linkType: hard
 
@@ -2143,12 +2143,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/colors@npm:^11.61.0":
-  version: 11.61.0
-  resolution: "@carbon/colors@npm:11.61.0"
+"@carbon/colors@npm:^11.62.0":
+  version: 11.62.0
+  resolution: "@carbon/colors@npm:11.62.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/c16a0264b1a90ce43c4e1e8d73785a1ef64b275fb3a37c0babf92ae45bd7a53adba9ab817172645f4c058f508184d74cbbd888d27b26abdb560094595bce3210
+  checksum: 10/429d52808f3bbc96e1c93905c94971a43f84519ac138da99405a9d66ae6ea7cf6f5953da2164edf0faf4d57d05707bc082b131b12cac3deea3dacf98fe2e5f80
   languageName: node
   linkType: hard
 
@@ -2161,12 +2161,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/feature-flags@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "@carbon/feature-flags@npm:1.11.0"
+"@carbon/feature-flags@npm:^1.12.0":
+  version: 1.12.0
+  resolution: "@carbon/feature-flags@npm:1.12.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/5ba45cd9e25e18ab91a8ca759c5f83b9664cfbe3554680719689056d4a8aead9be43fac53886724263c571e07378bcebbc31f9ae0018185b7622f19ca5418c83
+  checksum: 10/f92da066e9200ed4e4718bc14aff8d8664e29f14f439ca19b33143c43afd84f29cc8d4dae4c87378a10c15cc7da29a2e48c6e2d91f8056300e435d733bf8e7e7
   languageName: node
   linkType: hard
 
@@ -2190,17 +2190,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.65.0":
-  version: 11.65.0
-  resolution: "@carbon/grid@npm:11.65.0"
+"@carbon/grid@npm:^11.66.0":
+  version: 11.66.0
+  resolution: "@carbon/grid@npm:11.66.0"
   dependencies:
-    "@carbon/layout": "npm:^11.62.0"
+    "@carbon/layout": "npm:^11.63.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/c0a77248f8373dc6881d36ebd38e632e7b070b9d6eecaf197af842d6d0c5a05cb48674bf584c9b813caae6d3db01a8c017162174f5e2140e86c10aa83664b13d
+  checksum: 10/250964397aec2ac6cb3e2db38833f9654027251e70fff87783b792f3b88ba4a191ef8c7f431739139263500872a452d28177c88e1d89b27e11d9411d33a5fc8d
   languageName: node
   linkType: hard
 
-"@carbon/ibm-products-styles@npm:^2.99.0-rc.0, @carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
+"@carbon/ibm-products-styles@npm:^2.99.0":
+  version: 2.99.0
+  resolution: "@carbon/ibm-products-styles@npm:2.99.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.9.1"
+  peerDependencies:
+    "@carbon/grid": ^11.65.0
+    "@carbon/layout": ^11.62.0
+    "@carbon/motion": ^11.55.0
+    "@carbon/themes": ^11.84.0
+    "@carbon/type": ^11.70.0
+  checksum: 10/cf40aac2d37b21933ccb58a9dd14609ae8738e71ff49ed98cbc48a449942d79ca7d66fbe34edda33c5bba5d1d85ee48d3bfd6492a349687e48ae7cd64b47f66d
+  languageName: node
+  linkType: hard
+
+"@carbon/ibm-products-styles@workspace:packages/ibm-products-styles":
   version: 0.0.0-use.local
   resolution: "@carbon/ibm-products-styles@workspace:packages/ibm-products-styles"
   dependencies:
@@ -2216,11 +2231,11 @@ __metadata:
     sass: "npm:^1.93.2"
     yargs: "npm:^18.0.0"
   peerDependencies:
-    "@carbon/grid": ^11.65.0
-    "@carbon/layout": ^11.62.0
-    "@carbon/motion": ^11.55.0
-    "@carbon/themes": ^11.84.0
-    "@carbon/type": ^11.70.0
+    "@carbon/grid": ^11.66.0
+    "@carbon/layout": ^11.63.0
+    "@carbon/motion": ^11.56.0
+    "@carbon/themes": ^11.85.0
+    "@carbon/type": ^11.71.0
   languageName: unknown
   linkType: soft
 
@@ -2244,15 +2259,15 @@ __metadata:
     "@blockquote/rollup-plugin-externalize-source-dependencies": "npm:^1.0.0"
     "@carbon-labs/wc-empty-state": "npm:^0.22.0"
     "@carbon-labs/wc-resizer": "npm:^0.5.0"
-    "@carbon/ibm-products-styles": "npm:^2.99.0-rc.0"
+    "@carbon/ibm-products-styles": "npm:^2.99.0"
     "@carbon/ibm-products-utilities": "workspace:*"
-    "@carbon/icon-helpers": "npm:^10.84.0"
-    "@carbon/icons": "npm:^11.91.0"
-    "@carbon/layout": "npm:^11.62.0"
-    "@carbon/motion": "npm:^11.55.0"
-    "@carbon/styles": "npm:^1.118.0"
-    "@carbon/utilities": "npm:0.28.0"
-    "@carbon/web-components": "npm:2.66.0"
+    "@carbon/icon-helpers": "npm:^10.85.0"
+    "@carbon/icons": "npm:^11.92.0"
+    "@carbon/layout": "npm:^11.63.0"
+    "@carbon/motion": "npm:^11.56.0"
+    "@carbon/styles": "npm:^1.119.0"
+    "@carbon/utilities": "npm:0.29.0"
+    "@carbon/web-components": "npm:2.67.0"
     "@figma/code-connect": "npm:^1.4.0"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@ibm/telemetry-js-config-generator": "npm:^2.1.0"
@@ -2272,7 +2287,7 @@ __metadata:
     c8: "npm:^12.0.0"
     cssnano: "npm:^9.0.0"
     eslint: "npm:^9.14.0"
-    eslint-config-carbon: "npm:^3.29.0"
+    eslint-config-carbon: "npm:^3.30.0"
     globby: "npm:^15.0.0"
     happy-dom: "npm:^21.0.0"
     lit: "npm:^3.1.0"
@@ -2308,14 +2323,14 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.26.0"
     "@babel/runtime": "npm:^7.26.10"
     "@carbon-labs/react-resizer": "npm:^0.25.0"
-    "@carbon/charts-react": "npm:^1.27.25"
-    "@carbon/feature-flags": "npm:^1.11.0"
-    "@carbon/ibm-products-styles": "npm:^2.99.0-rc.0"
+    "@carbon/charts-react": "npm:^1.27.27"
+    "@carbon/feature-flags": "npm:^1.12.0"
+    "@carbon/ibm-products-styles": "npm:^2.99.0"
     "@carbon/ibm-products-utilities": "workspace:*"
-    "@carbon/styles": "npm:^1.118.0"
+    "@carbon/styles": "npm:^1.119.0"
     "@carbon/telemetry": "npm:^0.1.0"
-    "@carbon/utilities": "npm:0.28.0"
-    "@carbon/utilities-react": "npm:0.31.0"
+    "@carbon/utilities": "npm:0.29.0"
+    "@carbon/utilities-react": "npm:0.32.0"
     "@dnd-kit/core": "npm:^6.3.1"
     "@dnd-kit/modifiers": "npm:^9.0.0"
     "@dnd-kit/sortable": "npm:^10.0.0"
@@ -2359,12 +2374,12 @@ __metadata:
     vite: "npm:^7.0.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
-    "@carbon/grid": ^11.65.0
-    "@carbon/layout": ^11.62.0
-    "@carbon/motion": ^11.55.0
-    "@carbon/react": ^1.119.0
-    "@carbon/themes": ^11.84.0
-    "@carbon/type": ^11.70.0
+    "@carbon/grid": ^11.66.0
+    "@carbon/layout": ^11.63.0
+    "@carbon/motion": ^11.56.0
+    "@carbon/react": ^1.120.0
+    "@carbon/themes": ^11.85.0
+    "@carbon/type": ^11.71.0
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
     react-is: ^16.13.1 || ^17.0.2 || ^18.3.1 || ^19.0.0
@@ -2389,12 +2404,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icon-helpers@npm:^10.84.0":
-  version: 10.84.0
-  resolution: "@carbon/icon-helpers@npm:10.84.0"
+"@carbon/icon-helpers@npm:^10.85.0":
+  version: 10.85.0
+  resolution: "@carbon/icon-helpers@npm:10.85.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/ce31a169a6cb8d03690ffc6ba80263f126338942c8312b1b5f0087aa043c813296698fb9b3d302290953a8690c9bdae74fab5b531f904d151c6d6ac7fd4a2515
+  checksum: 10/15fca3f6b855eaa2efbf959e1e6cb423dcd707a386e71260dbd068854fc2f606456132628bdef775d0f15dbcbbca9da9b4cf25e5b6d228d4b0622a731e49f3eb
   languageName: node
   linkType: hard
 
@@ -2411,16 +2426,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.91.0":
-  version: 11.91.0
-  resolution: "@carbon/icons-react@npm:11.91.0"
+"@carbon/icons-react@npm:^11.92.0":
+  version: 11.92.0
+  resolution: "@carbon/icons-react@npm:11.92.0"
   dependencies:
-    "@carbon/icon-helpers": "npm:^10.84.0"
+    "@carbon/icon-helpers": "npm:^10.85.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
   peerDependencies:
     react: ">=16"
-  checksum: 10/de384e25cb27207bfc76f655baaa33ebcef6aa5c1a2f28b044f091bd9605cee5bd8b08c739e922fdd5af38155b3bcb88173c8648bd367bf31649d45e6473fa36
+  checksum: 10/bc3812225dfcaa5b4d6a2a27ca3704dd8f5aef2d9c5108ce291226e5636a2e860ce5367f37ded88306252bb25aec4b165f0383966168fe50d61e887a776e00d2
   languageName: node
   linkType: hard
 
@@ -2433,12 +2448,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons@npm:^11.91.0":
-  version: 11.91.0
-  resolution: "@carbon/icons@npm:11.91.0"
+"@carbon/icons@npm:^11.92.0":
+  version: 11.92.0
+  resolution: "@carbon/icons@npm:11.92.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/e05e565f393c66d706039a7e7be72b9a00f9d9ba34105d923f769a90da749589e2f803e4c93b3d5372024453554fac9f82e5501e89479ed4eb38a44c11fd3bf5
+  checksum: 10/52711e58b16cb1f2dfdd7a48ea331934c8ea2bdcad526d2bf358cddadcac8cd269ecc1ee3293dbf419c9fc501268abeea7bade1808dc42c6a9c5bda05d86d508
   languageName: node
   linkType: hard
 
@@ -2460,12 +2475,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.62.0":
-  version: 11.62.0
-  resolution: "@carbon/layout@npm:11.62.0"
+"@carbon/layout@npm:^11.63.0":
+  version: 11.63.0
+  resolution: "@carbon/layout@npm:11.63.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/81c1096a1f42f7e37d35ffb3d9450ce7a99665bffbbb0557dffccf4acc53d3117c9701b12f11cacb022ebb5b59320803c9249ed3f2eb41e88112bae3db121354
+  checksum: 10/4b7aa1e925340b2e91f91723b16245fb1d8ff742942f136ffcf504b65e5ef132445ea890668770a95028f5d2dce510e29c69762bb959b07c3ef16306f7aef8f3
   languageName: node
   linkType: hard
 
@@ -2487,39 +2502,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.55.0":
-  version: 11.55.0
-  resolution: "@carbon/motion@npm:11.55.0"
+"@carbon/motion@npm:^11.56.0":
+  version: 11.56.0
+  resolution: "@carbon/motion@npm:11.56.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/a81de66bf5b729db955722a3806d9375720eaed9b5d1c6f2be43e7af91a60d87a5da99627608b58597594fb378120db4cfb915e37157d18c8dc964c646462ec2
+  checksum: 10/db156065b21d114ff7988c7d0c0cb45ace40ff60e1bf26afe9e8c59fcfae5cf9672150b9da295c3aed086b890b82ca0c5b46e94f371fe61f769ae5c5cf90247a
   languageName: node
   linkType: hard
 
-"@carbon/pictograms-react@npm:^11.113.0":
-  version: 11.113.0
-  resolution: "@carbon/pictograms-react@npm:11.113.0"
+"@carbon/pictograms-react@npm:^11.114.0":
+  version: 11.114.0
+  resolution: "@carbon/pictograms-react@npm:11.114.0"
   dependencies:
-    "@carbon/icon-helpers": "npm:^10.84.0"
+    "@carbon/icon-helpers": "npm:^10.85.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
   peerDependencies:
     react: ">=16"
-  checksum: 10/28d01dce4946f035561a97d296a3d0c1065aa6c682dfe71b10c502542ebc2f1c57c3173fad37129a4d4f99533d241e019f9c2f94f262309b2205d85b37c5395a
+  checksum: 10/192d3e427dca2254a64bfa60d6d5c77ce1541c388206a6b562c7b435d171c038ab9a7ff531bb4b12f5e752eb020b42a0775ba3aeb9c8d069e1f19c36c7d0fe09
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.119.0":
-  version: 1.119.0
-  resolution: "@carbon/react@npm:1.119.0"
+"@carbon/react@npm:^1.120.0":
+  version: 1.120.0
+  resolution: "@carbon/react@npm:1.120.0"
   dependencies:
     "@babel/runtime": "npm:^8.0.0"
-    "@carbon/feature-flags": "npm:^1.11.0"
-    "@carbon/icons-react": "npm:^11.91.0"
-    "@carbon/layout": "npm:^11.62.0"
-    "@carbon/motion": "npm:^11.55.0"
-    "@carbon/styles": "npm:^1.118.0"
-    "@carbon/utilities": "npm:^0.28.0"
+    "@carbon/feature-flags": "npm:^1.12.0"
+    "@carbon/icons-react": "npm:^11.92.0"
+    "@carbon/layout": "npm:^11.63.0"
+    "@carbon/motion": "npm:^11.56.0"
+    "@carbon/styles": "npm:^1.119.0"
+    "@carbon/utilities": "npm:^0.29.0"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
     classnames: "npm:2.5.1"
@@ -2540,7 +2555,7 @@ __metadata:
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: 10/2c3c494c3c120ab97c4d29bd3966f62aec9977dad4e7023d1b4a32bad9fc6ac620ed6dfbb35ceff3f9b1f231f68eec0c8cff7d2e3213d1a0d67a05e29f58b313
+  checksum: 10/a125ec7ef4327866a617f71648f17d8203fa97b78af0ed3ce2b45a57a6a18b6e045dbd5e74f3607197437cb9aca6753a3f6fb78d83b134bd6aa5ae5bc568d623
   languageName: node
   linkType: hard
 
@@ -2568,17 +2583,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.118.0":
-  version: 1.118.0
-  resolution: "@carbon/styles@npm:1.118.0"
+"@carbon/styles@npm:^1.119.0":
+  version: 1.119.0
+  resolution: "@carbon/styles@npm:1.119.0"
   dependencies:
-    "@carbon/colors": "npm:^11.61.0"
-    "@carbon/feature-flags": "npm:^1.11.0"
-    "@carbon/grid": "npm:^11.65.0"
-    "@carbon/layout": "npm:^11.62.0"
-    "@carbon/motion": "npm:^11.55.0"
-    "@carbon/themes": "npm:^11.84.0"
-    "@carbon/type": "npm:^11.70.0"
+    "@carbon/colors": "npm:^11.62.0"
+    "@carbon/feature-flags": "npm:^1.12.0"
+    "@carbon/grid": "npm:^11.66.0"
+    "@carbon/layout": "npm:^11.63.0"
+    "@carbon/motion": "npm:^11.56.0"
+    "@carbon/themes": "npm:^11.85.0"
+    "@carbon/type": "npm:^11.71.0"
     "@ibm/plex": "npm:6.4.1"
     "@ibm/plex-mono": "npm:2.5.0"
     "@ibm/plex-sans": "npm:1.1.0"
@@ -2594,7 +2609,7 @@ __metadata:
   peerDependenciesMeta:
     sass:
       optional: true
-  checksum: 10/575aa30c6772a29c8bceb3c3413748c80baf91df75bc76e0826f48153f3df205e580ee0a18f9604c0c0793f95d9a31f7fc0d252a52f2890ba3b830d9c0bf1f07
+  checksum: 10/ce6469eeda810a8296d1ce6a62ce905e5c4f676572a559a4332ac0ab6dd6d2a25f8c0b703de649e3af85dfcca26a2e2dbbd2de9167b6be5a4d67a1089e63b117
   languageName: node
   linkType: hard
 
@@ -2663,16 +2678,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.84.0":
-  version: 11.84.0
-  resolution: "@carbon/themes@npm:11.84.0"
+"@carbon/themes@npm:^11.85.0":
+  version: 11.85.0
+  resolution: "@carbon/themes@npm:11.85.0"
   dependencies:
-    "@carbon/colors": "npm:^11.61.0"
-    "@carbon/layout": "npm:^11.62.0"
-    "@carbon/type": "npm:^11.70.0"
+    "@carbon/colors": "npm:^11.62.0"
+    "@carbon/layout": "npm:^11.63.0"
+    "@carbon/type": "npm:^11.71.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     color: "npm:^4.0.0"
-  checksum: 10/d5df4e41e55851756a010efb2c417d95dfe92ea90df8199dfbad4139698b20dfa2280ab2b37243fb90c54f77d68ef59b56593b3975fce782faddbe879bf377c0
+  checksum: 10/dd76d347a29cf15c4e29fd13c611053b95a0ff842fb0a1b53c5720e20db7629b3cb413cce640783c31a738b46cf7e0c6fc10457547443a10750843485baccfeb
   languageName: node
   linkType: hard
 
@@ -2698,37 +2713,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.70.0":
-  version: 11.70.0
-  resolution: "@carbon/type@npm:11.70.0"
+"@carbon/type@npm:^11.71.0":
+  version: 11.71.0
+  resolution: "@carbon/type@npm:11.71.0"
   dependencies:
-    "@carbon/grid": "npm:^11.65.0"
-    "@carbon/layout": "npm:^11.62.0"
+    "@carbon/grid": "npm:^11.66.0"
+    "@carbon/layout": "npm:^11.63.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
-  checksum: 10/22de36e9f79e60766e14f11ff90deff57b50ffebce54c225402bb3098497499fc8881333f2bb6cc2e65cef2d6abd5a6a7150db18ce2fb0d7061aa78e503a9f81
+  checksum: 10/7ee0ef1d1a4937ae546da9583d30b284b897097309f8a222ed4df09f3b98f8f3a2a33a2ccfca9a84e1265942b162c333226a104a1a6817ba2c63a68656612a59
   languageName: node
   linkType: hard
 
-"@carbon/utilities-react@npm:0.31.0":
-  version: 0.31.0
-  resolution: "@carbon/utilities-react@npm:0.31.0"
+"@carbon/utilities-react@npm:0.32.0":
+  version: 0.32.0
+  resolution: "@carbon/utilities-react@npm:0.32.0"
   dependencies:
-    "@carbon/utilities": "npm:^0.28.0"
+    "@carbon/utilities": "npm:^0.29.0"
     "@ibm/telemetry-js": "npm:^1.6.1"
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
-  checksum: 10/4de20cf5e8b4ac07954d64fd7200f334a7bbc1ee8cc5c7aadf443b761120dcd096b938f0701c032972fdc9c5e1ce91d2a0780cb34185dc5fb8832e765a51fea0
+  checksum: 10/170b698eab7754f1c5eef3fdbc9f29a7c486e15b76fad3d230a53ba27dc16d1f6787b3c977fe2d93cf00a1b59e84d6e7974e4d00e0ffe6695a0306252c42df9d
   languageName: node
   linkType: hard
 
-"@carbon/utilities@npm:0.28.0, @carbon/utilities@npm:^0.28.0":
-  version: 0.28.0
-  resolution: "@carbon/utilities@npm:0.28.0"
+"@carbon/utilities@npm:0.29.0, @carbon/utilities@npm:^0.29.0":
+  version: 0.29.0
+  resolution: "@carbon/utilities@npm:0.29.0"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.6.1"
     "@internationalized/number": "npm:^3.6.1"
     temporal-polyfill: "npm:^1.0.4"
-  checksum: 10/a6c251f703e47c76a4848132ec9d43a58d438ed3cd1dff88c04b962be5afa8c221e3de17b205dc9ba02a4dc2d7427a616788acad789fb3ea3cb80268c1879d1a
+  checksum: 10/b5445bcb9e97684ec63cd7dd41e4c286d52a85ef196cdc2da7267e2954d9a89aa314450b693ebfba36b7021d3d3c8c659fdc5bc2f98d560b007ba6e8bff5f214
   languageName: node
   linkType: hard
 
@@ -2741,14 +2756,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/web-components@npm:2.66.0":
-  version: 2.66.0
-  resolution: "@carbon/web-components@npm:2.66.0"
+"@carbon/web-components@npm:2.67.0":
+  version: 2.67.0
+  resolution: "@carbon/web-components@npm:2.67.0"
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
-    "@carbon/icons": "npm:^11.91.0"
-    "@carbon/styles": "npm:^1.118.0"
-    "@carbon/utilities": "npm:^0.28.0"
+    "@carbon/icons": "npm:^11.92.0"
+    "@carbon/styles": "npm:^1.119.0"
+    "@carbon/utilities": "npm:^0.29.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@lit/context": "npm:^1.1.3"
@@ -2758,7 +2773,7 @@ __metadata:
     tslib: "npm:^2.6.3"
   bin:
     create-prefixed-build: bin/create-prefixed-build.js
-  checksum: 10/f342a29f8247e916556740e5f15d9e8009a5f89c9afc926c3f63319a8e56b26f6a6f27a3b64085739eabbf64dd2628e4914cadf474f927a5de5731675515e0aa
+  checksum: 10/531282a75a3bf02dc16770912cb1c57fc243cd39d9fcd3da84b97ce24be426d044440743f8ae1e56fff80e7c8f51e2daf68031da46ad040ee682c46ad3b54df4
   languageName: node
   linkType: hard
 
@@ -3929,16 +3944,53 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@es-joy/jsdoccomment@npm:~0.98.0":
-  version: 0.98.0
-  resolution: "@es-joy/jsdoccomment@npm:0.98.0"
+"@es-joy/escodegen@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@es-joy/escodegen@npm:5.0.1"
+  dependencies:
+    "@es-joy/estraverse": "npm:^7.1.1"
+    "@es-joy/esutils": "npm:^3.0.0"
+    "@es-joy/jsdoccomment": "npm:^1.1.0"
+    "@types/estree": "npm:^1.0.10"
+    esprima: "npm:^4.0.1"
+    optionator: "npm:^0.9.4"
+    source-map: "npm:~0.8.0"
+  dependenciesMeta:
+    source-map:
+      optional: true
+  bin:
+    escodegen: ./bin/escodegen.js
+    esgenerate: ./bin/esgenerate.js
+  checksum: 10/23d922f4cb4db44a442698cec682b5a2ad269fdf302d91044aa358c6da35f0116141ea48af6554b2410ea2f3be7240db8881123ab12e973c30a13895f0d98419
+  languageName: node
+  linkType: hard
+
+"@es-joy/estraverse@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "@es-joy/estraverse@npm:7.1.1"
+  checksum: 10/d4ecc8625937de516b24aaa801fe054a02f03eff33398058a9a5e1e724c942dbed054c5a8fc61299968a317b0a37d60425165245d002d49ad5424b38fd28275f
+  languageName: node
+  linkType: hard
+
+"@es-joy/esutils@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@es-joy/esutils@npm:3.0.0"
   dependencies:
     "@types/estree": "npm:^1.0.9"
-    "@typescript-eslint/types": "npm:^8.70.0"
+  checksum: 10/549a1b4072182053f0be45aa7a23b80a64e8f1bf5b95b256ddf166151ba4b58d0dbb94b9d324ffb296dc7086c51d33eafb8ecf81fffe0c5fe728f269ad04df98
+  languageName: node
+  linkType: hard
+
+"@es-joy/jsdoccomment@npm:^1.1.0, @es-joy/jsdoccomment@npm:~1.2.0":
+  version: 1.2.0
+  resolution: "@es-joy/jsdoccomment@npm:1.2.0"
+  dependencies:
+    "@types/estree": "npm:^1.0.10"
+    "@typescript-eslint/types": "npm:^8.72.2"
     comment-parser: "npm:1.4.9"
     esquery: "npm:^1.7.0"
-    jsdoc-type-pratt-parser: "npm:~9.2.2"
-  checksum: 10/4fcdbfd9a1aacc684c52f1655be4840f0fad8807d32f615a84da33995da630b58d13d38081d60f1df59d06aaa9e1e99ce8081141bb1a71d0b12625d34aba97fe
+    jsdoc-type-pratt-parser: "npm:~9.5.0"
+  checksum: 10/7917edc2ec197f9cebfe195a4d5e1b401db239760455abc991c5d10aee38ed7ff87f9d9fee4f1d3e57ddcc1b2f06ead17072db2edb956ce96584ca29b7d591f8
   languageName: node
   linkType: hard
 
@@ -8671,6 +8723,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/estree@npm:^1.0.10":
+  version: 1.0.10
+  resolution: "@types/estree@npm:1.0.10"
+  checksum: 10/dfc3b05946d9e99e959843eddd2ed11b9ba750d30abbbd998ad7d6565f459ef647b7ea935124de622d80b6aa1eaa0f86bfc65e665ac91c71f63fbf0262912a7d
+  languageName: node
+  linkType: hard
+
 "@types/estree@npm:^1.0.9":
   version: 1.0.9
   resolution: "@types/estree@npm:1.0.9"
@@ -9288,16 +9347,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/project-service@npm:8.72.0":
-  version: 8.72.0
-  resolution: "@typescript-eslint/project-service@npm:8.72.0"
+"@typescript-eslint/project-service@npm:8.72.2":
+  version: 8.72.2
+  resolution: "@typescript-eslint/project-service@npm:8.72.2"
   dependencies:
-    "@typescript-eslint/tsconfig-utils": "npm:^8.72.0"
-    "@typescript-eslint/types": "npm:^8.72.0"
+    "@typescript-eslint/tsconfig-utils": "npm:^8.72.2"
+    "@typescript-eslint/types": "npm:^8.72.2"
     debug: "npm:^4.4.3"
   peerDependencies:
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/856d52de4ad0ee093ea4eaf8e6fec0e9b916e484b876e26eab29c956c08324f752c9e621604f6381a57168762a8ae9ba0b249d37873f16ed87c721e3303d11a5
+  checksum: 10/d1c34c837d72f5a7f097c617e26fa769e2c12ca8dc7c37116a885a2fce2f586f25861b461339d7e03c3eea065b1161f63ad0d32864989fbc712f0372f81e39b5
   languageName: node
   linkType: hard
 
@@ -9331,13 +9390,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:8.72.0":
-  version: 8.72.0
-  resolution: "@typescript-eslint/scope-manager@npm:8.72.0"
+"@typescript-eslint/scope-manager@npm:8.72.2":
+  version: 8.72.2
+  resolution: "@typescript-eslint/scope-manager@npm:8.72.2"
   dependencies:
-    "@typescript-eslint/types": "npm:8.72.0"
-    "@typescript-eslint/visitor-keys": "npm:8.72.0"
-  checksum: 10/2784d013091912cabc8bf86ac05e2038c3f22bd3d41b0fa28774cedf258eb968bf2823f4c318e42f723080686b1026f9de1b9880bd3cc1f57cdd4ddc4521b31c
+    "@typescript-eslint/types": "npm:8.72.2"
+    "@typescript-eslint/visitor-keys": "npm:8.72.2"
+  checksum: 10/d619e59ef7dd4c7b9a016278e1e18fb30a6e4da19218362b940107e5d5ca029f73b0e35cf577c4f74b3da787a00a98baa481938c4fde7cec03407e24e7d86349
   languageName: node
   linkType: hard
 
@@ -9350,12 +9409,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/tsconfig-utils@npm:8.72.0, @typescript-eslint/tsconfig-utils@npm:^8.72.0":
-  version: 8.72.0
-  resolution: "@typescript-eslint/tsconfig-utils@npm:8.72.0"
+"@typescript-eslint/tsconfig-utils@npm:8.72.2, @typescript-eslint/tsconfig-utils@npm:^8.72.2":
+  version: 8.72.2
+  resolution: "@typescript-eslint/tsconfig-utils@npm:8.72.2"
   peerDependencies:
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/b6b446513e475fabcc900efe58d0c5f24d69e9e9fb717d3f49f8bb7e4f44b4906123ec21af2feb15a847e82f008310c6a5707cc0d473fdfd5226b63475e302a6
+  checksum: 10/0b994c18e3049d4202d78e16b9b957e8f1fa75fb11ebaedea342e09d2643b6d19daf5392f330727067610823b282aaade174229bdf3c715633d8f3f306209ddf
   languageName: node
   linkType: hard
 
@@ -9412,10 +9471,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.72.0, @typescript-eslint/types@npm:^8.70.0, @typescript-eslint/types@npm:^8.72.0":
-  version: 8.72.0
-  resolution: "@typescript-eslint/types@npm:8.72.0"
-  checksum: 10/45d3b3b667b50352934feead34507930b2cbbb2ab8efffa507c89ba5cf99fdfa8d0e62346547f6c9f8463d2afa2e16e527c861160bd096ccafc660b602d9d415
+"@typescript-eslint/types@npm:8.72.2, @typescript-eslint/types@npm:^8.72.2":
+  version: 8.72.2
+  resolution: "@typescript-eslint/types@npm:8.72.2"
+  checksum: 10/f903893c7c467a8773e586b8042c149107024d9df918ca59101b64c6abb84891df7106d073a3443dfabb3a822e54528b35dc9d56826ac76b9f686fabe8b6f2b2
   languageName: node
   linkType: hard
 
@@ -9474,14 +9533,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:8.72.0":
-  version: 8.72.0
-  resolution: "@typescript-eslint/typescript-estree@npm:8.72.0"
+"@typescript-eslint/typescript-estree@npm:8.72.2":
+  version: 8.72.2
+  resolution: "@typescript-eslint/typescript-estree@npm:8.72.2"
   dependencies:
-    "@typescript-eslint/project-service": "npm:8.72.0"
-    "@typescript-eslint/tsconfig-utils": "npm:8.72.0"
-    "@typescript-eslint/types": "npm:8.72.0"
-    "@typescript-eslint/visitor-keys": "npm:8.72.0"
+    "@typescript-eslint/project-service": "npm:8.72.2"
+    "@typescript-eslint/tsconfig-utils": "npm:8.72.2"
+    "@typescript-eslint/types": "npm:8.72.2"
+    "@typescript-eslint/visitor-keys": "npm:8.72.2"
     debug: "npm:^4.4.3"
     minimatch: "npm:^10.2.2"
     semver: "npm:^7.7.3"
@@ -9489,7 +9548,7 @@ __metadata:
     ts-api-utils: "npm:^2.5.0"
   peerDependencies:
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/b588b1423ef38bfeff9e74313454998acff84e2bfe3bed524cfc22303318b58819a8589ceabb5a6de25b11d2670706803b6b00ca3a8428208469f68e5a4a4ad1
+  checksum: 10/82b9598cf2481bfa49aeb172f9af7ce5d13a457743bc0fa567b03bf0af8061b1a0d68f18d598ffd557aae9291c7049991774b3ce83d651c14a924f661d98a857
   languageName: node
   linkType: hard
 
@@ -9541,18 +9600,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:^8.70.0":
-  version: 8.72.0
-  resolution: "@typescript-eslint/utils@npm:8.72.0"
+"@typescript-eslint/utils@npm:^8.72.2":
+  version: 8.72.2
+  resolution: "@typescript-eslint/utils@npm:8.72.2"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.9.1"
-    "@typescript-eslint/scope-manager": "npm:8.72.0"
-    "@typescript-eslint/types": "npm:8.72.0"
-    "@typescript-eslint/typescript-estree": "npm:8.72.0"
+    "@typescript-eslint/scope-manager": "npm:8.72.2"
+    "@typescript-eslint/types": "npm:8.72.2"
+    "@typescript-eslint/typescript-estree": "npm:8.72.2"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/2f4f0083a7f4775f892eaf36bca0999917de027a3985a4c5ab02e0f8f1771a163e947e7b1d5e928cf12624b78bc112ca0fdf5e1c233100ab6cf790f733293153
+  checksum: 10/dfaab85de74c229d80da9692a3ea0055fd331e694db87a333a7b5f360fbe78ce91938e3315be5874f11141005087ea93536481215ef555ae595588653db5ef39
   languageName: node
   linkType: hard
 
@@ -9586,13 +9645,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:8.72.0":
-  version: 8.72.0
-  resolution: "@typescript-eslint/visitor-keys@npm:8.72.0"
+"@typescript-eslint/visitor-keys@npm:8.72.2":
+  version: 8.72.2
+  resolution: "@typescript-eslint/visitor-keys@npm:8.72.2"
   dependencies:
-    "@typescript-eslint/types": "npm:8.72.0"
+    "@typescript-eslint/types": "npm:8.72.2"
     eslint-visitor-keys: "npm:^5.0.0"
-  checksum: 10/db348dce2e373cae5e56410a5ea0b5cc33ccfc9abeb254ed46464dbbe0087d92a0c7000adba75e5c050d310b7df6cf5fb1f872c6b11cb3b2519af930d6d9d5ac
+  checksum: 10/af8bbe271d2481cb3a4b131eda3c91bd2ee7246fb7ec68433f83447719534878f8572c8e6e0749fc5175f86fcb06c0ac9e8b6c69951a8b03f139c28bf3b46da7
   languageName: node
   linkType: hard
 
@@ -14732,9 +14791,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-carbon@npm:^3.29.0":
-  version: 3.29.0
-  resolution: "eslint-config-carbon@npm:3.29.0"
+"eslint-config-carbon@npm:^3.30.0":
+  version: 3.30.0
+  resolution: "eslint-config-carbon@npm:3.30.0"
   dependencies:
     "@babel/eslint-parser": "npm:^8.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^5.59.6"
@@ -14745,7 +14804,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-jest: "npm:^29.0.0"
     eslint-plugin-jest-dom: "npm:^5.0.0"
-    eslint-plugin-jsdoc: "npm:^64.0.0"
+    eslint-plugin-jsdoc: "npm:^65.0.0"
     eslint-plugin-jsx-a11y: "npm:^6.7.1"
     eslint-plugin-prettier: "npm:^5.0.0"
     eslint-plugin-react: "npm:^7.32.2"
@@ -14755,7 +14814,7 @@ __metadata:
     eslint-restricted-globals: "npm:^0.2.0"
   peerDependencies:
     eslint: ^9.0.0
-  checksum: 10/bf79b6b8b8b2fac450fbb782fad1ebb5c2c9a707e7888bd98fa51226c1304b1a99cd6d4387bb90339e1399051a28ac9f078dcb21129418ca90955a0fa3965567
+  checksum: 10/2b544745de9f72b91bfa85ffabf7320557ce1f105a467e8402bc5041b5e1d45527069b9c1f3f267314f26b477714b937eeb354198a51832ee289431e487456d2
   languageName: node
   linkType: hard
 
@@ -14859,13 +14918,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:^64.0.0":
-  version: 64.5.4
-  resolution: "eslint-plugin-jsdoc@npm:64.5.4"
+"eslint-plugin-jsdoc@npm:^65.0.0":
+  version: 65.4.7
+  resolution: "eslint-plugin-jsdoc@npm:65.4.7"
   dependencies:
-    "@es-joy/jsdoccomment": "npm:~0.98.0"
+    "@es-joy/escodegen": "npm:^5.0.1"
+    "@es-joy/jsdoccomment": "npm:~1.2.0"
     "@es-joy/resolve.exports": "npm:1.2.0"
-    "@typescript-eslint/utils": "npm:^8.70.0"
+    "@typescript-eslint/utils": "npm:^8.72.2"
     are-docs-informative: "npm:^0.1.1"
     comment-parser: "npm:1.4.9"
     debug: "npm:^4.4.3"
@@ -14875,7 +14935,7 @@ __metadata:
     html-entities: "npm:^2.6.0"
     object-deep-merge: "npm:^2.0.1"
     parse-imports-exports: "npm:^0.2.4"
-    semver: "npm:^7.8.5"
+    semver: "npm:^7.8.6"
     spdx-expression-parse: "npm:^5.0.0"
     to-valid-identifier: "npm:^1.0.0"
   peerDependencies:
@@ -14884,7 +14944,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/1eba594af0c3357e4d9615d336f4a2d1eeba0f5632dadcdfa277c6ebcc2e1257ea37d0a193916044c0c5428240872b3ed3004ecd6cdbbd4043f6a7d642d08263
+  checksum: 10/095cbf6bd7640a77ff2e6a584999a374ca0ae5f2549a6d614a08686129ebca344bc5bc4a3f92cd6c4b1aa93f9339e37deb8066f92d8d4157c71bb8735a3319e4
   languageName: node
   linkType: hard
 
@@ -16704,13 +16764,13 @@ __metadata:
     "@babel/core": "npm:^7.29.6"
     "@babel/eslint-parser": "npm:^7.26.10"
     "@babel/preset-react": "npm:^7.26.3"
-    "@carbon/grid": "npm:^11.65.0"
-    "@carbon/layout": "npm:^11.62.0"
-    "@carbon/motion": "npm:^11.55.0"
-    "@carbon/pictograms-react": "npm:^11.113.0"
-    "@carbon/react": "npm:^1.119.0"
-    "@carbon/themes": "npm:^11.84.0"
-    "@carbon/type": "npm:^11.70.0"
+    "@carbon/grid": "npm:^11.66.0"
+    "@carbon/layout": "npm:^11.63.0"
+    "@carbon/motion": "npm:^11.56.0"
+    "@carbon/pictograms-react": "npm:^11.114.0"
+    "@carbon/react": "npm:^1.120.0"
+    "@carbon/themes": "npm:^11.85.0"
+    "@carbon/type": "npm:^11.71.0"
     "@commitlint/cli": "npm:^21.0.0"
     "@commitlint/config-conventional": "npm:^21.0.0"
     "@eslint/compat": "npm:^1.2.7"
@@ -16729,7 +16789,7 @@ __metadata:
     copyfiles: "npm:^2.4.1"
     cspell: "npm:^10.0.0"
     eslint: "npm:^9.22.0"
-    eslint-config-carbon: "npm:^3.29.0"
+    eslint-config-carbon: "npm:^3.30.0"
     eslint-plugin-jsx-a11y: "npm:^6.10.2"
     eslint-plugin-react: "npm:^7.37.4"
     eslint-plugin-react-hooks: "npm:^5.2.0"
@@ -18783,12 +18843,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdoc-type-pratt-parser@npm:~9.2.2":
-  version: 9.2.3
-  resolution: "jsdoc-type-pratt-parser@npm:9.2.3"
+"jsdoc-type-pratt-parser@npm:~9.5.0":
+  version: 9.5.0
+  resolution: "jsdoc-type-pratt-parser@npm:9.5.0"
   dependencies:
     "@types/estree": "npm:^1.0.9"
-  checksum: 10/52b746f93b8d2aa5f96c05396ba583e9b7b4c21a3bd1700a2678db1daecf9ffd73ec9c399560adb837d69b4a41f3be2f21858dde6d446727c347b1ddad7f0228
+  checksum: 10/53e544955ead7bcbd1e77992248919d5d6b4d9e39c8fad7158694ce1b4daace93a47d213ec3f86887d631c868bb4a5a6a446b28c6f31f53c979ad36b0f189181
   languageName: node
   linkType: hard
 
@@ -21681,7 +21741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"optionator@npm:^0.9.3":
+"optionator@npm:^0.9.3, optionator@npm:^0.9.4":
   version: 0.9.4
   resolution: "optionator@npm:0.9.4"
   dependencies:
@@ -24705,6 +24765,13 @@ __metadata:
   version: 0.7.4
   resolution: "source-map@npm:0.7.4"
   checksum: 10/a0f7c9b797eda93139842fd28648e868a9a03ea0ad0d9fa6602a0c1f17b7fb6a7dcca00c144476cccaeaae5042e99a285723b1a201e844ad67221bf5d428f1dc
+  languageName: node
+  linkType: hard
+
+"source-map@npm:~0.8.0":
+  version: 0.8.0
+  resolution: "source-map@npm:0.8.0"
+  checksum: 10/ad71b0c03715d970c2d114f0d403cc02c1e60e9ce997715f0a69bde2604b1d1ac287760f93d9763313a2a2b2c297df901f3378569f750a240e936ac5ddfd6b31
   languageName: node
   linkType: hard
 

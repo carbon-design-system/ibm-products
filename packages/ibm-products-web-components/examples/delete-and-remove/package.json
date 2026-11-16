@@ -11,8 +11,8 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@carbon/icons": "^11.91.0",
-    "@carbon/web-components": "^2.66.0",
+    "@carbon/icons": "^11.92.0",
+    "@carbon/web-components": "^2.67.0",
     "lit": "^3.1.4"
   },
   "devDependencies": {

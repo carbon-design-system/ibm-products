@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "lib": ["es2021", "dom", "dom.iterable"],
+    "typeRoots": ["../../../node_modules"],
+    "types": ["@figma/code-connect/figma-types-no-require"]
+  },
+  "include": ["**/*.figma.ts", "template-helpers.ts"],
+  "exclude": []
+}

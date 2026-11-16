@@ -52,6 +52,7 @@ ignore:
   # Figma design integration files (not production code)
   - '**/*.figma.tsx'
   - '**/*.figma.ts'
+  - '**/code-connect/**'
 
   # Storybook story assets
   - '**/_story-assets/**'

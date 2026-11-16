@@ -24,40 +24,36 @@ export const useResizeObserver = (
   }, [onResize]);
 
   useEffect(() => {
-    const getInitialSize = () => {
-      if (ref.current) {
-        const refComputedStyle = window.getComputedStyle(ref.current);
-
-        const initialWidth =
-          (ref.current?.offsetWidth ?? 0) -
-          (typeof refComputedStyle?.paddingLeft === 'string' &&
-          refComputedStyle?.paddingLeft.length
-            ? parseFloat(refComputedStyle?.paddingLeft)
-            : 0) -
-          (typeof refComputedStyle?.paddingRight === 'string' &&
-          refComputedStyle?.paddingRight.length
-            ? parseFloat(refComputedStyle?.paddingRight)
-            : 0);
-
-        const initialHeight =
-          (ref.current?.offsetHeight ?? 0) -
-          (typeof refComputedStyle?.paddingTop === 'string' &&
-          refComputedStyle?.paddingTop.length
-            ? parseFloat(refComputedStyle?.paddingTop)
-            : 0) -
-          (typeof refComputedStyle?.paddingBottom === 'string' &&
-          refComputedStyle?.paddingBottom.length
-            ? parseFloat(refComputedStyle?.paddingBottom)
-            : 0);
-
-        setWidth(initialWidth);
-        setHeight(initialHeight);
-      }
-    };
     if (!ref?.current || (width >= 0 && height >= 0)) {
       return;
     }
-    getInitialSize();
+
+    const refComputedStyle = window.getComputedStyle(ref.current);
+
+    const initialWidth =
+      (ref.current?.offsetWidth ?? 0) -
+      (typeof refComputedStyle?.paddingLeft === 'string' &&
+      refComputedStyle?.paddingLeft.length
+        ? parseFloat(refComputedStyle?.paddingLeft)
+        : 0) -
+      (typeof refComputedStyle?.paddingRight === 'string' &&
+      refComputedStyle?.paddingRight.length
+        ? parseFloat(refComputedStyle?.paddingRight)
+        : 0);
+
+    const initialHeight =
+      (ref.current?.offsetHeight ?? 0) -
+      (typeof refComputedStyle?.paddingTop === 'string' &&
+      refComputedStyle?.paddingTop.length
+        ? parseFloat(refComputedStyle?.paddingTop)
+        : 0) -
+      (typeof refComputedStyle?.paddingBottom === 'string' &&
+      refComputedStyle?.paddingBottom.length
+        ? parseFloat(refComputedStyle?.paddingBottom)
+        : 0);
+
+    setWidth(initialWidth);
+    setHeight(initialHeight);
     // Ignoring exhaustive-deps as we do NOT want to include the ref in dep array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, height]);
@@ -96,7 +92,11 @@ export const useResizeObserver = (
     return () => {
       observer.disconnect();
     };
+    // ref.current is a mutable value — listing it in the dep array causes spurious
+    // re-runs in React 19 (safelyDetachRef path) that call setState during commit.
+    // The ResizeObserver callback handles all subsequent DOM node changes, so []
+    // is semantically correct.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref.current]);
+  }, []);
   return { width, height };
 };

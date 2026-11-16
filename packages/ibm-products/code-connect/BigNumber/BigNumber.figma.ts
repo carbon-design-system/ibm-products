@@ -34,7 +34,7 @@ function createTemplate() {
   });
   const trending = instance.getBoolean('Trending');
   // Number props have no getter: use a representative value.
-  const total = instance.getBoolean('Total') ? 10000 : undefined;
+  const total = instance.getBoolean('Total') ? 100 : undefined;
   const tooltipDescription = instance.getBoolean('Tooltip')
     ? 'Tooltip description'
     : undefined;

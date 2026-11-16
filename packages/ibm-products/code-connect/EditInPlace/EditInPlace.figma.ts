@@ -32,19 +32,22 @@ function createTemplate() {
     id: 'EditInPlace',
     imports: ["import { EditInPlace } from '@carbon/ibm-products';"],
     example: figma.code`<EditInPlace
-  readOnly={false}
-  cancelLabel="Cancel"
-  editLabel="Edit"
-  id="Example-ID"
-  labelText="Example label text"
-  onCancel={() => console.log('Cancel clicked')}
-  onChange={(val) => {
-    console.log('Changed to: ' + val);
-  }}
-  onSave={() => console.log('Save clicked')}
-  saveLabel="Save"
-  value="${value}"${figma.helpers.react.renderProp('size', size)}${figma.helpers.react.renderProp('invalid', invalid)}${figma.helpers.react.renderProp('invalidText', invalidText)}
-/>`,
+      readOnly={false}
+      cancelLabel="Cancel"
+      editLabel="Edit"
+      id="Example-ID"
+      labelText="Example label text"
+      onCancel={() => console.log('Cancel clicked')}
+      onChange={(val) => {
+        console.log('Changed to: ' + val);
+      }}
+      onSave={() => console.log('Save clicked')}
+      saveLabel="Save"
+      value="${value}"
+      ${figma.helpers.react.renderProp('size', size)}
+      ${figma.helpers.react.renderProp('invalid', invalid)}
+      ${figma.helpers.react.renderProp('invalidText', invalidText)}
+    />`,
     metadata: { nestable: false },
   };
 }

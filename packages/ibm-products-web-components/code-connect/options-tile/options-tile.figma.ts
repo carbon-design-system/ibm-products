@@ -63,7 +63,7 @@ function createTemplate() {
   ${summary ? figma.code`<div slot="summary">${summary}</div>` : ''}
   ${
     hasToggle
-      ? figma.code`<cds-toggle id="my-toggle" size="sm" hideLabel slot="toggle"></cds-toggle>`
+      ? figma.code`<div slot="toggle"><cds-toggle id="my-toggle" size="sm" hideLabel slot="toggle"></cds-toggle></div>`
       : ''
   }
   ${slot ? figma.code`<div slot="body">${slot}</div>` : ''}

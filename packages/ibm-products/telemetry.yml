@@ -23,6 +23,8 @@ collect:
         - allPageRowsLabel
         - allRowsLabel
         - allTagsModalAriaLabel
+        - allTagsModalCloseLabel
+        - allTagsModalSearchClearLabel
         - allTagsModalSearchLabel
         - allTagsModalSearchPlaceholderText
         - allTagsModalSearchThreshold
@@ -960,6 +962,7 @@ collect:
         # PageHeaderTabBar
         - disableStickyTabBar
         # PageHeaderTagOverflow
+        - hiddenTagsLabel
         - renderOverflowTag
         - renderPopoverContent
         # PageHeaderTitle
@@ -1040,7 +1043,9 @@ collect:
         - tagComponent
         # TagOverflowModal
         - allTags
+        - closeLabel
         - onTagClose
+        - searchClearLabel
         # Tearsheet
         - containerClassName
         - keepMounted

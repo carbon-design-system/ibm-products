@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products-web-components",
   "description": "Carbon for IBM Products Web Components",
-  "version": "0.51.0",
+  "version": "0.52.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -59,7 +59,7 @@
   "dependencies": {
     "@carbon-labs/wc-empty-state": "^0.22.0",
     "@carbon-labs/wc-resizer": "^0.5.0",
-    "@carbon/ibm-products-styles": "^2.98.0",
+    "@carbon/ibm-products-styles": "^2.99.0",
     "@carbon/layout": "^11.62.0",
     "@carbon/styles": "^1.118.0",
     "@carbon/utilities": "0.28.0",
@@ -76,7 +76,7 @@
     "@carbon/icon-helpers": "^10.84.0",
     "@carbon/icons": "^11.91.0",
     "@carbon/motion": "^11.55.0",
-    "@figma/code-connect": "^1.4.0",
+    "@figma/code-connect": "1.5.3",
     "@ibm/telemetry-js-config-generator": "^2.1.0",
     "@mordech/vite-lit-loader": "^0.40.0",
     "@open-wc/testing": "^5.0.0",

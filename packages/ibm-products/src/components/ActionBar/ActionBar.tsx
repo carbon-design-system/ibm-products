@@ -8,6 +8,7 @@
 // Import portions of React that are needed.
 import React, {
   useRef,
+  useEffect,
   PropsWithChildren,
   Ref,
   ForwardedRef,
@@ -98,6 +99,11 @@ interface ActionBarProps extends PropsWithChildren {
 
 /**
  * The ActionBar is used internally by the PageHeader to wrap ActionBarItems.
+ *
+ * @deprecated ActionBar is deprecated and will be removed in a future major release.
+ * ActionBar was only used internally by the legacy PageHeader, which is being replaced
+ * by the new composable PageHeader migrating to @carbon/react. Use the composable
+ * PageHeader from @carbon/ibm-products instead.
  */
 export const ActionBar = React.forwardRef(
   (
@@ -118,6 +124,13 @@ export const ActionBar = React.forwardRef(
     }: ActionBarProps,
     ref: Ref<HTMLDivElement>
   ) => {
+    useEffect(() => {
+      console.warn(
+        'ActionBar is deprecated and will be removed in a future major release. ' +
+          'Reason: ActionBar was only used internally by the legacy PageHeader, which is being replaced by the new composable PageHeader migrating to @carbon/react. Use the composable PageHeader from @carbon/ibm-products instead.'
+      );
+    }, []);
+
     const internalId = useRef(uuidv4());
     const refDisplayedItems = useRef<HTMLDivElement>(null);
     const backupRef = useRef<HTMLDivElement>(null);

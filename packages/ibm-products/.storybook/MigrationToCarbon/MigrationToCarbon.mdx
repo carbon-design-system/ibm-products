@@ -21,6 +21,7 @@ import LinkTo from '@storybook/addon-links/react';
 - [What do I need to change?](#what-do-i-need-to-change)
   - [Import path change](#import-path-change)
   - [Non-composable components — two-step migration](#non-composable-components--two-step-migration)
+  - [Tearsheet, PageHeader and Card — migrate to the composable versions](#tearsheet-pageheader-and-card--migrate-to-the-composable-versions)
   - [Codemods](#codemods)
 
 ---
@@ -144,9 +145,11 @@ pattern rather than an exported component.
 | Decorator        | No adoption.                                                                                                |
 | Expressive card  | Replaced by the new composable `Card` component.                                                            |
 | Get started card | Will be delivered as a pattern built on top of the new composable `Card` component.                         |
+| Page header      | Replaced by the new composable `PageHeader` (`preview__PageHeader`).                                        |
 | Productive card  | Replaced by the new composable `Card` component.                                                            |
 | Search bar       | No adoption.                                                                                                |
 | Tag set          | Deprecated in favour of `TagOverflow`, which provides the same capability with greater flexibility.         |
+| Tearsheet        | Replaced by the new composable `Tearsheet` (`preview__Tearsheet`).                                          |
 | Toolbar          | No adoption.                                                                                                |
 
 ### Patterns and examples
@@ -201,6 +204,71 @@ deprecated.
 
 Migration guides and codemods for each of these will be published alongside the
 v12 release.
+
+### Tearsheet, PageHeader and Card — migrate to the composable versions
+
+`Tearsheet`, `PageHeader` and `Card` are being replaced by new composable
+implementations. This applies to both the **React** (`@carbon/ibm-products`) and
+**Web Components** (`@carbon/ibm-products-web-components`) packages.
+
+| Component  | Current (non-composable) status                                  | New composable version                        | Available in v12  |
+| ---------- | ---------------------------------------------------------------- | --------------------------------------------- | ----------------- |
+| Tearsheet  | Stable component now carries a **deprecation notice**.           | **Delivered** — available as a **preview**.   | New version only. |
+| PageHeader | Stable component now carries a **deprecation notice**.           | **Delivered** — available as a **preview**.   | New version only. |
+| Card       | `ExpressiveCard` / `ProductiveCard` will be deprecated **soon**. | **Coming soon** — will ship as a **preview**. | New version only. |
+
+**In v12, only the new composable components will be available.** The existing
+stable `Tearsheet`, `PageHeader` and `Card` (`ExpressiveCard`, `ProductiveCard`)
+will not be carried forward, so they cannot be used after upgrading.
+
+#### What to do now
+
+- **Start migrating to the new composable versions today.** Do not wait for v12
+  — the composable `Tearsheet` and `PageHeader` are already available as
+  previews and are the versions that will ship as stable in v12.
+- **Treat the deprecation notices as action items.** The old components keep
+  working until v12, but will receive no new features.
+- **Plan for `Card`.** Avoid starting new work on `ExpressiveCard` or
+  `ProductiveCard`. Migrate to the composable `Card` once it is released as a
+  preview. This will be released from @carbon/react
+- **Expect an API change, not just an import-path change.** The new components
+  are composed from smaller building blocks (for example header, body and footer
+  parts for `Tearsheet`) rather than configured through a single set of props.
+
+#### React
+
+The composable previews are exported from `@carbon/ibm-products` with a
+`preview__` prefix:
+
+```jsx
+// Before (deprecated)
+import { Tearsheet, PageHeader } from '@carbon/ibm-products';
+
+// After (composable, preview)
+import {
+  preview__Tearsheet as Tearsheet,
+  preview__PageHeader as PageHeader,
+} from '@carbon/ibm-products';
+```
+
+For codemods, prop mappings and side-by-side examples, see the migration
+sections in the component docs:
+
+- [Tearsheet — Migration from Legacy Tearsheet](?path=/docs/preview-tearsheet--docs#migration-from-legacy-tearsheet)
+- [PageHeader — Migration guidance from deprecated PageHeader to preview_PageHeader](?path=/docs/preview-pageheader--docs#migration-guidance-from-deprecated-pageheader-to-preview_pageheader)
+
+#### Web Components
+
+Detailed migration guide:
+[Tearsheet → `c4p-preview-tearsheet`](https://ibm-products-web-components.carbondesignsystem.com/?path=/docs/preview-tearsheet--docs#migration-from-legacy-tearsheet)
+
+The composable Tearsheet is delivered as a separate set of elements. For
+example, use `CDSTearsheetPreview` (`<c4p-preview-tearsheet>`) together with its
+companion elements such as `CDSTearsheetHeader`, `CDSTearsheetBody` and
+`CDSTearsheetFooter` in place of `CDSTearsheet` (`<c4p-tearsheet>`). Refer to
+the `PageHeader` and `Tearsheet` stories for the available composable elements.
+
+Migration guides and codemods will be published alongside the v12 release.
 
 ### Codemods
 

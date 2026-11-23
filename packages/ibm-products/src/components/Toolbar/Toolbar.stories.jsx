@@ -40,10 +40,11 @@ import {
   previewCandidate__ToolbarButton as ToolbarButton,
   previewCandidate__ToolbarGroup as ToolbarGroup,
 } from '..';
+import { Annotation } from '../../../.storybook/Annotation';
 import mdx from './Toolbar.mdx';
 
 export default {
-  title: 'Preview Candidate/Toolbar',
+  title: 'Deprecated/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: {
@@ -56,6 +57,22 @@ export default {
       control: 'boolean',
     },
   },
+  decorators: [
+    (story) => (
+      <Annotation
+        type="deprecation-notice"
+        text={
+          <div>
+            <strong>Toolbar</strong> is deprecated and will be removed in a
+            future major release. This component has no known production
+            adoption and will not be migrating to Carbon core.
+          </div>
+        }
+      >
+        {story()}
+      </Annotation>
+    ),
+  ],
 };
 
 function _Toolbar(args) {

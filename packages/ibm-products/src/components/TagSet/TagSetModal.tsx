@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2020
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -40,10 +40,12 @@ type AllTags = TagType[] & Omit<React.ComponentProps<typeof Tag>, 'filter'>[];
 interface TagSetModalProps {
   allTags?: AllTags;
   className?: string;
+  closeLabel?: string;
   modalAriaLabel?: string;
   onClose?: () => void;
   open?: boolean;
   portalTarget?: ReactNode;
+  searchClearLabel?: string;
   searchLabel?: string;
   searchPlaceholder?: string;
   title?: string;
@@ -53,11 +55,13 @@ export const TagSetModal = ({
 
   allTags,
   className,
+  closeLabel,
   title,
   modalAriaLabel = defaults.modalAriaLabel,
   onClose,
   open,
   portalTarget: portalTargetIn,
+  searchClearLabel,
   searchLabel = defaults.searchLabel,
   searchPlaceholder,
 
@@ -110,11 +114,13 @@ export const TagSetModal = ({
       <ModalHeader
         className={`${blockClass}__header`}
         closeModal={onClose}
+        iconDescription={closeLabel}
         title={title}
       >
         <Search
           data-modal-primary-focus
           className={`${blockClass}__search`}
+          closeButtonLabelText={searchClearLabel}
           labelText={searchLabel}
           placeholder={searchPlaceholder}
           onChange={handleSearch}
@@ -146,9 +152,11 @@ TagSetModal.propTypes = {
     })
   ),
   className: PropTypes.string,
+  closeLabel: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool,
   portalTarget: PropTypes.node,
+  searchClearLabel: PropTypes.string,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string,

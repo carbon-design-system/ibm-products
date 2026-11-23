@@ -1,3 +1,32 @@
+## `@carbon/ibm-products@2.103.0`
+### Features :rocket:
+- feat(TagSet, TagOverflow): add configurable modal close and clear-search labels (#9968)
+
+### Bug fixes :bug:
+- fix(NotificationPanel): Group using calendar days instead of 24h window (#9987)
+- fix: button accessibility issue in tearsheet stories (#9983)
+- fix(PageHeader): add hiddenTagsLabel prop to TagOverflow (#9991)
+
+### Housekeeping :house:
+- build(deps): update Carbon 11 compatible versions to latest (#10017)
+- chore: deprecate actionbar, decorator, searchbar, toolbar (#10008)
+- docs: add composable Tearsheet, PageHeader and Card section to v12 migration guides (#10012)
+- chore: deprecate AddSelect prebuilt pattern (#9995)
+- docs(changelog): update for v2.102.0-rc.0 (#10003)
+
+## `@carbon/ibm-products@2.102.0`
+### Features :rocket:
+- feat(about-modal): implemented as pattern in react (#9958)
+- feat(Tearsheet): deprecate stable Tearsheet, TearsheetNarrow, and TearsheetPresence in favour of preview__Tearsheet (#9942)
+
+### Bug fixes :bug:
+- fix: include changes from PR 10001 in the release
+- fix: wc chromatic build (#9976)
+
+### Housekeeping :house:
+- build(deps): update to Carbon 11 compatible versions to latest (#9964)
+- chore(release):  v2.101.0-rc.0 (#9954)
+
 ## `@carbon/ibm-products@2.101.0`
 ### Bug fixes :bug:
 - fix(useWindowResize): use queueMicrotask for React 19 compat (#9845)

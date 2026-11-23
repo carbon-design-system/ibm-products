@@ -482,20 +482,21 @@ export const NotificationsPanel = React.forwardRef(
     };
 
     // Notifications should be grouped by "Today", "Yesterday", and "Previous", the variables
-    // below filter the notifications based on those conditions and then render them in those groups
-    let yesterdayDate = new Date();
-    yesterdayDate = new Date(
-      yesterdayDate.setDate(yesterdayDate.getDate() - 1)
-    );
-    let dayBeforeYesterdayDate = new Date();
-    dayBeforeYesterdayDate = new Date(
-      dayBeforeYesterdayDate.setDate(dayBeforeYesterdayDate.getDate() - 2)
-    );
+    // below filter the notifications based on those conditions and then render them in those groups.
+    // Boundaries are midnight-anchored calendar-day cutoffs so that "Today" means the current
+    // calendar day, "Yesterday" means the previous calendar day, and "Previous" means anything
+    // older — regardless of the exact time of day the panel is viewed.
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+    const yesterdayDate = new Date(startOfToday);
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+    const dayBeforeYesterdayDate = new Date(startOfToday);
+    dayBeforeYesterdayDate.setDate(dayBeforeYesterdayDate.getDate() - 2);
     let withinLastDayNotifications =
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
-        (item) => (item.timestamp as Date).getTime() >= yesterdayDate.getTime()
+        (item) => (item.timestamp as Date).getTime() >= startOfToday.getTime()
       );
     withinLastDayNotifications = sortChronologically(
       withinLastDayNotifications
@@ -505,16 +506,15 @@ export const NotificationsPanel = React.forwardRef(
       allNotifications.length &&
       allNotifications.filter(
         (item) =>
-          (item.timestamp as Date).getTime() < yesterdayDate.getTime() &&
-          (item.timestamp as Date).getTime() >= dayBeforeYesterdayDate.getTime()
+          (item.timestamp as Date).getTime() < startOfToday.getTime() &&
+          (item.timestamp as Date).getTime() >= yesterdayDate.getTime()
       );
     previousDayNotifications = sortChronologically(previousDayNotifications);
     let previousNotifications =
       allNotifications &&
       allNotifications.length &&
       allNotifications.filter(
-        (item) =>
-          (item.timestamp as Date).getTime() < dayBeforeYesterdayDate.getTime()
+        (item) => (item.timestamp as Date).getTime() < yesterdayDate.getTime()
       );
     previousNotifications = sortChronologically(previousNotifications);
 

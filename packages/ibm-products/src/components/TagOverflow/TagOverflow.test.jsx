@@ -1,18 +1,26 @@
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { TagOverflow } from '.';
-import { fiveTags } from './utils';
+import { fiveTags, overflowAndModalStrings, tags } from './utils';
 
 const blockClass = `${pkg.prefix}--tag-overflow`;
 const componentName = TagOverflow.displayName;
@@ -99,6 +107,55 @@ describe(componentName, () => {
       expect(screen.getByText('+2')).toBeTruthy();
     });
   });
+
+  it.each([
+    {},
+    {
+      allTagsModalCloseLabel: 'Close tags',
+      allTagsModalSearchClearLabel: 'Clear tag search',
+    },
+  ])(
+    'uses modal button labels %j without changing their actions',
+    async (labels) => {
+      render(
+        <TagOverflow
+          {...overflowAndModalStrings}
+          {...labels}
+          items={tags}
+          maxVisible={5}
+        />
+      );
+
+      await act(() => userEvent.click(screen.getByText('+15')));
+      await act(() => userEvent.click(screen.getByText('View all tags')));
+
+      const modal = screen.getByRole('presentation');
+      const search = screen.getByRole('searchbox');
+      expect(within(modal).getAllByText(/^Tag \d+$/)).toHaveLength(tags.length);
+      await act(() => userEvent.type(search, 'Tag 2'));
+      expect(search).toHaveValue('Tag 2');
+      expect(within(modal).getAllByText(/^Tag \d+$/)).toHaveLength(2);
+
+      await act(() =>
+        userEvent.click(
+          screen.getByRole('button', {
+            name: labels.allTagsModalSearchClearLabel ?? 'Clear search input',
+          })
+        )
+      );
+      expect(search).toHaveValue('');
+      expect(within(modal).getAllByText(/^Tag \d+$/)).toHaveLength(tags.length);
+
+      await act(() =>
+        userEvent.click(
+          screen.getByRole('button', {
+            name: labels.allTagsModalCloseLabel ?? 'Close',
+          })
+        )
+      );
+      expect(modal).not.toHaveClass('is-visible');
+    }
+  );
 
   // The below test case is failing due to ResizeObserver mock
   // it('Renders only the overflow when very little space', async () => {

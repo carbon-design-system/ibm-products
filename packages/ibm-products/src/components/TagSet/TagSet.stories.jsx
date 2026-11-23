@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2024
+// Copyright IBM Corp. 2020, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -123,6 +123,8 @@ for (let i = 0; i < 200; i++) {
 
 const overflowAndModalStrings = {
   allTagsModalTitle: 'All tags',
+  allTagsModalCloseLabel: 'Close',
+  allTagsModalSearchClearLabel: 'Clear search input',
   allTagsModalSearchLabel: 'Search all tags',
   allTagsModalSearchPlaceholderText: 'Search all tags',
   showAllTagsLabel: 'View all tags',

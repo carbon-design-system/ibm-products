@@ -14,7 +14,7 @@ $animationProps: $duration-moderate-02 motion(standard, productive) 0s 1;
 $fadeStart: translateY(3rem);
 $fadeEnd: translateY(0);
 
-@keyframes fade {
+@keyframes cascade-fade {
   0% {
     opacity: 0;
     transform: $fadeStart;
@@ -31,7 +31,7 @@ $fadeEnd: translateY(0);
   /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: no-preference) {
     /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- Carbon animation duration defined above in $animationProps */
-    animation: $animationProps fade;
+    animation: $animationProps cascade-fade;
     animation-fill-mode: forwards;
     opacity: 0;
   }

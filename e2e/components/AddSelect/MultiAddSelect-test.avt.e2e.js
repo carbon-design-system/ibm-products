@@ -1,7 +1,7 @@
 // cspell:words multiaddselect
 
 /**
- * Copyright IBM Corp. 2024, 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,7 +16,7 @@ test.describe('MultiAddSelect @avt', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiAddSelect',
-      id: 'patterns-prebuilt-patterns-add-and-select-multiaddselect--default',
+      id: 'deprecated-prebuilt-patterns-add-and-select-multiaddselect--default',
       globals: {
         carbonTheme: 'white',
       },

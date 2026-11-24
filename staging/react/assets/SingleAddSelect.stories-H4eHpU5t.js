@@ -1,0 +1,35 @@
+var d=Object.defineProperty;var i=(t,a)=>d(t,"name",{value:a,configurable:!0});import{R as e,aj as u,r as h,L as g}from"./iframe-CAHi-ash.js";import{A as f}from"./index-juzYk_IH.js";import{S as n}from"./SingleAddSelect-CETEaaJp.js";import"./preload-helper-Cc2_yIPf.js";import"./bucket-11-wb9n9Mc6.js";import"./bucket-21-CD0ipd9A.js";import"./devtools-CF3eS4kS.js";import"./props-helper-DntgWPHn.js";import"./AddSelect-bpI-lY9f.js";import"./Tag-CNMZYQD2.js";import"./Text-DsolOYEo.js";import"./DefinitionTooltip-BzdxlL2b.js";import"./index-jLaOlUcY.js";import"./index-DK2JkwdU.js";import"./bucket-20-B1yq3xQZ.js";import"./AccordionItem-D9Uq0wTL.js";import"./NoDataEmptyState-KuoLOJt_.js";import"./EmptyState-DaOmVGnC.js";import"./EmptyStateV2.deprecated-BIY9qQuA.js";import"./Link-Thsk_YUK.js";import"./index-qdBxdvqW.js";import"./NoDataIllustration-B8TwBhHF.js";import"./useId-Ctlf7PVu.js";import"./uuidv4-Fbcg8Vng.js";import"./BreadcrumbItem-vGwX2FaP.js";import"./index-BkLgGYs5.js";import"./bucket-14-BYROENkX.js";import"./index-BdnfRBBG.js";import"./LayerContext-ZOVV-hMu.js";import"./clamp-ekNJC_Xv.js";import"./Dropdown-BQvv5_Am.js";import"./defaultItemToString-DDHghiWu.js";import"./downshift.esm-D7c-TRkM.js";import"./FormContext-a1LIIEAZ.js";import"./inheritsLoose-CdLKJotq.js";import"./mergeRefs-BH0-8uDG.js";import"./useNormalizedInputProps-D2SHc324.js";import"./useNoInteractiveChildrenForLabel-CUa-lZs9.js";import"./MultiSelect-BaO3vxje.js";import"./Checkbox-B66lYW7C.js";import"./hasHelperText-CcJ_VphT.js";import"./UserProfileImage-CdVRh-P4.js";import"./TooltipTrigger-Sv_LrFkm.js";import"./bucket-8-Cb0KQluP.js";import"./bucket-15-Br-JD4Qm.js";import"./Search-BSWSNX6f.js";import"./bucket-17-DWkJcv8y.js";import"./MenuItem-akDrE2Gr.js";import"./useAttachedMenu-CEJmMsbf.js";import"./environment-DRRHKtsv.js";import"./useControllableState-DMc6Pa5Q.js";import"./bucket-2-BAtmiIyf.js";import"./index-BTu5YF-G.js";import"./wrapFocus-DbuaTTNI.js";import"./useOutsideClick-DHl_vKqQ.js";import"./bucket-1-Df6sWiux.js";import"./bucket-7-D0gXeiJE.js";import"./ButtonSet-BJimU4f6.js";import"./DismissibleTag-DebYVXCG.js";import"./NotFoundEmptyState-By03GGSt.js";import"./NotFoundIllustration-DVWAK-Yh.js";import"./Tearsheet-DhVtLjSI.js";import"./TearsheetShell-DfWTw8pD.js";import"./useResizeObserver-B-_vnHM-.js";import"./useIsomorphicEffect-BTuoj9LQ.js";import"./getNodeTextContent-CjFansOq.js";import"./ComposedModal-CXrnX8xO.js";import"./isTopmostVisibleModal-DeFV3US-.js";import"./InlineLoading-C0V9gGX-.js";import"./Wrap-ByKg0mar.js";import"./usePortalTarget-CHduIn6w.js";import"./index-BkNZblnM.js";import"./useFocus-iYTaFa_8.js";import"./usePresence-yHrDfhuI.js";import"./usePreviousValue-aF8QrfT_.js";import"./ActionSet-xyYTw4Ri.js";import"./TearsheetNarrow-ChLzHw8x.js";const l=i(()=>e.createElement(u,{deprecationNotice:"This component is deprecated and will be removed in the next major version. Please migrate to the [SingleAddSelect](https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-add-and-select-singleaddselect--overview) pattern.",altGuidelinesHref:"https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage",blocks:[{title:"Structuring items",description:`The \`items\` object has a lot of customization potential and can greatly effect
+the way the component is displayed and how you interact with it..
+
+Let's walk through an example.`,source:{code:`items: {
+  entries: [ // the actual list of items / entries
+    {
+      id: '1', // required unique id for the entry
+      value: '1', // required value of the entry
+      title: 'item 1', // required title to display
+      subtitle: 'item 1 subtitle', // subtitle to display
+      children: { // designates if entry has children. if the children prop is found a hierarchy list will be used
+        entries: [
+          {
+            id: '1-1',
+            value: 'file1.pdf',
+            title: 'file1.pdf',
+          },
+        ],
+      },
+    },
+  ],
+}`}}]}),"DocsPage");l.__docgenInfo={description:"",methods:[],displayName:"DocsPage"};const Ie={title:"Deprecated/Prebuilt patterns/Add and select/SingleAddSelect",component:n,tags:["autodocs"],parameters:{docs:{page:l}},decorators:[t=>e.createElement("div",null,e.createElement(f,{type:"deprecation-notice",text:e.createElement("div",null,"This component is deprecated and will be removed in the next major version. Please migrate to ",e.createElement("a",{href:"/?path=/docs/patterns-add-and-select-singleaddselect--overview"},"SingleAddSelect")," ","example pattern.")},t()))],argTypes:{items:{control:{type:"select",labels:{0:"no items",1:"three items",2:"with hierarchy"}},options:[0,1,2],mapping:{0:{entries:[]},1:{entries:[{id:"1",title:"Kansas",value:"kansas"},{id:"2",title:"Texas",value:"texas"},{id:"3",title:"Florida",value:"florida"}]},2:{entries:[{id:"1",title:"Kansas",value:"kansas"},{id:"2",title:"Texas",value:"texas"},{id:"3",title:"Florida",value:"florida"},{id:"4",title:"California",value:"california",children:{entries:[{id:"5",title:"Los Angeles",value:"la",children:{entries:[{id:"6",title:"Beverly Hills",value:"bh"},{id:"7",title:"Malibu",value:"malibu",children:{entries:[{id:"8",title:"Malibu Rd",value:"malibu-rd"}]}}]}}]}}]}}}}},p={className:"placeholder-class",description:"select a category lorem ipsum",globalSearchLabel:"global search label",globalSearchPlaceholder:"Find categories",illustrationTheme:"light",itemsLabel:"Categories",navIconDescription:"View children",noResultsTitle:"No results",noResultsDescription:"Try again",noTearsheet:!1,onCloseButtonText:"Cancel",onSubmit:i(t=>console.log(t),"onSubmit"),onSubmitButtonText:"Select",searchResultsTitle:"Search results",title:"Select category"},m=i((t,a)=>{const[c,s]=h.useState(a?.viewMode!=="docs");return e.createElement(e.Fragment,null,e.createElement(n,{...t,open:c,onClose:i(()=>s(!1),"onClose")}),t?.noTearsheet===!1&&e.createElement(g,{onClick:i(()=>s(!0),"onClick")},"Launch AddSelect"))},"Template"),r=m.bind({});r.args={items:1,...p};const o=m.bind({});o.args={items:2,...p};r.parameters={...r.parameters,docs:{...r.parameters?.docs,source:{originalSource:`(args, context) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+  return <>
+      <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />
+      {args?.noTearsheet === false && <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>}
+    </>;
+}`,...r.parameters?.docs?.source}}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`(args, context) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+  return <>
+      <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />
+      {args?.noTearsheet === false && <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>}
+    </>;
+}`,...o.parameters?.docs?.source}}};const Ke=["Default","WithHierarchy"];export{r as Default,o as WithHierarchy,Ke as __namedExportsOrder,Ie as default};
+//# sourceMappingURL=SingleAddSelect.stories-H4eHpU5t.js.map

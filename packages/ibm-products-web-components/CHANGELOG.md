@@ -1,3 +1,8 @@
+## `@carbon/ibm-products-web-components@0.53.0-rc.0`
+### Housekeeping :house:
+- chore: update to use v11 motion tokens (#10038)
+- chore(code-connect): migrate five components to template API (#10024)
+
 ## `@carbon/ibm-products-web-components@0.52.0`
 ### Bug fixes :bug:
 - fix(page-header): fix breadcrumb icon alignment (#10013)

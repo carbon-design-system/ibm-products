@@ -1,3 +1,7 @@
+## `@carbon/ibm-products-styles@2.100.0-rc.0`
+### Bug fixes :bug:
+- fix(styles): prevent Cascade animation keyframe conflicts (#10025)
+
 ## `@carbon/ibm-products-styles@2.99.0`
 ### Housekeeping :house:
 - build(deps): update Carbon 11 compatible versions to latest (#10017)

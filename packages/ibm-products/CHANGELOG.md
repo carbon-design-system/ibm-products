@@ -1,3 +1,14 @@
+## `@carbon/ibm-products@2.104.0-rc.0`
+### Features :rocket:
+- feat(TagSet): deprecate TagSet in favour of TagOverflow (#9998)
+
+### Bug fixes :bug:
+- fix(Tearsheet): handle cancelled exit animations (#9957)
+
+### Housekeeping :house:
+- chore: update to use v11 motion tokens (#10038)
+- chore(code-connect): migrate five components to template API (#10024)
+
 ## `@carbon/ibm-products@2.103.0`
 ### Features :rocket:
 - feat(TagSet, TagOverflow): add configurable modal close and clear-search labels (#9968)

@@ -6,6 +6,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { ExpressiveCard } from '.';
@@ -47,5 +48,34 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
+  });
+
+  it('disables primary and secondary buttons when primaryButtonDisabled and secondaryButtonDisabled are true', async () => {
+    const user = userEvent.setup();
+    const onPrimaryButtonClick = jest.fn();
+    const onSecondaryButtonClick = jest.fn();
+
+    render(
+      <ExpressiveCard
+        primaryButtonText="Primary"
+        primaryButtonDisabled
+        onPrimaryButtonClick={onPrimaryButtonClick}
+        secondaryButtonText="Secondary"
+        secondaryButtonDisabled
+        onSecondaryButtonClick={onSecondaryButtonClick}
+      />
+    );
+
+    const primaryButton = screen.getByRole('button', { name: 'Primary' });
+    const secondaryButton = screen.getByRole('button', { name: 'Secondary' });
+
+    expect(primaryButton).toBeDisabled();
+    expect(secondaryButton).toBeDisabled();
+
+    await user.click(primaryButton);
+    await user.click(secondaryButton);
+
+    expect(onPrimaryButtonClick).not.toHaveBeenCalled();
+    expect(onSecondaryButtonClick).not.toHaveBeenCalled();
   });
 });

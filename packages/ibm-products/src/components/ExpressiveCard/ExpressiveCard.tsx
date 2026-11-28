@@ -64,6 +64,10 @@ export interface ExpressiveCardProps extends PropsWithChildren {
    */
   pictogram?: ReactNode;
   /**
+   * Determines if the primary button is enabled or not
+   */
+  primaryButtonDisabled?: boolean;
+  /**
    * Optionally specify an href for your Button to become an <a> element
    */
   primaryButtonHref?: string;
@@ -79,6 +83,10 @@ export interface ExpressiveCardProps extends PropsWithChildren {
    * The text that's displayed in the primary button
    */
   primaryButtonText?: string;
+  /**
+   * Determines if the secondary button is enabled or not
+   */
+  secondaryButtonDisabled?: boolean;
   /**
    * Optionally specify an href for your Button to become an <a> element
    */
@@ -193,6 +201,10 @@ ExpressiveCard.propTypes = {
    */
   pictogram: PropTypes.node,
   /**
+   * Determines if the primary button is enabled or not
+   */
+  primaryButtonDisabled: PropTypes.bool,
+  /**
    * Optionally specify an href for your Button to become an <a> element
    */
   primaryButtonHref: PropTypes.string,
@@ -209,6 +221,10 @@ ExpressiveCard.propTypes = {
    * The text that's displayed in the primary button
    */
   primaryButtonText: PropTypes.string,
+  /**
+   * Determines if the secondary button is enabled or not
+   */
+  secondaryButtonDisabled: PropTypes.bool,
   /**
    * Optionally specify an href for your Button to become an <a> element
    */
